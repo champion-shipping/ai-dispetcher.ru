@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курс по ChatGPT | AI Dispatcher</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    </style>
+    <title>Курс по ChatGPT | By AI Dispatcher</title>
+    <description>Курс по ChatGPT. Как правильно составлять промты, как обучаться и бла бла бла... | By AI Dispatcher</description>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body style="margin: 0; font-family: 'Inter', sans-serif; background-color: #f5f7fa; color: #1a1a1a; line-height: 1.5;">
-    <!-- Шапка с меню -->
+    <!-- Шапка с адаптивным меню -->
     <header style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; align-items: center;">
             <div style="font-weight: 700; font-size: 1.3rem; color: #4f46e5;">
                 AI Dispatcher
             </div>
-            <nav>
+            
+            <!-- Иконки соцсетей -->
+            <div style="display: flex; gap: 1rem; margin-left: auto; margin-right: 1.5rem;">
+                <a href="https://t.me/AIdispatcher9" target="_blank" style="color: #4f46e5; font-size: 1.2rem; text-decoration: none;">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://playbeat.store/" target="_blank" style="color: #4f46e5; font-size: 1.2rem; text-decoration: none;">
+                    <i class="fas fa-music"></i>
+                </a>
+            </div>
+            
+            <!-- Основное меню -->
+            <nav id="main-nav" style="display: flex;">
                 <a href="#about" style="margin-left: 1.5rem; text-decoration: none; color: #4f46e5; font-weight: 500;">О курсе</a>
-                <a href="#lessons" style="margin-left: 1.5rem; text-decoration: none; color: #1a1a1a; font-weight: 500;">Уроки</a>
-                <a href="https://t.me/AIdispatcher9" target="_blank" style="margin-left: 1.5rem; text-decoration: none; color: #1a1a1a; font-weight: 500;">Telegram</a>
-                <a href="https://playbeat.store/" target="_blank" style="margin-left: 1.5rem; text-decoration: none; color: #1a1a1a; font-weight: 500;">PlayBeat</a>
+                <a href="#contact" style="margin-left: 1.5rem; text-decoration: none; color: #1a1a1a; font-weight: 500;">Контакты</a>
             </nav>
         </div>
     </header>
@@ -27,8 +36,8 @@
     <!-- Герой-секция -->
     <section style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 4rem 1rem; text-align: center;">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Курс по ChatGPT</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9;">От основ к профессиональному использованию</p>
+            <h1 style="font-size: 2.2rem; margin-bottom: 1rem;">Курс по ChatGPT</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">От основ к профессиональному использованию</p>
         </div>
     </section>
 
@@ -51,10 +60,18 @@
             </div>
         </section>
 
-        <!-- Место для будущих уроков -->
-        <section id="lessons" style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <h2 style="margin-top: 0; color: #4f46e5;">Уроки будут здесь</h2>
-            <p>Скоро добавлю материалы курса...</p>
+        <!-- Контакты -->
+        <section id="contact" style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <h2 style="margin-top: 0; color: #4f46e5;">Контакты</h2>
+            <p>Подпишитесь для получения обновлений:</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <a href="https://t.me/AIdispatcher9" target="_blank" style="background: #4f46e5; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fab fa-telegram"></i> Telegram
+                </a>
+                <a href="https://playbeat.store/" target="_blank" style="background: #1a1a1a; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-music"></i> PlayBeat
+                </a>
+            </div>
         </section>
     </main>
 
@@ -62,9 +79,13 @@
     <footer style="background: #1a1a1a; color: white; padding: 2rem 1rem; text-align: center; margin-top: 3rem;">
         <div style="max-width: 800px; margin: 0 auto;">
             <p>© 2023 AI Dispatcher</p>
-            <div style="margin-top: 1rem;">
-                <a href="https://t.me/AIdispatcher9" target="_blank" style="color: white; margin: 0 0.5rem; text-decoration: none;">Telegram</a>
-                <a href="https://playbeat.store/" target="_blank" style="color: white; margin: 0 0.5rem; text-decoration: none;">PlayBeat</a>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
+                <a href="https://t.me/AIdispatcher9" target="_blank" style="color: white; font-size: 1.2rem; text-decoration: none;">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://playbeat.store/" target="_blank" style="color: white; font-size: 1.2rem; text-decoration: none;">
+                    <i class="fas fa-music"></i>
+                </a>
             </div>
         </div>
     </footer>
