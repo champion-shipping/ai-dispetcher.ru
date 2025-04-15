@@ -113,7 +113,24 @@
 
 
 
-
+<!-- Модальное окно авторизации -->
+<div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="background: white; border-radius: 12px; padding: 30px; width: 90%; max-width: 400px;">
+    <h2 style="font-size: 1.5rem; color: #2c3e50; margin-top: 0; margin-bottom: 20px; text-align: center;">Вход в систему</h2>
+    <form id="modalLoginForm">
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Логин</label>
+        <input type="text" id="modalUsername" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
+      </div>
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Пароль</label>
+        <input type="password" id="modalPassword" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
+      </div>
+      <button type="submit" style="width: 100%; padding: 10px; background: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer;">Войти</button>
+      <div id="modalError" style="color: #e74c3c; margin-top: 10px; text-align: center; display: none;">Неверный логин или пароль</div>
+    </form>
+  </div>
+</div>
         
     </div>
  
