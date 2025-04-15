@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница 1 | AI Dispatcher</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #111;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Страница 1</h1>
+            <button id="logoutBtn" class="logout-btn">Выйти</button>
+        </div>
+        
+        <div class="nav">
+            <a href="page1.html">Страница 1</a>
+            <a href="page2.html">Страница 2</a>
+            <a href="page3.html">Страница 3</a>
+        </div>
+        
+        <div class="content">
+            <h2>Контент страницы 1</h2>
+            <p>Добро пожаловать в защищенный раздел. Эта страница доступна только авторизованным пользователям.</p>
+        </div>
+    </div>
+
+    <script src="auth-check.js"></script>
+    <script>
+        // Проверка авторизации
+        checkAuth();
+        
+        // Выход из системы
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+    </script>
+</body>
+</html>
