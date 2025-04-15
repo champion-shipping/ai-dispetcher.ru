@@ -39,7 +39,6 @@
 
         
 <!-- Секция меню -->
-<!-- Секция меню -->
 <section style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
     <h2 style="font-size: 1.8rem; color: #2c3e50; margin-bottom: 25px; font-weight: 500;">Menu Sections</h2>
     
@@ -82,6 +81,19 @@
             </h3>
             <p style="color: #555; margin-bottom: 0;">Практические примеры</p>
         </div>
+        
+        <!-- Пункт меню 4 (закрытый) -->
+        <div onclick="checkAuthBeforeOpen('урок-4.html')" style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(230,126,34,0.2); border: 1px solid rgba(230,126,34,0.1); position: relative;">
+            <h3 style="font-size: 1.3rem; color: #e67e22; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                Урок 4
+                <span style="width: 22px; height: 22px; display: inline-flex;">
+                    <svg viewBox="0 0 24 24" style="width: 100%; height: 100%; fill: #e67e22;">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm3 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                </span>
+            </h3>
+            <p style="color: #555; margin-bottom: 0;">Дополнительные материалы</p>
+        </div>
     </div>
 </section>
 
@@ -91,7 +103,12 @@
 
 <!-- Модальное окно авторизации -->
 <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-  <div style="background: white; border-radius: 12px; padding: 30px; width: 90%; max-width: 400px;">
+  <div style="background: white; border-radius: 12px; padding: 30px; width: 90%; max-width: 400px; position: relative;">
+    <!-- Кнопка закрытия -->
+    <button onclick="hideAuthModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #7f8c8d;">
+      &times;
+    </button>
+    
     <h2 style="font-size: 1.5rem; color: #2c3e50; margin-top: 0; margin-bottom: 20px; text-align: center;">Вход в систему</h2>
     <form id="modalLoginForm">
       <div style="margin-bottom: 15px;">
@@ -119,10 +136,14 @@ let currentLessonToOpen = null;
 function showAuthModal(lessonUrl) {
     currentLessonToOpen = lessonUrl;
     document.getElementById('authModal').style.display = 'flex';
+    document.getElementById('modalUsername').focus();
 }
 
 function hideAuthModal() {
     document.getElementById('authModal').style.display = 'none';
+    currentLessonToOpen = null;
+    document.getElementById('modalLoginForm').reset();
+    document.getElementById('modalError').style.display = 'none';
 }
 
 // Проверка авторизации перед открытием урока
@@ -167,7 +188,7 @@ document.getElementById('modalLoginForm').addEventListener('submit', async funct
     }
 });
 
-// Функции авторизации (из login.html)
+// Функции авторизации
 async function handleLogin(username, password) {
     const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
     const userCreds = storedCredentials[username];
