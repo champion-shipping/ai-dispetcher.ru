@@ -154,11 +154,20 @@ function hideAuthModal() {
 
 // Проверка авторизации перед открытием урока
 function checkAuthBeforeOpen(lessonUrl) {
-    if (localStorage.getItem('sessionToken')) {
-        openLesson(lessonUrl);
-    } else {
-        showAuthModal(lessonUrl);
+    const sessionToken = localStorage.getItem('sessionToken');
+    
+    if (sessionToken) {
+        try {
+            const sessionData = JSON.parse(atob(sessionToken));
+            if (Date.now() < sessionData.expires) {
+                openLesson(lessonUrl);
+                return;
+            }
+        } catch (e) {
+            // Невалидный токен
+        }
     }
+    showAuthModal(lessonUrl);
 }
 
 // Открытие урока
@@ -175,16 +184,27 @@ document.getElementById('modalLoginForm').addEventListener('submit', async funct
     const errorElement = document.getElementById('modalError');
     
     try {
-        const isAuthenticated = await handleLogin(username, password);
+        const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
+        const userCreds = storedCredentials[username];
         
-        if (isAuthenticated) {
-            createSession(username);
+        if (!userCreds) throw new Error('User not found');
+        
+        const hashedInput = await sha256(password + userCreds.salt);
+        if (hashedInput === userCreds.hash) {
+            // Создаем сессию
+            const sessionData = {
+                username: username,
+                timestamp: Date.now(),
+                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
+            };
+            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
+            
             hideAuthModal();
             if (currentLessonToOpen) {
                 openLesson(currentLessonToOpen);
             }
         } else {
-            throw new Error('Authentication failed');
+            throw new Error('Invalid password');
         }
     } catch (error) {
         errorElement.style.display = 'block';
@@ -194,27 +214,7 @@ document.getElementById('modalLoginForm').addEventListener('submit', async funct
     }
 });
 
-// Функции авторизации
-async function handleLogin(username, password) {
-    const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
-    const userCreds = storedCredentials[username];
-    
-    if (!userCreds) return false;
-    
-    const hashedInput = await sha256(password + userCreds.salt);
-    return hashedInput === userCreds.hash;
-}
-
-function createSession(username) {
-    const sessionData = {
-        username: username,
-        timestamp: Date.now(),
-        expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
-    };
-    const sessionToken = btoa(JSON.stringify(sessionData));
-    localStorage.setItem('sessionToken', sessionToken);
-}
-
+// Хэширование SHA-256
 async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -222,7 +222,7 @@ async function sha256(message) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Инициализация учетных данных
+// Инициализация учетных данных (если еще не сделано)
 if (!localStorage.getItem('authInitialized')) {
     const credentials = {
         'admin': {
@@ -237,47 +237,24 @@ if (!localStorage.getItem('authInitialized')) {
     localStorage.setItem('credentials', JSON.stringify(credentials));
     localStorage.setItem('authInitialized', 'true');
 }
-</script>
 
-<script>
-// Добавляем 3D-эффект при наведении (inline JavaScript)
-document.querySelectorAll('section a div').forEach(item => {
-    item.onmouseover = function() {
-        this.style.transform = 'perspective(1000px) translateZ(20px)';
-        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-        this.lastElementChild.style.opacity = '1';
-    };
-    item.onmouseout = function() {
-        this.style.transform = 'perspective(1000px) translateZ(0)';
-        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        this.lastElementChild.style.opacity = '0';
-    };
-});
-</script>
-    
-<script>
 // 3D-эффект при наведении
-document.querySelectorAll('section > div > div').forEach(item => {
+document.querySelectorAll('section a div, section > div > div').forEach(item => {
     item.onmouseover = function() {
         this.style.transform = 'perspective(1000px) translateZ(20px)';
         this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-        this.lastElementChild.style.opacity = '1';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '1';
+        }
     };
     item.onmouseout = function() {
         this.style.transform = 'perspective(1000px) translateZ(0)';
         this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        this.lastElementChild.style.opacity = '0';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '0';
+        }
     };
 });
-
-// Проверка авторизации перед открытием урока
-function checkAuthBeforeOpen(lessonUrl) {
-    if (localStorage.getItem('sessionToken')) {
-        window.location.href = lessonUrl;
-    } else {
-        alert('Для доступа к этому уроку требуется авторизация');
-    }
-}
 </script>
     
     <script>
