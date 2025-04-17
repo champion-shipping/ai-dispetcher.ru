@@ -92,81 +92,84 @@
     </div>
 
     <script>
-        // Инициализация учетных данных
-        if (!localStorage.getItem('authInitialized')) {
-            const credentials = {
-                'admin': {
-                    salt: 'a1b2c3d4e5f6',
-                    hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069' // sha256('password1' + 'a1b2c3d4e5f6')
-                },
-                'qwerty123': {
-                    salt: 'z9y8x7w6v5u4',
-                    hash: 'a8b9e9e0c9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // sha256('999999999' + 'z9y8x7w6v5u4')
-                }
-            };
-            localStorage.setItem('credentials', JSON.stringify(credentials));
-            localStorage.setItem('authInitialized', 'true');
+// Проверка активной сессии и редирект
+if (localStorage.getItem('sessionToken')) {
+    try {
+        const sessionData = JSON.parse(atob(localStorage.getItem('sessionToken')));
+        if (Date.now() < sessionData.expires) {
+            // Редирект на предыдущую страницу или на главную
+            const returnUrl = sessionStorage.getItem('returnUrl') || 'index.html';
+            window.location.href = returnUrl;
         }
+    } catch (e) {
+        localStorage.removeItem('sessionToken');
+    }
+}
 
-        // Проверка активной сессии
-        if (localStorage.getItem('sessionToken')) {
-            redirectToProtectedPage();
+// Инициализация учетных данных
+if (!localStorage.getItem('authInitialized')) {
+    const credentials = {
+        'admin': {
+            salt: 'a1b2c3d4e5f6',
+            hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
+        },
+        'qwerty123': {
+            salt: 'z9y8x7w6v5u4',
+            hash: 'a8b9e9e0c9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2'
         }
+    };
+    localStorage.setItem('credentials', JSON.stringify(credentials));
+    localStorage.setItem('authInitialized', 'true');
+}
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
-        async function handleLogin(username, password) {
-            const storedCredentials = JSON.parse(localStorage.getItem('credentials'));
-            const userCreds = storedCredentials[username];
-            
-            if (!userCreds) return false;
-            
-            const hashedInput = await sha256(password + userCreds.salt);
-            return hashedInput === userCreds.hash;
-        }
-
-        function createSession(username) {
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorElement = document.getElementById('errorMessage');
+    
+    try {
+        const storedCredentials = JSON.parse(localStorage.getItem('credentials'));
+        const userCreds = storedCredentials[username];
+        
+        if (!userCreds) throw new Error('User not found');
+        
+        const hashedInput = await sha256(password + userCreds.salt);
+        if (hashedInput === userCreds.hash) {
+            // Создаем сессию
             const sessionData = {
                 username: username,
                 timestamp: Date.now(),
                 expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
             };
-            const sessionToken = btoa(JSON.stringify(sessionData));
-            localStorage.setItem('sessionToken', sessionToken);
-        }
-
-        function redirectToProtectedPage() {
-            window.location.href = 'page1.html';
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorElement = document.getElementById('errorMessage');
-            
-            try {
-                const isAuthenticated = await handleLogin(username, password);
-                
-                if (isAuthenticated) {
-                    createSession(username);
-                    redirectToProtectedPage();
-                } else {
-                    throw new Error('Authentication failed');
-                }
-            } catch (error) {
-                errorElement.style.display = 'block';
-                setTimeout(() => {
-                    errorElement.style.display = 'none';
-                }, 3000);
-            }
-        });
-    </script>
+            // Редирект на предыдущую страницу или на главную
+            const returnUrl = sessionStorage.getItem('returnUrl') || 'index.html';
+            window.location.href = returnUrl;
+        } else {
+            throw new Error('Invalid password');
+        }
+    } catch (error) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+            errorElement.style.display = 'none';
+        }, 3000);
+    }
+});
+
+// Сохраняем URL, с которого пришли, для редиректа после входа
+if (document.referrer && document.referrer.includes(window.location.hostname)) {
+    sessionStorage.setItem('returnUrl', document.referrer);
+}
+</script>
 </body>
 </html>
