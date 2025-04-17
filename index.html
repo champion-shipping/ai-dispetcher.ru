@@ -23,16 +23,36 @@
 
 
         
-        <!-- Секция заголовка -->
-        <section style="margin-bottom: 40px; text-align: center;">
-            <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">Курс и Плюшки на ChatGPT и DeepSeek</h1>
-            <p style="font-size: 1.2rem; color: #7f8c8d; max-width: 800px; margin: 0 auto;">Здесь вы найдете небольшой курс с тем как использовать LLM модели, их особенности, баги, ну и базовые примеры промтов. Так же буду переодически наполнять базу своих промтов, которые я использую во время своей работы, может и пригодится.</p>
-        </section>
+<style>
+    @media (min-width: 768px) {
+        .content-section {
+            flex-direction: row !important;
+            align-items: center;
+        }
+        .content-section > div {
+            flex: 1;
+        }
+        .text-content {
+            padding-right: 40px;
+        }
+    }
+</style>
 
-        <!-- Секция изображения -->
-        <section style="margin-bottom: 40px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-            <img src="ai-dispetcher.jpg" alt="Placeholder Image" style="width: 100%; height: auto; display: block; object-fit: cover;">
-        </section>
+<!-- Секция с заголовком и изображением -->
+<section style="margin-bottom: 40px;">
+    <div class="content-section" style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- Текстовый блок -->
+        <div class="text-content" style="flex: 1;">
+            <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">Курс и Плюшки на ChatGPT и DeepSeek</h1>
+            <p style="font-size: 1.2rem; color: #7f8c8d; max-width: 800px;">Здесь вы найдете небольшой курс с тем как использовать LLM модели, их особенности, баги, ну и базовые примеры промтов. Так же буду переодически наполнять базу своих промтов, которые я использую во время своей работы, может и пригодится.</p>
+        </div>
+        
+        <!-- Изображение (уменьшенное) -->
+        <div style="flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+            <img src="ai-dispetcher.jpg" alt="Placeholder Image" style="width: 100%; max-width: 500px; height: auto; display: block; object-fit: cover;">
+        </div>
+    </div>
+</section>
 
 
 
