@@ -23,11 +23,26 @@
 
 
         
-<!-- Общий контейнер для текста и картинки -->
+<style>
+    @media (min-width: 768px) {
+        .flex-container { 
+            flex-direction: row !important; 
+            align-items: center;
+            gap: 50px !important;
+        }
+        .flex-container > div:first-child { 
+            flex: 1; 
+        }
+        .flex-container > div:last-child { 
+            flex: 1; 
+            text-align: center; 
+        }
+    }
+</style>
+
 <div style="max-width: 1200px; margin: 0 auto 40px; padding: 0 20px;">
-    <!-- На десктопах (шире 768px) — текст слева, картинка справа -->
-    <div style="display: flex; flex-direction: column; gap: 30px;">
-        <!-- Текстовый блок -->
+    <div class="flex-container" style="display: flex; flex-direction: column; gap: 30px;">
+        <!-- Текст -->
         <div>
             <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">
                 Курс и Плюшки на ChatGPT и DeepSeek
@@ -37,7 +52,7 @@
             </p>
         </div>
 
-        <!-- Картинка (уменьшенная) -->
+        <!-- Картинка -->
         <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
             <img 
                 src="ai-dispetcher.jpg" 
