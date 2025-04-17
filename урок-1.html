@@ -173,55 +173,71 @@
         <h1 style="margin: 0; font-size: 28px; color: #2c3e50; text-align: left;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
         <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
         
-        <div style="margin-top: 20px; background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; border-radius: 0 5px 5px 0;">
-            <h3 style="margin-top: 0; color: #2c3e50;">Кому подойдет:</h3>
-            <p style="margin-bottom: 15px;">Новичкам в работе с ИИ, веб-разработчикам, маркетологам и всем, кто устал от шаблонных ответов ChatGPT.</p>
-            
-            <h3 style="color: #2c3e50;">Что узнаете:</h3>
-            <ul style="padding-left: 20px; margin-top: 0;">
-                <li>Как превратить "сделай красиво" в четкое ТЗ</li>
-                <li>Почему ИИ требует инструкций как живой сотрудник</li>
-                <li>Как получать готовые решения без бесконечных правок</li>
-            </ul>
-            
-            <h3 style="color: #2c3e50;">Перспективы курса:</h3>
-            <p>Если курс продолжит так же детально разбирать сложные кейсы (работа с кодом, длинными текстами, специфичными запросами), он станет:</p>
-            <ul style="padding-left: 20px;">
-                <li>Необходимым минимумом для всех, кто профессионально работает с ИИ</li>
-                <li>Базовым навыком (как умение гуглить или пользоваться Excel)</li>
-                <li>Экономией 50+ часов в месяц за счет грамотного делегирования задач ИИ</li>
-            </ul>
-            
-            <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
-                <p style="margin: 0; font-weight: 500; color: #1565c0;">Итог: Освойте профессиональное взаимодействие с ИИ вместо игры в "угадайку".</p>
-            </div>
-        </div>
+<div style="margin-top: 20px; background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; border-radius: 0 5px 5px 0;">
+    <h3 style="margin-top: 0; color: #2c3e50;">Кому подойдет:</h3>
+    <p style="margin-bottom: 15px;">Новичкам в работе с ИИ, веб-разработчикам, маркетологам и всем, кто устал от шаблонных ответов ChatGPT.</p>
+    
+    <h3 style="color: #2c3e50;">Что узнаете:</h3>
+    <ul style="padding-left: 20px; margin-top: 0;">
+        <li>Как превратить "сделай красиво" в четкое ТЗ</li>
+        <li>Почему ИИ требует инструкций как живой сотрудник</li>
+        <li>Как получать готовые решения без бесконечных правок</li>
+    </ul>
+    
+    <h3 style="color: #2c3e50;">Что это вам даст:</h3>
+    <ul style="padding-left: 20px;">
+        <li><strong>Профессиональное владение ИИ</strong> – перестанете зависеть от случайных ответов ChatGPT</li>
+        <li><strong>Конкурентное преимущество</strong> – сможете решать задачи быстрее коллег, работающих "вручную"</li>
+        <li><strong>Экономия 50+ часов в месяц</strong> – автоматизация рутинных задач (генерация кода, текстов, анализ данных)</li>
+        <li><strong>Навык будущего</strong> – умение работать с ИИ станет таким же базовым, как Excel или Google-поиск</li>
+    </ul>
+    
+    <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+        <p style="margin: 0; font-weight: 500; color: #1565c0;">Итог: Научитесь получать от ИИ именно то, что вам нужно, а не случайные варианты.</p>
+    </div>
+</div>
     </div>
     
-    <!-- Боковое меню -->
-    <div style="position: relative;">
+ <!-- Боковое меню -->
+    <div style="width: 300px; position: relative;">
         <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
             <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 10px;">
-                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                        Введение в LLM
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
+                        1.1 Не промт — А грамотно поставленное ТЗ!
                     </a>
+                    <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
+                    </div>
                 </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                        Работа с формами
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
+                        1.2 Примеры: Плохие vs хорошие промты!
                     </a>
+                    <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
+                    </div>
                 </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                        Оптимизация запросов
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
+                        1.3 Почему важно уметь делать правильное ТЗ
                     </a>
+                    <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
+                    </div>
                 </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                        Продвинутые техники
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
+                        1.4 Сам себе режиссер!
                     </a>
+                    <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
+                    </div>
                 </li>
             </ul>
         </div>
