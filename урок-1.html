@@ -62,8 +62,8 @@
 
 
 <div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
-    <!-- Заголовок урока -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+    <!-- Десктопная версия (видна только на больших экранах) -->
+    <div class="desktop-version" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
         <!-- Основной заголовок и вводный текст -->
         <div style="flex: 1; padding-right: 30px;">
             <h1 style="margin: 0; font-size: 28px; color: #2c3e50;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
@@ -81,7 +81,7 @@
                             Введение в LLM
                         </a>
                         <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
                         </div>
                     </li>
                     <li style="margin-bottom: 10px; position: relative;">
@@ -90,7 +90,7 @@
                             Работа с формами
                         </a>
                         <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                     </li>
                     <li style="margin-bottom: 10px; position: relative;">
@@ -99,7 +99,7 @@
                             Оптимизация запросов
                         </a>
                         <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                     </li>
                     <li style="margin-bottom: 10px; position: relative;">
@@ -108,8 +108,46 @@
                             Продвинутые техники
                         </a>
                         <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                         </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мобильная версия (видна только на маленьких экранах) -->
+    <div class="mobile-version" style="display: none; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+        <!-- Основной заголовок и вводный текст -->
+        <div style="margin-bottom: 30px;">
+            <h1 style="margin: 0; font-size: 28px; color: #2c3e50; text-align: left;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
+            <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
+        </div>
+        
+        <!-- Боковое меню -->
+        <div style="position: relative;">
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 10px;">
+                        <a href="#section1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                            Введение в LLM
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <a href="#section2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                            Работа с формами
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <a href="#section3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                            Оптимизация запросов
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <a href="#section4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                            Продвинутые техники
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -129,6 +167,20 @@ function hideTooltip(id) {
         document.getElementById(id).style.display = 'none';
     }, 300);
 }
+
+// Адаптация под разные экраны
+function checkScreenSize() {
+    if (window.innerWidth >= 768) {
+        document.querySelector('.desktop-version').style.display = 'flex';
+        document.querySelector('.mobile-version').style.display = 'none';
+    } else {
+        document.querySelector('.desktop-version').style.display = 'none';
+        document.querySelector('.mobile-version').style.display = 'block';
+    }
+}
+
+window.addEventListener('resize', checkScreenSize);
+window.addEventListener('load', checkScreenSize);
 </script>
 
 <style>
@@ -145,6 +197,24 @@ function hideTooltip(id) {
 a:hover {
     background: #e3f2fd !important;
     color: #1565c0 !important;
+}
+
+@media (max-width: 767px) {
+    .desktop-version {
+        display: none !important;
+    }
+    .mobile-version {
+        display: block !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .desktop-version {
+        display: flex !important;
+    }
+    .mobile-version {
+        display: none !important;
+    }
 }
 </style>
 
