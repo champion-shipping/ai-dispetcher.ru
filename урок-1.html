@@ -62,95 +62,142 @@
 
 
 <div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
-    <!-- Десктопная версия (видна только на больших экранах) -->
-    <div class="desktop-version" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
-        <!-- Основной заголовок и вводный текст -->
-        <div style="flex: 1; padding-right: 30px;">
-            <h1 style="margin: 0; font-size: 28px; color: #2c3e50;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
-            <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
-        </div>
+<!-- Десктопная версия (видна только на больших экранах) -->
+<div class="desktop-version" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+    <!-- Основной заголовок и вводный текст с новым контентом -->
+    <div style="flex: 1; padding-right: 30px;">
+        <h1 style="margin: 0; font-size: 28px; color: #2c3e50;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
+        <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
         
-        <!-- Боковое меню -->
-        <div style="width: 300px; position: relative;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
-                            1.1 Не промт — А грамотно поставленное ТЗ!
-                        </a>
-                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
-                            1.2 Примеры: Плохие vs хорошие промты!
-                        </a>
-                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
-                            1.3 Почему важно уметь делать правильное ТЗ
-                        </a>
-                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
-                            1.4 Сам себе режиссер!
-                        </a>
-                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
-                        </div>
-                    </li>
-                </ul>
+<div style="margin-top: 20px; background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; border-radius: 0 5px 5px 0;">
+    <h3 style="margin-top: 0; color: #2c3e50;">Кому подойдет:</h3>
+    <p style="margin-bottom: 15px;">Новичкам в работе с ИИ, веб-разработчикам, маркетологам и всем, кто устал от шаблонных ответов ChatGPT.</p>
+    
+    <h3 style="color: #2c3e50;">Что узнаете:</h3>
+    <ul style="padding-left: 20px; margin-top: 0;">
+        <li>Как превратить "сделай красиво" в четкое ТЗ</li>
+        <li>Почему ИИ требует инструкций как живой сотрудник</li>
+        <li>Как получать готовые решения без бесконечных правок</li>
+    </ul>
+    
+    <h3 style="color: #2c3e50;">Что это вам даст:</h3>
+    <ul style="padding-left: 20px;">
+        <li><strong>Профессиональное владение ИИ</strong> – перестанете зависеть от случайных ответов ChatGPT</li>
+        <li><strong>Конкурентное преимущество</strong> – сможете решать задачи быстрее коллег, работающих "вручную"</li>
+        <li><strong>Экономия 50+ часов в месяц</strong> – автоматизация рутинных задач (генерация кода, текстов, анализ данных)</li>
+        <li><strong>Навык будущего</strong> – умение работать с ИИ станет таким же базовым, как Excel или Google-поиск</li>
+    </ul>
+    
+    <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+        <p style="margin: 0; font-weight: 500; color: #1565c0;">Итог: Научитесь получать от ИИ именно то, что вам нужно, а не случайные варианты.</p>
+    </div>
+</div>
+    </div>
+    
+    <!-- Боковое меню -->
+    <div style="width: 300px; position: relative;">
+        <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
+                        1.1 Не промт — А грамотно поставленное ТЗ!
+                    </a>
+                    <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
+                        1.2 Примеры: Плохие vs хорошие промты!
+                    </a>
+                    <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
+                        1.3 Почему важно уметь делать правильное ТЗ
+                    </a>
+                    <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
+                        1.4 Сам себе режиссер!
+                    </a>
+                    <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Мобильная версия (видна только на маленьких экранах) -->
+<div class="mobile-version" style="display: none; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+    <!-- Основной заголовок и вводный текст -->
+    <div style="margin-bottom: 30px;">
+        <h1 style="margin: 0; font-size: 28px; color: #2c3e50; text-align: left;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
+        <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
+        
+        <div style="margin-top: 20px; background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; border-radius: 0 5px 5px 0;">
+            <h3 style="margin-top: 0; color: #2c3e50;">Кому подойдет:</h3>
+            <p style="margin-bottom: 15px;">Новичкам в работе с ИИ, веб-разработчикам, маркетологам и всем, кто устал от шаблонных ответов ChatGPT.</p>
+            
+            <h3 style="color: #2c3e50;">Что узнаете:</h3>
+            <ul style="padding-left: 20px; margin-top: 0;">
+                <li>Как превратить "сделай красиво" в четкое ТЗ</li>
+                <li>Почему ИИ требует инструкций как живой сотрудник</li>
+                <li>Как получать готовые решения без бесконечных правок</li>
+            </ul>
+            
+            <h3 style="color: #2c3e50;">Перспективы курса:</h3>
+            <p>Если курс продолжит так же детально разбирать сложные кейсы (работа с кодом, длинными текстами, специфичными запросами), он станет:</p>
+            <ul style="padding-left: 20px;">
+                <li>Необходимым минимумом для всех, кто профессионально работает с ИИ</li>
+                <li>Базовым навыком (как умение гуглить или пользоваться Excel)</li>
+                <li>Экономией 50+ часов в месяц за счет грамотного делегирования задач ИИ</li>
+            </ul>
+            
+            <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px;">
+                <p style="margin: 0; font-weight: 500; color: #1565c0;">Итог: Освойте профессиональное взаимодействие с ИИ вместо игры в "угадайку".</p>
             </div>
         </div>
     </div>
-
-    <!-- Мобильная версия (видна только на маленьких экранах) -->
-    <div class="mobile-version" style="display: none; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
-        <!-- Основной заголовок и вводный текст -->
-        <div style="margin-bottom: 30px;">
-            <h1 style="margin: 0; font-size: 28px; color: #2c3e50; text-align: left;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
-            <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
-        </div>
-        
-        <!-- Боковое меню -->
-        <div style="position: relative;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px;">
-                        <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            Введение в LLM
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;">
-                        <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            Работа с формами
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;">
-                        <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            Оптимизация запросов
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px;">
-                        <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            Продвинутые техники
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    
+    <!-- Боковое меню -->
+    <div style="position: relative;">
+        <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px;">
+                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                        Введение в LLM
+                    </a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                        Работа с формами
+                    </a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                        Оптимизация запросов
+                    </a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
+                        Продвинутые техники
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -217,7 +264,6 @@ a:hover {
     }
 }
 </style>
-
 
 
 
@@ -1061,6 +1107,50 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
                             <li>Насколько технически подкованы ваши пользователи? Это поможет определить, насколько простая или сложная форма будет удобна.</li>
                         </ul>
                     </li>
+					                    <li><strong>Тип данных</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Какие данные вы хотите собирать? (например, имя, email, телефон, компания, должность, комментарии и т.д.)</li>
+                            <li>Есть ли обязательные и необязательные поля?</li>
+							<li>Нужно ли собирать дополнительные данные, такие как файлы (резюме, документы) или выбор из списка (например, услуги, продукты)?</li>
+                        </ul>
+                    </li>
+										                    <li><strong>Дизайн и UX</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Какой стиль оформления вы предпочитаете? (минимализм, яркие цвета, корпоративный стиль и т.д.)</li>
+                            <li>Должна ли форма быть компактной или развернутой?</li>
+							
+							<li>Чекбоксы для согласия на обработку данных?</li>
+							<li>Кнопки социальных сетей для быстрой авторизации?</li>
+							<li>Интерактивные элементы (выпадающие списки, календари для выбора даты и т.д.)?</li>
+							
+                        </ul>
+                    </li>
+										                    <li><strong>Интеграция</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Куда должны отправляться данные из формы? (например, на email, в CRM, в базу данных)</li>
+                            <li>Нужны ли уведомления для пользователя после отправки формы? (например, сообщение об успешной отправке или письмо на email)</li>
+							<li>Нужно ли интегрировать форму с другими сервисами (например, Google Analytics, Mailchimp, Telegram)?</li>
+                        </ul>
+                    </li>
+					
+                <li><strong>Валидация и безопасность</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Нужна ли проверка данных (валидация)? Например, проверка email, телефона или обязательных полей.</li>
+                            <li>Нужно ли добавить защиту от спама (например, CAPTCHA или скрытые поля)?</li>
+                        </ul>
+                    </li>
+					                <li><strong>Мобильная версия</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Должна ли форма быть адаптивной и корректно отображаться на мобильных устройствах?</li>
+                            <li>Есть ли особые требования к удобству использования на смартфонах?</li>
+                        </ul>
+                    </li>
+										                <li><strong>Примеры и вдохновение</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Есть ли у вас примеры форм, которые вам нравятся? (ссылки или скриншоты)</li>
+                            <li>Какие элементы из этих форм вы хотели бы использовать?</li>
+                        </ul>
+                    </li>
                     <!-- Остальные пункты списка -->
                 </ol>
                 
@@ -1087,6 +1177,35 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
                             <li>Что вы хотите получить от пользователей? (например, заявка на консультацию, запрос коммерческого предложения, обратный звонок, подписка на новости).</li>
                         </ul>
                     </li>
+					                    <li><strong>Какие данные нужны</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Какие поля должны быть в форме? (например, имя, телефон, email, комментарий).</li>
+							<li>Есть ли обязательные поля? (например, телефон или email).</li>
+
+                        </ul>
+                    </li>
+										                    <li><strong>Внешний вид</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Форма должна быть простой (минимум полей) или более детальной (например, с выбором услуги или дополнительными вопросами)?</li>
+							<li>Должна ли форма выделяться на странице (например, яркая кнопка или фон)?</li>
+
+                        </ul>
+                    </li>
+					
+															                    <li><strong>Куда отправлять данные</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Куда должны приходить заявки? (например, на email, в CRM или мессенджер).</li>
+							<li>Нужно ли уведомлять пользователя об успешной отправке?</li>
+
+                        </ul>
+                    </li>
+             <li><strong>Дополнительные функции</strong>
+                        <ul style="padding-left: 20px; list-style-type: circle;">
+                            <li>Нужна ли защита от спама (например, CAPTCHA)?</li>
+							<li>Нужно ли добавить согласие на обработку персональных данных (чекбокс)?</li>
+
+                        </ul>
+                    </li>
                     <!-- Остальные пункты упрощенного списка -->
                 </ol>
                 
@@ -1094,6 +1213,7 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
             </div>
         </div>
     </div>
+	<p style="margin-bottom: 0;">И так далее, шаг за шагом мы можем или упрощать вопросы от чата или интересоваться у него непонятными для нас вопросами:</p>
 
     <!-- Диалог про CAPTCHA -->
     <div style="margin: 30px 0;">
@@ -1121,7 +1241,7 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
     <!-- Заключительный блок -->
     <div style="background-color: #fff8e1; border-left: 4px solid #ffc107; padding: 15px; margin: 30px 0; border-radius: 0 5px 5px 0;">
         <p style="font-size: 1.1em; margin-bottom: 0;">
-            К чему все эти примеры, возможно кому-то это покажется глупым и странным, но основной наклон идет на то, что мы общаемся с ним как с нашим ассистентом. Любые наши возможные не понимания при составлении ТЗ или каких-то моментов доработок. Мы всегда сможем обратиться к чату напрямую. Это говорит о том, что модель в целом сама знает какие должны и могут присутствовать детали в ответе. Нам остается только спросить, что ему нужно.
+            К чему все эти примеры, возможно кому-то это покажется глупым и странным, но основной наклон идет на то, что мы общаемся с ним как с нашим ассистентом. Любые наши возможные не понимания при составлении ТЗ или каких-то моментов доработок. Мы всегда сможем обратиться к чату напрямую. Это говорит о том, что модель в целом сама знает какие должны и могут присутствовать детали в ответе. Нам остается только спросить, что ему нужно или выдать ему четкое ТЗ.
         </p>
     </div>
 
