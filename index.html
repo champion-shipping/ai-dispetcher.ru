@@ -23,45 +23,56 @@
 
 
         
-<style>
-    @media (min-width: 768px) {
-        .flex-container { 
-            flex-direction: row !important; 
-            align-items: center;
-            gap: 50px !important;
-        }
-        .flex-container > div:first-child { 
-            flex: 1; 
-        }
-        .flex-container > div:last-child { 
-            flex: 1; 
-            text-align: center; 
-        }
-    }
-</style>
-
 <div style="max-width: 1200px; margin: 0 auto 40px; padding: 0 20px;">
-    <div class="flex-container" style="display: flex; flex-direction: column; gap: 30px;">
-        <!-- Текст -->
-        <div>
-            <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">
-                Курс и Плюшки на ChatGPT и DeepSeek
-            </h1>
-            <p style="font-size: 1.2rem; color: #7f8c8d; max-width: 800px;">
-                Здесь вы найдете небольшой курс с тем как использовать LLM модели, их особенности, баги, ну и базовые примеры промтов. Так же буду переодически наполнять базу своих промтов, которые я использую во время своей работы, может и пригодится.
-            </p>
+    <!-- Десктопная версия (скрыта на мобильных) -->
+    <div class="desktop-layout" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <div style="flex: 1;">
+                <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">
+                    Курс и Плюшки на ChatGPT и DeepSeek
+                </h1>
+                <p style="font-size: 1.2rem; color: #7f8c8d; max-width: 800px;">
+                    Здесь вы найдете небольшой курс с тем как использовать LLM модели, их особенности, баги, ну и базовые примеры промтов. Так же буду переодически наполнять базу своих промтов, которые я использую во время своей работы, может и пригодится.
+                </p>
+            </div>
+            <div style="flex: 0 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                <img 
+                    src="ai-dispetcher.jpg" 
+                    alt="AI Dispatcher" 
+                    style="width: 100%; max-width: 500px; height: auto; display: block;"
+                >
+            </div>
         </div>
+    </div>
 
-        <!-- Картинка -->
-        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+    <!-- Мобильная версия (скрыта на десктопе) -->
+    <div class="mobile-layout" style="display: none;">
+        <h1 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px; font-weight: 600;">
+            Курс и Плюшки на ChatGPT и DeepSeek
+        </h1>
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 20px;">
             <img 
                 src="ai-dispetcher.jpg" 
                 alt="AI Dispatcher" 
                 style="width: 100%; max-width: 500px; height: auto; display: block;"
             >
         </div>
+        <p style="font-size: 1.2rem; color: #7f8c8d; max-width: 800px;">
+            Здесь вы найдете небольшой курс с тем как использовать LLM модели, их особенности, баги, ну и базовые примеры промтов. Так же буду переодически наполнять базу своих промтов, которые я использую во время своей работы, может и пригодится.
+        </p>
     </div>
 </div>
+
+<style>
+    @media (min-width: 768px) {
+        .desktop-layout { display: block !important; }
+        .mobile-layout { display: none !important; }
+    }
+    @media (max-width: 767px) {
+        .desktop-layout { display: none !important; }
+        .mobile-layout { display: block !important; }
+    }
+</style>
 
 
 
