@@ -155,7 +155,7 @@
                 <li style="margin-bottom: 10px; position: relative;">
                     <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
                        onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
-                        1.4 Сам себе режиссер!
+                        1.4 Перестань думать!
                     </a>
                     <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                         <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
@@ -233,7 +233,7 @@
                 <li style="margin-bottom: 10px; position: relative;">
                     <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
                        onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
-                        1.4 Сам себе режиссер!
+                        1.4 Перестань думать!
                     </a>
                     <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                         <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
@@ -968,6 +968,46 @@ a:hover {
     </p>
 </div>
 
+
+
+<div style="
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+">
+    <h4 style="
+        font-size: 1.2em;
+        margin: 0 0 15px 0;
+        color: #3498db;
+    ">ChatGPT:</h4>
+    <p style="margin: 0 0 15px 0;">
+        Вот пример формы заявки, которая соответствует вашим требованиям. Форма будет отправлять данные в Telegram-бота с использованием AJAX. Все стили сделаны inline для удобства редактирования.
+    </p>
+    
+    <p style="margin: 0 0 15px 0;"><strong>Пояснения:</strong></p>
+    <ol style="margin: 0 0 15px 0; padding-left: 20px;">
+        <li><strong>Стили:</strong> Все стили сделаны inline для удобства редактирования. Цвета подобраны в мягких темных тонах.</li>
+        <li><strong>Расположение:</strong> Форма имеет горизонтальное расположение с использованием flexbox.</li>
+        <li><strong>Оптимизация под мобильные устройства:</strong> Форма адаптируется под мобильные устройства благодаря использованию flex-wrap и flex свойств.</li>
+        <li><strong>Отправка в Telegram:</strong> Используется API Telegram для отправки сообщений. Вам нужно заменить TOKEN на токен вашего бота и YOUR_CHAT_ID на ваш chat_id.</li>
+    </ol>
+    
+    <p style="margin: 0 0 15px 0;"><strong>Как получить chat_id:</strong></p>
+    <ol style="margin: 0 0 15px 0; padding-left: 20px;">
+        <li>Создайте бота в Telegram.</li>
+        <li>Напишите боту любое сообщение.</li>
+        <li>Перейдите по ссылке: https://api.telegram.org/bot(TOKEN)/getUpdates, заменив (TOKEN) на токен вашего бота.</li>
+        <li>В ответе вы увидите chat_id в поле message.chat.id.</li>
+    </ol>
+    
+    <p style="margin: 0 0 15px 0;"><strong>Дополнительно:</strong></p>
+    <p style="margin: 0;">
+        - Если вы хотите, чтобы форма отправляла данные на сервер PHP, а уже сервер отправлял сообщение в Telegram, вам нужно будет немного изменить скрипт и добавить обработчик на стороне сервера.
+    </p>
+</div>
 <!-- Вторая форма - всегда видимый код -->
 <div style="margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
     <div style="display: flex; flex-wrap: wrap;">
@@ -1057,45 +1097,6 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
     </div>
 </div>
 
-<div style="
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-">
-    <h4 style="
-        font-size: 1.2em;
-        margin: 0 0 15px 0;
-        color: #3498db;
-    ">ChatGPT:</h4>
-    <p style="margin: 0 0 15px 0;">
-        Вот пример формы заявки, которая соответствует вашим требованиям. Форма будет отправлять данные в Telegram-бота с использованием AJAX. Все стили сделаны inline для удобства редактирования.
-    </p>
-    
-    <p style="margin: 0 0 15px 0;"><strong>Пояснения:</strong></p>
-    <ol style="margin: 0 0 15px 0; padding-left: 20px;">
-        <li><strong>Стили:</strong> Все стили сделаны inline для удобства редактирования. Цвета подобраны в мягких темных тонах.</li>
-        <li><strong>Расположение:</strong> Форма имеет горизонтальное расположение с использованием flexbox.</li>
-        <li><strong>Оптимизация под мобильные устройства:</strong> Форма адаптируется под мобильные устройства благодаря использованию flex-wrap и flex свойств.</li>
-        <li><strong>Отправка в Telegram:</strong> Используется API Telegram для отправки сообщений. Вам нужно заменить TOKEN на токен вашего бота и YOUR_CHAT_ID на ваш chat_id.</li>
-    </ol>
-    
-    <p style="margin: 0 0 15px 0;"><strong>Как получить chat_id:</strong></p>
-    <ol style="margin: 0 0 15px 0; padding-left: 20px;">
-        <li>Создайте бота в Telegram.</li>
-        <li>Напишите боту любое сообщение.</li>
-        <li>Перейдите по ссылке: https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates, заменив &lt;TOKEN&gt; на токен вашего бота.</li>
-        <li>В ответе вы увидите chat_id в поле message.chat.id.</li>
-    </ol>
-    
-    <p style="margin: 0 0 15px 0;"><strong>Дополнительно:</strong></p>
-    <p style="margin: 0;">
-        - Если вы хотите, чтобы форма отправляла данные на сервер PHP, а уже сервер отправлял сообщение в Telegram, вам нужно будет немного изменить скрипт и добавить обработчик на стороне сервера.
-    </p>
-</div>
-
 <p style="font-size: 1.1em; margin-bottom: 20px;">
     Выглядит довольно прилично и близко к тому, что мы хотели исходя из нашего запроса!
 </p>
@@ -1111,7 +1112,7 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
 
 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px;">
     <!-- Заголовок раздела -->
-    <h2 id="1.4" style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 40px;">1.4 Сам себе режиссер!</h2>
+    <h2 id="1.4" style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 40px;">1.4 Перестань думать!</h2>
     
     <!-- Основной текст -->
 
