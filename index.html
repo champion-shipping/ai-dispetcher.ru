@@ -132,117 +132,130 @@
 </div>
         
     </div>
-
-    
+ 
     <div id="footer"></div>
+<script>
+// Глобальные переменные
+let currentLessonToOpen = null;
 
-    <!-- Подключаем внешние скрипты -->
-    <script src="auth-data.js" defer></script>
-    <script>
-    // Основная логика приложения
-    let currentLessonToOpen = null;
+// Функции для работы с модальным окном
+function showAuthModal(lessonUrl) {
+    currentLessonToOpen = lessonUrl;
+    document.getElementById('authModal').style.display = 'flex';
+    document.getElementById('modalUsername').focus();
+}
 
-    function showAuthModal(lessonUrl) {
-        currentLessonToOpen = lessonUrl;
-        document.getElementById('authModal').style.display = 'flex';
-        document.getElementById('modalUsername').focus();
-    }
+function hideAuthModal() {
+    document.getElementById('authModal').style.display = 'none';
+    currentLessonToOpen = null;
+    document.getElementById('modalLoginForm').reset();
+    document.getElementById('modalError').style.display = 'none';
+}
 
-    function hideAuthModal() {
-        document.getElementById('authModal').style.display = 'none';
-        currentLessonToOpen = null;
-        document.getElementById('modalLoginForm').reset();
-        document.getElementById('modalError').style.display = 'none';
-    }
-
-    function checkAuthBeforeOpen(lessonUrl) {
-        const sessionToken = localStorage.getItem('sessionToken');
-        
-        if (sessionToken) {
-            try {
-                const sessionData = JSON.parse(atob(sessionToken));
-                if (Date.now() < sessionData.expires) {
-                    window.location.href = lessonUrl;
-                    return;
-                }
-            } catch (e) {
-                localStorage.removeItem('sessionToken');
-            }
-        }
-        showAuthModal(lessonUrl);
-    }
-
-    async function sha256(message) {
-        const msgBuffer = new TextEncoder().encode(message);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    document.getElementById('modalLoginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const username = document.getElementById('modalUsername').value;
-        const password = document.getElementById('modalPassword').value;
-        const errorElement = document.getElementById('modalError');
-        
+// Проверка авторизации перед открытием урока
+function checkAuthBeforeOpen(lessonUrl) {
+    const sessionToken = localStorage.getItem('sessionToken');
+    
+    if (sessionToken) {
         try {
-            const storedCredentials = JSON.parse(localStorage.getItem('credentials') || {};
-            const userCreds = storedCredentials[username];
-            
-            if (!userCreds) throw new Error('User not found');
-            
-            const hashedInput = await sha256(password + userCreds.salt);
-            if (hashedInput === userCreds.hash) {
-                const sessionData = {
-                    username: username,
-                    timestamp: Date.now(),
-                    expires: Date.now() + (24 * 60 * 60 * 1000)
-                };
-                localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
-                
-                hideAuthModal();
-                if (currentLessonToOpen) {
-                    window.location.href = currentLessonToOpen;
-                }
-            } else {
-                throw new Error('Invalid password');
+            const sessionData = JSON.parse(atob(sessionToken));
+            if (Date.now() < sessionData.expires) {
+                openLesson(lessonUrl);
+                return;
             }
-        } catch (error) {
-            errorElement.style.display = 'block';
-            setTimeout(() => {
-                errorElement.style.display = 'none';
-            }, 3000);
+        } catch (e) {
+            // Невалидный токен
         }
-    });
+    }
+    showAuthModal(lessonUrl);
+}
 
-    // 3D-эффект при наведении
-    document.querySelectorAll('section a div, section > div > div').forEach(item => {
-        item.onmouseover = function() {
-            this.style.transform = 'perspective(1000px) translateZ(20px)';
-            this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-            if (this.lastElementChild && this.lastElementChild.style) {
-                this.lastElementChild.style.opacity = '1';
+// Открытие урока
+function openLesson(url) {
+    window.location.href = url;
+}
+
+// Обработка формы в модальном окне
+document.getElementById('modalLoginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('modalUsername').value;
+    const password = document.getElementById('modalPassword').value;
+    const errorElement = document.getElementById('modalError');
+    
+    try {
+        const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
+        const userCreds = storedCredentials[username];
+        
+        if (!userCreds) throw new Error('User not found');
+        
+        const hashedInput = await sha256(password + userCreds.salt);
+        if (hashedInput === userCreds.hash) {
+            // Создаем сессию
+            const sessionData = {
+                username: username,
+                timestamp: Date.now(),
+                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
+            };
+            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
+            
+            hideAuthModal();
+            if (currentLessonToOpen) {
+                openLesson(currentLessonToOpen);
             }
-        };
-        item.onmouseout = function() {
-            this.style.transform = 'perspective(1000px) translateZ(0)';
-            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-            if (this.lastElementChild && this.lastElementChild.style) {
-                this.lastElementChild.style.opacity = '0';
-            }
-        };
-    });
+        } else {
+            throw new Error('Invalid password');
+        }
+    } catch (error) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+            errorElement.style.display = 'none';
+        }, 3000);
+    }
+});
 
-    // Загружаем header и footer
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => document.getElementById('header').innerHTML = data);
+// Хэширование SHA-256
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => document.getElementById('footer').innerHTML = data);
-    </script>
+// Инициализация учетных данных (если еще не сделано)
+if (!localStorage.getItem('authInitialized')) {
+    const credentials = {
+        'admin': {
+            salt: 'a1b2c3d4e5f6',
+            hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
+        },
+'qwerty123': {
+    salt: 'z9y8x7w6v5u4',
+    hash: 'c5d1a8a3e2d8a5e0e2a8e3d5f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // Пример (не настоящий хеш)
+}
+    };
+    localStorage.setItem('credentials', JSON.stringify(credentials));
+    localStorage.setItem('authInitialized', 'true');
+}
+
+// 3D-эффект при наведении
+document.querySelectorAll('section a div, section > div > div').forEach(item => {
+    item.onmouseover = function() {
+        this.style.transform = 'perspective(1000px) translateZ(20px)';
+        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '1';
+        }
+    };
+    item.onmouseout = function() {
+        this.style.transform = 'perspective(1000px) translateZ(0)';
+        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '0';
+        }
+    };
+});
+</script>
     
     <script>
         // Загружаем header и footer
