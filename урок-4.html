@@ -58,6 +58,27 @@
     </style>
 </head>
 
+<script>
+// Проверка авторизации
+const sessionToken = localStorage.getItem('sessionToken');
+    
+if (!sessionToken) {
+    window.location.href = 'login.html';
+} else {
+    try {
+        const sessionData = JSON.parse(atob(sessionToken));
+        if (Date.now() > sessionData.expires) {
+            localStorage.removeItem('sessionToken');
+            window.location.href = 'login.html';
+        }
+    } catch (e) {
+        localStorage.removeItem('sessionToken');
+        window.location.href = 'login.html';
+    }
+}
+</script>
+
+    
     <div id="header"></div>
     <!-- Основной контент -->
     <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
