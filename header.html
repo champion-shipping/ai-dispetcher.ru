@@ -32,23 +32,4 @@
         <a href="#lessons" style="display:block;padding:10px 0;text-decoration:none;color:#111">Уроки</a>
         <a href="#contact" style="display:block;padding:10px 0;text-decoration:none;color:#111">Контакты</a>
     </div>
-
-    <script>
-        // Адаптация меню
-        function updateMenu() {
-            const isMobile = window.innerWidth <= 768;
-            document.getElementById('menuBtn').style.display = isMobile ? 'block' : 'none';
-            document.getElementById('desktopMenu').style.display = isMobile ? 'none' : 'flex';
-            if (!isMobile) document.getElementById('mobileMenu').style.display = 'none';
-        }
-
-        // Клик по мобильному меню
-        document.getElementById('menuBtn').addEventListener('click', function() {
-            const menu = document.getElementById('mobileMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        window.addEventListener('load', updateMenu);
-        window.addEventListener('resize', updateMenu);
-    </script>
 </header>
