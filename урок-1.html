@@ -88,135 +88,231 @@
 
 
 <div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
-<div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
-    <!-- Общий заголовок H1 (виден на всех устройствах) -->
-    <h1 style="margin: 0 0 20px 0; font-size: clamp(24px, 3vw, 28px); color: #2c3e50; line-height: 1.3;">
-        Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!
-    </h1>
-    <p style="color: #7f8c8d; margin-top: 10px; font-size: clamp(14px, 2vw, 16px);">
-        Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.
-    </p>
-
-    <!-- Десктопная версия (видна только на больших экранах) -->
-    <div class="desktop-version" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
-        <!-- Основной контент -->
-        <div style="flex: 1; padding-right: 30px;">
-            <!-- Здесь будет основной контент урока -->
+<!-- Десктопная версия (видна только на больших экранах) -->
+<div class="desktop-version" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+    <!-- Основной заголовок и вводный текст с новым контентом -->
+    <div style="flex: 1; padding-right: 30px;">
+        <h1 style="margin: 0; font-size: 28px; color: #2c3e50;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
+        <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
+        <div class="lesson-desktop" style="margin: 25px auto; max-width: 800px; background: #f8f9fa; border-left: 4px solid #3498db; padding: 25px; border-radius: 0 8px 8px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <h2 style="margin-top: 0; color: #2c3e50; font-size: 22px; border-bottom: 1px solid #eee; padding-bottom: 10px;">Цель урока:</h2>
+    <p style="margin-bottom: 20px; line-height: 1.6;">Познакомить пользователей с основами эффективного взаимодействия с LLM-моделями (ChatGPT, DeepSeek и др.), научить формулировать четкие технические задания (ТЗ) вместо абстрактных запросов и показать разницу между плохими и хорошими промтами.</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <h3 style="color: #2c3e50; font-size: 18px; margin-bottom: 15px;">Ключевые темы:</h3>
+            <ul style="padding-left: 20px; margin-top: 0; line-height: 1.8;">
+                <li><strong>Почему "промт" — это ТЗ</strong><br>Сравнение работы с ИИ и сотрудником</li>
+                <li><strong>Примеры промтов</strong><br>5 кейсов: от названия продукта до кода</li>
+                <li><strong>Важность ТЗ</strong><br>Как ИИ "угадывает" без инструкций</li>
+                <li><strong>Если не знаешь, чего хочешь</strong><br>Как получить уточняющие вопросы от ИИ</li>
+            </ul>
         </div>
         
-        <!-- Боковое меню (полностью сохранено) -->
-        <div style="width: 300px; position: relative;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
-                            1.1 Не промт — А грамотно поставленное ТЗ!
-                        </a>
-                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
-                            1.2 Примеры: Плохие vs хорошие промты!
-                        </a>
-                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
-                            1.3 Почему важно уметь делать правильное ТЗ
-                        </a>
-                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
-                        </div>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
-                           onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
-                            1.4 Перестань думать!
-                        </a>
-                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
-                            <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div>
+            <h3 style="color: #2c3e50; font-size: 18px; margin-bottom: 15px;">Практическая польза:</h3>
+            <ul style="padding-left: 20px; margin-top: 0; line-height: 1.8;">
+                <li>Превращение абстракций в рабочие инструкции</li>
+                <li>Сокращение времени на правки на 60-80%</li>
+                <li>Готовые решения вместо сырых вариантов</li>
+                <li>Навык, который станет базовым как Excel</li>
+            </ul>
         </div>
     </div>
+    
+    <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 6px; border: 1px dashed #3498db;">
+        <p style="margin: 0; font-weight: 600; color: #0d47a1; text-align: center;">Итог: Вы научитесь получать от ИИ именно то, что нужно, а не случайные варианты</p>
+    </div>
+</div>
 
-    <!-- Мобильная версия (видна только на маленьких экранах) -->
-    <div class="mobile-version" style="display: none; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
-        <!-- Основной контент для мобильной версии -->
-        <div style="margin-bottom: 30px;">
-            <!-- Здесь будет основной контент урока для мобильной версии -->
-        </div>
-        
-        <!-- Боковое меню для мобильной версии (полностью сохранено) -->
-        <div style="width: 100%; position: relative;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            1.1 Не промт — А грамотно поставленное ТЗ!
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            1.2 Примеры: Плохие vs хорошие промты!
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            1.3 Почему важно уметь делать правильное ТЗ
-                        </a>
-                    </li>
-                    <li style="margin-bottom: 10px; position: relative;">
-                        <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;">
-                            1.4 Перестань думать!
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+    
+    <!-- Боковое меню -->
+    <div style="width: 300px; position: relative;">
+        <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
+                        1.1 Не промт — А грамотно поставленное ТЗ!
+                    </a>
+                    <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
+                        1.2 Примеры: Плохие vs хорошие промты!
+                    </a>
+                    <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
+                        1.3 Почему важно уметь делать правильное ТЗ
+                    </a>
+                    <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
+                        1.4 Перестань думать!
+                    </a>
+                    <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 
-<!-- Медиазапросы для переключения версий -->
-<style>
-    @media (max-width: 768px) {
-        .desktop-version {
-            display: none !important;
-        }
-        .mobile-version {
-            display: block !important;
-        }
-    }
-    @media (min-width: 769px) {
-        .desktop-version {
-            display: flex !important;
-        }
-        .mobile-version {
-            display: none !important;
-        }
-    }
-</style>
+<!-- Мобильная версия (видна только на маленьких экранах) -->
+<div class="mobile-version" style="display: none; margin-bottom: 40px; border-bottom: 2px solid #3498db; padding-bottom: 20px;">
+    <!-- Основной заголовок и вводный текст -->
+    <div style="margin-bottom: 30px;">
+        <h1 style="margin: 0; font-size: 28px; color: #2c3e50; text-align: left;">Урок 1: Возможности LLM-моделей заканчиваются там, где заканчиваются твои!</h1>
+        <p style="color: #7f8c8d; margin-top: 10px;">Изучите как эффективно взаимодействовать с ИИ-ассистентами для достижения лучших результатов в веб-разработке.</p>
+        
+<div class="lesson-mobile" style="margin: 15px 10px; background: #f8f9fa; border-left: 3px solid #3498db; padding: 15px; border-radius: 0 6px 6px 0;">
+    <h2 style="margin-top: 0; color: #2c3e50; font-size: 18px;">Цель урока:</h2>
+    <p style="margin-bottom: 15px; line-height: 1.5; font-size: 14px;">Научиться формулировать четкие ТЗ для ИИ вместо абстрактных запросов и понимать разницу между плохими и хорошими промтами.</p>
+    
+    <h3 style="color: #2c3e50; font-size: 16px; margin-bottom: 10px;">Основные темы:</h3>
+    <ul style="padding-left: 18px; margin: 0 0 15px 0; line-height: 1.6; font-size: 14px;">
+        <li>Почему промт = ТЗ</li>
+        <li>5 примеров промтов</li>
+        <li>Как ИИ угадывает</li>
+        <li>Что делать без четких идей</li>
+    </ul>
+    
+    <h3 style="color: #2c3e50; font-size: 16px; margin-bottom: 10px;">Что это даст:</h3>
+    <ul style="padding-left: 18px; margin: 0; line-height: 1.6; font-size: 14px;">
+        <li>Конкретные результаты вместо шаблонов</li>
+        <li>Экономия 50+ часов в месяц</li>
+        <li>Навык будущего</li>
+    </ul>
+    
+    <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 4px;">
+        <p style="margin: 0; font-weight: 500; color: #1565c0; font-size: 14px; text-align: center;">Итог: Получайте от ИИ именно то, что вам нужно</p>
+    </div>
+</div>
+    </div>
+    
+ <!-- Боковое меню -->
+    <div style="width: 300px; position: relative;">
+        <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
+                        1.1 Не промт — А грамотно поставленное ТЗ!
+                    </a>
+                    <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Для начала хотелось развеять слово "промт-инженер"! На самом деле никакого секретного создания промта нету, ведь само составление так называемого «промта» — это грамотно поставленное ТЗ.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.2" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
+                        1.2 Примеры: Плохие vs хорошие промты!
+                    </a>
+                    <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Нельзя сказать, что LLM модель не может сделать что либо. Скорее это не ее ограниченность, а ограниченность твоего ТЗ. Приведу несколько максимально простых и банальных примеров:</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.3" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
+                        1.3 Почему важно уметь делать правильное ТЗ
+                    </a>
+                    <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Специфика LLM моделей построена так, что она угадывает, а не пытается думать и размышлять логически.</p>
+                    </div>
+                </li>
+                <li style="margin-bottom: 10px; position: relative;">
+                    <a href="#1.4" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
+                       onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
+                        1.4 Перестань думать!
+                    </a>
+                    <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <p style="margin: 0; font-style: italic; color: #7f8c8d;">Теперь рассмотрим с вами вариант, где мы в целом не знаем, что хотим получить в финальном результате и имеем в арсенале только классические пользовательские вопросы.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-<!-- Скрипт для работы тултипов -->
 <script>
-    function showTooltip(id) {
-        document.getElementById(id).style.display = 'block';
-    }
-    function hideTooltip(id) {
+function showTooltip(id) {
+    document.getElementById(id).style.display = 'block';
+    document.getElementById(id).style.animation = 'slideIn 0.3s forwards';
+}
+
+function hideTooltip(id) {
+    document.getElementById(id).style.animation = 'slideOut 0.3s forwards';
+    setTimeout(function() {
         document.getElementById(id).style.display = 'none';
+    }, 300);
+}
+
+// Адаптация под разные экраны
+function checkScreenSize() {
+    if (window.innerWidth >= 768) {
+        document.querySelector('.desktop-version').style.display = 'flex';
+        document.querySelector('.mobile-version').style.display = 'none';
+    } else {
+        document.querySelector('.desktop-version').style.display = 'none';
+        document.querySelector('.mobile-version').style.display = 'block';
     }
+}
+
+window.addEventListener('resize', checkScreenSize);
+window.addEventListener('load', checkScreenSize);
 </script>
+
+<style>
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-20px); }
+}
+
+a:hover {
+    background: #e3f2fd !important;
+    color: #1565c0 !important;
+}
+
+@media (max-width: 767px) {
+    .desktop-version {
+        display: none !important;
+    }
+    .mobile-version {
+        display: block !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .desktop-version {
+        display: flex !important;
+    }
+    .mobile-version {
+        display: none !important;
+    }
+}
+</style>
 
 
 
