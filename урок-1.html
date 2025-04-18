@@ -2,87 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Страница 1 | AI Dispatcher</title>
-    <style>
-        /* Базовые сбросы и фиксы */
-        html, body {
-            overflow-x: hidden; /* Блокируем горизонтальный скролл */
-            width: 100%; /* Фиксируем ширину */
-            position: relative; /* Для корректного позиционирования */
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f7fa;
-            margin: 0;
-            padding: 0;
-            color: #111;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        
-        /* Контейнер с защитой от переполнения */
-        .container {
-            max-width: 100%; /* Важно для мобильных */
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 20px;
-            box-sizing: border-box; /* Учитываем padding в ширине */
-        }
-        
-        /* Остальные стили без изменений */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap; /* На случай длинного текста */
-        }
-        .title {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin: 0;
-            word-break: break-word; /* Перенос длинных слов */
-        }
-        .logout-btn {
-            padding: 8px 16px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .content {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .nav {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap; /* Для мобильных */
-        }
-        .nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            white-space: nowrap; /* Запрещаем перенос ссылок */
-        }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Дополнительная защита для всех элементов */
-        * {
-            max-width: 100%; /* Никакой элемент не выйдет за границы */
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название страницы | AI Dispatcher</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+<body>
     <div id="header"></div>
     <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
 
@@ -1264,16 +1188,8 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
 
         </div>
             </div>
+	
     <div id="footer"></div>
-    <script>
-        // Загружаем header и footer
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data);
-
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data);
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
