@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | AI Dispatcher</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            color: #111;
+            line-height: 1.6;
+        }
+    </style>
+
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(101179914, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/101179914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <div style="max-width:800px;margin:0 auto;padding:20px;">
+        <h1 style="color:#111;text-align:center;margin-bottom:30px;">Контакты</h1>
+        
+        <div style="background:#fff;padding:30px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.1);margin-bottom:40px;">
+            <h2 style="color:#111;margin-top:0;">Как со мной связаться</h2>
+            <p>Если у вас есть вопросы или предложения, вы можете написать мне:</p>
+            <ul style="padding-left:20px;">
+                <li style="margin-bottom:10px;">В информации моего Telegram канала: <a href="https://t.me/AIdispatcher9" target="_blank" style="color:#111;font-weight:bold;">AI Диспетчер</a></li>
+                <li>По электронной почте: <a href="mailto:shippingchampion@gmail.com" style="color:#111;font-weight:bold;">shippingchampion@gmail.com</a></li>
+            </ul>
+            <p>Отвечаю в течение 1-3 часов, обычно в первые 15 минут.</p>
+        </div>
+        
+        <div style="text-align:center;margin:30px 0;">
+            <p>Также вы можете поддержать меня:</p>
+            <a href="https://pay.cloudtips.ru/p/a063fe6b" style="display:inline-block;background:#111;color:#fff;padding:12px 20px;text-decoration:none;border-radius:4px;font-weight:bold;margin-top:10px;">Купить мне кофе</a>
+        </div>
+    </div>
+
+
+    <div id="footer"></div>
+<script>
+// Глобальные переменные
+let currentLessonToOpen = null;
+
+// Функции для работы с модальным окном
+function showAuthModal(lessonUrl) {
+    currentLessonToOpen = lessonUrl;
+    document.getElementById('authModal').style.display = 'flex';
+    document.getElementById('modalUsername').focus();
+}
+
+function hideAuthModal() {
+    document.getElementById('authModal').style.display = 'none';
+    currentLessonToOpen = null;
+    document.getElementById('modalLoginForm').reset();
+    document.getElementById('modalError').style.display = 'none';
+}
+
+// Проверка авторизации перед открытием урока
+function checkAuthBeforeOpen(lessonUrl) {
+    const sessionToken = localStorage.getItem('sessionToken');
+    
+    if (sessionToken) {
+        try {
+            const sessionData = JSON.parse(atob(sessionToken));
+            if (Date.now() < sessionData.expires) {
+                openLesson(lessonUrl);
+                return;
+            }
+        } catch (e) {
+            // Невалидный токен
+        }
+    }
+    showAuthModal(lessonUrl);
+}
+
+// Открытие урока
+function openLesson(url) {
+    window.location.href = url;
+}
+
+// Обработка формы в модальном окне
+document.getElementById('modalLoginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('modalUsername').value;
+    const password = document.getElementById('modalPassword').value;
+    const errorElement = document.getElementById('modalError');
+    
+    try {
+        const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
+        const userCreds = storedCredentials[username];
+        
+        if (!userCreds) throw new Error('User not found');
+        
+        const hashedInput = await sha256(password + userCreds.salt);
+        if (hashedInput === userCreds.hash) {
+            // Создаем сессию
+            const sessionData = {
+                username: username,
+                timestamp: Date.now(),
+                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
+            };
+            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
+            
+            hideAuthModal();
+            if (currentLessonToOpen) {
+                openLesson(currentLessonToOpen);
+            }
+        } else {
+            throw new Error('Invalid password');
+        }
+    } catch (error) {
+        errorElement.style.display = 'block';
+        setTimeout(() => {
+            errorElement.style.display = 'none';
+        }, 3000);
+    }
+});
+
+// Хэширование SHA-256
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Инициализация учетных данных (если еще не сделано)
+if (!localStorage.getItem('authInitialized')) {
+    const credentials = {
+        'admin': {
+            salt: 'a1b2c3d4e5f6',
+            hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
+        },
+'qwerty123': {
+    salt: 'z9y8x7w6v5u4',
+    hash: 'c5d1a8a3e2d8a5e0e2a8e3d5f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // Пример (не настоящий хеш)
+}
+    };
+    localStorage.setItem('credentials', JSON.stringify(credentials));
+    localStorage.setItem('authInitialized', 'true');
+}
+
+// 3D-эффект при наведении
+document.querySelectorAll('section a div, section > div > div').forEach(item => {
+    item.onmouseover = function() {
+        this.style.transform = 'perspective(1000px) translateZ(20px)';
+        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '1';
+        }
+    };
+    item.onmouseout = function() {
+        this.style.transform = 'perspective(1000px) translateZ(0)';
+        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '0';
+        }
+    };
+});
+</script>
+  
+    <script>
+        // Загружаем header и footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+</body>
+</html>
