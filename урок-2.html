@@ -158,28 +158,27 @@
     });
 
     // Функция проверки логина и пароля (ИСПРАВЛЕННАЯ)
-    async function checkLogin() {
+async function checkLogin() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     try {
-        // 1. Загружаем auth.html
-        const response = await fetch('auth.html');
+        // Загружаем auth.html в скрытом iframe
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'auth.html';
+        document.body.appendChild(iframe);
         
-        // Если файл не найден (ошибка 404)
-        if (!response.ok) {
-            throw new Error(`Файл auth.html не найден (${response.status})`);
-        }
+        // Ждем загрузки
+        await new Promise(resolve => {
+            iframe.onload = resolve;
+        });
         
-        const authHtml = await response.text();
+        // Получаем данные из iframe
+        const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+        document.body.removeChild(iframe);
         
-        // 2. Извлекаем AUTH_DATA
-        const scriptContent = authHtml.match(/const AUTH_DATA = ({[\s\S]*?});/)[1];
-        const AUTH_DATA = JSON.parse(scriptContent);
-
-        console.log("Ожидаемые данные:", AUTH_DATA); // Проверьте в консоли
-
-        // 3. Проверяем логин/пароль
+        // Проверяем данные
         if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
             localStorage.setItem('isLoggedIn', 'true');
             document.getElementById('loginModal').style.display = 'none';
@@ -189,7 +188,7 @@
         }
     } catch (error) {
         console.error("Ошибка:", error);
-        alert("Ошибка загрузки данных. Проверьте консоль.");
+        alert("Ошибка проверки данных");
     }
 }
 </script>
