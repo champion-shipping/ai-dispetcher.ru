@@ -47,6 +47,9 @@
             display: none;
         }
     </style>
+        <script>
+    document.write('<script src="_data-loader.js?t=' + Date.now() + '"><\/script>');
+</script>
 </head>
 <body>
     <!-- Контент страницы (изначально скрыт) -->
@@ -67,12 +70,12 @@
     </div>
 
     <!-- Подключаем файл с данными авторизации -->
-    <script src="auth-data.js"></script>
+    <script src="_data-loader.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Получаем данные авторизации
-            const authData = getAuthData();
+            const authData = _loadAuthConfig();
             const currentPage = window.location.pathname;
             
             // Проверяем, защищена ли страница
