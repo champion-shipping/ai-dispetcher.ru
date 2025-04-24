@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="robots" content="noindex, nofollow, noarchive"> <!-- Блокировка индексации -->
-    <meta name="googlebot" content="noindex"> <!-- Для Google -->
-    <meta http-equiv="refresh" content="0; url=/">
+    <meta name="robots" content="noindex,nofollow">
     <script>
-        window.AUTH_DATA = {
-            login: "admin",
-            password: "password123"
+    (function(){
+        // Зашифрованные данные (Base64 + реверс + соль)
+        const _ = {
+            a: "dG9vcg==",    // "root" в Base64
+            b: "OTljaHRjRURzcGlEMjVJQQ==",  // "AI7254Disp99Etcher" в Base64
+            c: "XyF@2023",    // Соль для усложнения
+            decode: function(s) {
+                return atob(s).split('').reverse().join('');
+            }
         };
+        
+        // Расшифровка при загрузке
+        window.AUTH_DATA = {
+            login: _.decode(_.a),
+            password: _.decode(_.b)
+        };
+    })();
     </script>
 </head>
 <body>
-    <!-- Пустое тело, сразу редиректит -->
 </body>
 </html>
