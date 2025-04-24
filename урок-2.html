@@ -148,7 +148,7 @@
 
     // Проверяем, авторизован ли пользователь
 document.addEventListener('DOMContentLoaded', function() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  // Уникальный ключ
+    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2'); 
     if (isLoggedIn === 'true') {
         document.getElementById('protectedContent').style.display = 'block';
     } else {
@@ -163,7 +163,7 @@ async function checkLogin() {
     try {
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.src = 'auth.html';  // Ваш файл для урока 2
+        iframe.src = 'auth.html';  
         document.body.appendChild(iframe);
         
         await new Promise(resolve => iframe.onload = resolve);
@@ -171,7 +171,7 @@ async function checkLogin() {
         document.body.removeChild(iframe);
         
         if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-            localStorage.setItem('isLoggedIn_lesson2', 'true');  // Уникальный ключ
+            localStorage.setItem('isLoggedIn_lesson2', 'true');  
             document.getElementById('loginModal').style.display = 'none';
             document.getElementById('protectedContent').style.display = 'block';
         } else {
