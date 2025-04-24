@@ -159,30 +159,39 @@
 
     // Функция проверки логина и пароля (ИСПРАВЛЕННАЯ)
     async function checkLogin() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-        // Загружаем auth.html и парсим его
-        const authHtml = await fetch('auth.html').then(res => res.text());
-        const parser = new DOMParser();
-        const authDoc = parser.parseFromString(authHtml, 'text/html');
+    try {
+        // 1. Загружаем auth.html
+        const response = await fetch('auth.html');
         
-        // Извлекаем скрипт с AUTH_DATA
-        const authScript = authDoc.querySelector('script').textContent;
+        // Если файл не найден (ошибка 404)
+        if (!response.ok) {
+            throw new Error(`Файл auth.html не найден (${response.status})`);
+        }
         
-        // Исполняем скрипт, чтобы получить AUTH_DATA
-        const AUTH_DATA = {};
-        eval(authScript);
+        const authHtml = await response.text();
         
-        // Проверяем введённые данные
+        // 2. Извлекаем AUTH_DATA
+        const scriptContent = authHtml.match(/const AUTH_DATA = ({[\s\S]*?});/)[1];
+        const AUTH_DATA = JSON.parse(scriptContent);
+
+        console.log("Ожидаемые данные:", AUTH_DATA); // Проверьте в консоли
+
+        // 3. Проверяем логин/пароль
         if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
             localStorage.setItem('isLoggedIn', 'true');
             document.getElementById('loginModal').style.display = 'none';
             document.getElementById('protectedContent').style.display = 'block';
         } else {
-            alert('Неверный логин или пароль!');
+            alert("Неверный логин или пароль!");
         }
+    } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Ошибка загрузки данных. Проверьте консоль.");
     }
+}
 </script>
 </body>
 </html>
