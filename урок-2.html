@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Урок 2 | AI Dispatcher</title>
+    <title>Страница 1 | AI Dispatcher</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -28,136 +28,55 @@
             color: #2c3e50;
             margin: 0;
         }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
         .content {
             background: white;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        
-        /* Стили модального окна */
-        .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 9999;
+        .nav {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-        .auth-box {
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            width: 300px;
+        .nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
         }
-        .auth-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .auth-btn {
-            width: 100%;
-            padding: 12px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .auth-error {
-            color: #e74c3c;
-            margin-top: 10px;
-            display: none;
-        }
-        .hidden {
-            display: none;
+        .nav a:hover {
+            text-decoration: underline;
         }
     </style>
-    <!-- Подключаем скрипт с защитой от кэша -->
-    <script src="_data-loader.js?nocache=<?=Math.random()?>"></script>
-</head>
-<body>
-    <!-- Контент (изначально скрыт) -->
-    <div id="mainContent" class="hidden">
-        <div id="header"></div>
-        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-            <!-- Основной контент страницы -->
-            <h1>Урок 2</h1>
-            <div class="content">
-                
-                
-                
-                Содержимое урока...
-                
-                
-                
-                
-            </div>
-        </div>
-        <div id="footer"></div>
-    </div>
+</head>    
+    <div id="header"></div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const auth = getAuthConfig();
-    const isProtected = auth.protectedPages.includes(window.location.pathname);
-    
-    if(isProtected && !sessionStorage.getItem('auth_ok')) {
-        // Показываем модалку авторизации
-        const modal = `
-        <div style="
-            position:fixed;top:0;left:0;width:100%;height:100%;
-            background:rgba(0,0,0,0.9);z-index:9999;
-            display:flex;justify-content:center;align-items:center;
-        ">
-            <div style="background:#fff;padding:20px;border-radius:8px;width:300px;">
-                <h3 style="margin-top:0;">Введите логин и пароль</h3>
-                <input type="text" id="auth_login" placeholder="Логин" style="width:100%;padding:8px;margin-bottom:10px;">
-                <input type="password" id="auth_pass" placeholder="Пароль" style="width:100%;padding:8px;">
-                <button onclick="checkAuth()" style="width:100%;padding:10px;background:#4CAF50;color:#fff;border:none;margin-top:10px;">
-                    Войти
-                </button>
-                <p id="auth_error" style="color:red;display:none;">Неверные данные!</p>
-            </div>
-        </div>`;
-        
-        document.body.insertAdjacentHTML('afterbegin', modal);
-    }
-});
+    <!-- Основной контент -->
 
-function checkAuth() {
-    const login = document.getElementById('auth_login').value;
-    const pass = document.getElementById('auth_pass').value;
-    const authData = getAuthConfig();
-    
-    const isValid = authData.credentials.some(u => u.l === login && u.p === pass);
-    
-    if(isValid) {
-        sessionStorage.setItem('auth_ok', '1');
-        location.reload(); // Перезагружаем страницу
-    } else {
-        document.getElementById('auth_error').style.display = 'block';
-    }
-}
-</script>
-            
-            <script>
-            // Загружаем header и footer
-            fetch('header.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('header').innerHTML = html);
-            
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(html => document.getElementById('footer').innerHTML = html);
-        }
+
+
+
+
+            </div>
+    <div id="footer"></div>
+    <script>
+        // Загружаем header и footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
     </script>
 </body>
 </html>
