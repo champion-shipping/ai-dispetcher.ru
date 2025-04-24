@@ -167,24 +167,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    console.log("Введенные данные:", { username, password }); // Логируем ввод
 
     try {
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.src = 'auth.html'; 
+        iframe.src = 'auth.html';
         document.body.appendChild(iframe);
         
         await new Promise(resolve => iframe.onload = resolve);
         const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+        console.log("Данные из auth.html:", AUTH_DATA); // Логируем полученные данные
         document.body.removeChild(iframe);
         
         if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-            localStorage.setItem('isLoggedIn_lesson2', 'true');  
+            console.log("Авторизация успешна!");
+            localStorage.setItem('isLoggedIn_lesson2', 'true');
             document.getElementById('loginModal').style.display = 'none';
             document.getElementById('protectedContent').style.display = 'block';
         } else {
+            console.log("Ошибка: неверный логин/пароль");
             alert("Неверный логин или пароль для Урока 2!");
         }
     } catch (error) {
