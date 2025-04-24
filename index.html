@@ -156,7 +156,8 @@
         </a>
         
         <!-- Пункт меню 2 (закрытый) -->
-        <div onclick="checkAuthBeforeOpen('урок-2.html')" style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(155,89,182,0.2); border: 1px solid rgba(155,89,182,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
+            <a href="урок-2" style="text-decoration: none;">
+        <div style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(155,89,182,0.2); border: 1px solid rgba(155,89,182,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #9b59b6; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 2
                 <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -168,8 +169,10 @@
             <p style="color: #555; margin-bottom: 0;">Основные концепции</p>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #9b59b6, #e74c3c); border-radius: 0 0 12px 12px; opacity: 0; transition: opacity 0.3s ease;"></div>
         </div>
-        
+            </a>
+                
         <!-- Пункт меню 3 (закрытый) -->
+            <a href="урок-3" style="text-decoration: none;">
         <div onclick="checkAuthBeforeOpen('урок-3.html')" style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(46,204,113,0.2); border: 1px solid rgba(46,204,113,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #2ecc71; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 3
@@ -182,9 +185,11 @@
             <p style="color: #555; margin-bottom: 0;">Практические примеры</p>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #2ecc71, #3498db); border-radius: 0 0 12px 12px; opacity: 0; transition: opacity 0.3s ease;"></div>
         </div>
+            </a>
         
         <!-- Пункт меню 4 (закрытый) -->
-        <div onclick="checkAuthBeforeOpen('урок-4.html')" style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(230,126,34,0.2); border: 1px solid rgba(230,126,34,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
+            <a href="урок-4" style="text-decoration: none;">
+        <div style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(230,126,34,0.2); border: 1px solid rgba(230,126,34,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #e67e22; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 4
                 <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -196,6 +201,7 @@
             <p style="color: #555; margin-bottom: 0;">Дополнительные материалы</p>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #e67e22, #9b59b6); border-radius: 0 0 12px 12px; opacity: 0; transition: opacity 0.3s ease;"></div>
         </div>
+            </a>
     </div>
 </section>
 
@@ -203,137 +209,12 @@
 
 
 
-<!-- Модальное окно авторизации -->
-<div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-  <div style="background: white; border-radius: 12px; padding: 30px; width: 90%; max-width: 400px; position: relative;">
-    <!-- Кнопка закрытия -->
-    <button onclick="hideAuthModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #7f8c8d;">
-      &times;
-    </button>
-    
-    <h2 style="font-size: 1.5rem; color: #2c3e50; margin-top: 0; margin-bottom: 20px; text-align: center;">Вход в систему</h2>
-    <form id="modalLoginForm">
-      <div style="margin-bottom: 15px;">
-        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Логин</label>
-        <input type="text" id="modalUsername" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
-      </div>
-      <div style="margin-bottom: 20px;">
-        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Пароль</label>
-        <input type="password" id="modalPassword" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
-      </div>
-      <button type="submit" style="width: 100%; padding: 10px; background: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer;">Войти</button>
-      <div id="modalError" style="color: #e74c3c; margin-top: 10px; text-align: center; display: none;">Неверный логин или пароль</div>
-    </form>
-  </div>
-</div>
+
         
     </div>
  
     <div id="footer"></div>
 <script>
-// Глобальные переменные
-let currentLessonToOpen = null;
-
-// Функции для работы с модальным окном
-function showAuthModal(lessonUrl) {
-    currentLessonToOpen = lessonUrl;
-    document.getElementById('authModal').style.display = 'flex';
-    document.getElementById('modalUsername').focus();
-}
-
-function hideAuthModal() {
-    document.getElementById('authModal').style.display = 'none';
-    currentLessonToOpen = null;
-    document.getElementById('modalLoginForm').reset();
-    document.getElementById('modalError').style.display = 'none';
-}
-
-// Проверка авторизации перед открытием урока
-function checkAuthBeforeOpen(lessonUrl) {
-    const sessionToken = localStorage.getItem('sessionToken');
-    
-    if (sessionToken) {
-        try {
-            const sessionData = JSON.parse(atob(sessionToken));
-            if (Date.now() < sessionData.expires) {
-                openLesson(lessonUrl);
-                return;
-            }
-        } catch (e) {
-            // Невалидный токен
-        }
-    }
-    showAuthModal(lessonUrl);
-}
-
-// Открытие урока
-function openLesson(url) {
-    window.location.href = url;
-}
-
-// Обработка формы в модальном окне
-document.getElementById('modalLoginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('modalUsername').value;
-    const password = document.getElementById('modalPassword').value;
-    const errorElement = document.getElementById('modalError');
-    
-    try {
-        const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
-        const userCreds = storedCredentials[username];
-        
-        if (!userCreds) throw new Error('User not found');
-        
-        const hashedInput = await sha256(password + userCreds.salt);
-        if (hashedInput === userCreds.hash) {
-            // Создаем сессию
-            const sessionData = {
-                username: username,
-                timestamp: Date.now(),
-                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
-            };
-            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
-            
-            hideAuthModal();
-            if (currentLessonToOpen) {
-                openLesson(currentLessonToOpen);
-            }
-        } else {
-            throw new Error('Invalid password');
-        }
-    } catch (error) {
-        errorElement.style.display = 'block';
-        setTimeout(() => {
-            errorElement.style.display = 'none';
-        }, 3000);
-    }
-});
-
-// Хэширование SHA-256
-async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// Инициализация учетных данных (если еще не сделано)
-if (!localStorage.getItem('authInitialized')) {
-    const credentials = {
-        'admin': {
-            salt: 'a1b2c3d4e5f6',
-            hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
-        },
-'qwerty123': {
-    salt: 'z9y8x7w6v5u4',
-    hash: 'c5d1a8a3e2d8a5e0e2a8e3d5f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // Пример (не настоящий хеш)
-}
-    };
-    localStorage.setItem('credentials', JSON.stringify(credentials));
-    localStorage.setItem('authInitialized', 'true');
-}
-
 // 3D-эффект при наведении
 document.querySelectorAll('section a div, section > div > div').forEach(item => {
     item.onmouseover = function() {
