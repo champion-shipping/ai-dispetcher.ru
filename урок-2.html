@@ -147,44 +147,35 @@
         .then(data => document.getElementById('footer').innerHTML = data);
 
     // Проверяем, авторизован ли пользователь
-    document.addEventListener('DOMContentLoaded', function() {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        
-        if (isLoggedIn === 'true') {
-            document.getElementById('protectedContent').style.display = 'block';
-        } else {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  // Уникальный ключ
+    if (isLoggedIn === 'true') {
+        document.getElementById('protectedContent').style.display = 'block';
+    } else {
+        document.getElementById('loginModal').style.display = 'flex';
+    }
+});
 
-    // Функция проверки логина и пароля (ИСПРАВЛЕННАЯ)
 async function checkLogin() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     try {
-        // Загружаем auth.html в скрытом iframe
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.src = 'auth.html';
+        iframe.src = 'auth.html';  // Ваш файл для урока 2
         document.body.appendChild(iframe);
         
-        // Ждем загрузки
-        await new Promise(resolve => {
-            iframe.onload = resolve;
-        });
-        
-        // Получаем данные из iframe
+        await new Promise(resolve => iframe.onload = resolve);
         const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
         document.body.removeChild(iframe);
         
-        // Проверяем данные
         if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('isLoggedIn_lesson2', 'true');  // Уникальный ключ
             document.getElementById('loginModal').style.display = 'none';
             document.getElementById('protectedContent').style.display = 'block';
         } else {
-            alert("Неверный логин или пароль!");
+            alert("Неверный логин или пароль для Урока 2!");
         }
     } catch (error) {
         console.error("Ошибка:", error);
