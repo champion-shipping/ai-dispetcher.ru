@@ -146,65 +146,42 @@
         .then(response => response.text())
         .then(data => document.getElementById('footer').innerHTML = data);
 
-    // Проверяем авторизацию
-    document.addEventListener('DOMContentLoaded', function() {
-        // Всегда сбрасываем состояние при загрузке страницы
-        const modal = document.getElementById('loginModal');
-        const content = document.getElementById('protectedContent');
-        
-        // Проверяем наличие ключа
-        const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');
-        
-        if (isLoggedIn === 'true') {
-            // Дополнительная проверка - если модальное окно видно, значит авторизация не прошла
-            if (modal && modal.style.display !== 'flex') {
-                content.style.display = 'block';
-            } else {
-                localStorage.removeItem('isLoggedIn_lesson2');
-                modal.style.display = 'flex';
-                content.style.display = 'none';
-            }
-        } else {
-            if (modal) modal.style.display = 'flex';
-            if (content) content.style.display = 'none';
-        }
-    });
-
-    async function checkLogin() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const modal = document.getElementById('loginModal');
-        const content = document.getElementById('protectedContent');
-
-        try {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = 'auth.html';
-            document.body.appendChild(iframe);
-            
-            await new Promise(resolve => iframe.onload = resolve);
-            const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
-            document.body.removeChild(iframe);
-            
-            if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-                // Только при успешной авторизации
-                localStorage.setItem('isLoggedIn_lesson2', 'true');
-                modal.style.display = 'none';
-                content.style.display = 'block';
-            } else {
-                localStorage.removeItem('isLoggedIn_lesson2');
-                modal.style.display = 'flex';
-                content.style.display = 'none';
-                alert("Неверный логин или пароль для Урока 2!");
-            }
-        } catch (error) {
-            localStorage.removeItem('isLoggedIn_lesson2');
-            modal.style.display = 'flex';
-            content.style.display = 'none';
-            console.error("Ошибка:", error);
-            alert("Ошибка проверки данных");
-        }
+    // Проверяем, авторизован ли пользователь
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  // Уникальный ключ
+    if (isLoggedIn === 'true') {
+        document.getElementById('protectedContent').style.display = 'block';
+    } else {
+        document.getElementById('loginModal').style.display = 'flex';
     }
+});
+
+async function checkLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = 'auth.html';  // Ваш файл для урока 2
+        document.body.appendChild(iframe);
+        
+        await new Promise(resolve => iframe.onload = resolve);
+        const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+        document.body.removeChild(iframe);
+        
+        if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
+            localStorage.setItem('isLoggedIn_lesson2', 'true');  // Уникальный ключ
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('protectedContent').style.display = 'block';
+        } else {
+            alert("Неверный логин или пароль для Урока 2!");
+        }
+    } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Ошибка проверки данных");
+    }
+}
 </script>
 </body>
 </html>
