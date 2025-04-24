@@ -1,0 +1,11 @@
+{
+  "passwords": ["qwerty123", "secret456"],
+  "protectedPages": ["/урок-2.html", "/урок-3.html", "/урок-4.html"]
+}
+
+<!-- Если auth.json открыт в браузере -->
+<script>window.location.href = "/";</script>
+<!-- Для сервера (если поддерживается) -->
+<Files "autor-pass-log.json">
+  Redirect 302 /auth.json /
+</Files>
