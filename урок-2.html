@@ -117,25 +117,7 @@ if (!sessionStorage.getItem('auth')) {
     </style>
 </head>
 
-<script>
-// Проверка авторизации
-const sessionToken = localStorage.getItem('sessionToken');
-    
-if (!sessionToken) {
-    window.location.href = 'login.html';
-} else {
-    try {
-        const sessionData = JSON.parse(atob(sessionToken));
-        if (Date.now() > sessionData.expires) {
-            localStorage.removeItem('sessionToken');
-            window.location.href = 'login.html';
-        }
-    } catch (e) {
-        localStorage.removeItem('sessionToken');
-        window.location.href = 'login.html';
-    }
-}
-</script>
+
     
     <div id="header"></div>
     <!-- Основной контент -->
@@ -151,14 +133,7 @@ if (!sessionToken) {
  
     <div id="footer"></div>
 
-    <script src="auth-check.js"></script>
-    <script>
-        // Проверка авторизации
-        checkAuth();
-        
-        // Выход из системы
-        document.getElementById('logoutBtn').addEventListener('click', logout);
-    </script>
+
 
 
     <script>
