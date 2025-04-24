@@ -146,42 +146,51 @@
         .then(response => response.text())
         .then(data => document.getElementById('footer').innerHTML = data);
 
-    // Проверяем, авторизован ли пользователь
-document.addEventListener('DOMContentLoaded', function() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  // Уникальный ключ
-    if (isLoggedIn === 'true') {
-        document.getElementById('protectedContent').style.display = 'block';
-    } else {
-        document.getElementById('loginModal').style.display = 'flex';
-    }
-});
-
-async function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = 'auth.html';  // Ваш файл для урока 2
-        document.body.appendChild(iframe);
+    // Проверяем авторизацию
+    document.addEventListener('DOMContentLoaded', function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');
         
-        await new Promise(resolve => iframe.onload = resolve);
-        const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
-        document.body.removeChild(iframe);
-        
-        if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-            localStorage.setItem('isLoggedIn_lesson2', 'true');  // Уникальный ключ
-            document.getElementById('loginModal').style.display = 'none';
+        // Дополнительная проверка на случай сброса состояния
+        if (isLoggedIn === 'true' && !document.getElementById('loginModal')) {
             document.getElementById('protectedContent').style.display = 'block';
         } else {
-            alert("Неверный логин или пароль для Урока 2!");
+            localStorage.removeItem('isLoggedIn_lesson2'); // Очищаем при любой ошибке
+            document.getElementById('loginModal').style.display = 'flex';
         }
-    } catch (error) {
-        console.error("Ошибка:", error);
-        alert("Ошибка проверки данных");
+    });
+
+    async function checkLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        let authSuccessful = false;
+
+        try {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'auth.html';
+            document.body.appendChild(iframe);
+            
+            await new Promise(resolve => iframe.onload = resolve);
+            const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+            document.body.removeChild(iframe);
+            
+            if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
+                localStorage.setItem('isLoggedIn_lesson2', 'true');
+                authSuccessful = true;
+                document.getElementById('loginModal').style.display = 'none';
+                document.getElementById('protectedContent').style.display = 'block';
+            } else {
+                alert("Неверный логин или пароль для Урока 2!");
+            }
+        } catch (error) {
+            console.error("Ошибка:", error);
+            alert("Ошибка проверки данных");
+        } finally {
+            if (!authSuccessful) {
+                localStorage.removeItem('isLoggedIn_lesson2');
+            }
+        }
     }
-}
 </script>
 </body>
 </html>
