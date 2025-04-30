@@ -332,6 +332,106 @@
 
 
 
+<div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+    <!-- Заголовок раздела -->
+    <section style="margin-bottom: 30px;">
+        <h2 style="font-size: 1.4em; color: #2c3e50; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #3498db;">2.1 Формула правильного ТЗ</h2>
+        
+        <p style="font-size: 1.1em; margin-bottom: 20px;">
+            В прошлом уроке, я показал примерами в пункте (1.3), что при составлении ТЗ для LLM, для начала мы должны создать задачу сами себе, расписав нужные нам моменты по пунктам (1, 2, 3) и тд.
+        </p>
+    </section>
+
+    <!-- Основные пункты ТЗ -->
+    <section style="margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+        <ol style="font-size: 1.1em; margin: 0; padding-left: 20px;">
+            <li style="margin-bottom: 10px;"><strong>Описание того, что у вас есть, в каком виде, что означает</strong></li>
+            <li style="margin-bottom: 10px;"><strong>Данные которые у вас есть</strong> - ""</li>
+            <li style="margin-bottom: 10px;"><strong>Описание проблемы</strong></li>
+            <li style="margin-bottom: 10px;"><strong>Что нужно сделать</strong> - (Тут можно добавлять еще что, где, как - разберем чуть позже)</li>
+            <li><strong>Критерии</strong></li>
+        </ol>
+    </section>
+
+    <!-- Пример с кодом -->
+    <section style="margin-bottom: 30px;">
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример с языком программирования:</h4>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+                <p style="margin: 0; font-style: italic;">
+                    У меня есть вот такой PHP код, который выполняет … (Важно указать какой именно язык!)<br>
+                    "КОД"<br>
+                    Сейчас у меня не работает …<br>
+                    Мне надо сделать так, чтобы …, остальное оставь без изменений.<br>
+                    Дай мне полностью обновленный код, ничего не обрезай и не сокращай!
+                </p>
+            </div>
+        </div>
+        
+        <p style="font-size: 1.1em; margin-bottom: 20px;">
+            В целом такой формат составления промта, я выдал еще в Тестовом Задании в конце прошлого урока. (Если вы конечно обратили на это внимание!)
+        </p>
+    </section>
+
+    <!-- Пример с контентом -->
+    <section style="margin-bottom: 30px;">
+        <p style="font-size: 1.1em; margin-bottom: 20px;">
+            Но что если у нас не только идет работа с кодом, а так же нам нужно получать контент в определенном формате?
+            В идеале и проще простого - это выдать небольшой пример в каком формате вы хотите получать ответ. Но главное, не забываем описать, что у нас имеется и что это означает.  
+        </p>
+        
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример с данными:</h4>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                <p style="margin: 0; font-style: italic;">
+                    У меня есть вот такая информация о … (Тут желательно расписать, что за информация)<br>
+                    "ИНФОРМАЦИЯ"<br>
+                    Мне нужно…<br>
+                    Дай мне ответ в таком же формате как и в этом примере:<br>
+                    "ПРИМЕР" - (Таблица, Текст в 2 столбца, Распределение на категории и тд. и тп.)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел про большие данные -->
+    <section style="margin-bottom: 30px;">
+        <p style="font-size: 1.1em; margin-bottom: 20px;">
+            Кажется довольно простым и банальным, но для самой LLM модели, которая пытается угадать, что вам нужно и в каком формате, грамотно составленное ТЗ убирает все возможные тыкания пальцем в небо.
+        </p>
+        
+        <p style="font-size: 1.1em; margin-bottom: 20px;">
+            Но тут есть момент, что при обработке больших данных в текстовом формате >1000 токенов (для LLM это 3-5 символов на 1 токен), в которую входят (Описание проблемы, Данные, Задача, Критерии), то модель будет упускать разные моменты, что будет приводить к постоянным правкам и получении не точного результата, что особенно критично при автоматической генерации контента. И тут важно правильно разбить все на этапы:
+        </p>
+        
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример:</h4>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                <p style="margin: 0; font-style: italic;">
+                    У меня есть вот такая информация о … (Тут желательно расписать, что за информация)<br>
+                    "ИНФОРМАЦИЯ"<br>
+                    В информации есть важные моменты которые нельзя пропустить:<br>
+                    1. …<br>
+                    2. …<br>
+                    3. …<br>
+                    4. и тд.<br>
+                    Мне нужно…<br>
+                    Дай мне ответ в таком же формате как и в этом примере:<br>
+                    "ПРИМЕР" - (Таблица, Текст в 2 столбца, Распределение на категории, Абзац-Таблица-Абзац и тд. и тп.)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Заключительный абзац -->
+    <section>
+        <p style="font-size: 1.1em; margin-bottom: 0;">
+            Таким образом мы заранее указываем для модели, основные моменты, которые нас интересуют и исключаем возможность того, что она упустит интересующий нас пункт.
+        </p>
+    </section>
+</div>
+		
+
 
 
 
