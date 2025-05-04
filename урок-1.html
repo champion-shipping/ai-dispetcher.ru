@@ -1385,6 +1385,26 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
 </div>
 	    
     <div id="footer"></div>
+
+		<script>
+// 3D-эффект при наведении
+document.querySelectorAll('section a div, section > div > div').forEach(item => {
+    item.onmouseover = function() {
+        this.style.transform = 'perspective(1000px) translateZ(20px)';
+        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '1';
+        }
+    };
+    item.onmouseout = function() {
+        this.style.transform = 'perspective(1000px) translateZ(0)';
+        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        if (this.lastElementChild && this.lastElementChild.style) {
+            this.lastElementChild.style.opacity = '0';
+        }
+    };
+});
+</script>
 	<script>
 // Глобальные переменные
 let currentLessonToOpen = null;
