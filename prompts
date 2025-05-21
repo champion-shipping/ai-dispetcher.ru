@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База промтов для LLM | AI Dispatcher</title>
+    <meta name="description" content="Коллекция полезных промтов для ChatGPT, DeepSeek и других LLM. Разработка, Контент, Человекоподобный текст и другие категории.">
+    <link rel="canonical" href="https://ai-dispetcher.ru/prompts" /> <!-- Обновили canonical URL -->
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            color: #111;
+            line-height: 1.6;
+        }
+        
+        /* Общие стили для контейнера контента */
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Стили для заголовка страницы */
+        .content-container h1 {
+             font-size: 2.5rem;
+             color: #2c3e50;
+             margin-bottom: 20px;
+             font-weight: 600;
+        }
+
+        /* Стили для категорий промтов */
+        .prompt-category {
+            margin-bottom: 40px; /* Отступ между категориями */
+            background: white; /* Фон для блока категории */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .prompt-category h3 {
+            color: #3498db; /* Цвет заголовка категории */
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #ecf0f1; /* Разделитель под заголовком */
+            padding-bottom: 10px;
+        }
+
+        /* Стили для отдельного промта (используем details) */
+        .prompt-item {
+            background: #ecf0f1; /* Светлый фон для каждого промта */
+            border-radius: 8px;
+            margin-bottom: 15px; /* Отступ между промтами */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border: 1px solid #dde3e4; /* Граница */
+        }
+
+        .prompt-item summary {
+            padding: 15px 20px;
+            background: #ecf0f1; /* Фон для заголовка (summary) */
+            cursor: pointer;
+            outline: none; /* Убираем стандартную обводку при фокусе */
+            user-select: none; /* Не даем выделять текст заголовка */
+            font-weight: 600;
+            color: #34495e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease; /* Плавное изменение фона при наведении/открытии */
+        }
+
+        .prompt-item summary::-webkit-details-marker {
+            display: none; /* Скрываем стандартный маркер Chrome/Safari */
+        }
+         .prompt-item summary::before {
+            content: '+'; /* Кастомный маркер */
+            margin-right: 10px;
+            font-weight: bold;
+            color: #3498db; /* Цвет маркера */
+            transition: transform 0.2s ease;
+            flex-shrink: 0; /* Предотвращаем сжатие маркера */
+        }
+         .prompt-item[open] summary::before {
+            content: '-'; /* Маркер при открытом состоянии */
+        }
+
+        .prompt-item summary:hover {
+             background: #dde3e4; /* Фон при наведении */
+        }
+
+        /* Стили для содержимого промта (после summary) */
+        .prompt-content {
+            padding: 15px 20px;
+            border-top: 1px solid #dde3e4; /* Разделитель между заголовком и контентом */
+            background: #fdfdfd; /* Фон для содержимого */
+        }
+
+        .prompt-content p {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* Стили для блока кода (промта) */
+        .prompt-content pre {
+            background: #eee; /* Фон для блока кода */
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto; /* Скролл для длинных строк */
+            white-space: pre-wrap; /* Перенос строк */
+            word-wrap: break-word;
+            margin: 0; /* Убираем стандартные отступы pre */
+        }
+
+         .prompt-content code {
+             font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+             font-size: 0.9em;
+             display: block; /* Чтобы занимал всю ширину pre */
+         }
+
+         /* Дополнительный стиль для открытого состояния (можно использовать для границ и т.п.) */
+         .prompt-item[open] {
+             border-color: #3498db; /* Подсветка границы при открытии */
+         }
+
+          /* Медиа-запросы при необходимости (хотя details/summary адаптивны) */
+          /* @media (max-width: 768px) {
+               ... адаптивные стили ...
+          } */
+
+    </style>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(101179914, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101179914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <!-- Основной контент -->
+    <div class="content-container">
+
+        <h1>База полезных промтов для LLM</h1>
+
+        <p>Здесь собраны промты, которые я использую в работе с ChatGPT, DeepSeek и другими большими языковыми моделями. Вы можете взять их за основу, адаптировать под свои задачи или просто изучить примеры эффективных запросов.</p>
+
+        <!-- Пример категории: Разработка -->
+        <div class="prompt-category">
+            <h3>Разработка</h3>
+
+            <!-- Пример промта в категории -->
+            <details class="prompt-item">
+                <summary>Промт для создания базовой структуры HTML страницы</summary>
+                <div class="prompt-content">
+                    <p>Этот промт помогает быстро сгенерировать шаблон HTML5 страницы с мета-тегами, подключением CSS и JS.</p>
+                    <pre><code>
+Создай базовый шаблон HTML5 страницы.
+Включи:
+- Doctype HTML5
+- Тег html с lang="ru"
+- Тег head с charset="UTF-8" и viewport meta tag.
+- Тег title (поставь "Пример страницы")
+- Тег meta description (с описанием "Это пример сгенерированной страницы")
+- Подключение внешнего CSS файла (style.css)
+- Подключение внешнего JS файла (script.js) в конце body.
+- Внутри body добавь пустой div с id="app".
+</code></pre>
+                </div>
+            </details>
+
+             <!-- Еще один пример промта -->
+             <details class="prompt-item">
+                <summary>Промт для написания простого PHP скрипта</summary>
+                <div class="prompt-content">
+                     <p>Генерирует очень простой PHP скрипт для быстрого теста.</p>
+                    <pre><code>
+Напиши простой PHP скрипт, который выводит на экран строку "Привет, мир!" и текущую дату в формате ГГГГ-ММ-ДД.
+</code></pre>
+                </div>
+            </details>
+
+            <!-- Добавьте сюда другие промты для категории "Разработка", копируя блок <details> -->
+
+        </div>
+
+        <!-- Пример категории: Контент -->
+        <div class="prompt-category">
+            <h3>Контент</h3>
+
+             <details class="prompt-item">
+                <summary>Промт для генерации идеи статьи для блога</summary>
+                <div class="prompt-content">
+                     <p>Используйте этот промт для брейнсторминга тем, подходящих для вашей аудитории.</p>
+                    <pre><code>
+Я пишу блог о [Ваша тема блога, например: "эффективное использование LLM в работе"].
+Моя целевая аудитория - [Описание ЦА, например: "фрилансеры и малый бизнес, которые хотят автоматизировать рутинные задачи"].
+Предложи 5 оригинальных идей для статей или постов в блог, которые будут максимально полезны этой аудитории.
+Для каждой идеи укажи:
+1. Заголовок
+2. Краткое описание (2-3 предложения)
+3. Примерное ключевое слово или фраза для SEO.
+</code></pre>
+                </div>
+            </details>
+
+             <details class="prompt-item">
+                <summary>Промт для написания продающего текста для продукта (AIDA)</summary>
+                <div class="prompt-content">
+                     <p>Шаблон для создания убедительного текста по классической маркетинговой формуле AIDA.</p>
+                    <pre><code>
+Напиши продающий текст для моего [Продукт/Услуга: например, "онлайн-курс по быстрому освоению промт-инжиниринга"].
+Целевая аудитория: [Описание ЦА: например, "новички в ИИ, которые хотят быстро получить практические навыки"].
+Основные преимущества продукта/услуги:
+- [Преимущество 1: например, "Минимум теории, максимум практики"]
+- [Преимущество 2: например, "Создание реальных проектов уже на курсе"]
+- [Преимущество 3: например, "Поддержка автора"]
+Призыв к действию (CTA): [Что должен сделать пользователь: например, "Записаться на курс", "Скачать пробный урок", "Оставить заявку"].
+Длина текста: [Например, "около 300 слов", "не более 5 абзацев"].
+Используй структуру AIDA (Attention, Interest, Desire, Action) для построения текста. Сделай тон текста [Тон: например, "дружелюбным и мотивирующим", "профессиональным и убедительным"].
+</code></pre>
+                </div>
+            </details>
+
+            <!-- Добавьте сюда другие промты для категории "Контент" -->
+
+        </div>
+
+        <!-- Пример категории: Писать как человек -->
+        <div class="prompt-category">
+            <h3>Писать как человек</h3>
+
+             <details class="prompt-item">
+                <summary>Промт для переписывания текста в более разговорном стиле</summary>
+                <div class="prompt-content">
+                     <p>Полезно, когда нужно сделать официальный или технический текст более живым и доступным.</p>
+                    <pre><code>
+Перепиши следующий текст в более неформальном, разговорном стиле, как если бы ты объяснял это другу или рассказывал историю в своем блоге. Используй простые слова, избегай канцеляризмов и сложных оборотов. Добавь немного эмоций или личного отношения, если это уместно.
+
+[Вставьте текст, который нужно переписать, сюда]
+</code></pre>
+                </div>
+            </details>
+
+             <details class="prompt-item">
+                <summary>Промт для имитации определенной личности или стиля письма</summary>
+                <div class="prompt-content">
+                     <p>Позволяет настроить LLM на определенный тон, словарный запас или даже манеру речи.</p>
+                    <pre><code>
+С этого момента и во всех следующих ответах имитируй манеру речи и стиль письма [Опишите личность или стиль: например, "опытного, но немного саркастичного технического специалиста", "дружелюбного и восторженного новичка", "официального представителя компании"].
+Твой словарный запас должен соответствовать этой роли. Избегай стандартных фраз ИИ.
+Начни с ответа на вопрос: [Задайте первый вопрос, чтобы начать диалог в нужном стиле].
+</code></pre>
+                </div>
+            </details>
+
+            <!-- Добавьте сюда другие промты для категории "Писать как человек" -->
+
+        </div>
+
+        <!-- Добавьте другие категории здесь, копируя div class="prompt-category" -->
+
+
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Загружаем header и footer
+        // Добавил простую проверку на наличие элемента перед innerHTML и обработку ошибок
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                const headerDiv = document.getElementById('header');
+                if (headerDiv) headerDiv.innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error)); // Логируем ошибку если не удалось загрузить
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                const footerDiv = document.getElementById('footer');
+                if (footerDiv) footerDiv.innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error)); // Логируем ошибку
+    </script>
+     <script>
+        // Опционально: Добавляем класс 'open' к details, когда он открыт. 
+        // Может быть полезно для дополнительной стилизации открытых блоков.
+        document.querySelectorAll('.prompt-item').forEach(details => {
+            details.addEventListener('toggle', function() {
+                if (this.open) {
+                    this.classList.add('open');
+                } else {
+                    this.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
