@@ -145,7 +145,74 @@
         </div>
     </div>
     <div id="footer"></div>
+ <script>
+        const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
+        const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
+        const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
+        const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
+        const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
 
+        // Функция для открытия мобильного меню
+        function openMobileMenu() {
+            sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
+            mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
+            // Используем setTimeout для плавного появления оверлея после его display: block
+            setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
+            document.body.style.overflow = 'hidden'; // Запрещаем скролл основного контента
+            menuBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        // Функция для закрытия мобильного меню
+        function closeMobileMenu() {
+            sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
+            mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
+             // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+            setTimeout(() => {
+                 mobileMenuOverlay.style.display = 'none';
+                 document.body.style.overflow = ''; // Разрешаем скролл
+            }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        // Функция для обновления видимости меню в зависимости от размера экрана
+        function updateMenuVisibility() {
+            const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
+
+            if (isMobile) {
+                mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
+                desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
+
+                // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
+                if (sideMobileMenu.style.transform === 'translateX(0px)') {
+                     closeMobileMenu();
+                }
+
+            } else { // Десктоп
+                mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
+                // Используем flex для nav на десктопе, чтобы элементы были в ряд
+                desktopMenu.style.display = 'flex';
+                closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
+            }
+        }
+
+        // Привязываем события
+        menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
+        closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
+
+        // Закрывать мобильное меню при клике на любую ссылку внутри него
+        sideMobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Вызываем функцию при загрузке и изменении размера окна
+        window.addEventListener('load', updateMenuVisibility);
+        window.addEventListener('resize', updateMenuVisibility);
+
+        // Также вызываем при DOMContentLoaded для корректного отображения до полной загрузки (например, картинок)
+         document.addEventListener('DOMContentLoaded', updateMenuVisibility);
+    </script>
 <script>
   
     fetch('header.html')
