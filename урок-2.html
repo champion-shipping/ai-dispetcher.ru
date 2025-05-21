@@ -1759,74 +1759,7 @@ Plate Verb – эмуляция классических пластинчаты�
         </div>
     </div>
     <div id="footer"></div>
- <script>
-        const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
-        const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
-        const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
-        const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
-        const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
 
-        // Функция для открытия мобильного меню
-        function openMobileMenu() {
-            sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
-            mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
-            // Используем setTimeout для плавного появления оверлея после его display: block
-            setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
-            document.body.style.overflow = 'hidden'; // Запрещаем скролл основного контента
-            menuBtn.setAttribute('aria-expanded', 'true');
-        }
-
-        // Функция для закрытия мобильного меню
-        function closeMobileMenu() {
-            sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
-            mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
-             // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
-            setTimeout(() => {
-                 mobileMenuOverlay.style.display = 'none';
-                 document.body.style.overflow = ''; // Разрешаем скролл
-            }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
-            menuBtn.setAttribute('aria-expanded', 'false');
-        }
-
-        // Функция для обновления видимости меню в зависимости от размера экрана
-        function updateMenuVisibility() {
-            const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
-
-            if (isMobile) {
-                mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
-                desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
-
-                // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
-                if (sideMobileMenu.style.transform === 'translateX(0px)') {
-                     closeMobileMenu();
-                }
-
-            } else { // Десктоп
-                mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
-                // Используем flex для nav на десктопе, чтобы элементы были в ряд
-                desktopMenu.style.display = 'flex';
-                closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
-            }
-        }
-
-        // Привязываем события
-        menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
-        closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
-
-        // Закрывать мобильное меню при клике на любую ссылку внутри него
-        sideMobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // Вызываем функцию при загрузке и изменении размера окна
-        window.addEventListener('load', updateMenuVisibility);
-        window.addEventListener('resize', updateMenuVisibility);
-
-        // Также вызываем при DOMContentLoaded для корректного отображения до полной загрузки (например, картинок)
-         document.addEventListener('DOMContentLoaded', updateMenuVisibility);
-    </script>
 	<script>
 // 3D-эффект при наведении
 document.querySelectorAll('section a div, section > div > div').forEach(item => {
@@ -1846,18 +1779,167 @@ document.querySelectorAll('section a div, section > div > div').forEach(item => 
     };
 });
 </script>
+ <script>
+        // Загружаем header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const headerDiv = document.getElementById('header');
+                if (headerDiv) {
+                    headerDiv.innerHTML = data;
+                    // !!! ВАЖНО: Инициализируем меню ТОЛЬКО после того, как header загружен и вставлен
+                    initializeMobileMenu(); 
+                }
+            })
+            .catch(error => console.error('Error loading header:', error)); 
 
+        // Загружаем footer
+        fetch('footer.html')
+            .then(response => {
+                 if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const footerDiv = document.getElementById('footer');
+                if (footerDiv) footerDiv.innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error)); 
+
+
+        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ (ПЕРЕМЕЩЕН СЮДА) ---
+        function initializeMobileMenu() {
+            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
+            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
+            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
+            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
+            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
+
+            // Проверка, что все нужные элементы найдены (для надежности)
+            if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
+                console.error('Не найдены элементы меню для инициализации.');
+                return; // Прекращаем выполнение функции, если элементы не найдены
+            }
+
+
+            // Функция для открытия мобильного меню
+            function openMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
+                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
+                // Используем setTimeout для плавного появления оверлея после его display: block
+                setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
+                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+
+            // Функция для закрытия мобильного меню
+            function closeMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
+                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
+                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+                setTimeout(() => {
+                     mobileMenuOverlay.style.display = 'none';
+                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
+                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            // Функция для обновления видимости меню в зависимости от размера экрана
+            function updateMenuVisibility() {
+                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
+
+                if (isMobile) {
+                    mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
+                    desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
+
+                    // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
+                    // Проверяем transform.includes('0') вместо === 'translateX(0px)' для надежности
+                    if (sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
+                         closeMobileMenu();
+                    }
+
+                } else { // Десктоп
+                    mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
+                    desktopMenu.style.display = 'flex'; // Используем flex для nav на десктопе
+                    closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
+                }
+            }
+
+            // Привязываем события ТОЛЬКО после загрузки header
+            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
+            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
+
+            // Закрывать мобильное меню при клике на любую ссылку внутри него
+            sideMobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Вызываем функцию при загрузке и изменении размера окна
+            // Вместо load и DOMContentLoaded, вызываем updateMenuVisibility 
+            // сразу после привязки событий и при resize
+            updateMenuVisibility(); // Вызываем сразу после инициализации
+            window.addEventListener('resize', updateMenuVisibility);
+
+             // Опционально: перехват клика на уроки, чтобы сначала закрыть меню, потом перейти
+             document.querySelectorAll('#mobile-offcanvas-menu a[href="/#lessons"]').forEach(link => {
+                 link.addEventListener('click', function(event) {
+                     // closeMobileMenu() уже вызывается обработчиком выше для всех ссылок a
+                     // Если нужно добавить что-то специфичное, можно сделать здесь, но вряд ли нужно.
+                 });
+             });
+        }
+        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
+
+
+        // 3D-эффект при наведении (ваш существующий скрипт)
+        document.querySelectorAll('section a div, section > div > div').forEach(item => {
+            item.onmouseover = function() {
+                this.style.transform = 'perspective(1000px) translateZ(20px)';
+                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+                if (this.lastElementChild && this.lastElementChild.style) {
+                    this.lastElementChild.style.opacity = '1';
+                }
+            };
+            item.onmouseout = function() {
+                this.style.transform = 'perspective(1000px) translateZ(0)';
+                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                if (this.lastElementChild && this.lastElementChild.style) {
+                    this.lastElementChild.style.opacity = '0';
+                }
+            };
+        });
+
+         // Добавляем обработку случая, когда элемент "Уроки" находится на текущей странице
+         // Если пользователь на главной и кликнул "Уроки" в мобильном меню, нужно закрыть меню
+         // Этот обработчик уже есть в initializeMobileMenu для всех ссылок, но убедимся.
+         // Можно добавить скролл к якорю вручную после закрытия меню, если стандартное поведение не работает.
+         document.querySelectorAll('a[href="/#lessons"]').forEach(link => {
+            link.addEventListener('click', function(event) {
+                 // Проверяем, что это якорь и мы на текущей странице
+                 if (link.pathname === window.location.pathname && link.hash === '#lessons') {
+                     // Стандартное поведение браузера обычно работает с якорями
+                     // Если меню закрывается, скролл должен произойти после.
+                     // Если нужен плавный скролл, его можно добавить тут.
+                     // event.preventDefault(); // Закомментировано, т.к. якоря обычно работают
+                     // closeMobileMenu(); // Меню уже закроется из обработчика внутри initializeMobileMenu
+                     // setTimeout(() => { // Опционально: плавный скролл после закрытия
+                     //    document.getElementById('lessons').scrollIntoView({ behavior: 'smooth' });
+                     // }, 350); // Небольшая задержка после анимации закрытия
+                 }
+            });
+         });
+
+
+    </script>
 <script>
-  
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => document.getElementById('header').innerHTML = data);
-
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => document.getElementById('footer').innerHTML = data);
-
-   
 document.addEventListener('DOMContentLoaded', function() {
     const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  
     if (isLoggedIn === 'true') {
