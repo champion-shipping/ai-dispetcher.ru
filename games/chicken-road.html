@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chicken Road - Игра от AI Dispatcher</title> <!-- Обновляем title -->
-<meta name="description" content="Попробуйте увлекательную игру Chicken Road! Помогите курице пересечь дорогу, избегая ловушек и собирая выигрыши."> <!-- Обновляем описание -->
-    <link rel="canonical" href="https://ai-dispetcher.ru/games/chicken-road" /> <!-- Обновляем canonical URL для страницы в папке games -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"> <!-- shrink-to-fit=no может помочь с некоторыми проблемами масштабирования -->
+<title>Chicken Road - Игра от AI Dispatcher</title>
+<meta name="description" content="Попробуйте увлекательную игру Chicken Road! Помогите курице пересечь дорогу, избегая ловушек и собирая выигрыши.">
+    <link rel="canonical" href="https://ai-dispetcher.ru/games/chicken-road" />
 
 
     <!-- Yandex.Metrika counter -->
@@ -27,77 +27,63 @@
 
 
   <style>
-        /* Стили body из вашего шаблона (светлая тема). 
-           Удалены конфликтующие стили позиционирования и размеров из игрового CSS. */
+        /* Стили body из вашего шаблона (светлая тема). */
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f7fa; /* Светлый фон из вашего шаблона */
-            color: #111; /* Темный текст из вашего шаблона */
+            background: #f5f7fa;
+            color: #111;
             line-height: 1.6;
-            overflow-y: auto; /* Разрешаем скролл основной страницы */
-            overflow-x: hidden; /* Скрываем горизонтальный скролл */
-             /* Игровые стили body, которые можно оставить: */
-             user-select: none; /* Сохраняем запрет выделения текста для игры */
+            overflow-y: auto;
+            overflow-x: hidden;
+            user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
             -moz-user-select: none;
         }
 
-         /* Стили для контейнера контента из вашего шаблона.
-            Добавлены flex свойства для центрирования игрового контейнера внутри. */
          .content-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            padding-top: 80px; /* Отступ сверху, чтобы контент не скрывался за header */
-            padding-bottom: 40px; /* Отступ снизу перед footer */
-            position: relative; /* Может понадобиться для других элементов шаблона, но для игры не критично */
-            /* Flexbox для центрирования game-container */
+            padding-top: 80px;
+            padding-bottom: 40px;
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Центрирует game-container по горизонтали */
+            align-items: center;
          }
 
-        /* --- Стили самой игры (адаптированные для работы внутри другого контейнера) --- */
         .game-container {
-            /* Удалены старые абсолютные позиционирования, которые ломались внутри content-container */
-            /* position: relative; width: 98%; max-width: 900px; height: 550px; */
-
-            /* Новые стили для game-container как блочного элемента внутри content-container */
-            width: 98%; /* Ширина внутри content-container */
-            max-width: 900px; /* Максимальная ширина */
-            height: 550px; /* Фиксированная высота игрового поля (для десктопа) */
-            margin: 20px auto; /* Центрируем блок игры и добавляем отступы */
-
-            border: 4px solid #24262b; /* Темная рамка */
+            width: 98%;
+            max-width: 900px;
+            height: 550px;
+            margin: 20px auto;
+            border: 4px solid #24262b;
             border-radius: 10px;
-            overflow: hidden; /* Обрезаем все внутри по границам контейнера */
+            overflow: hidden;
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-            background-color: #4a4c56; /* Темный фон игрового поля */
-
-            /* Внутренний layout игры остается flex и absolute */
+            background-color: #4a4c56;
             display: flex;
             flex-direction: column;
-            position: relative; /* Это критично! Внутренние absolute элементы позиционируются относительно него */
-            flex-shrink: 0; /* Не сжимаем контейнер игры внутри flexbox */
-            flex-grow: 0; /* Не растягиваем контейнер игры */
+            position: relative;
+            flex-shrink: 0;
+            flex-grow: 0;
         }
 
-        /* Элементы внутри game-container позиционируются абсолютно относительно game-container */
         .top-bar {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 50px; /* Высота верхней панели */
-            background-color: #24262b; /* Темный фон верхней панели */
+            height: 50px;
+            background-color: #24262b;
             color: #fff;
             display: flex;
             align-items: center;
             padding: 0 20px;
             justify-content: space-between;
-            z-index: 30; /* Самый верхний слой */
+            z-index: 30;
             font-size: 1.1em;
             font-weight: bold;
         }
@@ -106,19 +92,19 @@
             display: flex;
             align-items: center;
             font-size: 1.3em;
-            color: #ffcc00; /* Желтый цвет заголовка */
-             flex-shrink: 0; /* Предотвращаем сжатие заголовка */
+            color: #ffcc00;
+             flex-shrink: 0;
         }
 
          .top-bar .title a {
-             color: inherit; /* Наследует цвет от родителя */
-             text-decoration: none; /* Убираем подчеркивание */
+             color: inherit;
+             text-decoration: none;
              margin-left: 5px;
          }
 
 
         .top-bar .title img {
-             height: 25px; /* Размер яйца */
+             height: 25px;
              margin-left: 8px;
         }
 
@@ -127,14 +113,14 @@
              font-size: 0.9em;
              cursor: pointer;
              text-decoration: underline;
-             margin: 0 10px; /* Отступы */
-             flex-shrink: 0; /* Предотвращаем сжатие */
+             margin: 0 10px;
+             flex-shrink: 0;
          }
 
         .top-bar .balance-info {
-             color: #00ff00; /* Зеленый для баланса */
-             flex-grow: 1; /* Занимает оставшееся место */
-             text-align: right; /* Выравнивание баланса вправо */
+             color: #00ff00;
+             flex-grow: 1;
+             text-align: right;
         }
          .top-bar .balance {
              font-weight: bold;
@@ -142,70 +128,68 @@
 
         .info-panel {
             position: absolute;
-            top: 65px; /* Ниже верхней панели (50px + 15px) */
+            top: 65px;
             left: 15px;
             right: 15px;
             z-index: 20;
-            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный темный фон */
-            color: rgba(255, 255, 255, 0.8); /* Полупрозрачный светлый текст */
+            background-color: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.8);
             padding: 8px 12px;
             border-radius: 6px;
             font-size: 0.9em;
             display: flex;
             gap: 20px;
-             flex-wrap: wrap; /* Перенос на новую строку при необходимости */
+             flex-wrap: wrap;
         }
 
         .status-message {
             position: absolute;
-            top: 105px; /* Ниже инфо-панели (65px + высота инфо-панели ~25-30px + 10px отступ) */
+            top: 105px;
             left: 0;
             right: 0;
             z-index: 20;
             text-align: center;
-            color: #ffcc00; /* Желтый для статуса */
+            color: #ffcc00;
             font-weight: bold;
             font-size: 1em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            padding: 0 10px; /* Отступы, чтобы текст не прилипал к краям */
+            padding: 0 10px;
         }
 
-        /* Игровое поле с дорожками */
         .game-road {
             position: absolute;
-            top: 140px; /* Выше инфо-панели и статуса, ниже top-bar */
-            bottom: 120px; /* Выше контролов */
+            top: 140px;
+            bottom: 120px;
             left: 0;
             right: 0;
             display: flex;
-            justify-content: space-around; /* Равномерно распределяем колонки */
-            align-items: flex-end; /* Выравниваем по низу */
-            padding: 0 10px; /* Небольшие отступы по бокам */
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 10px;
             z-index: 10;
         }
 
         .road-column {
-            flex-grow: 1; /* Каждая колонка занимает равное место */
-            flex-basis: 0; /* Игнорируем начальный размер, чтобы flex-grow работал */
-            height: 100%; /* Занимает всю высоту game-road */
-            border-left: 2px dashed rgba(255, 255, 255, 0.2); /* Пунктирные разделители */
-            /* Убираем рамку для первой колонки */
+            flex-grow: 1;
+            flex-basis: 0;
+            height: 100%;
+            border-left: 2px dashed rgba(255, 255, 255, 0.2);
             &:first-child { border-left: none; }
 
             display: flex;
-            flex-direction: column; /* Элементы внутри колонки расположены вертикально */
-            align-items: center; /* Центрируем содержимое колонки */
-            justify-content: flex-end; /* Выравниваем содержимое по низу */
-            padding-bottom: 10px; /* Отступ снизу для решетки */
-            position: relative; /* Для позиционирования блока */
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 10px;
+            position: relative;
         }
 
         .block {
-             width: 60px; /* Размер блока */
+             width: 60px;
              height: 60px;
-             background-color: #6a738c; /* Серый цвет по умолчанию */
-             border-radius: 50%; /* Круглый блок */
-             border: 3px solid #4a526b; /* Темная рамка */
+             background-color: #6a738c;
+             border-radius: 50%;
+             border: 3px solid #4a526b;
              display: flex;
              justify-content: center;
              align-items: center;
@@ -214,25 +198,25 @@
              color: #fff;
              transition: background-color 0.3s ease, border-color 0.3s ease;
              box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-             margin-bottom: 20px; /* Отступ снизу, чтобы над решеткой */
+             margin-bottom: 20px;
              user-select: none;
-             flex-shrink: 0; /* Блок не должен сжиматься */
-             position: absolute; /* Абсолютное позиционирование внутри колонки */
-             bottom: 50px; /* Над решеткой (высота решетки 40 + отступ 10) */
+             flex-shrink: 0;
+             position: absolute;
+             bottom: 50px;
         }
 
         .block.active {
-             background-color: #007bff; /* Синий для текущего */
+             background-color: #007bff;
              border-color: #0056b3;
         }
 
         .block.revealed-win {
-             background-color: #4caf50; /* Зеленый для выигравшего */
+             background-color: #4caf50;
              border-color: #388e3c;
         }
 
         .block.revealed-lose {
-             background-color: #f44336; /* Красный для проигрыша */
+             background-color: #f44336;
              border-color: #d32f2f;
         }
 
@@ -244,23 +228,23 @@
          }
 
          .block .outcome-icon {
-             font-size: 1.8em; /* Размер иконки проигрыша */
+             font-size: 1.8em;
              color: #fff;
          }
 
 
         .grate {
-            width: 80%; /* Ширина решетки */
-            height: 40px; /* Высота решетки */
-            background-color: #34363d; /* Темный цвет решетки */
+            width: 80%;
+            height: 40px;
+            background-color: #34363d;
             border-top: 3px solid #24262b;
-            position: absolute; /* Абсолютное позиционирование внутри колонки */
-            bottom: 0; /* Внизу колонки */
-            left: 10%; /* Центрируем решетку */
+            position: absolute;
+            bottom: 0;
+            left: 10%;
             right: 10%;
             overflow: hidden;
             border-radius: 3px;
-             z-index: 1; /* Решетка ниже блока и персонажа */
+             z-index: 1;
         }
 
         .grate::before {
@@ -273,56 +257,49 @@
             background: repeating-linear-gradient(
                 to right,
                 transparent,
-                transparent 4px, /* Ширина прута */
-                #24262b 4px, /* Цвет промежутка */
-                #24262b 8px /* Ширина промежутка */
+                transparent 4px,
+                #24262b 4px,
+                #24262b 8px
             );
         }
 
 
         .character {
             position: absolute;
-            bottom: 115px; /* Должен стоять НАД решеткой */
-             /* Left будет выставляться JS */
-            width: 50px; /* Ширина курицы */
-            height: 60px; /* Высота курицы */
-            /* --- ПУТЬ К КАРТИНКЕ --- */
-            /* ЕСЛИ chicken.png в корне сайта: */
+            bottom: 115px;
+            width: 50px;
+            height: 60px;
+            /* ПУТЬ К КАРТИНКЕ: Предполагаем, что chicken.png в корне сайта */
             background: url('/chicken.png') no-repeat center center;
-            /* ЕСЛИ chicken.png в папке images в корне сайта: */
-            /* background: url('/images/chicken.png') no-repeat center center; */
-            /* ЕСЛИ chicken.png в той же папке games/ (менее вероятно для общих ресурсов): */
-            /* background: url('chicken.png') no-repeat center center; */
             background-size: contain;
-            z-index: 15; /* Персонаж должен быть выше решеток и блоков */
-            transition: left 0.6s ease-out; /* Анимация движения влево/вправо */
-            transform: translateX(-50%); /* Центрируем по точке left */
-             pointer-events: none; /* Игнорируем клики на курице */
+            z-index: 15;
+            transition: left 0.6s ease-out;
+            transform: translateX(-50%);
+            pointer-events: none;
         }
 
 
-        /* Управление */
         .controls {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            min-height: 100px; /* Минимальная высота контрольной панели */
-            background-color: #24262b; /* Темный фон */
+            min-height: 100px;
+            background-color: #24262b;
             z-index: 20;
             display: flex;
-            align-items: flex-start; /* Выравнивание по верхнему краю */
-            padding: 10px 20px; /* Отступы по бокам и сверху/снизу */
-            gap: 20px; /* Расстояние между элементами */
-             flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+            align-items: flex-start;
+            padding: 10px 20px;
+            gap: 20px;
+             flex-wrap: wrap;
         }
 
         .controls .bet-section,
         .controls .difficulty-section {
             display: flex;
-            flex-direction: column; /* Элементы внутри секции вертикально */
-            gap: 3px; /* Уменьшаем вертикальный отступ */
-            flex-shrink: 0; /* Не сжимать по горизонтали */
+            flex-direction: column;
+            gap: 3px;
+            flex-shrink: 0;
         }
 
          .controls .bet-section label,
@@ -340,34 +317,34 @@
 
          .controls input[type="number"] {
             width: 80px;
-            padding: 6px; /* Уменьшаем padding */
+            padding: 6px;
             border-radius: 5px;
             border: 1px solid #555;
             background-color: #333;
             color: #fff;
             font-size: 1em;
-             box-sizing: border-box; /* Учитываем padding и border в ширине */
+             box-sizing: border-box;
          }
 
          .controls .bet-buttons,
          .controls .difficulty-buttons {
-             display: flex; /* Горизонтальный flexbox для кнопок */
-             gap: 5px; /* Отступ между кнопками */
-             flex-wrap: wrap; /* Перенос кнопок при необходимости */
+             display: flex;
+             gap: 5px;
+             flex-wrap: wrap;
          }
 
 
          .controls .bet-buttons button,
          .controls .difficulty-buttons button {
-             padding: 6px 10px; /* Уменьшаем padding */
+             padding: 6px 10px;
              border: none;
              border-radius: 5px;
              background-color: #555;
              color: #fff;
              cursor: pointer;
-             font-size: 0.85em; /* Чуть меньше шрифт */
+             font-size: 0.85em;
              transition: background-color 0.2s ease;
-             flex-shrink: 0; /* Не сжимать кнопки */
+             flex-shrink: 0;
          }
 
          .controls .bet-buttons button:hover,
@@ -377,11 +354,11 @@
 
 
          .controls .difficulty-buttons button {
-             border: 2px solid transparent; /* Добавляем рамку для активного состояния */
+             border: 2px solid transparent;
          }
 
          .controls .difficulty-buttons button.active {
-            background-color: #007bff; /* Синий для активной сложности */
+            background-color: #007bff;
             border-color: #0056b3;
          }
 
@@ -389,10 +366,10 @@
         .controls .action-buttons {
              display: flex;
              gap: 15px;
-             flex-grow: 1; /* Кнопки занимают оставшееся место */
-             justify-content: flex-end; /* Выравнивание кнопок вправо */
-             align-items: center; /* Выравнивание кнопок по центру вертикали */
-             flex-wrap: wrap; /* Перенос кнопок при необходимости */
+             flex-grow: 1;
+             justify-content: flex-end;
+             align-items: center;
+             flex-wrap: wrap;
         }
 
 
@@ -404,14 +381,14 @@
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.1s ease;
             font-weight: bold;
-            background-color: #4caf50; /* Зеленый */
+            background-color: #4caf50;
             color: white;
-             min-width: 120px; /* Минимальная ширина */
+             min-width: 120px;
              box-sizing: border-box;
         }
 
         #go-button:hover:not(:disabled) {
-            background-color: #388e3c; /* Темно-зеленый при наведении */
+            background-color: #388e3c;
         }
 
         #cash-out-button {
@@ -422,58 +399,55 @@
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.1s ease;
             font-weight: bold;
-            background-color: #ffc107; /* Желтый */
-            color: #212529; /* Темный текст */
-             min-width: 150px; /* Минимальная ширина */
+            background-color: #ffc107;
+            color: #212529;
+             min-width: 150px;
              box-sizing: border-box;
              display: flex;
              flex-direction: column;
              align-items: center;
-             line-height: 1.2; /* Межстрочный интервал */
+             line-height: 1.2;
         }
 
         #cash-out-button span {
-             display: block; /* Множитель на новой строке */
+             display: block;
              font-size: 0.9em;
              font-weight: normal;
              margin-top: 3px;
         }
 
         #cash-out-button:hover:not(:disabled) {
-            background-color: #ffb300; /* Темно-желтый при наведении */
+            background-color: #ffb300;
         }
 
 
         .controls button:disabled {
-            background-color: #546e7a !important; /* Серый */
+            background-color: #546e7a !important;
             cursor: not-allowed;
-            color: #cfd8dc !important; /* Серый текст */
+            color: #cfd8dc !important;
             opacity: 0.8;
         }
 
-         /* Эффект при клике */
         .controls button:not(:disabled):active {
             transform: scale(0.98);
         }
 
-         /* Стили для иконок результата (для примера) */
         .outcome-icon.win::before { content: '✔️'; }
-        .outcome-icon.lose::before { content: '💀'; } /* Череп */
+        .outcome-icon.lose::before { content: '💀'; }
 
 
-        /* Стили для модального окна (попапа) */
         .modal-overlay {
-            position: fixed; /* Фиксировано относительно viewport */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100; /* Выше всех остальных элементов */
-            opacity: 0; /* Скрыто по умолчанию */
+            z-index: 1000; /* Выше rotate-prompt */
+            opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
@@ -484,13 +458,13 @@
         }
 
         .modal-content {
-            background-color: #31333c; /* Темный фон */
+            background-color: #31333c;
             padding: 25px;
             border-radius: 10px;
             max-width: 500px;
             width: 90%;
-            max-height: 80vh; /* Максимальная высота, чтобы поместилось на экране */
-            overflow-y: auto; /* Прокрутка, если контент не помещается */
+            max-height: 80vh;
+            overflow-y: auto;
             color: #fff;
             position: relative;
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
@@ -500,7 +474,7 @@
 
         .modal-content h3 {
             margin-top: 0;
-            color: #ffcc00; /* Желтый заголовок */
+            color: #ffcc00;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 10px;
             margin-bottom: 15px;
@@ -526,151 +500,203 @@
             color: #fff;
         }
 
+        /* --- Стили для сообщения о повороте экрана --- */
+        .rotate-prompt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center;
+            align-items: center;
+            z-index: 999; /* Ниже модального окна, но выше игры */
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .rotate-prompt-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rotate-prompt-icon {
+            font-size: 3em; /* Размер иконки */
+            margin-bottom: 20px;
+            /* Можно использовать SVG или изображение */
+        }
+
+        .rotate-prompt-text {
+            font-size: 1.2em;
+        }
+
 
         /* --- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
         @media (max-width: 768px) {
             .content-container {
-                padding: 10px; /* Уменьшаем padding на мобилках */
-                padding-top: 70px; /* Отступ сверху с учетом меньшего header */
-                padding-bottom: 20px; /* Отступ снизу */
+                padding: 10px;
+                padding-top: 70px;
+                padding-bottom: 20px;
             }
 
             .game-container {
-                width: 100%; /* Игра занимает всю доступную ширину контейнера */
-                margin: 10px auto; /* Меньшие отступы */
-                /* Снижаем высоту игры на мобилках. 
-                   Это пропорционально уменьшит внутренние absolute элементы. */
-                height: 450px; /* Примерная высота для мобильных */
-                max-height: 85vh; /* Не больше 85% высоты вьюпорта */
+                width: 100%;
+                margin: 10px auto;
+                height: 480px; /* Увеличил немного высоту для мобильных */
+                max-height: calc(100vh - 90px); /* Высота минус отступы (70+20) */
             }
 
-            /* Скорректируем отступы и размеры элементов внутри игры, если нужно */
             .top-bar {
-                height: 40px; /* Чуть меньше высота */
+                height: 40px;
                 padding: 0 10px;
-                font-size: 1em;
+                font-size: 0.9em; /* Уменьшаем шрифт в top-bar */
             }
             .top-bar .title {
-                 font-size: 1.1em;
+                 font-size: 1em;
             }
              .top-bar .how-to-play {
-                 font-size: 0.8em;
+                 font-size: 0.7em;
                  margin: 0 5px;
              }
             .balance-info {
-                 font-size: 0.9em;
+                 font-size: 0.8em;
             }
 
             .info-panel {
-                top: 55px; /* Ниже нового top-bar */
+                top: 55px;
                 left: 10px;
                 right: 10px;
                 padding: 5px 8px;
-                gap: 10px;
-                font-size: 0.8em;
+                gap: 5px; /* Уменьшаем отступ */
+                font-size: 0.75em;
+                flex-wrap: nowrap; /* Предотвращаем перенос, если возможно */
+                overflow-x: auto; /* Добавляем скролл, если не влезает */
             }
+             .info-panel .round-info {
+                 white-space: nowrap; /* Текст в одну строку */
+             }
+
 
             .status-message {
-                 top: 85px; /* Ниже info-panel */
-                 font-size: 0.9em;
+                 top: 80px; /* Скорректировано под info-panel */
+                 font-size: 0.85em;
             }
 
             .game-road {
-                top: 110px; /* Ниже status-message */
-                bottom: 100px; /* Выше controls */
-                 padding: 0 5px; /* Меньшие отступы по бокам */
-            }
-
-            .road-column {
-                 /* border-left: 1px dashed rgba(255, 255, 255, 0.1); /* Чуть тоньше разделители */ */
-                 /* Убираем рамку для первой колонки */
-                &:first-child { border-left: none; }
+                top: 105px; /* Скорректировано под status-message */
+                bottom: 90px; /* Немного уменьшаем для controls */
+                 padding: 0 5px;
             }
 
             .block {
-                width: 45px; /* Меньше размер блоков */
-                height: 45px;
-                border-width: 2px; /* Тоньше рамка */
-                margin-bottom: 15px; /* Меньше отступ */
+                width: 40px; /* Меньше размер блоков */
+                height: 40px;
+                border-width: 2px;
+                margin-bottom: 10px; /* Меньше отступ */
                 bottom: 30px; /* Позиция над решеткой (grate height 30 + margin 0) */
-                font-size: 0.9em;
+                font-size: 0.8em;
             }
 
             .block .multiplier,
             .block .jackpot-label {
-                font-size: 0.9em;
+                font-size: 0.8em;
             }
 
             .block .outcome-icon {
-                font-size: 1.4em;
+                font-size: 1.2em;
             }
 
 
             .grate {
-                height: 30px; /* Меньше высота решетки */
+                height: 30px;
                 border-top-width: 2px;
-                 background: repeating-linear-gradient( /* Корректируем фон решетки */
+                 background: repeating-linear-gradient(
                     to right,
                     transparent,
-                    transparent 3px, /* Ширина прута */
-                    #24262b 3px, /* Цвет промежутка */
-                    #24262b 6px /* Ширина промежутка */
+                    transparent 3px,
+                    #24262b 3px,
+                    #24262b 6px
                 );
             }
 
 
             .character {
-                 width: 40px; /* Меньше размер курицы */
-                 height: 50px;
-                 bottom: 95px; /* Позиция над решеткой game-road bottom (100) - chicken height(50) + some offset? No, use bottom relative to game container. road bottom is 100, character bottom should be slightly higher */
-                 bottom: 105px; /* Должен стоять над решеткой, которая внизу game-road */
-                 /* Chicken bottom should be bottom of game-road (100px from container bottom) + half grate height (15px) */
-                 bottom: calc(100px + 15px); /* Position relative to game-container bottom */
+                 width: 35px;
+                 height: 45px;
+                 bottom: 95px; /* Позиция относительно game-container bottom */
             }
 
 
             .controls {
-                min-height: 80px; /* Меньше высота контрольной панели */
-                padding: 8px 10px;
-                gap: 10px; /* Меньше отступ между секциями */
-                align-items: center; /* Центрируем по вертикали, если места мало */
+                min-height: 80px;
+                padding: 5px 10px; /* Уменьшаем padding */
+                gap: 5px; /* Уменьшаем отступ между секциями */
+                align-items: center;
+                 justify-content: space-around; /* Равномерно распределяем секции */
             }
 
              .controls .bet-section,
              .controls .difficulty-section {
-                 gap: 2px; /* Меньше вертикальный отступ */
+                 gap: 2px;
+                 /* Позволяем секциям занимать меньше места, если нужно */
+                 flex-basis: auto;
+                 flex-grow: 1; /* Позволяем секциям расти и занимать доступное место */
              }
+             .controls .bet-section { max-width: 150px;} /* Ограничиваем ширину секции ставки */
+             .controls .difficulty-section { max-width: 200px;} /* Ограничиваем ширину секции сложности */
+
 
              .controls .bet-section label,
              .controls .difficulty-section label {
-                 font-size: 0.8em;
+                 font-size: 0.75em;
              }
 
             .controls input[type="number"] {
-                 width: 60px; /* Меньше ширина инпута */
+                 width: 50px;
                  padding: 4px;
-                 font-size: 0.9em;
+                 font-size: 0.85em;
             }
 
             .controls .bet-buttons button,
             .controls .difficulty-buttons button {
-                 padding: 4px 8px; /* Меньше padding кнопок */
-                 font-size: 0.8em;
+                 padding: 3px 6px;
+                 font-size: 0.75em;
             }
 
              .controls .action-buttons {
-                 gap: 10px; /* Меньше отступ между кнопками действий */
+                 gap: 8px;
+                 flex-grow: 1; /* Позволяем кнопкам действий занимать оставшееся место */
+                 justify-content: center; /* Центрируем кнопки действий */
              }
 
             #go-button,
             #cash-out-button {
-                 padding: 8px 15px; /* Меньше padding */
-                 font-size: 1em;
-                 min-width: auto; /* Убираем минимальную ширину, чтобы кнопки могли сжиматься */
+                 padding: 6px 10px;
+                 font-size: 0.9em;
+                 min-width: auto;
             }
 
             #cash-out-button span {
-                font-size: 0.8em;
+                font-size: 0.75em;
+                 margin-top: 2px;
+            }
+        }
+
+         /* Специальные стили для очень узких экранов, когда игра скрыта, а подсказка о повороте видна */
+        @media (orientation: portrait) and (max-width: 480px) { /* Примерный порог */
+            body.show-rotate-prompt .game-container {
+                display: none; /* Скрываем игру, когда показываем просьбу повернуть */
+            }
+            body.show-rotate-prompt .content-container {
+                 /* Можно убрать padding, чтобы сообщение было по центру экрана */
+                 padding-top: 0;
+                 padding-bottom: 0;
+                 justify-content: center; /* Центрируем сообщение */
+                 min-height: 100vh; /* Занимаем всю высоту для центрирования */
             }
         }
 
@@ -684,9 +710,6 @@
     <!-- Основной контент -->
     <div class="content-container">
 
-        <!-- Здесь может быть H1 страницы, если он нужен над игрой -->
-        <!-- <h1>Название страницы с игрой</h1> -->
-
         <div class="game-container">
             <div class="top-bar">
                 <div class="title">CHICKEN ROAD BY  <a href="https://t.me/AIdispatcher9" target="_blank"> AI Dispatcher</a></div>
@@ -694,7 +717,6 @@
                 <div class="balance-info">
                     Баланс: <span id="balance">0.00</span> $
                 </div>
-                <!-- Место для других иконок -->
             </div>
 
             <div class="info-panel">
@@ -712,9 +734,7 @@
                 <!-- Колонки с блоками и решетками будут сгенерированы JS -->
             </div>
 
-             <!-- Персонаж - курица -->
             <div class="character" id="character"></div>
-
 
             <div class="controls">
                 <div class="bet-section">
@@ -782,94 +802,86 @@
 
     <div id="footer"></div>
 
+    <!-- Сообщение о повороте экрана -->
+    <div class="rotate-prompt-overlay" id="rotate-prompt">
+        <div class="rotate-prompt-content">
+            <div class="rotate-prompt-icon">📱🔄</div> <!-- Простая иконка, можно заменить на SVG -->
+            <p class="rotate-prompt-text">Пожалуйста, поверните ваше устройство в горизонтальное положение для лучшего отображения игры.</p>
+        </div>
+    </div>
+
+
     <!-- ОБЪЕДИНЕННЫЙ БЛОК СКРИПТОВ -->
     <script>
         // --- СКРИПТЫ ШАБЛОНА ---
 
-        // Функция для инициализации мобильного меню (перенесена сюда)
+        // Функция для инициализации мобильного меню
         function initializeMobileMenu() {
-            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
-            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
-            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
-            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
-            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const desktopMenu = document.getElementById('desktopMenu');
+            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const closeMenuBtn = document.getElementById('mobile-menu-close-button');
+            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle');
 
-            // Проверка, что все нужные элементы меню найдены (для надежности)
-            // Используем console.warn, т.к. это может быть нормальным, если на странице нет полного меню
             if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
-                console.warn('Элементы мобильного меню не найдены для инициализации. Возможно, на этой странице нет полного меню.');
-                 return; // Выходим из функции, если элементы меню не найдены
+                console.warn('Элементы мобильного меню не найдены для инициализации.');
+                 return;
             }
 
-            // Функция для открытия мобильного меню
             function openMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
-                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
-                // Используем setTimeout для плавного появления оверлея после его display: block
+                sideMobileMenu.style.transform = 'translateX(0)';
+                mobileMenuOverlay.style.display = 'block';
                 setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
-                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
+                document.body.classList.add('no-scroll');
                 menuBtn.setAttribute('aria-expanded', 'true');
             }
 
-            // Функция для закрытия мобильного меню
             function closeMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
-                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
-                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+                sideMobileMenu.style.transform = 'translateX(-100%)';
+                mobileMenuOverlay.style.opacity = '0';
                 setTimeout(() => {
                      mobileMenuOverlay.style.display = 'none';
-                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
-                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+                     document.body.classList.remove('no-scroll');
+                }, 300);
                 menuBtn.setAttribute('aria-expanded', 'false');
             }
 
-            // Функция для обновления видимости меню в зависимости от размера экрана
             function updateMenuVisibility() {
-                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
+                const isMobile = window.innerWidth <= 768;
 
                 if (isMobile) {
                     if(mobileMenuToggleContainer) mobileMenuToggleContainer.style.display = 'block';
                     if(desktopMenu) desktopMenu.style.display = 'none';
-
                     if (sideMobileMenu && sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
                          closeMobileMenu();
                     }
-
-                } else { // Десктоп
+                } else {
                     if(mobileMenuToggleContainer) mobileMenuToggleContainer.style.display = 'none';
                     if(desktopMenu) desktopMenu.style.display = 'flex';
                     if(sideMobileMenu) closeMobileMenu();
                 }
             }
 
-            // Привязываем события после загрузки header
             if(menuBtn) menuBtn.addEventListener('click', openMobileMenu);
             if(closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileMenu);
             if(mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
-            // Закрывать мобильное меню при клике на любую ссылку внутри него
             if(sideMobileMenu) {
                 sideMobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', closeMobileMenu);
                 });
             }
 
-
-            // Вызываем функцию при загрузке и изменении размера окна
-            updateMenuVisibility(); // Вызываем сразу после инициализации
+            updateMenuVisibility();
             window.addEventListener('resize', updateMenuVisibility);
 
-             // Обработчики для ссылок с якорями
-             document.querySelectorAll('a[href*="#"]').forEach(link => {
-                 // Проверяем, что это якорь на текущей или главной странице
-                 if (link.pathname === window.location.pathname || (link.pathname === '/' && window.location.pathname.startsWith('/games/'))) { // Проверяем, ведет ли ссылка на якорь на текущей странице ИЛИ на главную страницу из подпапки games
+            document.querySelectorAll('a[href*="#"]').forEach(link => {
+                 if (link.pathname === window.location.pathname || (link.pathname === '/' && window.location.pathname.startsWith('/games/'))) {
                       link.addEventListener('click', function(event) {
-                           // Если мобильное меню открыто, закрываем его
                            if (sideMobileMenu && sideMobileMenu.style.transform === 'translateX(0)') {
                                closeMobileMenu();
                            }
-                            // Опционально: добавить плавный скролл после закрытия меню
                       });
                  }
              });
@@ -877,37 +889,48 @@
         // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
 
 
-        // Загружаем header и footer ПОСЛЕДОВАТЕЛЬНО.
-        // ИСПОЛЬЗУЕМ АБСОЛЮТНЫЕ ПУТИ /header.html и /footer.html ОТ КОРНЯ САЙТА.
+        // Загружаем header и footer
         fetch('/header.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject(`HTTP error! status: ${response.status}`))
             .then(data => {
                 const headerDiv = document.getElementById('header');
                 if (headerDiv) {
                     headerDiv.innerHTML = data;
-                    // !!! ИНИЦИАЛИЗИРУЕМ МЕНЮ ПОСЛЕ ЗАГРУЗКИ HEADER
-                    initializeMobileMenu();
+                    initializeMobileMenu(); // Инициализация меню после загрузки хедера
                 }
             })
             .catch(error => console.error('Error loading header:', error));
 
         fetch('/footer.html')
-            .then(response => {
-                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`); // Исправил опечатку (status вместо status)
-                }
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject(`HTTP error! status: ${response.status}`))
             .then(data => {
                 const footerDiv = document.getElementById('footer');
                 if (footerDiv) footerDiv.innerHTML = data;
             })
             .catch(error => console.error('Error loading footer:', error));
+
+
+        // --- СКРИПТ УПРАВЛЕНИЯ СООБЩЕНИЕМ О ПОВОРОТЕ ЭКРАНА ---
+        const rotatePrompt = document.getElementById('rotate-prompt');
+        const gameContainerElement = document.querySelector('.game-container'); // Для скрытия/показа
+
+        function checkOrientation() {
+            // Порог ширины, при котором игра может плохо отображаться в портретной ориентации
+            const portraitWidthThreshold = 480; // Можно настроить
+            const isMobilePortrait = window.matchMedia(`(orientation: portrait) and (max-width: ${portraitWidthThreshold}px)`).matches;
+
+            if (isMobilePortrait) {
+                if (rotatePrompt) rotatePrompt.style.display = 'flex';
+                document.body.classList.add('show-rotate-prompt'); // Добавляем класс для CSS стилей
+            } else {
+                if (rotatePrompt) rotatePrompt.style.display = 'none';
+                document.body.classList.remove('show-rotate-prompt'); // Убираем класс
+            }
+        }
+        // Вызываем при загрузке и изменении ориентации/размера
+        window.addEventListener('load', checkOrientation);
+        window.addEventListener('resize', checkOrientation);
+        window.addEventListener('orientationchange', checkOrientation); // Важно для мобильных
 
 
         // --- СКРИПТ ИГРЫ ---
@@ -922,52 +945,37 @@
 
 
         // Переменные игры
-        let balance = 1000.00; // Начальный баланс
-        let initialBet = 0.60; // Начальная ставка для UI до первого раунда
-        let currentMultiplier = 1.00; // Текущий множитель в раунде
-        let currentStepIndex = -1; // Индекс текущей колонки, где находится курица (-1 = старт, до первой колонки)
-        let roundActive = false; // Флаг активности раунда
-        let isAnimating = false; // Флаг, предотвращающий множественные нажатия во время анимации
+        let balance = 1000.00;
+        let initialBet = 0.60;
+        let currentMultiplier = 1.00;
+        let currentStepIndex = -1;
+        let roundActive = false;
+        let isAnimating = false;
 
-        // Множители для каждой стандартной колонки (10 шагов перед Джекпотом)
-        const baseMultipliers = [1.03, 1.07, 1.12, 1.17, 1.23, 1.29, 1.36, 1.44, 1.53, 1.62]; // 10 стандартных шагов
-        const jackpotMultipliers = [15.00, 50.00, 250.00]; // Потенциальные значения Джекпота
-        const numberOfColumns = baseMultipliers.length + 1; // Общее количество колонок (10 стандартных + 1 Джекпот = 11)
-        const jackpotStepIndex = numberOfColumns - 1; // Индекс колонки с Джекпотом (10)
+        const baseMultipliers = [1.03, 1.07, 1.12, 1.17, 1.23, 1.29, 1.36, 1.44, 1.53, 1.62];
+        const jackpotMultipliers = [15.00, 50.00, 250.00];
+        const numberOfColumns = baseMultipliers.length + 1;
+        const jackpotStepIndex = numberOfColumns - 1;
 
-        // Шансы проигрыша по сложности (для стандартных шагов)
         const loseProbabilities = {
-            easy: 0.10,      // 10% шанс проиграть на каждом стандартном шаге
-            medium: 0.20,    // 20%
-            hard: 0.30,      // 30%
-            hardcore: 0.40   // 40%
+            easy: 0.10, medium: 0.20, hard: 0.30, hardcore: 0.40
         };
+        const jackpotStepLoseProbabilityMultiplier = 1.8;
+        const maxLoseProbability = 0.90;
+        let selectedDifficulty = 'easy';
+        const stepAnimationDuration = 600;
 
-        // Дополнительный множитель шанса проигрыша для Джекпот шага
-        const jackpotStepLoseProbabilityMultiplier = 1.8; // Шанс проигрыша на Джекпот шаге будет выше
-        const maxLoseProbability = 0.90; // Максимальный шанс проигрыша на любом шаге
-
-        let selectedDifficulty = 'easy'; // Выбранная сложность по умолчанию
-
-
-        // Визуальные параметры анимации
-        const stepAnimationDuration = 600; // Длительность анимации шага курицы в ms
-
-        // Функция для динамической генерации дорожки
         function generateRoad() {
              if (!gameRoadElement) return;
-
-            gameRoadElement.innerHTML = ''; // Очищаем текущую дорожку
-            roadColumns = []; // Сбрасываем массив ссылок на колонки
+            gameRoadElement.innerHTML = '';
+            roadColumns = [];
 
             for (let i = 0; i < numberOfColumns; i++) {
                 const column = document.createElement('div');
                 column.classList.add('road-column');
                 column.dataset.columnIndex = i;
-
                 const block = document.createElement('div');
                 block.classList.add('block');
-
                 const span = document.createElement('span');
                 if (i === jackpotStepIndex) {
                     span.classList.add('jackpot-label');
@@ -981,10 +989,8 @@
                     }
                 }
                 block.appendChild(span);
-
                 const grate = document.createElement('div');
                 grate.classList.add('grate');
-
                 column.appendChild(block);
                 column.appendChild(grate);
                 gameRoadElement.appendChild(column);
@@ -992,28 +998,22 @@
              roadColumns = document.querySelectorAll('.road-column');
         }
 
-
-        // Функция обновления UI
         function updateUI() {
-             // Проверяем наличие всех элементов игры перед обновлением
              if (!balanceElement || !currentBetElement || !currentMultiplierElement || !cashOutAmountElement || !statusMessageElement || !gameRoadElement || !characterElement || !goButtonElement || !cashOutButtonElement || !betInput || roadColumns.length === 0) {
                  console.warn("Game UI elements not found or road is empty, skipping UI update.");
                  return;
              }
-
             balanceElement.textContent = balance.toFixed(2);
-            currentBetElement.textContent = initialBet.toFixed(2); // Показываем ставку раунда
+            currentBetElement.textContent = initialBet.toFixed(2);
             currentMultiplierElement.textContent = currentMultiplier.toFixed(2);
             cashOutAmountElement.textContent = `${(initialBet * currentMultiplier).toFixed(2)} USD`;
 
-            // Обновляем состояние кнопок
             betInput.disabled = roundActive || isAnimating;
             betButtons.forEach(btn => btn.disabled = roundActive || isAnimating);
             difficultyButtons.forEach(btn => btn.disabled = roundActive || isAnimating);
 
             if (!roundActive) {
                 goButtonElement.textContent = `Начать раунд`;
-                // Кнопка старта активна, если баланс >= ставка (и ставка > 0.0) и нет анимации
                 goButtonElement.disabled = balance < initialBet || initialBet <= 0 || isAnimating;
                 cashOutButtonElement.disabled = true;
             } else {
@@ -1021,27 +1021,21 @@
                  const nextMultiplierText = (nextStepIndexToCheck < baseMultipliers.length)
                      ? `${baseMultipliers[nextStepIndexToCheck].toFixed(2)}x`
                      : (nextStepIndexToCheck === jackpotStepIndex ? 'Jackpot!' : 'END');
-
                 goButtonElement.textContent = `GO (${nextMultiplierText})`;
-                 goButtonElement.disabled = nextStepIndexToCheck >= numberOfColumns || isAnimating;
-                 cashOutButtonElement.disabled = currentStepIndex < 0 || isAnimating;
+                goButtonElement.disabled = nextStepIndexToCheck >= numberOfColumns || isAnimating;
+                cashOutButtonElement.disabled = currentStepIndex < 0 || isAnimating;
             }
 
-            // Обновляем визуальное состояние блоков
             roadColumns.forEach((column, index) => {
                  const block = column.querySelector('.block');
                  if (!block) return;
-
                  let multiplierSpan = block.querySelector('.multiplier');
                  let jackpotLabelSpan = block.querySelector('.jackpot-label');
                  let outcomeIconSpan = block.querySelector('.outcome-icon');
-
                  block.classList.remove('active', 'revealed-win', 'revealed-lose');
                  if (outcomeIconSpan) outcomeIconSpan.remove();
-
                  if (multiplierSpan) multiplierSpan.remove();
                  if (jackpotLabelSpan) jackpotLabelSpan.remove();
-
                  const newSpan = document.createElement('span');
                  if (index === jackpotStepIndex) {
                      newSpan.classList.add('jackpot-label');
@@ -1050,12 +1044,9 @@
                      newSpan.classList.add('multiplier');
                       if (baseMultipliers[index] !== undefined) {
                           newSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`;
-                      } else {
-                           newSpan.textContent = '';
-                      }
+                      } else { newSpan.textContent = ''; }
                  }
                  block.appendChild(newSpan);
-
 
                  if (index < currentStepIndex) {
                        if (column.dataset.outcome === 'win') {
@@ -1074,8 +1065,7 @@
                            iconSpan.classList.add('outcome-icon', 'lose');
                            block.appendChild(iconSpan);
                        } else {
-                            block.style.backgroundColor = '#6a738c';
-                            block.style.borderColor = '#4a526b';
+                            block.style.backgroundColor = '#6a738c'; block.style.borderColor = '#4a526b';
                        }
                  } else if (index === currentStepIndex) {
                      block.classList.add('active');
@@ -1085,408 +1075,165 @@
                              block.classList.add('revealed-win');
                               if (index === jackpotStepIndex) {
                                   newSpan.remove();
-                                   const iconSpan = document.createElement('span');
-                                   iconSpan.classList.add('outcome-icon', 'win');
-                                   block.appendChild(iconSpan);
-                                   const prevMultiplierTotal = currentStepIndex > 0
-                                       ? baseMultipliers.slice(0, currentStepIndex).reduce((acc, m) => acc * m, 1)
-                                       : 1;
+                                   const iconSpan = document.createElement('span'); iconSpan.classList.add('outcome-icon', 'win'); block.appendChild(iconSpan);
+                                   const prevMultiplierTotal = currentStepIndex > 0 ? baseMultipliers.slice(0, currentStepIndex).reduce((acc, m) => acc * m, 1) : 1;
                                    const jackpotAppliedMultiplier = currentMultiplier / prevMultiplierTotal;
-
-                                   const actualMultiplierSpan = document.createElement('span');
-                                   actualMultiplierSpan.classList.add('multiplier');
-                                   actualMultiplierSpan.textContent = `${jackpotAppliedMultiplier.toFixed(2)}x`;
-                                   block.appendChild(actualMultiplierSpan);
-
+                                   const actualMultiplierSpan = document.createElement('span'); actualMultiplierSpan.classList.add('multiplier'); actualMultiplierSpan.textContent = `${jackpotAppliedMultiplier.toFixed(2)}x`; block.appendChild(actualMultiplierSpan);
                               } else {
                                    newSpan.remove();
-                                   const iconSpan = document.createElement('span');
-                                   iconSpan.classList.add('outcome-icon', 'win');
-                                   block.appendChild(iconSpan);
-                                   const stepMultiplierSpan = document.createElement('span');
-                                   stepMultiplierSpan.classList.add('multiplier');
-                                   stepMultiplierSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`;
-                                   block.appendChild(stepMultiplierSpan);
+                                   const iconSpan = document.createElement('span'); iconSpan.classList.add('outcome-icon', 'win'); block.appendChild(iconSpan);
+                                   const stepMultiplierSpan = document.createElement('span'); stepMultiplierSpan.classList.add('multiplier'); stepMultiplierSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`; block.appendChild(stepMultiplierSpan);
                               }
                          } else {
-                            block.classList.add('revealed-lose');
-                            newSpan.remove();
-                            const iconSpan = document.createElement('span');
-                            iconSpan.classList.add('outcome-icon', 'lose');
-                            block.appendChild(iconSpan);
+                            block.classList.add('revealed-lose'); newSpan.remove();
+                            const iconSpan = document.createElement('span'); iconSpan.classList.add('outcome-icon', 'lose'); block.appendChild(iconSpan);
                          }
                      }
                  } else {
-                      block.style.backgroundColor = '#6a738c';
-                      block.style.borderColor = '#4a526b';
+                      block.style.backgroundColor = '#6a738c'; block.style.borderColor = '#4a526b';
                       delete column.dataset.outcome;
                  }
             });
-
-             difficultyButtons.forEach(btn => {
-                 if (btn.dataset.difficulty === selectedDifficulty) {
-                     btn.classList.add('active');
-                 } else {
-                     btn.classList.remove('active');
-                 }
-             });
-
+             difficultyButtons.forEach(btn => { btn.classList.toggle('active', btn.dataset.difficulty === selectedDifficulty); });
              updateCharacterPosition();
         }
 
-         // Функция обновления позиции персонажа
          function updateCharacterPosition() {
-             if (!characterElement || !gameRoadElement || roadColumns.length === 0) {
-                  console.warn("Character or road elements not found for position update.");
-                  return;
-             }
-
+             if (!characterElement || !gameRoadElement || roadColumns.length === 0) { return; }
              let targetX;
-
              const gameContainer = document.querySelector('.game-container');
-             if (!gameContainer) {
-                 console.error("Game container not found for position update!");
-                 return;
-             }
+             if (!gameContainer) { return; }
              const gameContainerRect = gameContainer.getBoundingClientRect();
              const characterWidth = characterElement.offsetWidth;
 
              if (currentStepIndex < 0) {
-                  const firstColumn = roadColumns[0];
-                  const firstColumnRect = firstColumn.getBoundingClientRect();
-
-                   // Левый край первой колонки относительно gameContainer
-                   const firstColumnLeftRelativeToContainer = firstColumnRect.left - gameContainerRect.left;
-
-                  // Позиционируем центр курицы немного левее этого края
-                  targetX = (firstColumnLeftRelativeToContainer - 10) / gameContainerRect.width * 100; // 10px отступ влево
-
-                  // Гарантируем, что не уходит слишком далеко влево
+                  const firstColumn = roadColumns[0]; const firstColumnRect = firstColumn.getBoundingClientRect();
+                  const firstColumnLeftRelativeToContainer = firstColumnRect.left - gameContainerRect.left;
+                  targetX = (firstColumnLeftRelativeToContainer - 10) / gameContainerRect.width * 100;
                   targetX = Math.max(targetX, (characterWidth / 2) / gameContainerRect.width * 100);
-
-
              } else if (currentStepIndex < numberOfColumns) {
-                 const currentColumn = roadColumns[currentStepIndex];
-                 if (!currentColumn) {
-                     console.error(`Column with index ${currentStepIndex} not found for position update!`);
-                     return;
-                 }
+                 const currentColumn = roadColumns[currentStepIndex]; if (!currentColumn) { return; }
                  const columnRect = currentColumn.getBoundingClientRect();
-
                  const columnCenterRelativeToContainer = (columnRect.left - gameContainerRect.left) + columnRect.width / 2;
                  targetX = columnCenterRelativeToContainer / gameContainerRect.width * 100;
-
              } else {
-                   const lastColumn = roadColumns[numberOfColumns - 1];
-                    if (!lastColumn) {
-                     console.error(`Last column not found for position update!`);
-                     return;
-                 }
+                   const lastColumn = roadColumns[numberOfColumns - 1]; if (!lastColumn) { return; }
                    const columnRect = lastColumn.getBoundingClientRect();
-
                    const columnCenterRelativeToContainer = (columnRect.left - gameContainerRect.left) + lastColumn.offsetWidth / 2;
                    targetX = columnCenterRelativeToContainer / gameContainerRect.width * 100;
              }
-
              characterElement.style.left = `${targetX}%`;
              characterElement.style.transform = 'translateX(-50%)';
-             characterElement.style.bottom = '115px'; /* Позиция относительно низа game-container */
-             // На мобилках этот bottom скорректируется медиа-запросом
+             // Позиция курицы по вертикали:
+             // На десктопе: 115px от низа .game-container
+             // На мобильных (согласно @media): 95px (если высота .controls 80px и .game-road bottom 90px)
+             // Это немного сложно сделать динамически без JS изменения CSS, но т.к. .character position:absolute к .game-container,
+             // его bottom будет отсчитываться от низа .game-container.
+             // Оставляем CSS как есть (115px), а медиа-запрос для .character должен корректно переопределить bottom.
+             // Если на мобильных character.style.bottom останется 115px, то медиа-запрос не сработал или был переопределен JS.
+             // Лучше всего, чтобы JS НЕ устанавливал character.style.bottom, а полагался на CSS.
+             // Убрал characterElement.style.bottom = '115px'; из JS
          }
 
-
-        // Функция завершения раунда
         function endRound(reason = 'cash-out') {
             if (!roundActive) return;
-
-            roundActive = false;
-            isAnimating = true;
-
-            let winAmount = 0;
+            roundActive = false; isAnimating = true; let winAmount = 0;
             if (reason === 'cash-out' || reason === 'end') {
-                winAmount = initialBet * currentMultiplier;
-                balance += winAmount;
-                if (reason === 'cash-out') {
-                    statusMessageElement.textContent = `🎉 Успех! Забрано ${winAmount.toFixed(2)} $! 🎉`;
-                } else {
-                     statusMessageElement.textContent = `🥳 Конец дорожки! Выигрыш ${winAmount.toFixed(2)} $! 🥳`;
-                }
-            } else if (reason === 'lose') {
-                statusMessageElement.textContent = `💥 Проигрыш! Вы потеряли ${initialBet.toFixed(2)} $! 😢`;
-            }
-
-            initialBet = parseFloat(betInput.value);
-            currentMultiplier = 1.00;
-            currentStepIndex = -1;
-
+                winAmount = initialBet * currentMultiplier; balance += winAmount;
+                if (reason === 'cash-out') { statusMessageElement.textContent = `🎉 Успех! Забрано ${winAmount.toFixed(2)} $! 🎉`; }
+                else { statusMessageElement.textContent = `🥳 Конец дорожки! Выигрыш ${winAmount.toFixed(2)} $! 🥳`; }
+            } else if (reason === 'lose') { statusMessageElement.textContent = `💥 Проигрыш! Вы потеряли ${initialBet.toFixed(2)} $! 😢`; }
+            initialBet = parseFloat(betInput.value); currentMultiplier = 1.00; currentStepIndex = -1;
             setTimeout(() => {
-                 isAnimating = false;
-                 roadColumns.forEach(column => {
-                  if(column) delete column.dataset.outcome;
-                 });
-                 generateRoad();
-                 // roadColumns обновляется внутри generateRoad()
-                 updateUI();
+                 isAnimating = false; roadColumns.forEach(column => { if(column) delete column.dataset.outcome; });
+                 generateRoad(); updateUI();
             }, stepAnimationDuration + 300);
         }
 
-
-        // Функция выполнения шага и определения результата
         function performStep() {
             if (isAnimating || !roundActive) return;
-
             const nextStepIndex = currentStepIndex + 1;
-
-            if (nextStepIndex >= numberOfColumns) {
-                 statusMessageElement.textContent = "Ошибка: Попытка шага за пределы дорожки.";
-                 updateUI();
-                 return;
-            }
-
+            if (nextStepIndex >= numberOfColumns) { statusMessageElement.textContent = "Ошибка: Попытка шага за пределы дорожки."; updateUI(); return; }
             isAnimating = true;
-
-             if (currentStepIndex >= 0 && roadColumns[currentStepIndex]) {
-                 roadColumns[currentStepIndex].querySelector('.block').classList.remove('active');
-             }
-
-             currentStepIndex = nextStepIndex;
-             updateCharacterPosition();
-
+             if (currentStepIndex >= 0 && roadColumns[currentStepIndex]) { roadColumns[currentStepIndex].querySelector('.block').classList.remove('active'); }
+             currentStepIndex = nextStepIndex; updateCharacterPosition();
              let probability;
-             if (currentStepIndex === jackpotStepIndex) {
-                  probability = Math.min(loseProbabilities[selectedDifficulty] * jackpotStepLoseProbabilityMultiplier, maxLoseProbability);
-             } else {
-                  probability = loseProbabilities[selectedDifficulty];
-             }
-
+             if (currentStepIndex === jackpotStepIndex) { probability = Math.min(loseProbabilities[selectedDifficulty] * jackpotStepLoseProbabilityMultiplier, maxLoseProbability); }
+             else { probability = loseProbabilities[selectedDifficulty]; }
              const isLose = Math.random() < probability;
              const targetColumn = roadColumns[currentStepIndex];
-
             setTimeout(() => {
-                if (isLose) {
-                    targetColumn.dataset.outcome = 'lose';
-                    statusMessageElement.textContent = '💥 Проигрыш!';
-                } else {
+                if (isLose) { targetColumn.dataset.outcome = 'lose'; statusMessageElement.textContent = '💥 Проигрыш!'; }
+                else {
                     targetColumn.dataset.outcome = 'win';
                     if (currentStepIndex === jackpotStepIndex) {
-                         const randomJackpotIndex = Math.floor(Math.random() * jackpotMultipliers.length);
-                         currentMultiplier *= jackpotMultipliers[randomJackpotIndex];
+                         const randomJackpotIndex = Math.floor(Math.random() * jackpotMultipliers.length); currentMultiplier *= jackpotMultipliers[randomJackpotIndex];
                          statusMessageElement.textContent = `🏆 JACKPOT! Получен множитель ${jackpotMultipliers[randomJackpotIndex].toFixed(2)}x! Текущий множитель ${currentMultiplier.toFixed(2)}x! 🏆`;
-                    } else {
-                         currentMultiplier *= baseMultipliers[currentStepIndex];
-                        statusMessageElement.textContent = `💰 Удача! Текущий множитель ${currentMultiplier.toFixed(2)}x! 💰`;
-                    }
+                    } else { currentMultiplier *= baseMultipliers[currentStepIndex]; statusMessageElement.textContent = `💰 Удача! Текущий множитель ${currentMultiplier.toFixed(2)}x! 💰`; }
                 }
-
                 updateUI();
-
             }, stepAnimationDuration / 2);
-
-
             setTimeout(() => {
                 isAnimating = false;
-
-                if (isLose) {
-                    endRound('lose');
-                } else if (currentStepIndex >= numberOfColumns - 1) {
-                     endRound('end');
-                } else {
-                    updateUI();
-                }
+                if (isLose) { endRound('lose'); }
+                else if (currentStepIndex >= numberOfColumns - 1) { endRound('end'); }
+                else { updateUI(); }
             }, stepAnimationDuration);
         }
 
-
-        // Функция старта нового раунда
         function startGame() {
             if (roundActive || isAnimating) return;
-
              if (!betInput || !statusMessageElement || !balanceElement) return;
-
             const bet = parseFloat(parseFloat(betInput.value).toFixed(2));
-
-            if (isNaN(bet) || bet <= 0) {
-                 statusMessageElement.textContent = "🚫 Введите корректную ставку больше 0!";
-                 return;
-            }
-
-             if (balance < bet) {
-                statusMessageElement.textContent = `😔 Недостаточно средств! Необходимо ${bet.toFixed(2)} $.`;
-                return;
-            }
-
-            isAnimating = true;
-            statusMessageElement.textContent = 'Начинаем раунд...';
-
-            balance -= bet;
-            initialBet = bet;
-
-            currentStepIndex = -1;
-            currentMultiplier = 1.00;
-            roundActive = true;
-
-             roadColumns.forEach(column => {
-                  if(column) delete column.dataset.outcome;
-             });
+            if (isNaN(bet) || bet <= 0) { statusMessageElement.textContent = "🚫 Введите корректную ставку больше 0!"; return; }
+             if (balance < bet) { statusMessageElement.textContent = `😔 Недостаточно средств! Необходимо ${bet.toFixed(2)} $.`; return; }
+            isAnimating = true; statusMessageElement.textContent = 'Начинаем раунд...';
+            balance -= bet; initialBet = bet;
+            currentStepIndex = -1; currentMultiplier = 1.00; roundActive = true;
+             roadColumns.forEach(column => { if(column) delete column.dataset.outcome; });
              generateRoad();
-             // roadColumns обновляется внутри generateRoad()
-
-
              setTimeout(() => {
-                 isAnimating = false;
-                 if(statusMessageElement) statusMessageElement.textContent = `🎮 Раунд начат! Ставка ${initialBet.toFixed(2)} $. Нажмите GO!`;
+                 isAnimating = false; if(statusMessageElement) statusMessageElement.textContent = `🎮 Раунд начат! Ставка ${initialBet.toFixed(2)} $. Нажмите GO!`;
                  updateUI();
              }, 500);
         }
-
-        // Функция вывода выигрыша (Cash Out)
         function cashOut() {
-            if (!roundActive || currentStepIndex < 0 || isAnimating) {
-                 if(statusMessageElement) statusMessageElement.textContent = "Нет выигрыша для вывода или идет анимация!";
-                return;
-            }
+            if (!roundActive || currentStepIndex < 0 || isAnimating) { if(statusMessageElement) statusMessageElement.textContent = "Нет выигрыша для вывода или идет анимация!"; return; }
              endRound('cash-out');
         }
 
         // --- ИНИЦИАЛИЗАЦИЯ ИГРЫ ---
         document.addEventListener('DOMContentLoaded', () => {
-             // Получаем ссылки на элементы игры только после полной загрузки DOM
-             balanceElement = document.getElementById('balance');
-             currentBetElement = document.getElementById('current-bet');
-             currentMultiplierElement = document.getElementById('current-multiplier');
-             cashOutAmountElement = document.getElementById('cash-out-amount');
-             statusMessageElement = document.getElementById('status-message');
-             gameRoadElement = document.getElementById('game-road');
-             characterElement = document.getElementById('character');
-             goButtonElement = document.getElementById('go-button');
-             cashOutButtonElement = document.getElementById('cash-out-button');
-             betInput = document.getElementById('bet-input');
-             betButtons = document.querySelectorAll('.bet-buttons button');
-             difficultyButtons = document.querySelectorAll('#difficulty-buttons button');
-             // roadColumns будет инициализирован в generateRoad()
+             balanceElement = document.getElementById('balance'); currentBetElement = document.getElementById('current-bet'); currentMultiplierElement = document.getElementById('current-multiplier'); cashOutAmountElement = document.getElementById('cash-out-amount');
+             statusMessageElement = document.getElementById('status-message'); gameRoadElement = document.getElementById('game-road'); characterElement = document.getElementById('character'); goButtonElement = document.getElementById('go-button');
+             cashOutButtonElement = document.getElementById('cash-out-button'); betInput = document.getElementById('bet-input'); betButtons = document.querySelectorAll('.bet-buttons button'); difficultyButtons = document.querySelectorAll('#difficulty-buttons button');
+             howToPlayLink = document.getElementById('how-to-play-link'); howToPlayModal = document.getElementById('how-to-play-modal'); modalCloseButton = howToPlayModal ? howToPlayModal.querySelector('.modal-close-button') : null;
 
-             // Элементы модального окна игры
-             howToPlayLink = document.getElementById('how-to-play-link');
-             howToPlayModal = document.getElementById('how-to-play-modal');
-             modalCloseButton = howToPlayModal ? howToPlayModal.querySelector('.modal-close-button') : null;
-
-
-            // Проверяем наличие основного контейнера игры и ключевых элементов перед инициализацией игры
             const gameContainer = document.querySelector('.game-container');
             if (gameContainer && balanceElement && gameRoadElement && characterElement && goButtonElement && cashOutButtonElement && betInput) {
-
-                 // Обработчик выбора ставки (привязываем только если кнопки найдены)
-                 if(betButtons.length > 0) {
-                     betButtons.forEach(button => {
-                         button.addEventListener('click', () => {
-                             if (!roundActive && !isAnimating) {
-                                 betInput.value = parseFloat(button.dataset.bet).toFixed(2);
-                                 initialBet = parseFloat(betInput.value);
-                                 updateUI();
-                             }
-                         });
-                     });
-                 } else {
-                      console.warn("Bet buttons not found.");
-                 }
-
-
-                  // Обработчик ввода ставки вручную (привязываем только если инпут найден)
-                 if(betInput) {
-                      betInput.addEventListener('change', () => {
-                          if (!roundActive && !isAnimating) {
-                              let bet = parseFloat(betInput.value);
-                              if (isNaN(bet) || bet < 0.1) {
-                                  bet = 0.1; // Минимальная ставка
-                              }
-                              bet = parseFloat(bet.toFixed(2));
-                              betInput.value = bet.toFixed(2);
-                              initialBet = bet;
-                              updateUI();
-                          }
-                      });
-                      // Устанавливаем initialBet из инпута при старте, т.к. он может иметь значение по умолчанию
-                      initialBet = parseFloat(betInput.value);
-                      if (isNaN(initialBet) || initialBet <= 0) initialBet = 0.1; // Гарантируем минимальную ставку
-                 } else {
-                      console.warn("Bet input not found.");
-                 }
-
-
-                 // Обработчик выбора сложности (привязываем только если кнопки найдены)
-                 if(difficultyButtons.length > 0) {
-                     difficultyButtons.forEach(button => {
-                         button.addEventListener('click', () => {
-                             if (!roundActive && !isAnimating) {
-                                  selectedDifficulty = button.dataset.difficulty;
-                                 updateUI();
-                             }
-                         });
-                     });
-                 } else {
-                      console.warn("Difficulty buttons not found.");
-                 }
-
-
-                // Навешиваем обработчики событий на кнопки GO и CASH OUT (привязываем только если кнопки найдены)
-                 if(goButtonElement) {
-                    goButtonElement.addEventListener('click', () => {
-                         if (!roundActive) {
-                             startGame();
-                         } else {
-                             performStep();
-                         }
-                    });
+                 if(betButtons.length > 0) { betButtons.forEach(button => { button.addEventListener('click', () => { if (!roundActive && !isAnimating) { betInput.value = parseFloat(button.dataset.bet).toFixed(2); initialBet = parseFloat(betInput.value); updateUI(); } }); });
+                 } else { console.warn("Bet buttons not found."); }
+                 if(betInput) { betInput.addEventListener('change', () => { if (!roundActive && !isAnimating) { let bet = parseFloat(betInput.value); if (isNaN(bet) || bet < 0.1) { bet = 0.1; } bet = parseFloat(bet.toFixed(2)); betInput.value = bet.toFixed(2); initialBet = bet; updateUI(); } });
+                      initialBet = parseFloat(betInput.value); if (isNaN(initialBet) || initialBet <= 0) initialBet = 0.1;
+                 } else { console.warn("Bet input not found."); }
+                 if(difficultyButtons.length > 0) { difficultyButtons.forEach(button => { button.addEventListener('click', () => { if (!roundActive && !isAnimating) { selectedDifficulty = button.dataset.difficulty; updateUI(); } }); });
+                 } else { console.warn("Difficulty buttons not found."); }
+                 if(goButtonElement) { goButtonElement.addEventListener('click', () => { if (!roundActive) { startGame(); } else { performStep(); } });
                  } else { console.warn("GO button not found."); }
-
-                 if(cashOutButtonElement) {
-                    cashOutButtonElement.addEventListener('click', cashOut);
+                 if(cashOutButtonElement) { cashOutButtonElement.addEventListener('click', cashOut);
                  } else { console.warn("Cash Out button not found."); }
-
-
-                 // Обработчики для модального окна "Как играть?"
                  if (howToPlayLink && howToPlayModal && modalCloseButton) {
-                     howToPlayLink.addEventListener('click', (event) => {
-                          event.preventDefault();
-                          howToPlayModal.classList.add('visible');
-                     });
-
-                     modalCloseButton.addEventListener('click', () => {
-                          howToPlayModal.classList.remove('visible');
-                     });
-
-                     howToPlayModal.addEventListener('click', (event) => {
-                          if (event.target === howToPlayModal) {
-                              howToPlayModal.classList.remove('visible');
-                          }
-                     });
-                 } else {
-                     console.warn("Game modal elements not fully found, how-to-play functionality may be limited.");
-                 }
-
-
-                // Инициализация игры
-                generateRoad(); // Генерируем дорожку
-                // Устанавливаем начальный баланс из переменной
-                balanceElement.textContent = balance.toFixed(2);
-                // Вычисляем и устанавливаем начальную позицию курицы
-                updateCharacterPosition();
-                updateUI(); // Устанавливаем начальное состояние UI и кнопок
-
+                     howToPlayLink.addEventListener('click', (event) => { event.preventDefault(); howToPlayModal.classList.add('visible'); });
+                     modalCloseButton.addEventListener('click', () => { howToPlayModal.classList.remove('visible'); });
+                     howToPlayModal.addEventListener('click', (event) => { if (event.target === howToPlayModal) { howToPlayModal.classList.remove('visible'); } });
+                 } else { console.warn("Game modal elements not fully found, how-to-play functionality may be limited."); }
+                generateRoad(); balanceElement.textContent = balance.toFixed(2);
+                updateCharacterPosition(); updateUI();
             } else {
                 console.error("One or more game essential elements not found on page. Game cannot initialize.");
-                // Optionally display a message to the user that the game couldn't load
-                 if (statusMessageElement) {
-                    statusMessageElement.textContent = "Ошибка загрузки игры. Пожалуйста, попробуйте обновить страницу.";
-                    statusMessageElement.style.color = 'red';
-                 }
-                 if (gameContainer) {
-                      // Можно скрыть контейнер игры, если он пустой или сломан
-                      // gameContainer.style.display = 'none';
-                 }
+                 if (statusMessageElement) { statusMessageElement.textContent = "Ошибка загрузки игры. Пожалуйста, попробуйте обновить страницу."; statusMessageElement.style.color = 'red'; }
             }
         });
-
     </script>
 </body>
 </html>
