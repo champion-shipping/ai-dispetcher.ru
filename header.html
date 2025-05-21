@@ -18,8 +18,8 @@
             gap: 25px; /* Расстояние между пунктами */
         }
 
-        /* Стили для контейнера кнопки мобильного меню */
-        #mobile-menu-toggle {
+        /* Стили для контейнера кнопки мобильного меню - ИСПОЛЬЗУЕМ КЛАСС */
+        .mobile-menu-toggle {
             display: none; /* Скрываем кнопку мобильного меню по умолчанию */
         }
 
@@ -28,7 +28,8 @@
             #desktopMenu {
                 display: none !important; /* Скрываем десктопное меню на мобильных */
             }
-            #mobile-menu-toggle {
+            /* ИСПОЛЬЗУЕМ КЛАСС в медиа-запросе */
+            .mobile-menu-toggle {
                 display: block !important; /* Показываем контейнер кнопки мобильного меню на мобильных */
             }
         }
@@ -39,8 +40,6 @@
             border: none;
             cursor: pointer;
             padding: 5px 10px;
-            /* Убираем color отсюда, зададим цвет напрямую в SVG stroke */
-            /* color: #4f46e5; */
         }
 
         /* Стили для SVG иконки гамбургера */
@@ -180,8 +179,8 @@
         </nav>
 
         <!-- Кнопка мобильного меню (ее видимость управляется CSS выше) -->
-        <!-- !!! ВАЖНО: Добавлен ID="mobile-menu-toggle" к этому div -->
-        <div id="mobile-menu-toggle">
+        <!-- !!! ИСПРАВЛЕНО: Теперь это div имеет КЛАСС="mobile-menu-toggle" -->
+        <div class="mobile-menu-toggle">
             <button id="mobile-menu-button" aria-label="Открыть меню">
                 <!-- SVG иконка гамбургера. Цвет задан через stroke в CSS -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
