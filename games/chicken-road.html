@@ -27,33 +27,21 @@
 
 
   <style>
-        /* Удалены конфликтующие стили body из игрового CSS */
-        /* body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #31333c; 
-            font-family: 'Arial', sans-serif;
-            overflow: hidden; 
-            user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            -moz-user-select: none;
-            color: #fff;
-        } */
-
-        /* Стили body из вашего шаблона (предполагаемые) */
+        /* Стили body из вашего шаблона (светлая тема) */
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: #f5f7fa; /* Светлый фон из вашего шаблона */
             color: #111; /* Темный текст из вашего шаблона */
             line-height: 1.6;
-             /* Убеждаемся, что body не скрывает overflow, чтобы скролл работал */
-             overflow-y: auto;
-             overflow-x: hidden; /* Скрываем горизонтальный скролл, если есть */
+            overflow-y: auto; /* Разрешаем скролл основной страницы */
+            overflow-x: hidden; /* Скрываем горизонтальный скролл */
+            /* Удаляем изначальные flex стили игры, т.к. body теперь управляется шаблоном */
+             /* display: flex; justify-content: center; align-items: center; min-height: 100vh; */
+             user-select: none; /* Сохраняем запрет выделения текста для игры */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
 
          /* Стили для контейнера контента из вашего шаблона */
@@ -61,23 +49,20 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-             /* min-height может конфликтовать с игрой, если игра выше. 
-                Лучше установить padding-top/bottom и позволить контенту определять высоту */
-            /* min-height: calc(100vh - var(--header-height, 0px) - var(--footer-height, 0px)); /* Пример: 100vh минус высота header и footer */ */
+             /* min-height может конфликтовать с игрой, если игра выше, или быть ненужным. */
+             /* Убедитесь, что есть достаточно отступа для header/footer */
             padding-top: 80px; /* Отступ сверху, чтобы контент не скрывался за header */
             padding-bottom: 40px; /* Отступ снизу перед footer */
-             position: relative; /* Может понадобиться для позиционирования внутренних элементов, но лучше избегать */
-             /* Если game-container нужно центрировать, убедитесь, что content-container это позволяет */
-             display: flex; /* Можно использовать flexbox */
-             flex-direction: column; /* Располагаем элементы вертикально */
-             align-items: center; /* Центрируем game-container по горизонтали */
+            position: relative; /* Может понадобиться, но лучше избегать, если не обязательно */
+            /* Центрируем game-container внутри content-container, если game-container < max-width */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое по горизонтали */
          }
 
-
-        /* --- Стили самой игры --- */
+        /* --- Стили самой игры (адаптированные для работы внутри другого контейнера) --- */
         .game-container {
-            /* Удаляем position: relative, т.к. он будет установлен flexbox/margin auto */
-            /* position: relative; */ /* Перемещено вниз, чтобы не конфликтовало */
+            /* position: relative; */ /* Перенесено ниже */
             width: 98%; /* Шире, чтобы вместить больше колонок */
             max-width: 900px; /* Максимальная ширина */
             height: 550px; /* Фиксированная высота игрового поля */
@@ -94,6 +79,9 @@
             position: relative; /* Устанавливаем position: relative здесь, чтобы дочерние absolute элементы позиционировались относительно него */
             flex-shrink: 0; /* Не сжимаем контейнер игры */
             flex-grow: 0; /* Не растягиваем контейнер игры */
+
+             /* Убираем overflow hidden, т.к. он уже на body */
+             /* overflow: hidden; */ /* Оставил overflow: hidden на game-container, чтобы скрыть элементы игры за его рамкой */
         }
 
         /* Элементы внутри game-container теперь позиционируются абсолютно относительно game-container */
@@ -471,7 +459,7 @@
 
         /* Стили для модального окна (попапа) */
         .modal-overlay {
-            position: fixed;
+            position: fixed; /* Фиксировано относительно viewport */
             top: 0;
             left: 0;
             width: 100%;
@@ -544,6 +532,9 @@
     <div class="content-container">
 
         <!-- Игровой контейнер теперь внутри content-container -->
+        <!-- Добавьте здесь заголовок страницы, если нужен -->
+        <!-- <h1>Chicken Road</h1> -->
+
         <div class="game-container">
             <div class="top-bar">
                 <div class="title">CHICKEN ROAD BY  <a href="https://t.me/AIdispatcher9" target="_blank"> AI Dispatcher</a></div>
@@ -639,9 +630,141 @@
 
     <div id="footer"></div>
 
-    <!-- Скрипт игры (ПЕРВЫЙ скрипт в body) -->
+    <!-- ОБЪЕДИНЕННЫЙ БЛОК СКРИПТОВ -->
     <script>
-        // Получаем ссылки на элементы HTML
+        // --- СКРИПТЫ ШАБЛОНА (выполняются первыми) ---
+
+        // Функция для инициализации мобильного меню (перенесена сюда)
+        function initializeMobileMenu() {
+            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
+            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
+            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
+            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
+            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
+
+            // Проверка, что все нужные элементы меню найдены (для надежности)
+            // Используем console.warn, т.к. это может быть нормальным, если на странице нет полного меню (например, на странице самой игры)
+            if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
+                console.warn('Элементы мобильного меню не найдены для инициализации. Возможно, на этой странице нет полного меню.');
+                // Не возвращаемся, чтобы дать шанс другим скриптам выполниться,
+                // но не привязываем обработчики, если элементы отсутствуют.
+                 return; // Выходим из функции, если элементы меню не найдены
+            }
+
+            // Функция для открытия мобильного меню
+            function openMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
+                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
+                // Используем setTimeout для плавного появления оверлея после его display: block
+                setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
+                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+
+            // Функция для закрытия мобильного меню
+            function closeMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
+                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
+                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+                setTimeout(() => {
+                     mobileMenuOverlay.style.display = 'none';
+                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
+                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            // Функция для обновления видимости меню в зависимости от размера экрана
+            function updateMenuVisibility() {
+                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
+
+                if (isMobile) {
+                    mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
+                    desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
+
+                    // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
+                    if (sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
+                         closeMobileMenu();
+                    }
+
+                } else { // Десктоп
+                    mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
+                    desktopMenu.style.display = 'flex'; // Используем flex для nav на десктопе
+                    closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
+                }
+            }
+
+            // Привязываем события после загрузки header
+            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
+            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
+
+            // Закрывать мобильное меню при клике на любую ссылку внутри него
+            sideMobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Вызываем функцию при загрузке и изменении размера окна
+            updateMenuVisibility(); // Вызываем сразу после инициализации
+            window.addEventListener('resize', updateMenuVisibility);
+
+             // Обработчики для ссылок с якорями, если такие есть в меню и ведут на текущую страницу
+             document.querySelectorAll('#mobile-offcanvas-menu a[href*="#"]').forEach(link => {
+                 if (link.pathname === window.location.pathname || link.pathname === '/') { // Проверяем, ведет ли ссылка на якорь на текущей или главной странице
+                      link.addEventListener('click', function(event) {
+                           // Закрыть меню
+                           closeMobileMenu();
+                            // Опционально: добавить плавный скролл после закрытия меню, если стандартный не устраивает
+                            // event.preventDefault();
+                            // const targetId = this.hash.substring(1);
+                            // const targetElement = document.getElementById(targetId);
+                            // if (targetElement) {
+                            //      setTimeout(() => {
+                            //           targetElement.scrollIntoView({ behavior: 'smooth' });
+                            //      }, 350); // Задержка после анимации закрытия
+                            // }
+                      });
+                 }
+             });
+        }
+        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ ---
+
+
+        // Загружаем header и footer ПОСЛЕДОВАТЕЛЬНО
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const headerDiv = document.getElementById('header');
+                if (headerDiv) {
+                    headerDiv.innerHTML = data;
+                    // !!! ИНИЦИАЛИЗИРУЕМ МЕНЮ ПОСЛЕ ЗАГРУЗКИ HEADER
+                    initializeMobileMenu();
+                }
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        fetch('footer.html')
+            .then(response => {
+                 if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const footerDiv = document.getElementById('footer');
+                if (footerDiv) footerDiv.innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+
+        // --- СКРИПТ ИГРЫ (выполняется после загрузки DOM и шаблонов) ---
+
+        // Получаем ссылки на элементы HTML (теперь они гарантированно в DOM после DOMContentLoaded)
         const balanceElement = document.getElementById('balance');
         const currentBetElement = document.getElementById('current-bet');
         const currentMultiplierElement = document.getElementById('current-multiplier');
@@ -657,23 +780,21 @@
         // roadColumns будут получены динамически после генерации
         let roadColumns = [];
 
-
-        // Элементы модального окна
+        // Элементы модального окна игры
         const howToPlayLink = document.getElementById('how-to-play-link');
         const howToPlayModal = document.getElementById('how-to-play-modal');
-        const modalCloseButton = howToPlayModal.querySelector('.modal-close-button');
-
+        const modalCloseButton = howToPlayModal ? howToPlayModal.querySelector('.modal-close-button') : null; // Проверяем наличие
 
         // Переменные игры
         let balance = 1000.00; // Начальный баланс
-        let initialBet = parseFloat(betInput.value); // Начальная ставка (по умолчанию из input)
+        // initialBet берется из input.value при старте игры
+        let initialBet = 0.60; // Начальная ставка для UI до первого раунда
         let currentMultiplier = 1.00; // Текущий множитель в раунде
         let currentStepIndex = -1; // Индекс текущей колонки, где находится курица (-1 = старт, до первой колонки)
         let roundActive = false; // Флаг активности раунда
         let isAnimating = false; // Флаг, предотвращающий множественные нажатия во время анимации
 
         // Множители для каждой стандартной колонки (10 шагов перед Джекпотом)
-        // Используем ваши множители и добавляем еще 2
         const baseMultipliers = [1.03, 1.07, 1.12, 1.17, 1.23, 1.29, 1.36, 1.44, 1.53, 1.62]; // 10 стандартных шагов
         const jackpotMultipliers = [15.00, 50.00, 250.00]; // Потенциальные значения Джекпота
         const numberOfColumns = baseMultipliers.length + 1; // Общее количество колонок (10 стандартных + 1 Джекпот = 11)
@@ -699,6 +820,8 @@
 
         // Функция для динамической генерации дорожки
         function generateRoad() {
+             if (!gameRoadElement) return; // Проверка на существование элемента
+
             gameRoadElement.innerHTML = ''; // Очищаем текущую дорожку
             roadColumns = []; // Сбрасываем массив ссылок на колонки
 
@@ -730,11 +853,19 @@
 
                 roadColumns.push(column); // Добавляем колонку в массив ссылок
             }
+             // Обновляем roadColumns после генерации
+             roadColumns = document.querySelectorAll('.road-column');
         }
 
 
         // Функция обновления UI
         function updateUI() {
+             // Проверяем наличие всех элементов игры перед обновлением
+             if (!balanceElement || !currentBetElement || !currentMultiplierElement || !cashOutAmountElement || !statusMessageElement || !gameRoadElement || !characterElement || !goButtonElement || !cashOutButtonElement || !betInput) {
+                 console.warn("Game UI elements not found, skipping UI update.");
+                 return;
+             }
+
             balanceElement.textContent = balance.toFixed(2);
             currentBetElement.textContent = initialBet.toFixed(2); // Показываем ставку раунда
             currentMultiplierElement.textContent = currentMultiplier.toFixed(2);
@@ -766,6 +897,8 @@
             // Обновляем визуальное состояние блоков
             roadColumns.forEach((column, index) => {
                  const block = column.querySelector('.block');
+                 if (!block) return; // Проверка
+
                  let multiplierSpan = block.querySelector('.multiplier');
                  let jackpotLabelSpan = block.querySelector('.jackpot-label');
                  let outcomeIconSpan = block.querySelector('.outcome-icon');
@@ -801,10 +934,7 @@
                             block.classList.add('revealed-win');
                              // В прошедших блоках показываем множитель, который был на этом шаге
                              if (index === jackpotStepIndex) {
-                                 // Здесь не совсем корректно показывать jackpotlabel, т.к. он был пройден.
-                                 // Можно оставить множитель или сделать отдельный стиль для пройденного джекпота
-                                 // Пока оставим множитель, который был на этом шаге.
-                                  newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`; // Множитель стандартного шага
+                                  newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`; // Множитель стандартного шага (или пустой)
                              } else {
                                  newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`; // Множитель стандартного шага
                              }
@@ -834,10 +964,13 @@
                                    iconSpan.classList.add('outcome-icon', 'win'); // Иконка выигрыша
                                    block.appendChild(iconSpan);
                                    // Для джекпота показываем сам множитель джекпота
-                                   const jackpotValue = currentMultiplier / (currentStepIndex > 0 ? baseMultipliers.slice(0, currentStepIndex).reduce((acc, m) => acc * m, 1) : 1);
+                                    // Рассчитываем множитель, примененный на этом шаге
+                                   const prevMultiplier = currentStepIndex > 0 ? baseMultipliers.slice(0, currentStepIndex).reduce((acc, m) => acc * m, 1) : 1;
+                                   const jackpotAppliedMultiplier = currentMultiplier / prevMultiplier;
+
                                    const actualMultiplierSpan = document.createElement('span');
                                    actualMultiplierSpan.classList.add('multiplier');
-                                   actualMultiplierSpan.textContent = `${jackpotValue.toFixed(2)}x`;
+                                   actualMultiplierSpan.textContent = `${jackpotAppliedMultiplier.toFixed(2)}x`;
                                    block.appendChild(actualMultiplierSpan);
 
                               } else {
@@ -882,6 +1015,12 @@
 
          // Функция обновления позиции персонажа
          function updateCharacterPosition() {
+             // Проверка на существование элементов
+             if (!characterElement || !gameRoadElement || roadColumns.length === 0) {
+                  console.warn("Character or road elements not found for position update.");
+                  return;
+             }
+
              let targetX;
 
              // Получаем ссылку на контейнер игры
@@ -891,21 +1030,26 @@
                  return;
              }
              const gameContainerRect = gameContainer.getBoundingClientRect();
-             const gameRoadRect = gameRoadElement.getBoundingClientRect(); // gameRoadRect относительно gameContainerRect
+             const gameRoadRect = gameRoadElement.getBoundingClientRect(); // gameRoadRect относительно viewport
 
              // Ширина gameRoad относительно gameContainer
-             const gameRoadWidth = gameRoadRect.width;
+             // const gameRoadWidth = gameRoadRect.width; // Не используется напрямую в процентах от gameContainer
              const characterWidth = characterElement.offsetWidth;
 
              if (currentStepIndex < 0) {
                   // Курица слева от первой колонки (начальная позиция -1)
-                   // Располагаем центр курицы примерно в начале gameRoad
-                   // Начало gameRoadElement относительно gameContainer: gameRoadRect.left - gameContainerRect.left
-                  const startOfGameRoadRelativeToContainer = gameRoadRect.left - gameContainerRect.left;
-                  // Позиционируем центр курицы немного левее начала gameRoad
-                  targetX = (startOfGameRoadRelativeToContainer - characterWidth / 2 - 10) / gameContainerRect.width * 100; // 10px отступ
-                   // Убедимся, что не уходит слишком далеко влево
-                  targetX = Math.max(targetX, 0); // Не уходит за левый край gameContainer
+                   // Располагаем центр курицы немного левее начала gameRoad, но относительно gameContainer
+                   const firstColumn = roadColumns[0];
+                   const firstColumnRect = firstColumn.getBoundingClientRect();
+
+                   // Левый край первой колонки относительно gameContainer
+                   const firstColumnLeftRelativeToContainer = firstColumnRect.left - gameContainerRect.left;
+
+                  // Позиционируем центр курицы немного левее этого края
+                  targetX = (firstColumnLeftRelativeToContainer - characterWidth / 2 - 10) / gameContainerRect.width * 100; // 10px отступ влево
+
+                  // Гарантируем, что не уходит слишком далеко влево
+                  targetX = Math.max(targetX, (characterWidth / 2) / gameContainerRect.width * 100); // Левый край курицы у края контейнера
 
              } else if (currentStepIndex < numberOfColumns) {
                  // Курица в центре текущей колонки
@@ -935,7 +1079,7 @@
              }
 
              characterElement.style.left = `${targetX}%`;
-             characterElement.style.transform = 'translateX(-50%)'; // Центрируем по этой точке
+             characterElement.style.transform = 'translateX(-50%)'; // Центрируем по точке left
              characterElement.style.bottom = '115px'; // Фиксируем по низу контейнера игры, как в CSS
          }
 
@@ -971,11 +1115,11 @@
                  isAnimating = false; // Анимация завершена
                  // Сбрасываем визуальное состояние всех блоков для нового раунда
                  roadColumns.forEach(column => {
-                     delete column.dataset.outcome; // Удаляем исход
+                     if(column) delete column.dataset.outcome; // Проверка на существование
                  });
                  generateRoad(); // Перерисовываем дорожку для нового раунда
-                 // Обновляем ссылки на колонки после генерации
-                 roadColumns = document.querySelectorAll('.road-column');
+                 // Обновляем ссылки на колонки после генерации (уже делается внутри generateRoad)
+                 // roadColumns = document.querySelectorAll('.road-column');
                  updateUI(); // Обновляем интерфейс
             }, stepAnimationDuration + 300); // Ждем завершения анимации шага + небольшой запас
         }
@@ -1094,11 +1238,11 @@
 
              // Сбрасываем визуальное состояние всех блоков и перерисовываем дорожку
              roadColumns.forEach(column => {
-                 delete column.dataset.outcome;
+                  if(column) delete column.dataset.outcome; // Проверка на существование
              });
              generateRoad(); // Пересоздаем дорожку с начальным состоянием
-             // Получаем обновленные ссылки на колонки после генерации
-             roadColumns = document.querySelectorAll('.road-column');
+             // Обновляем ссылки на колонки после генерации (уже делается внутри generateRoad)
+             // roadColumns = document.querySelectorAll('.road-column');
 
 
              // Небольшая задержка перед фактическим стартом игры и первым шагом
@@ -1169,170 +1313,47 @@
 
 
         // Обработчики для модального окна "Как играть?"
-        howToPlayLink.addEventListener('click', (event) => {
-             event.preventDefault(); // Отменяем стандартное действие ссылки
-             howToPlayModal.classList.add('visible');
-        });
+        // Проверяем наличие элементов перед добавлением обработчиков
+        if (howToPlayLink && howToPlayModal && modalCloseButton) {
+            howToPlayLink.addEventListener('click', (event) => {
+                 event.preventDefault(); // Отменяем стандартное действие ссылки
+                 howToPlayModal.classList.add('visible');
+            });
 
-        modalCloseButton.addEventListener('click', () => {
-             howToPlayModal.classList.remove('visible');
-        });
-
-        howToPlayModal.addEventListener('click', (event) => {
-            // Закрываем модальное окно при клике на оверлей (но не на само окно контента)
-             if (event.target === howToPlayModal) {
+            modalCloseButton.addEventListener('click', () => {
                  howToPlayModal.classList.remove('visible');
-             }
-        });
+            });
+
+            howToPlayModal.addEventListener('click', (event) => {
+                // Закрываем модальное окно при клике на оверлей (но не на само окно контента)
+                 if (event.target === howToPlayModal) {
+                     howToPlayModal.classList.remove('visible');
+                 }
+            });
+        } else {
+            console.warn("Game modal elements not found, how-to-play functionality may not work.");
+        }
 
 
         // Инициализация игры при загрузке страницы
+        // Запускаем инициализацию игры после полной загрузки DOM И после того, как шаблоны header/footer предположительно загрузились (хотя fetch асинхронен, DOMContentLoaded сам по себе не ждет fetch).
+        // Лучше всего было бы запустить инициализацию игры после завершения обоих fetch, но это усложнит код.
+        // Пока что оставим DOMContentLoaded, но будем готовы к тому, что первое позиционирование может быть не идеальным до рендера header/footer.
         document.addEventListener('DOMContentLoaded', () => {
-            generateRoad(); // Генерируем дорожку
-             // Получаем ссылки на колонки после их генерации
-             roadColumns = document.querySelectorAll('.road-column');
-            // Устанавливаем начальный баланс из переменной
-            balanceElement.textContent = balance.toFixed(2);
-            // Вычисляем и устанавливаем начальную позицию курицы
-             updateCharacterPosition();
-            updateUI(); // Устанавливаем начальное состояние UI и кнопок
+            // Проверяем наличие основного контейнера игры перед инициализацией
+            const gameContainer = document.querySelector('.game-container');
+            if (gameContainer) {
+                generateRoad(); // Генерируем дорожку
+                 // roadColumns уже обновляется внутри generateRoad
+                // Устанавливаем начальный баланс из переменной
+                if(balanceElement) balanceElement.textContent = balance.toFixed(2);
+                // Вычисляем и устанавливаем начальную позицию курицы
+                 updateCharacterPosition();
+                updateUI(); // Устанавливаем начальное состояние UI и кнопок
+            } else {
+                console.error("Game container (.game-container) not found on page. Game cannot initialize.");
+            }
         });
-    </script>
-
-
-    <!-- Скрипты шаблона (ВТОРОЙ скрипт в body) -->
-    <script>
-        // Загружаем header
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const headerDiv = document.getElementById('header');
-                if (headerDiv) {
-                    headerDiv.innerHTML = data;
-                    // !!! ВАЖНО: Инициализируем меню ТОЛЬКО после того, как header загружен и вставлен
-                    initializeMobileMenu();
-                }
-            })
-            .catch(error => console.error('Error loading header:', error));
-
-        // Загружаем footer
-        fetch('footer.html')
-            .then(response => {
-                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const footerDiv = document.getElementById('footer');
-                if (footerDiv) footerDiv.innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
-
-
-        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ (ПЕРЕМЕЩЕН СЮДА) ---
-        function initializeMobileMenu() {
-            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
-            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
-            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
-            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
-            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
-
-            // Проверка, что все нужные элементы найдены (для надежности)
-             // Использовать console.warn, т.к. это может быть нормальным, если на странице нет меню
-            if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
-                console.warn('Не найдены элементы меню для инициализации. Возможно, это не страница с меню.');
-                return; // Прекращаем выполнение функции, если элементы не найдены
-            }
-
-
-            // Функция для открытия мобильного меню
-            function openMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
-                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
-                // Используем setTimeout для плавного появления оверлея после его display: block
-                setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
-                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
-                menuBtn.setAttribute('aria-expanded', 'true');
-            }
-
-            // Функция для закрытия мобильного меню
-            function closeMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
-                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
-                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
-                setTimeout(() => {
-                     mobileMenuOverlay.style.display = 'none';
-                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
-                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
-                menuBtn.setAttribute('aria-expanded', 'false');
-            }
-
-            // Функция для обновления видимости меню в зависимости от размера экрана
-            function updateMenuVisibility() {
-                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
-
-                if (isMobile) {
-                     // Проверяем наличие элементов перед изменением display
-                    if(mobileMenuToggleContainer) mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
-                    if(desktopMenu) desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
-
-                    // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
-                    if (sideMobileMenu && sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
-                         closeMobileMenu();
-                    }
-
-                } else { // Десктоп
-                     // Проверяем наличие элементов перед изменением display
-                    if(mobileMenuToggleContainer) mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
-                    if(desktopMenu) desktopMenu.style.display = 'flex'; // Используем flex для nav на десктопе
-                    if(sideMobileMenu) closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
-                }
-            }
-
-            // Привязываем события ТОЛЬКО после загрузки header
-            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
-            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
-            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
-
-            // Закрывать мобильное меню при клике на любую ссылку внутри него
-            sideMobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-
-            // Вызываем функцию при загрузке и изменении размера окна
-            updateMenuVisibility(); // Вызываем сразу после инициализации
-            window.addEventListener('resize', updateMenuVisibility);
-
-             // Обработчики для ссылок с якорями, если такие есть в меню и ведут на текущую страницу
-             document.querySelectorAll('#mobile-offcanvas-menu a[href*="#"]').forEach(link => {
-                 if (link.pathname === window.location.pathname || link.pathname === '/') { // Проверяем, ведет ли ссылка на якорь на текущей или главной странице
-                      link.addEventListener('click', function(event) {
-                           // Закрыть меню
-                           closeMobileMenu();
-                            // Опционально: добавить плавный скролл после закрытия меню, если стандартный не устраивает
-                            // event.preventDefault();
-                            // const targetId = this.hash.substring(1);
-                            // const targetElement = document.getElementById(targetId);
-                            // if (targetElement) {
-                            //      setTimeout(() => {
-                            //           targetElement.scrollIntoView({ behavior: 'smooth' });
-                            //      }, 350); // Задержка после анимации закрытия
-                            // }
-                      });
-                 }
-             });
-        }
-        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
-
-
-        // Скрипты 3D-эффекта и details не нужны на этой странице
 
     </script>
 </body>
