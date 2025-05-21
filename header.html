@@ -20,24 +20,13 @@
         </nav>
 
         <!-- Кнопка мобильного меню (показывается только на мобильных, справа) -->
-<div class="mobile-menu-toggle">
-    <button id="mobile-menu-button" style="background:none;border:none;cursor:pointer;padding:5px 10px;" aria-label="Открыть меню">
-        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-        </svg>
-    </button>
-</div>
-<style>
-    .mobile-menu-toggle {
-    display: none;
-}
-
-@media (max-width: 768px) { /* или другой подходящий breakpoint */
-    .mobile-menu-toggle {
-        display: block;
-    }
-}
-</style>
+        <div id="mobile-menu-toggle" style="display: none; @media (max-width: 768px) { display: block; }">
+            <button id="mobile-menu-button" style="background:none;border:none;cursor:pointer;padding:5px 10px;" aria-label="Открыть меню">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#3b82f6" style="width:28px;height:28px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <!-- Оверлей для затемнения фона -->
