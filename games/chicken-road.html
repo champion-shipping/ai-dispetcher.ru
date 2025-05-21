@@ -27,7 +27,8 @@
 
 
   <style>
-        /* Стили body из вашего шаблона (светлая тема) */
+        /* Стили body из вашего шаблона (светлая тема). 
+           Удалены конфликтующие стили позиционирования и размеров из игрового CSS. */
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -36,46 +37,54 @@
             line-height: 1.6;
             overflow-y: auto; /* Разрешаем скролл основной страницы */
             overflow-x: hidden; /* Скрываем горизонтальный скролл */
-            user-select: none; /* Сохраняем запрет выделения текста для игры */
+             /* Игровые стили body, которые можно оставить: */
+             user-select: none; /* Сохраняем запрет выделения текста для игры */
             -webkit-user-select: none;
             -ms-user-select: none;
             -moz-user-select: none;
         }
 
-         /* Стили для контейнера контента из вашего шаблона */
+         /* Стили для контейнера контента из вашего шаблона.
+            Добавлены flex свойства для центрирования игрового контейнера внутри. */
          .content-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             padding-top: 80px; /* Отступ сверху, чтобы контент не скрывался за header */
             padding-bottom: 40px; /* Отступ снизу перед footer */
-            position: relative;
+            position: relative; /* Может понадобиться для других элементов шаблона, но для игры не критично */
+            /* Flexbox для центрирования game-container */
             display: flex;
             flex-direction: column;
-            align-items: center; /* Центрируем содержимое по горизонтали */
+            align-items: center; /* Центрирует game-container по горизонтали */
          }
 
         /* --- Стили самой игры (адаптированные для работы внутри другого контейнера) --- */
         .game-container {
-            width: 98%; /* Шире, чтобы вместить больше колонок */
+            /* Удалены старые абсолютные позиционирования, которые ломались внутри content-container */
+            /* position: relative; width: 98%; max-width: 900px; height: 550px; */
+
+            /* Новые стили для game-container как блочного элемента внутри content-container */
+            width: 98%; /* Ширина внутри content-container */
             max-width: 900px; /* Максимальная ширина */
-            height: 550px; /* Фиксированная высота игрового поля */
+            height: 550px; /* Фиксированная высота игрового поля (для десктопа) */
+            margin: 20px auto; /* Центрируем блок игры и добавляем отступы */
+
             border: 4px solid #24262b; /* Темная рамка */
             border-radius: 10px;
             overflow: hidden; /* Обрезаем все внутри по границам контейнера */
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
             background-color: #4a4c56; /* Темный фон игрового поля */
-            display: flex; /* Используем flexbox для размещения игрового поля и элементов */
-            flex-direction: column; /* Располагаем элементы вертикально */
 
-            /* Центрируем game-container внутри content-container */
-            margin: 20px auto; /* Отступ сверху/снизу и автоматическое центрирование по горизонтали */
-            position: relative; /* Устанавливаем position: relative здесь, чтобы дочерние absolute элементы позиционировались относительно него */
-            flex-shrink: 0; /* Не сжимаем контейнер игры */
+            /* Внутренний layout игры остается flex и absolute */
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Это критично! Внутренние absolute элементы позиционируются относительно него */
+            flex-shrink: 0; /* Не сжимаем контейнер игры внутри flexbox */
             flex-grow: 0; /* Не растягиваем контейнер игры */
         }
 
-        /* Элементы внутри game-container теперь позиционируются абсолютно относительно game-container */
+        /* Элементы внутри game-container позиционируются абсолютно относительно game-container */
         .top-bar {
             position: absolute;
             top: 0;
@@ -277,12 +286,13 @@
              /* Left будет выставляться JS */
             width: 50px; /* Ширина курицы */
             height: 60px; /* Высота курицы */
-            /* ПУТЬ К КАРТИНКЕ: Если chicken.png в той же папке games/ */
-            background: url('chicken.png') no-repeat center center;
-            /* ЕСЛИ chicken.png в корне сайта, используйте: */
-            /* background: url('/chicken.png') no-repeat center center; */
-            /* ЕСЛИ chicken.png в папке images в корне сайта, используйте: */
+            /* --- ПУТЬ К КАРТИНКЕ --- */
+            /* ЕСЛИ chicken.png в корне сайта: */
+            background: url('/chicken.png') no-repeat center center;
+            /* ЕСЛИ chicken.png в папке images в корне сайта: */
             /* background: url('/images/chicken.png') no-repeat center center; */
+            /* ЕСЛИ chicken.png в той же папке games/ (менее вероятно для общих ресурсов): */
+            /* background: url('chicken.png') no-repeat center center; */
             background-size: contain;
             z-index: 15; /* Персонаж должен быть выше решеток и блоков */
             transition: left 0.6s ease-out; /* Анимация движения влево/вправо */
@@ -291,7 +301,7 @@
         }
 
 
-        /* Управление - СДВИНУТО НИЖЕ */
+        /* Управление */
         .controls {
             position: absolute;
             bottom: 0;
@@ -516,6 +526,155 @@
             color: #fff;
         }
 
+
+        /* --- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 10px; /* Уменьшаем padding на мобилках */
+                padding-top: 70px; /* Отступ сверху с учетом меньшего header */
+                padding-bottom: 20px; /* Отступ снизу */
+            }
+
+            .game-container {
+                width: 100%; /* Игра занимает всю доступную ширину контейнера */
+                margin: 10px auto; /* Меньшие отступы */
+                /* Снижаем высоту игры на мобилках. 
+                   Это пропорционально уменьшит внутренние absolute элементы. */
+                height: 450px; /* Примерная высота для мобильных */
+                max-height: 85vh; /* Не больше 85% высоты вьюпорта */
+            }
+
+            /* Скорректируем отступы и размеры элементов внутри игры, если нужно */
+            .top-bar {
+                height: 40px; /* Чуть меньше высота */
+                padding: 0 10px;
+                font-size: 1em;
+            }
+            .top-bar .title {
+                 font-size: 1.1em;
+            }
+             .top-bar .how-to-play {
+                 font-size: 0.8em;
+                 margin: 0 5px;
+             }
+            .balance-info {
+                 font-size: 0.9em;
+            }
+
+            .info-panel {
+                top: 55px; /* Ниже нового top-bar */
+                left: 10px;
+                right: 10px;
+                padding: 5px 8px;
+                gap: 10px;
+                font-size: 0.8em;
+            }
+
+            .status-message {
+                 top: 85px; /* Ниже info-panel */
+                 font-size: 0.9em;
+            }
+
+            .game-road {
+                top: 110px; /* Ниже status-message */
+                bottom: 100px; /* Выше controls */
+                 padding: 0 5px; /* Меньшие отступы по бокам */
+            }
+
+            .road-column {
+                 /* border-left: 1px dashed rgba(255, 255, 255, 0.1); /* Чуть тоньше разделители */ */
+                 /* Убираем рамку для первой колонки */
+                &:first-child { border-left: none; }
+            }
+
+            .block {
+                width: 45px; /* Меньше размер блоков */
+                height: 45px;
+                border-width: 2px; /* Тоньше рамка */
+                margin-bottom: 15px; /* Меньше отступ */
+                bottom: 30px; /* Позиция над решеткой (grate height 30 + margin 0) */
+                font-size: 0.9em;
+            }
+
+            .block .multiplier,
+            .block .jackpot-label {
+                font-size: 0.9em;
+            }
+
+            .block .outcome-icon {
+                font-size: 1.4em;
+            }
+
+
+            .grate {
+                height: 30px; /* Меньше высота решетки */
+                border-top-width: 2px;
+                 background: repeating-linear-gradient( /* Корректируем фон решетки */
+                    to right,
+                    transparent,
+                    transparent 3px, /* Ширина прута */
+                    #24262b 3px, /* Цвет промежутка */
+                    #24262b 6px /* Ширина промежутка */
+                );
+            }
+
+
+            .character {
+                 width: 40px; /* Меньше размер курицы */
+                 height: 50px;
+                 bottom: 95px; /* Позиция над решеткой game-road bottom (100) - chicken height(50) + some offset? No, use bottom relative to game container. road bottom is 100, character bottom should be slightly higher */
+                 bottom: 105px; /* Должен стоять над решеткой, которая внизу game-road */
+                 /* Chicken bottom should be bottom of game-road (100px from container bottom) + half grate height (15px) */
+                 bottom: calc(100px + 15px); /* Position relative to game-container bottom */
+            }
+
+
+            .controls {
+                min-height: 80px; /* Меньше высота контрольной панели */
+                padding: 8px 10px;
+                gap: 10px; /* Меньше отступ между секциями */
+                align-items: center; /* Центрируем по вертикали, если места мало */
+            }
+
+             .controls .bet-section,
+             .controls .difficulty-section {
+                 gap: 2px; /* Меньше вертикальный отступ */
+             }
+
+             .controls .bet-section label,
+             .controls .difficulty-section label {
+                 font-size: 0.8em;
+             }
+
+            .controls input[type="number"] {
+                 width: 60px; /* Меньше ширина инпута */
+                 padding: 4px;
+                 font-size: 0.9em;
+            }
+
+            .controls .bet-buttons button,
+            .controls .difficulty-buttons button {
+                 padding: 4px 8px; /* Меньше padding кнопок */
+                 font-size: 0.8em;
+            }
+
+             .controls .action-buttons {
+                 gap: 10px; /* Меньше отступ между кнопками действий */
+             }
+
+            #go-button,
+            #cash-out-button {
+                 padding: 8px 15px; /* Меньше padding */
+                 font-size: 1em;
+                 min-width: auto; /* Убираем минимальную ширину, чтобы кнопки могли сжиматься */
+            }
+
+            #cash-out-button span {
+                font-size: 0.8em;
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -525,9 +684,8 @@
     <!-- Основной контент -->
     <div class="content-container">
 
-        <!-- Игровой контейнер теперь внутри content-container -->
-        <!-- Добавьте здесь заголовок страницы, если нужен -->
-        <!-- <h1>Chicken Road</h1> -->
+        <!-- Здесь может быть H1 страницы, если он нужен над игрой -->
+        <!-- <h1>Название страницы с игрой</h1> -->
 
         <div class="game-container">
             <div class="top-bar">
@@ -626,7 +784,7 @@
 
     <!-- ОБЪЕДИНЕННЫЙ БЛОК СКРИПТОВ -->
     <script>
-        // --- СКРИПТЫ ШАБЛОНА (выполняются первыми) ---
+        // --- СКРИПТЫ ШАБЛОНА ---
 
         // Функция для инициализации мобильного меню (перенесена сюда)
         function initializeMobileMenu() {
@@ -638,7 +796,7 @@
             const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
 
             // Проверка, что все нужные элементы меню найдены (для надежности)
-            // Используем console.warn, т.к. это может быть нормальным, если на странице нет полного меню (например, на странице самой игры)
+            // Используем console.warn, т.к. это может быть нормальным, если на странице нет полного меню
             if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
                 console.warn('Элементы мобильного меню не найдены для инициализации. Возможно, на этой странице нет полного меню.');
                  return; // Выходим из функции, если элементы меню не найдены
@@ -705,7 +863,7 @@
              // Обработчики для ссылок с якорями
              document.querySelectorAll('a[href*="#"]').forEach(link => {
                  // Проверяем, что это якорь на текущей или главной странице
-                 if (link.pathname === window.location.pathname || (link.pathname === '/' && window.location.pathname === '/games/chicken-road.html')) { // Добавлена проверка для случая, если ссылка на якорь на главной странице
+                 if (link.pathname === window.location.pathname || (link.pathname === '/' && window.location.pathname.startsWith('/games/'))) { // Проверяем, ведет ли ссылка на якорь на текущей странице ИЛИ на главную страницу из подпапки games
                       link.addEventListener('click', function(event) {
                            // Если мобильное меню открыто, закрываем его
                            if (sideMobileMenu && sideMobileMenu.style.transform === 'translateX(0)') {
@@ -719,8 +877,8 @@
         // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
 
 
-        // Загружаем header и footer ПОСЛЕДОВАТЕЛЬНО
-        // ИСПОЛЬЗУЕМ АБСОЛЮТНЫЕ ПУТИ /header.html и /footer.html
+        // Загружаем header и footer ПОСЛЕДОВАТЕЛЬНО.
+        // ИСПОЛЬЗУЕМ АБСОЛЮТНЫЕ ПУТИ /header.html и /footer.html ОТ КОРНЯ САЙТА.
         fetch('/header.html')
             .then(response => {
                 if (!response.ok) {
@@ -741,7 +899,7 @@
         fetch('/footer.html')
             .then(response => {
                  if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${status}`); // Исправил опечатку
+                    throw new Error(`HTTP error! status: ${response.status}`); // Исправил опечатку (status вместо status)
                 }
                 return response.text();
             })
@@ -752,10 +910,9 @@
             .catch(error => console.error('Error loading footer:', error));
 
 
-        // --- СКРИПТ ИГРЫ (выполняется после загрузки DOM и предположительно шаблонов) ---
+        // --- СКРИПТ ИГРЫ ---
 
-        // Получаем ссылки на элементы HTML (теперь они должны быть в DOM после DOMContentLoaded)
-        // Объявляем их через let, чтобы присвоить значения после DOMContentLoaded
+        // Объявляем переменные для элементов игры
         let balanceElement, currentBetElement, currentMultiplierElement, cashOutAmountElement,
             statusMessageElement, gameRoadElement, characterElement, goButtonElement,
             cashOutButtonElement, betInput, betButtons, difficultyButtons, roadColumns = [];
@@ -798,10 +955,10 @@
 
         // Функция для динамической генерации дорожки
         function generateRoad() {
-             if (!gameRoadElement) return; // Проверка на существование элемента
+             if (!gameRoadElement) return;
 
             gameRoadElement.innerHTML = ''; // Очищаем текущую дорожку
-            // roadColumns очищается перед заполнением
+            roadColumns = []; // Сбрасываем массив ссылок на колонки
 
             for (let i = 0; i < numberOfColumns; i++) {
                 const column = document.createElement('div');
@@ -817,11 +974,10 @@
                     span.textContent = 'Jackpot!';
                 } else {
                     span.classList.add('multiplier');
-                    // Проверяем, что индекс i существует в baseMultipliers
-                    if (baseMultipliers[i] !== undefined) { // Используем !== undefined для надежности
+                    if (baseMultipliers[i] !== undefined) {
                         span.textContent = `${baseMultipliers[i].toFixed(2)}x`;
                     } else {
-                        span.textContent = ''; // Пустой текст, если индекс некорректен
+                        span.textContent = '';
                     }
                 }
                 block.appendChild(span);
@@ -833,7 +989,6 @@
                 column.appendChild(grate);
                 gameRoadElement.appendChild(column);
             }
-             // Обновляем roadColumns после генерации
              roadColumns = document.querySelectorAll('.road-column');
         }
 
@@ -863,31 +1018,27 @@
                 cashOutButtonElement.disabled = true;
             } else {
                  const nextStepIndexToCheck = currentStepIndex + 1;
-                 const nextMultiplierText = (nextStepIndexToCheck < baseMultipliers.length) // Если следующий шаг - стандартный
+                 const nextMultiplierText = (nextStepIndexToCheck < baseMultipliers.length)
                      ? `${baseMultipliers[nextStepIndexToCheck].toFixed(2)}x`
-                     : (nextStepIndexToCheck === jackpotStepIndex ? 'Jackpot!' : 'END'); // Если следующий шаг Джекпот или конец
+                     : (nextStepIndexToCheck === jackpotStepIndex ? 'Jackpot!' : 'END');
 
                 goButtonElement.textContent = `GO (${nextMultiplierText})`;
-                 // Кнопка GO активна, если раунд активен, есть следующая колонка (nextStepIndex < numberOfColumns) и нет анимации
-                goButtonElement.disabled = nextStepIndexToCheck >= numberOfColumns || isAnimating;
-                // Кнопка CASH OUT активна, если раунд активен, сделан хотя бы один шаг (currentStepIndex >= 0) и нет анимации
-                cashOutButtonElement.disabled = currentStepIndex < 0 || isAnimating;
+                 goButtonElement.disabled = nextStepIndexToCheck >= numberOfColumns || isAnimating;
+                 cashOutButtonElement.disabled = currentStepIndex < 0 || isAnimating;
             }
 
             // Обновляем визуальное состояние блоков
             roadColumns.forEach((column, index) => {
                  const block = column.querySelector('.block');
-                 if (!block) return; // Проверка
+                 if (!block) return;
 
                  let multiplierSpan = block.querySelector('.multiplier');
                  let jackpotLabelSpan = block.querySelector('.jackpot-label');
                  let outcomeIconSpan = block.querySelector('.outcome-icon');
 
-                 // Сбрасываем все классы состояний
                  block.classList.remove('active', 'revealed-win', 'revealed-lose');
-                 if (outcomeIconSpan) outcomeIconSpan.remove(); // Удаляем старую иконку
+                 if (outcomeIconSpan) outcomeIconSpan.remove();
 
-                 // Пересоздаем span множителя/джекпота, чтобы гарантировать правильный текст
                  if (multiplierSpan) multiplierSpan.remove();
                  if (jackpotLabelSpan) jackpotLabelSpan.remove();
 
@@ -900,56 +1051,46 @@
                       if (baseMultipliers[index] !== undefined) {
                           newSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`;
                       } else {
-                           newSpan.textContent = ''; // Пустой текст
+                           newSpan.textContent = '';
                       }
                  }
                  block.appendChild(newSpan);
 
 
-                 // Обновляем состояние блока на основе текущего шага и исхода
                  if (index < currentStepIndex) {
-                      // Прошедшие блоки (кроме текущего), если был исход, показывают его
                        if (column.dataset.outcome === 'win') {
                             block.classList.add('revealed-win');
-                            // В прошедших блоках показываем множитель, который был на этом шаге
                             if (index === jackpotStepIndex) {
-                                 // Для пройденного джекпот шага можно показать его множитель из base, если нужно
                                  newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`;
-                                 newSpan.classList.remove('jackpot-label'); // Это уже не метка джекпота, а пройденный шаг
+                                 newSpan.classList.remove('jackpot-label');
                                  newSpan.classList.add('multiplier');
                              } else {
-                                 newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`; // Множитель стандартного шага
+                                 newSpan.textContent = `${baseMultipliers[index] ? baseMultipliers[index].toFixed(2) + 'x' : ''}`;
                              }
-
                        } else if (column.dataset.outcome === 'lose') {
                            block.classList.add('revealed-lose');
-                           newSpan.remove(); // Удаляем множитель/джекпот текст
+                           newSpan.remove();
                            const iconSpan = document.createElement('span');
-                           iconSpan.classList.add('outcome-icon', 'lose'); // Иконка проигрыша
+                           iconSpan.classList.add('outcome-icon', 'lose');
                            block.appendChild(iconSpan);
                        } else {
-                           // Если нет исхода (не должно происходить после шага)
-                            block.style.backgroundColor = '#6a738c'; // Серый
+                            block.style.backgroundColor = '#6a738c';
                             block.style.borderColor = '#4a526b';
                        }
                  } else if (index === currentStepIndex) {
-                     // Текущий блок, где находится курица
-                     block.classList.add('active'); // Помечаем как активный
-                     if (column.dataset.outcome) { // Если исход уже определен для текущего шага (после анимации)
-                         block.classList.remove('active'); // Убираем активное состояние
+                     block.classList.add('active');
+                     if (column.dataset.outcome) {
+                         block.classList.remove('active');
                          if (column.dataset.outcome === 'win') {
                              block.classList.add('revealed-win');
                               if (index === jackpotStepIndex) {
-                                  // При выигрыше джекпота показываем иконку выигрыша и фактический множитель джекпота
-                                  newSpan.remove(); // Удаляем текст "Jackpot!"
+                                  newSpan.remove();
                                    const iconSpan = document.createElement('span');
-                                   iconSpan.classList.add('outcome-icon', 'win'); // Иконка выигрыша
+                                   iconSpan.classList.add('outcome-icon', 'win');
                                    block.appendChild(iconSpan);
-                                   // Для джекпота показываем сам множитель джекпота, который был *применен*
-                                   // Находим множитель до этого шага
                                    const prevMultiplierTotal = currentStepIndex > 0
                                        ? baseMultipliers.slice(0, currentStepIndex).reduce((acc, m) => acc * m, 1)
-                                       : 1; // Если это первый шаг (что не для джекпота), множитель до него 1
+                                       : 1;
                                    const jackpotAppliedMultiplier = currentMultiplier / prevMultiplierTotal;
 
                                    const actualMultiplierSpan = document.createElement('span');
@@ -958,33 +1099,30 @@
                                    block.appendChild(actualMultiplierSpan);
 
                               } else {
-                                  // При выигрыше стандартного шага показываем иконку выигрыша и множитель этого шага
-                                   newSpan.remove(); // Удаляем текст множителя
+                                   newSpan.remove();
                                    const iconSpan = document.createElement('span');
-                                   iconSpan.classList.add('outcome-icon', 'win'); // Иконка выигрыша
+                                   iconSpan.classList.add('outcome-icon', 'win');
                                    block.appendChild(iconSpan);
                                    const stepMultiplierSpan = document.createElement('span');
                                    stepMultiplierSpan.classList.add('multiplier');
-                                   stepMultiplierSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`; // Множитель этого шага
+                                   stepMultiplierSpan.textContent = `${baseMultipliers[index].toFixed(2)}x`;
                                    block.appendChild(stepMultiplierSpan);
                               }
-                         } else { // outcome === 'lose'
+                         } else {
                             block.classList.add('revealed-lose');
-                            newSpan.remove(); // Удаляем множитель/джекпот текст
+                            newSpan.remove();
                             const iconSpan = document.createElement('span');
-                            iconSpan.classList.add('outcome-icon', 'lose'); // Иконка проигрыша
+                            iconSpan.classList.add('outcome-icon', 'lose');
                             block.appendChild(iconSpan);
                          }
                      }
                  } else {
-                      // Будущие блоки - серые, показываем потенциальный множитель/Джекпот
-                      block.style.backgroundColor = '#6a738c'; // Серый
+                      block.style.backgroundColor = '#6a738c';
                       block.style.borderColor = '#4a526b';
-                      delete column.dataset.outcome; // Убедимся, что нет исхода для будущих блоков
+                      delete column.dataset.outcome;
                  }
             });
 
-             // Устанавливаем активный класс для выбранной сложности
              difficultyButtons.forEach(btn => {
                  if (btn.dataset.difficulty === selectedDifficulty) {
                      btn.classList.add('active');
@@ -993,13 +1131,11 @@
                  }
              });
 
-             // Обновляем позицию курицы
              updateCharacterPosition();
         }
 
          // Функция обновления позиции персонажа
          function updateCharacterPosition() {
-             // Проверка на существование элементов
              if (!characterElement || !gameRoadElement || roadColumns.length === 0) {
                   console.warn("Character or road elements not found for position update.");
                   return;
@@ -1007,35 +1143,29 @@
 
              let targetX;
 
-             // Получаем ссылку на контейнер игры
              const gameContainer = document.querySelector('.game-container');
              if (!gameContainer) {
                  console.error("Game container not found for position update!");
                  return;
              }
              const gameContainerRect = gameContainer.getBoundingClientRect();
-             // gameRoadElement находится внутри gameContainer, его getBoundingClientRect() позиция относительна viewport
-             const gameRoadRect = gameRoadElement.getBoundingClientRect();
              const characterWidth = characterElement.offsetWidth;
 
              if (currentStepIndex < 0) {
-                  // Курица слева от первой колонки (начальная позиция -1)
-                   const firstColumn = roadColumns[0];
-                   const firstColumnRect = firstColumn.getBoundingClientRect();
+                  const firstColumn = roadColumns[0];
+                  const firstColumnRect = firstColumn.getBoundingClientRect();
 
                    // Левый край первой колонки относительно gameContainer
                    const firstColumnLeftRelativeToContainer = firstColumnRect.left - gameContainerRect.left;
 
                   // Позиционируем центр курицы немного левее этого края
-                  // Например, на 10px левее левого края первой колонки
-                  targetX = (firstColumnLeftRelativeToContainer - 10) / gameContainerRect.width * 100;
+                  targetX = (firstColumnLeftRelativeToContainer - 10) / gameContainerRect.width * 100; // 10px отступ влево
 
-                  // Гарантируем, что центр курицы не уходит за левый край gameContainer
+                  // Гарантируем, что не уходит слишком далеко влево
                   targetX = Math.max(targetX, (characterWidth / 2) / gameContainerRect.width * 100);
 
 
              } else if (currentStepIndex < numberOfColumns) {
-                 // Курица в центре текущей колонки
                  const currentColumn = roadColumns[currentStepIndex];
                  if (!currentColumn) {
                      console.error(`Column with index ${currentStepIndex} not found for position update!`);
@@ -1043,12 +1173,10 @@
                  }
                  const columnRect = currentColumn.getBoundingClientRect();
 
-                 // Вычисляем позицию центра колонки относительно gameContainer
                  const columnCenterRelativeToContainer = (columnRect.left - gameContainerRect.left) + columnRect.width / 2;
-                 targetX = columnCenterRelativeToContainer / gameContainerRect.width * 100; // Позиция в % от ширины gameContainer
+                 targetX = columnCenterRelativeToContainer / gameContainerRect.width * 100;
 
              } else {
-                  // Курица после последней колонки (конец игры, осталась в последней колонке)
                    const lastColumn = roadColumns[numberOfColumns - 1];
                     if (!lastColumn) {
                      console.error(`Last column not found for position update!`);
@@ -1056,14 +1184,14 @@
                  }
                    const columnRect = lastColumn.getBoundingClientRect();
 
-                   // Вычисляем позицию центра последней колонки относительно gameContainer
                    const columnCenterRelativeToContainer = (columnRect.left - gameContainerRect.left) + lastColumn.offsetWidth / 2;
                    targetX = columnCenterRelativeToContainer / gameContainerRect.width * 100;
              }
 
              characterElement.style.left = `${targetX}%`;
-             characterElement.style.transform = 'translateX(-50%)'; // Центрируем по точке left
-             characterElement.style.bottom = '115px'; // Фиксируем по низу контейнера игры, как в CSS
+             characterElement.style.transform = 'translateX(-50%)';
+             characterElement.style.bottom = '115px'; /* Позиция относительно низа game-container */
+             // На мобилках этот bottom скорректируется медиа-запросом
          }
 
 
@@ -1072,7 +1200,7 @@
             if (!roundActive) return;
 
             roundActive = false;
-            isAnimating = true; // Включаем флаг анимации (на время сброса)
+            isAnimating = true;
 
             let winAmount = 0;
             if (reason === 'cash-out' || reason === 'end') {
@@ -1080,123 +1208,102 @@
                 balance += winAmount;
                 if (reason === 'cash-out') {
                     statusMessageElement.textContent = `🎉 Успех! Забрано ${winAmount.toFixed(2)} $! 🎉`;
-                } else { // reason === 'end' (достигнут конец)
+                } else {
                      statusMessageElement.textContent = `🥳 Конец дорожки! Выигрыш ${winAmount.toFixed(2)} $! 🥳`;
                 }
             } else if (reason === 'lose') {
-                // При проигрыше ставка уже списана при старте, баланс не меняется.
                 statusMessageElement.textContent = `💥 Проигрыш! Вы потеряли ${initialBet.toFixed(2)} $! 😢`;
             }
 
-            // Сбрасываем переменные раунда
-            initialBet = parseFloat(betInput.value); // Возвращаем ставку в UI (могла измениться во время раунда)
+            initialBet = parseFloat(betInput.value);
             currentMultiplier = 1.00;
-            currentStepIndex = -1; // Возвращаем курицу в начальную позицию
+            currentStepIndex = -1;
 
-            // Небольшая задержка для ощущения завершения
             setTimeout(() => {
-                 isAnimating = false; // Анимация завершена
-                 // Сбрасываем визуальное состояние всех блоков для нового раунда
+                 isAnimating = false;
                  roadColumns.forEach(column => {
-                  if(column) delete column.dataset.outcome; // Проверка на существование
+                  if(column) delete column.dataset.outcome;
                  });
-                 generateRoad(); // Перерисовываем дорожку для нового раунда
-                 // roadColumns уже обновляется внутри generateRoad()
-                 updateUI(); // Обновляем интерфейс
-            }, stepAnimationDuration + 300); // Ждем завершения анимации шага + небольшой запас
+                 generateRoad();
+                 // roadColumns обновляется внутри generateRoad()
+                 updateUI();
+            }, stepAnimationDuration + 300);
         }
 
 
         // Функция выполнения шага и определения результата
         function performStep() {
-            if (isAnimating || !roundActive) return; // Не делаем ничего, если идет анимация или раунд не активен
+            if (isAnimating || !roundActive) return;
 
             const nextStepIndex = currentStepIndex + 1;
 
-            // Проверка, не достигли ли конца дорожки
             if (nextStepIndex >= numberOfColumns) {
-                 // Это состояние не должно быть достигнуто, если кнопка GO правильно блокируется
                  statusMessageElement.textContent = "Ошибка: Попытка шага за пределы дорожки.";
                  updateUI();
                  return;
             }
 
-            isAnimating = true; // Блокируем кнопки
+            isAnimating = true;
 
-            // Удаляем класс 'active' с предыдущего блока (если есть)
              if (currentStepIndex >= 0 && roadColumns[currentStepIndex]) {
                  roadColumns[currentStepIndex].querySelector('.block').classList.remove('active');
              }
 
-            // 1. Начинаем анимацию движения курицы к следующей колонке
-             currentStepIndex = nextStepIndex; // Обновляем индекс текущего шага
-             updateCharacterPosition(); // Запускаем CSS transition для движения
+             currentStepIndex = nextStepIndex;
+             updateCharacterPosition();
 
-            // 2. Определяем результат (случайный проигрыш)
              let probability;
              if (currentStepIndex === jackpotStepIndex) {
-                 // Шанс проигрыша на Джекпот шаге
                   probability = Math.min(loseProbabilities[selectedDifficulty] * jackpotStepLoseProbabilityMultiplier, maxLoseProbability);
              } else {
-                 // Шанс проигрыша на стандартном шаге
                   probability = loseProbabilities[selectedDifficulty];
              }
 
              const isLose = Math.random() < probability;
              const targetColumn = roadColumns[currentStepIndex];
-             // const targetBlock = targetColumn.querySelector('.block'); // Ссылка на блок в текущей колонке
 
-
-            // Определяем результат примерно в середине анимации движения
             setTimeout(() => {
                 if (isLose) {
-                    // Проигрыш!
-                    targetColumn.dataset.outcome = 'lose'; // Помечаем колонку результатом
-                    statusMessageElement.textContent = '💥 Проигрыш!'; // Обновляем статус сразу
-                     // endRound() вызовется ниже после завершения анимации шага
+                    targetColumn.dataset.outcome = 'lose';
+                    statusMessageElement.textContent = '💥 Проигрыш!';
                 } else {
-                    // Успех!
-                    targetColumn.dataset.outcome = 'win'; // Помечаем колонку результатом
+                    targetColumn.dataset.outcome = 'win';
                     if (currentStepIndex === jackpotStepIndex) {
-                         // Успех на Джекпот шаге - выбираем случайный множитель джекпота
                          const randomJackpotIndex = Math.floor(Math.random() * jackpotMultipliers.length);
-                         currentMultiplier *= jackpotMultipliers[randomJackpotIndex]; // Умножаем текущий *общий* множитель на множитель джекпота
+                         currentMultiplier *= jackpotMultipliers[randomJackpotIndex];
                          statusMessageElement.textContent = `🏆 JACKPOT! Получен множитель ${jackpotMultipliers[randomJackpotIndex].toFixed(2)}x! Текущий множитель ${currentMultiplier.toFixed(2)}x! 🏆`;
                     } else {
-                        // Успех на стандартном шаге - применяем множитель этого шага
-                         currentMultiplier *= baseMultipliers[currentStepIndex]; // Умножаем текущий *общий* множитель на множитель шага
-                        statusMessageElement.textContent = `💰 Удача! Текущий множитель ${currentMultiplier.toFixed(2)}x! 💰`; // Обновляем статус сразу
+                         currentMultiplier *= baseMultipliers[currentStepIndex];
+                        statusMessageElement.textContent = `💰 Удача! Текущий множитель ${currentMultiplier.toFixed(2)}x! 💰`;
                     }
                 }
 
-                // Визуально обновляем блок после определения исхода
-                updateUI(); // Обновляем UI, чтобы блок показал результат
+                updateUI();
 
-            }, stepAnimationDuration / 2); // Результат определяется в середине анимации шага
+            }, stepAnimationDuration / 2);
 
 
-            // 3. Завершение анимации движения, разблокировка кнопок или завершение раунда
             setTimeout(() => {
-                isAnimating = false; // Анимация шага завершена
+                isAnimating = false;
 
                 if (isLose) {
-                    endRound('lose'); // Завершаем раунд, если был проигрыш
+                    endRound('lose');
                 } else if (currentStepIndex >= numberOfColumns - 1) {
-                     endRound('end'); // Завершаем раунд, если достигнут конец дорожки
+                     endRound('end');
                 } else {
-                    updateUI(); // Если раунд продолжается, просто обновляем UI (разблокируем кнопки и т.д.)
+                    updateUI();
                 }
-            }, stepAnimationDuration); // Разблокировка после завершения анимации движения
+            }, stepAnimationDuration);
         }
 
 
         // Функция старта нового раунда
         function startGame() {
-            if (roundActive || isAnimating) return; // Не начинаем, если уже активно или идет анимация
+            if (roundActive || isAnimating) return;
 
-             if (!betInput || !statusMessageElement || !balanceElement) return; // Проверка на существование элементов
+             if (!betInput || !statusMessageElement || !balanceElement) return;
 
-            const bet = parseFloat(parseFloat(betInput.value).toFixed(2)); // Округляем ставку
+            const bet = parseFloat(parseFloat(betInput.value).toFixed(2));
 
             if (isNaN(bet) || bet <= 0) {
                  statusMessageElement.textContent = "🚫 Введите корректную ставку больше 0!";
@@ -1208,45 +1315,40 @@
                 return;
             }
 
-            isAnimating = true; // Блокируем кнопки пока идет анимация/подготовка к раунду
+            isAnimating = true;
             statusMessageElement.textContent = 'Начинаем раунд...';
 
-            // Списываем ставку сразу при начале раунда
             balance -= bet;
-            initialBet = bet; // Сохраняем ставку для расчета выигрыша
+            initialBet = bet;
 
-            // Сбрасываем состояние раунда
-            currentStepIndex = -1; // Курица перед первой колонкой
-            currentMultiplier = 1.00; // Множитель сбрасывается
-            roundActive = true; // Раунд активен
+            currentStepIndex = -1;
+            currentMultiplier = 1.00;
+            roundActive = true;
 
-             // Сбрасываем визуальное состояние всех блоков и перерисовываем дорожку
              roadColumns.forEach(column => {
-                  if(column) delete column.dataset.outcome; // Проверка на существование
+                  if(column) delete column.dataset.outcome;
              });
-             generateRoad(); // Пересоздаем дорожку с начальным состоянием
-             // roadColumns уже обновляется внутри generateRoad()
+             generateRoad();
+             // roadColumns обновляется внутри generateRoad()
 
 
-             // Небольшая задержка перед фактическим стартом игры и первым шагом
              setTimeout(() => {
-                 isAnimating = false; // Подготовка завершена, разблокируем кнопки
+                 isAnimating = false;
                  if(statusMessageElement) statusMessageElement.textContent = `🎮 Раунд начат! Ставка ${initialBet.toFixed(2)} $. Нажмите GO!`;
-                 updateUI(); // Обновляем UI (списан баланс, обнулен множитель, кнопки)
-             }, 500); // Пауза в 500 мс
+                 updateUI();
+             }, 500);
         }
 
         // Функция вывода выигрыша (Cash Out)
         function cashOut() {
-            // Проверяем возможность вывода: раунд должен быть активен, сделан хотя бы один шаг (currentStepIndex >= 0), и не должно идти анимации
             if (!roundActive || currentStepIndex < 0 || isAnimating) {
                  if(statusMessageElement) statusMessageElement.textContent = "Нет выигрыша для вывода или идет анимация!";
                 return;
             }
-             endRound('cash-out'); // Завершаем раунд, добавляя выигрыш к балансу
+             endRound('cash-out');
         }
 
-        // Привязываем обработчики событий для игры после загрузки DOM
+        // --- ИНИЦИАЛИЗАЦИЯ ИГРЫ ---
         document.addEventListener('DOMContentLoaded', () => {
              // Получаем ссылки на элементы игры только после полной загрузки DOM
              balanceElement = document.getElementById('balance');
@@ -1261,7 +1363,7 @@
              betInput = document.getElementById('bet-input');
              betButtons = document.querySelectorAll('.bet-buttons button');
              difficultyButtons = document.querySelectorAll('#difficulty-buttons button');
-             // roadColumns инициализируется в generateRoad()
+             // roadColumns будет инициализирован в generateRoad()
 
              // Элементы модального окна игры
              howToPlayLink = document.getElementById('how-to-play-link');
@@ -1273,57 +1375,79 @@
             const gameContainer = document.querySelector('.game-container');
             if (gameContainer && balanceElement && gameRoadElement && characterElement && goButtonElement && cashOutButtonElement && betInput) {
 
-                 // Обработчик выбора ставки
-                 betButtons.forEach(button => {
-                     button.addEventListener('click', () => {
-                         if (!roundActive && !isAnimating) {
-                             betInput.value = parseFloat(button.dataset.bet).toFixed(2);
-                             initialBet = parseFloat(betInput.value); // Обновляем initialBet при выборе кнопки
-                             updateUI(); // Обновляем UI, чтобы показать новую ставку
-                         }
+                 // Обработчик выбора ставки (привязываем только если кнопки найдены)
+                 if(betButtons.length > 0) {
+                     betButtons.forEach(button => {
+                         button.addEventListener('click', () => {
+                             if (!roundActive && !isAnimating) {
+                                 betInput.value = parseFloat(button.dataset.bet).toFixed(2);
+                                 initialBet = parseFloat(betInput.value);
+                                 updateUI();
+                             }
+                         });
                      });
-                 });
+                 } else {
+                      console.warn("Bet buttons not found.");
+                 }
 
-                  // Обработчик ввода ставки вручную
-                  betInput.addEventListener('change', () => {
-                      if (!roundActive && !isAnimating) {
-                          let bet = parseFloat(betInput.value);
-                          if (isNaN(bet) || bet < 0.1) {
-                              bet = 0.1; // Минимальная ставка
+
+                  // Обработчик ввода ставки вручную (привязываем только если инпут найден)
+                 if(betInput) {
+                      betInput.addEventListener('change', () => {
+                          if (!roundActive && !isAnimating) {
+                              let bet = parseFloat(betInput.value);
+                              if (isNaN(bet) || bet < 0.1) {
+                                  bet = 0.1; // Минимальная ставка
+                              }
+                              bet = parseFloat(bet.toFixed(2));
+                              betInput.value = bet.toFixed(2);
+                              initialBet = bet;
+                              updateUI();
                           }
-                           // Округляем до 2 знаков после запятой
-                          bet = parseFloat(bet.toFixed(2));
-                          betInput.value = bet.toFixed(2);
-                          initialBet = bet; // Обновляем initialBet
-                          updateUI(); // Обновляем UI
-                      }
-                  });
+                      });
+                      // Устанавливаем initialBet из инпута при старте, т.к. он может иметь значение по умолчанию
+                      initialBet = parseFloat(betInput.value);
+                      if (isNaN(initialBet) || initialBet <= 0) initialBet = 0.1; // Гарантируем минимальную ставку
+                 } else {
+                      console.warn("Bet input not found.");
+                 }
 
-                 // Обработчик выбора сложности
-                 difficultyButtons.forEach(button => {
-                     button.addEventListener('click', () => {
-                         if (!roundActive && !isAnimating) {
-                              selectedDifficulty = button.dataset.difficulty;
-                             updateUI(); // Обновляем UI, чтобы показать активную кнопку сложности
-                         }
+
+                 // Обработчик выбора сложности (привязываем только если кнопки найдены)
+                 if(difficultyButtons.length > 0) {
+                     difficultyButtons.forEach(button => {
+                         button.addEventListener('click', () => {
+                             if (!roundActive && !isAnimating) {
+                                  selectedDifficulty = button.dataset.difficulty;
+                                 updateUI();
+                             }
+                         });
                      });
-                 });
+                 } else {
+                      console.warn("Difficulty buttons not found.");
+                 }
 
-                // Навешиваем обработчики событий на кнопки GO и CASH OUT
-                goButtonElement.addEventListener('click', () => {
-                     if (!roundActive) {
-                         startGame(); // Если раунд не активен, кнопка начинает его
-                     } else {
-                         performStep(); // Если раунд активен, кнопка делает шаг
-                     }
-                });
 
-                cashOutButtonElement.addEventListener('click', cashOut);
+                // Навешиваем обработчики событий на кнопки GO и CASH OUT (привязываем только если кнопки найдены)
+                 if(goButtonElement) {
+                    goButtonElement.addEventListener('click', () => {
+                         if (!roundActive) {
+                             startGame();
+                         } else {
+                             performStep();
+                         }
+                    });
+                 } else { console.warn("GO button not found."); }
+
+                 if(cashOutButtonElement) {
+                    cashOutButtonElement.addEventListener('click', cashOut);
+                 } else { console.warn("Cash Out button not found."); }
+
 
                  // Обработчики для модального окна "Как играть?"
                  if (howToPlayLink && howToPlayModal && modalCloseButton) {
                      howToPlayLink.addEventListener('click', (event) => {
-                          event.preventDefault(); // Отменяем стандартное действие ссылки
+                          event.preventDefault();
                           howToPlayModal.classList.add('visible');
                      });
 
@@ -1332,7 +1456,6 @@
                      });
 
                      howToPlayModal.addEventListener('click', (event) => {
-                         // Закрываем модальное окно при клике на оверлей (но не на само окно контента)
                           if (event.target === howToPlayModal) {
                               howToPlayModal.classList.remove('visible');
                           }
@@ -1352,6 +1475,15 @@
 
             } else {
                 console.error("One or more game essential elements not found on page. Game cannot initialize.");
+                // Optionally display a message to the user that the game couldn't load
+                 if (statusMessageElement) {
+                    statusMessageElement.textContent = "Ошибка загрузки игры. Пожалуйста, попробуйте обновить страницу.";
+                    statusMessageElement.style.color = 'red';
+                 }
+                 if (gameContainer) {
+                      // Можно скрыть контейнер игры, если он пустой или сломан
+                      // gameContainer.style.display = 'none';
+                 }
             }
         });
 
