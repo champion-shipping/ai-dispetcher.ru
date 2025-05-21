@@ -1,5 +1,5 @@
 <header style="background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;left:0;right:0;z-index:1000;padding:15px 0;">
-    <!-- CSS для управления видимостью меню на разных разрешениях -->
+    <!-- CSS для управления видимостью меню на разных разрешениях и стилями элементов -->
     <style>
         /* Стили для основного контейнера шапки */
         .header-container {
@@ -29,7 +29,7 @@
                 display: none !important; /* Скрываем десктопное меню на мобильных */
             }
             #mobile-menu-toggle {
-                display: block !important; /* Показываем кнопку мобильного меню на мобильных */
+                display: block !important; /* Показываем контейнер кнопки мобильного меню на мобильных */
             }
         }
 
@@ -39,6 +39,8 @@
             border: none;
             cursor: pointer;
             padding: 5px 10px;
+            /* Убираем color отсюда, зададим цвет напрямую в SVG stroke */
+            /* color: #4f46e5; */
         }
 
         /* Стили для SVG иконки гамбургера */
@@ -178,9 +180,10 @@
         </nav>
 
         <!-- Кнопка мобильного меню (ее видимость управляется CSS выше) -->
+        <!-- !!! ВАЖНО: Добавлен ID="mobile-menu-toggle" к этому div -->
         <div id="mobile-menu-toggle">
             <button id="mobile-menu-button" aria-label="Открыть меню">
-                <!-- SVG иконка гамбургера. Цвет задан через stroke в CSS/inline -->
+                <!-- SVG иконка гамбургера. Цвет задан через stroke в CSS -->
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
             </button>
         </div>
