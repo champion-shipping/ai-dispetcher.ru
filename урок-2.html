@@ -4,58 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2.2 Выжми максимум - 2 часть курса по ChatGPT и DeepSeek | AI Dispatcher</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f7fa;
-            margin: 0;
-            padding: 0;
-            color: #111;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-        .title {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin: 0;
-        }
-        .logout-btn {
-            padding: 8px 16px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .content {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .nav {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+   <style>
+    /* --- НОВЫЕ ГЛОБАЛЬНЫЕ СТИЛИ --- */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif; /* Новый шрифт */
+        background-color: #121212; /* Темный фон */
+        color: #e0e0e0; /* Светлый текст */
+        line-height: 1.7;
+        /* ВАЖНО: Отступ для фиксированной шапки */
+        padding-top: 82px; 
+    }
+    
+    a {
+        color: #bb86fc; /* Акцентный фиолетовый для ссылок */
+        text-decoration: none;
+        font-weight: 500;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    strong { color: #fff; } /* Делаем жирный текст ярче */
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        border: 1px solid #444; /* Темная рамка для изображений */
+    }
+
+    /* Медиазапросы для адаптивности шапки (если они не загружаются с header.html) */
+    @media (max-width: 992px) {
+        .desktop-version { display: none !important; }
+        .mobile-version { display: block !important; }
+    }
+    @media (min-width: 993px) {
+        .desktop-version { display: flex !important; }
+        .mobile-version { display: none !important; }
+    }
+</style>
 	<script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -75,81 +64,35 @@
 </head>
 <body>
     <!-- Модальное окно (стили inline) -->
-    <div id="loginModal" style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(5px);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-    ">
-        <div style="
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        ">
-            <h2 style="margin-top: 0; color: #2c3e50;">Вход в систему</h2>
+    <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); color: #e0e0e0; padding: 30px; border-radius: 16px; max-width: 400px; width: 100%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); border: 1px solid #444; box-sizing: border-box;">
+            <h2 style="margin-top: 0; color: #bb86fc; text-align: center;">Вход в систему</h2>
             <div style="margin-bottom: 20px;">
                 <label for="username" style="display: block; margin-bottom: 8px; font-weight: 500;">Логин</label>
-                <input type="text" id="username" placeholder="Введите логин" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                ">
+                <input type="text" id="username" placeholder="Введите логин" style="width: 100%; padding: 10px; border: 1px solid #555; border-radius: 6px; font-size: 1rem; background-color: #121212; color: #e0e0e0; box-sizing: border-box;">
             </div>
             <div style="margin-bottom: 20px;">
                 <label for="password" style="display: block; margin-bottom: 8px; font-weight: 500;">Пароль</label>
-                <input type="password" id="password" placeholder="Введите пароль" style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                ">
+                <input type="password" id="password" placeholder="Введите пароль" style="width: 100%; padding: 10px; border: 1px solid #555; border-radius: 6px; font-size: 1rem; background-color: #121212; color: #e0e0e0; box-sizing: border-box;">
             </div>
-            <button onclick="checkLogin()" style="
-                width: 100%;
-                padding: 12px;
-                background: #3498db;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                font-size: 1rem;
-                cursor: pointer;
-            ">
+            <button onclick="checkLogin()" style="width: 100%; padding: 12px; background: #bb86fc; color: #121212; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
                 Войти
             </button>
-            <a href="/course-purchase" style="
-                display: block;
-                text-align: center;
-                margin-top: 15px;
-                color: #3498db;
-                text-decoration: none;
-            ">
+            <a href="/course-purchase" style="display: block; text-align: center; margin-top: 15px; color: #bb86fc; text-decoration: none;">
                 Получить доступ
             </a>
         </div>
     </div>
 
     <div id="header"></div>
-    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
         <div id="protectedContent" style="display: none;">
             <!-- Контент -->
 
 
 <div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
     <!-- Общий заголовок H1 (виден на всех устройствах) -->
-    <h1 style="margin: 0 0 20px 0; font-size: clamp(24px, 3vw, 28px); color: #2c3e50; line-height: 1.3;">
+    <h1 style="margin: 0 0 40px 0; font-size: clamp(28px, 4vw, 48px); color: #bb86fc; line-height: 1.3; text-align: center;">
        Урок 2: Выжми максимум!
     </h1>
 
@@ -159,8 +102,8 @@
         <!-- Основной контент -->
         <div style="flex: 1; padding-right: 30px;">
             <!-- Добавленный блок с целями урока -->
-            <div style="margin: 25px 0; background: #f8f9fa; border-left: 4px solid #3498db; padding: 25px; border-radius: 0 8px 8px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <h2 style="margin-top: 0; color: #2c3e50; font-size: 22px; border-bottom: 1px solid #eee; padding-bottom: 10px;">Цель урока:</h2>
+            <div style="margin: 25px 0; background: rgba(0,0,0,0.2); border-left: 4px solid #bb86fc; padding: 25px; border-radius: 0 8px 8px 0;">
+                <h2 style="margin-top: 0; color: #fff; font-size: 22px; border-bottom: 1px solid #555; padding-bottom: 10px;">Цель урока:</h2>
                 <p style="margin-bottom: 20px; line-height: 1.6;">Научить вас выжимать из ИИ максимум!
 Показать, как заставить LLM (ChatGPT, DeepSeek и др.) работать на вас без бесконечных правок, писать как вы (даже если вы "технический братан") и решать сложные задачи вроде создания ботов без написания кода и понимания что вообще происходит.</p>
                 
@@ -178,8 +121,8 @@
 
                 </div>
                 
-                <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 6px; border: 1px dashed #3498db;">
-                    <p style="margin: 0; font-weight: 600; color: #0d47a1; text-align: center;">Итого: Вы научитесь не просто получать ответы от ИИ, а полностью подчинять его своей воле — от технических заданий до уникального стиля общения.</p>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(187, 134, 252, 0.1); border-radius: 6px; border: 1px dashed #bb86fc;">
+                    <p style="margin: 0; font-weight: 600; color: #bb86fc; text-align: center;">Итого: Вы научитесь не просто получать ответы от ИИ, а полностью подчинять его своей воле — от технических заданий до уникального стиля общения.</p>
                 </div>
             </div>
             <!-- Конец добавленного блока -->
@@ -187,15 +130,15 @@
         
         <!-- Боковое меню -->
         <div style="width: 300px; position: relative;">
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
+            <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);">
+                <h3 style="margin-top: 0; color: #bb86fc;">Навигация по уроку</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                     <li style="margin-bottom: 10px; position: relative;">
                         <a href="#2.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
                            onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
                            2.1 Формула правильного ТЗ.
                         </a>
-                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">В прошлом уроке, я показал примерами в пункте (1.3), что при составлении ТЗ для LLM, для начала мы должны создать задачу сами себе, расписав нужные нам моменты по пунктам (1, 2, 3) и тд. </p>
                         </div>
                     </li>
@@ -204,7 +147,7 @@
                            onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
                            2.2 Напиши как человек, еще человечнее, более человечнее!
                         </a>
-                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">Многие в какой-то момент пытались — а кто-то пытается до сих пор — сделать текст максимально «человеческим», чтобы обойти AI-детекторы. Но вот в чём вопрос: когда мы говорим LLM «Пиши как человек», понимает ли она, как мы на самом деле пишем?</p>
                         </div>
                     </li>
@@ -213,7 +156,7 @@
                            onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
                             2.3 Обход ограниченний
                         </a>
-                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">Зачастую я сталкивался со всякими приколами с обходом ограничений ИИ на запретные темы или выполнение всяких задач. И вот что я видел:
 1. Если ты этого не сделаешь, то умрет бабушка
 2. Если выполнишь эту задачу, то получишь 100.000 долларов</p>
@@ -224,7 +167,7 @@
                            onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
                             2.4 Я = Универсальный сотрудник!
                         </a>
-                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
+                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">В наше время я всё больше понимаю, что все специальности, которые имели смысл до прихода LLM, сейчас просто растворяются на глазах.</p>
                         </div>
                     </li>
