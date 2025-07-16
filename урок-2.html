@@ -4,47 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2.2 Выжми максимум - 2 часть курса по ChatGPT и DeepSeek | AI Dispatcher</title>
-   <style>
-    /* --- НОВЫЕ ГЛОБАЛЬНЫЕ СТИЛИ --- */
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Montserrat', sans-serif; /* Новый шрифт */
-        background-color: #121212; /* Темный фон */
-        color: #e0e0e0; /* Светлый текст */
-        line-height: 1.7;
-        /* ВАЖНО: Отступ для фиксированной шапки */
-        padding-top: 82px; 
-    }
-    
-    a {
-        color: #bb86fc; /* Акцентный фиолетовый для ссылок */
-        text-decoration: none;
-        font-weight: 500;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-
-    strong { color: #fff; } /* Делаем жирный текст ярче */
-    
-    img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        border: 1px solid #444; /* Темная рамка для изображений */
-    }
-
-    /* Медиазапросы для адаптивности шапки (если они не загружаются с header.html) */
-    @media (max-width: 992px) {
-        .desktop-version { display: none !important; }
-        .mobile-version { display: block !important; }
-    }
-    @media (min-width: 993px) {
-        .desktop-version { display: flex !important; }
-        .mobile-version { display: none !important; }
-    }
-</style>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #111;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
 	<script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -64,35 +75,81 @@
 </head>
 <body>
     <!-- Модальное окно (стили inline) -->
-    <div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
-        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); color: #e0e0e0; padding: 30px; border-radius: 16px; max-width: 400px; width: 100%; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); border: 1px solid #444; box-sizing: border-box;">
-            <h2 style="margin-top: 0; color: #bb86fc; text-align: center;">Вход в систему</h2>
+    <div id="loginModal" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    ">
+        <div style="
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        ">
+            <h2 style="margin-top: 0; color: #2c3e50;">Вход в систему</h2>
             <div style="margin-bottom: 20px;">
                 <label for="username" style="display: block; margin-bottom: 8px; font-weight: 500;">Логин</label>
-                <input type="text" id="username" placeholder="Введите логин" style="width: 100%; padding: 10px; border: 1px solid #555; border-radius: 6px; font-size: 1rem; background-color: #121212; color: #e0e0e0; box-sizing: border-box;">
+                <input type="text" id="username" placeholder="Введите логин" style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                ">
             </div>
             <div style="margin-bottom: 20px;">
                 <label for="password" style="display: block; margin-bottom: 8px; font-weight: 500;">Пароль</label>
-                <input type="password" id="password" placeholder="Введите пароль" style="width: 100%; padding: 10px; border: 1px solid #555; border-radius: 6px; font-size: 1rem; background-color: #121212; color: #e0e0e0; box-sizing: border-box;">
+                <input type="password" id="password" placeholder="Введите пароль" style="
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                ">
             </div>
-            <button onclick="checkLogin()" style="width: 100%; padding: 12px; background: #bb86fc; color: #121212; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+            <button onclick="checkLogin()" style="
+                width: 100%;
+                padding: 12px;
+                background: #3498db;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem;
+                cursor: pointer;
+            ">
                 Войти
             </button>
-            <a href="/course-purchase" style="display: block; text-align: center; margin-top: 15px; color: #bb86fc; text-decoration: none;">
+            <a href="/course-purchase" style="
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                color: #3498db;
+                text-decoration: none;
+            ">
                 Получить доступ
             </a>
         </div>
     </div>
 
     <div id="header"></div>
-    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
         <div id="protectedContent" style="display: none;">
             <!-- Контент -->
 
 
 <div style="font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;">
     <!-- Общий заголовок H1 (виден на всех устройствах) -->
-    <h1 style="margin: 0 0 40px 0; font-size: clamp(28px, 4vw, 48px); color: #bb86fc; line-height: 1.3; text-align: center;">
+    <h1 style="margin: 0 0 20px 0; font-size: clamp(24px, 3vw, 28px); color: #2c3e50; line-height: 1.3;">
        Урок 2: Выжми максимум!
     </h1>
 
@@ -102,8 +159,8 @@
         <!-- Основной контент -->
         <div style="flex: 1; padding-right: 30px;">
             <!-- Добавленный блок с целями урока -->
-            <div style="margin: 25px 0; background: rgba(0,0,0,0.2); border-left: 4px solid #bb86fc; padding: 25px; border-radius: 0 8px 8px 0;">
-                <h2 style="margin-top: 0; color: #fff; font-size: 22px; border-bottom: 1px solid #555; padding-bottom: 10px;">Цель урока:</h2>
+            <div style="margin: 25px 0; background: #f8f9fa; border-left: 4px solid #3498db; padding: 25px; border-radius: 0 8px 8px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h2 style="margin-top: 0; color: #2c3e50; font-size: 22px; border-bottom: 1px solid #eee; padding-bottom: 10px;">Цель урока:</h2>
                 <p style="margin-bottom: 20px; line-height: 1.6;">Научить вас выжимать из ИИ максимум!
 Показать, как заставить LLM (ChatGPT, DeepSeek и др.) работать на вас без бесконечных правок, писать как вы (даже если вы "технический братан") и решать сложные задачи вроде создания ботов без написания кода и понимания что вообще происходит.</p>
                 
@@ -121,8 +178,8 @@
 
                 </div>
                 
-                <div style="margin-top: 20px; padding: 15px; background: rgba(187, 134, 252, 0.1); border-radius: 6px; border: 1px dashed #bb86fc;">
-                    <p style="margin: 0; font-weight: 600; color: #bb86fc; text-align: center;">Итого: Вы научитесь не просто получать ответы от ИИ, а полностью подчинять его своей воле — от технических заданий до уникального стиля общения.</p>
+                <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 6px; border: 1px dashed #3498db;">
+                    <p style="margin: 0; font-weight: 600; color: #0d47a1; text-align: center;">Итого: Вы научитесь не просто получать ответы от ИИ, а полностью подчинять его своей воле — от технических заданий до уникального стиля общения.</p>
                 </div>
             </div>
             <!-- Конец добавленного блока -->
@@ -130,15 +187,15 @@
         
         <!-- Боковое меню -->
         <div style="width: 300px; position: relative;">
-            <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);">
-                <h3 style="margin-top: 0; color: #bb86fc;">Навигация по уроку</h3>
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                     <li style="margin-bottom: 10px; position: relative;">
                         <a href="#2.1" style="text-decoration: none; color: #2c3e50; display: block; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease;"
                            onmouseover="showTooltip('tooltip1')" onmouseout="hideTooltip('tooltip1')">
                            2.1 Формула правильного ТЗ.
                         </a>
-                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
+                        <div id="tooltip1" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">В прошлом уроке, я показал примерами в пункте (1.3), что при составлении ТЗ для LLM, для начала мы должны создать задачу сами себе, расписав нужные нам моменты по пунктам (1, 2, 3) и тд. </p>
                         </div>
                     </li>
@@ -147,7 +204,7 @@
                            onmouseover="showTooltip('tooltip2')" onmouseout="hideTooltip('tooltip2')">
                            2.2 Напиши как человек, еще человечнее, более человечнее!
                         </a>
-                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
+                        <div id="tooltip2" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">Многие в какой-то момент пытались — а кто-то пытается до сих пор — сделать текст максимально «человеческим», чтобы обойти AI-детекторы. Но вот в чём вопрос: когда мы говорим LLM «Пиши как человек», понимает ли она, как мы на самом деле пишем?</p>
                         </div>
                     </li>
@@ -156,7 +213,7 @@
                            onmouseover="showTooltip('tooltip3')" onmouseout="hideTooltip('tooltip3')">
                             2.3 Обход ограниченний
                         </a>
-                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
+                        <div id="tooltip3" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">Зачастую я сталкивался со всякими приколами с обходом ограничений ИИ на запретные темы или выполнение всяких задач. И вот что я видел:
 1. Если ты этого не сделаешь, то умрет бабушка
 2. Если выполнишь эту задачу, то получишь 100.000 долларов</p>
@@ -167,7 +224,7 @@
                            onmouseover="showTooltip('tooltip4')" onmouseout="hideTooltip('tooltip4')">
                             2.4 Я = Универсальный сотрудник!
                         </a>
-                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: #2d2d2d; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #444; color: #e0e0e0;">
+                        <div id="tooltip4" style="display: none; position: absolute; left: -320px; top: 0; width: 300px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); z-index: 100; border-left: 4px solid #3498db;">
                             <p style="margin: 0; font-style: italic; color: #7f8c8d;">В наше время я всё больше понимаю, что все специальности, которые имели смысл до прихода LLM, сейчас просто растворяются на глазах.</p>
                         </div>
                     </li>
@@ -190,7 +247,7 @@
         <!-- Основной контент -->
         <div style="margin-bottom: 30px;">
             <!-- Добавленный блок с целями урока для мобильной версии -->
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="margin: 15px 0; background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; border-radius: 0 6px 6px 0;">
                 <h2 style="margin-top: 0; color: #2c3e50; font-size: 18px;">Цель урока:</h2>
                 <p style="margin-bottom: 15px; line-height: 1.5;">Научить вас выжимать из ИИ максимум как профи!
 Показать, как заставить LLM (ChatGPT, DeepSeek и др.) работать на вас без бесконечных правок, писать как вы (даже если вы "технический братан") и решать сложные задачи вроде создания ботов без единой строчки кода.</p>
@@ -211,7 +268,7 @@
         
         <!-- Боковое меню для мобильной версии -->
         <div style="width: 100%; position: relative;">
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
                 <h3 style="margin-top: 0; color: #3498db;">Навигация по уроку</h3>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                     <li style="margin-bottom: 10px;">
@@ -280,7 +337,7 @@
 <div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
     <!-- Заголовок раздела -->
     <section style="margin-bottom: 30px;">
-        <h1 id="2.1" style="font-size: 1.8em; color: #bb86fc; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #bb86fc;">2.1 Формула правильного ТЗ</h1>
+        <h1 id="2.1" style="font-size: 1.4em; color: #2c3e50; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #3498db;">2.1 Формула правильного ТЗ</h1>
         
         <p style="font-size: 1.1em; margin-bottom: 20px;">
             В прошлом уроке, я показал примерами в пункте (1.3), что при составлении ТЗ для LLM, для начала мы должны создать задачу сами себе, расписав нужные нам моменты по пунктам (1, 2, 3) и тд.
@@ -288,7 +345,7 @@
     </section>
 
     <!-- Основные пункты ТЗ -->
-    <section style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <section style="margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
         <ol style="font-size: 1.1em; margin: 0; padding-left: 20px;">
             <li style="margin-bottom: 10px;"><strong>Описание того, что у вас есть, в каком виде, что означает</strong></li>
             <li style="margin-bottom: 10px;"><strong>Данные которые у вас есть</strong> - ""</li>
@@ -300,9 +357,9 @@
 
     <!-- Пример с кодом -->
     <section style="margin-bottom: 30px;">
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример с языком программирования:</h4>
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
                 <p style="margin: 0; font-style: italic;">
                     У меня есть вот такой PHP код, который выполняет … (Важно указать какой именно язык!)<br>
                     "КОД"<br>
@@ -325,9 +382,9 @@
             В идеале и проще простого - это выдать небольшой пример в каком формате вы хотите получать ответ. Но главное, не забываем описать, что у нас имеется и что это означает.  
         </p>
         
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример с данными:</h4>
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
                 <p style="margin: 0; font-style: italic;">
                     У меня есть вот такая информация о … (Тут желательно расписать, что за информация)<br>
                     "ИНФОРМАЦИЯ"<br>
@@ -349,9 +406,9 @@
             Но тут есть момент, что при обработке больших данных в текстовом формате >1000 токенов (для LLM это 3-5 символов на 1 токен), в которую входят (Описание проблемы, Данные, Задача, Критерии), то модель будет упускать разные моменты, что будет приводить к постоянным правкам и получении не точного результата, что особенно критично при автоматической генерации контента. И тут важно правильно разбить все на этапы:
         </p>
         
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h4 style="font-size: 1.2em; margin: 0 0 15px 0; color: #3498db;">Пример:</h4>
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
                 <p style="margin: 0; font-style: italic;">
                     У меня есть вот такая информация о … (Тут желательно расписать, что за информация)<br>
                     "ИНФОРМАЦИЯ"<br>
@@ -387,7 +444,13 @@
     color: #333;
     line-height: 1.5;
 ">
-    <h3 id="2.2" style="font-size: 1.8em; color: #bb86fc; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #bb86fc;">2.2 Напиши как человек, еще человечнее, более человечнее!</h3>
+    <h3 id="2.2" style="
+        font-size: 1.4em;
+        color: #2c3e50;
+        margin: 0 0 20px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #3498db;
+    ">2.2 Напиши как человек, еще человечнее, более человечнее!</h3>
     
     <p style="font-size: 1.1em; margin-bottom: 20px;">
         Многие в какой-то момент пытались — а кто-то пытается до сих пор — сделать текст максимально «человеческим», чтобы обойти AI-детекторы. Но вот в чём вопрос: когда мы говорим LLM «Пиши как человек», понимает ли она, как мы на самом деле пишем?
@@ -401,7 +464,13 @@
         И чтобы получить от модели текст, который максимально будет похож на человека, нам надо показать ей - уникальность нашего общения.
     </p>
     
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #fff8e6;
+        padding: 20px;
+        border-left: 4px solid #ffcc00;
+        margin-bottom: 25px;
+        border-radius: 0 8px 8px 0;
+    ">
         <p style="font-weight: bold; margin: 0 0 15px 0; font-size: 1.1em;">
             И вот как я добивался данного результата:
         </p>
@@ -581,14 +650,26 @@
         С теми данными, которые я получил ответом от чата мы можем составить нужный нам промт для того, чтобы он общался именно в этой манере (тобишь моей). Для примера возьмем информацию о <a href="https://playbeat.store/plugins/valhalla-room">VST плагине Valhalla Room</a> <i>(это для музыкальных продюсеров штучки)</i> с моего же сайта и попробуем описать плагин в манере моего общения в 3 абзаца (грубо говоря отзыв). Так же для того, чтобы LLM понимал наш опыт, я выдам ему дополнительную инфу в оценке моего опыта использования плагина. <i>(Оценку я сделаю выдуманную, чтобы не тратить на это время.)</i>
     </p>
 
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #f8f9fa;
+        border-left: 4px solid #6c757d;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 0 8px 8px 0;
+    ">
         <h4 style="
             font-size: 1.2em;
             margin: 0 0 15px 0;
             color: #2c3e50;
         ">Наш промт:</h4>
         
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        ">
             <p style="margin: 0 0 10px 0; font-weight: bold;">У меня есть вот такая вот информация о VST плагине Valhalla Room</p>
             
             <!-- Кнопка для скрытой информации о плагине -->
@@ -671,7 +752,15 @@ Plate Verb – эмуляция классических пластинчаты�
             font-size: 0.9em;
         ">Показать/скрыть манеру общения</button>
         
-        <div id="speechStyle" style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div id="speechStyle" style="
+            display: none;
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        ">
             <h5 style="
                 font-size: 1.1em;
                 color: #3498db;
@@ -814,7 +903,13 @@ Plate Verb – эмуляция классических пластинчаты�
         border-bottom: 2px solid #3498db;
     ">LLM (DeepSeek):</h4>
 
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #f8f9fa;
+        border-left: 4px solid #6c757d;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 0 8px 8px 0;
+    ">
         <blockquote style="
             margin: 0;
             padding: 0;
@@ -996,7 +1091,13 @@ Plate Verb – эмуляция классических пластинчаты�
     color: #333;
     line-height: 1.5;
 ">
-    <h3 id="2.3" style="font-size: 1.8em; color: #bb86fc; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #bb86fc;">2.3 Обход ограничений</h3>
+    <h3 id="2.3" style="
+        font-size: 1.4em;
+        color: #2c3e50;
+        margin: 0 0 20px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #3498db;
+    ">2.3 Обход ограничений</h3>
 
     <p style="font-size: 1.1em; margin-bottom: 20px;">
         Зачастую я сталкивался со всякими приколами с обходом ограничений ИИ на запретные темы или выполнение всяких задач. И вот что я видел:
@@ -1144,7 +1245,13 @@ Plate Verb – эмуляция классических пластинчаты�
 
     </div>
 
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+    ">
         <p style="margin: 0; font-size: 1.1em;">
             Используйте это, не как способ обхода ограничений в плохих целях, а в качестве понимания принципа работа моделей. Вам нужно самостоятельно подводите ее к тому, что вы хотите получить.
         </p>
@@ -1162,7 +1269,13 @@ Plate Verb – эмуляция классических пластинчаты�
     color: #333;
     line-height: 1.5;
 ">
-    <h3 id="2.4" style="font-size: 1.8em; color: #bb86fc; margin: 0 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid #bb86fc;">2.4 Я = универсальный сотрудник</h3>
+    <h3 id="2.4" style="
+        font-size: 1.4em;
+        color: #2c3e50;
+        margin: 0 0 20px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #3498db;
+    ">2.4 Я = универсальный сотрудник</h3>
 
     <p style="font-size: 1.1em; margin-bottom: 20px;">
         В наше время я всё больше понимаю, что все специальности, которые имели смысл до прихода LLM, сейчас просто растворяются на глазах. Определённо, на данный момент LLM не заменят учёных, фулл-стек-разработчиков, врачей и т. д. Но, я думаю, это лишь вопрос времени.
@@ -1211,10 +1324,24 @@ Plate Verb – эмуляция классических пластинчаты�
     color: #333;
     line-height: 1.5;
 ">
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    ">
 
         
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border-left: 3px solid #3498db;
+        ">
             <p style="margin: 0;">Мне нужно:
 Создать Google-таблицу для учёта расходов (дата, категория, сумма).
 Прикрутить к ней Telegram-бота, чтобы я писал ему "500 еда", и он добавлял это в таблицу.
@@ -1502,7 +1629,14 @@ Plate Verb – эмуляция классических пластинчаты�
     color: #333;
     line-height: 1.5;
 ">
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+    ">
         <h3 style="
             font-size: 1.5em;
             color: #2c3e50;
@@ -1518,7 +1652,13 @@ Plate Verb – эмуляция классических пластинчаты�
         </p>
     </div>
 
-    <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <div style="
+        background: #fff;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+    ">
         <h3 id="тест" style="
             font-size: 1.4em;
             color: #2c3e50;
@@ -1564,7 +1704,7 @@ Plate Verb – эмуляция классических пластинчаты�
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
         <!-- Пункт меню 1 (открытый) -->
         <a href="урок-1" style="text-decoration: none;">
-            <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(52,152,219,0.2); border: 1px solid rgba(52,152,219,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
                 <h3 style="font-size: 1.3rem; color: #3498db; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                     Урок 1
                     <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -1580,7 +1720,7 @@ Plate Verb – эмуляция классических пластинчаты�
         
         <!-- Пункт меню 2 (закрытый) -->
             <a href="урок-2" style="text-decoration: none;">
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(155,89,182,0.2); border: 1px solid rgba(155,89,182,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #9b59b6; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 2
                 <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -1596,7 +1736,7 @@ Plate Verb – эмуляция классических пластинчаты�
                 
         <!-- Пункт меню 3 (закрытый) -->
             <a href="урок-3" style="text-decoration: none;">
-        <div onclick="checkAuthBeforeOpen('урок-3.html')" style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div onclick="checkAuthBeforeOpen('урок-3.html')" style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(46,204,113,0.2); border: 1px solid rgba(46,204,113,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #2ecc71; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 3
                 <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -1612,7 +1752,7 @@ Plate Verb – эмуляция классических пластинчаты�
         
         <!-- Пункт меню 4 (закрытый) -->
             <a href="урок-4" style="text-decoration: none;">
-        <div style="background: linear-gradient(145deg, #2a2a2a, #202020); border: 1px solid #444; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <div style="cursor: pointer; background: #f8f9fa; padding: 25px; border-radius: 12px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(230,126,34,0.2); border: 1px solid rgba(230,126,34,0.1); position: relative; transform: perspective(1000px) translateZ(0);">
             <h3 style="font-size: 1.3rem; color: #e67e22; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                 Урок 4
                 <span style="width: 22px; height: 22px; display: inline-flex;">
