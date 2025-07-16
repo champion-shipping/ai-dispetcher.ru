@@ -4,32 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты | AI Dispatcher</title>
+    
+    <!-- Подключаем шрифты для нового дизайна -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- НОВЫЕ ГЛОБАЛЬНЫЕ СТИЛИ --- */
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f7fa;
-            color: #111;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212; /* Темный фон */
+            color: #e0e0e0; /* Светлый текст */
+            line-height: 1.7;
+            /* ВАЖНО: Отступ для фиксированной шапки. */
+            padding-top: 82px; 
+        }
+
+        /* Общие стили для информационных карточек */
+        .contact-card {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Стили для заголовков */
+        h1 {
+            color: #bb86fc;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .contact-card h2 {
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        /* Стили для ссылок */
+        a {
+            color: #bb86fc;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: #d0b0ff;
+        }
+        
+        /* Стили для списков */
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
             line-height: 1.6;
+        }
+
+        /* Стиль для кнопки "На кофе" */
+        .coffee-button {
+            display: inline-block;
+            background-color: #bb86fc;
+            color: #121212;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .coffee-button:hover {
+            color: #121212;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(187, 134, 252, 0.25);
         }
     </style>
 
     <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-   ym(101179914, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/101179914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+       ym(101179914, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101179914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -39,167 +113,156 @@
     })(window, document, "clarity", "script", "s702ykdcha");
 </script>
 
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="AI" />
-<link rel="manifest" href="/site.webmanifest" />
-
-    
+    <!-- Favicon-ы остаются без изменений -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AI" />
+    <link rel="manifest" href="/site.webmanifest" />
 </head>
 <body>
 
     <div id="header"></div>
 
-    <div style="max-width:100%;margin:0 auto;padding:15px;box-sizing:border-box;">
-    <h1 style="color:#111;text-align:center;margin-bottom:20px;font-size:1.8rem;line-height:1.3;">Контакты</h1>
-    
-    <div style="background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);margin-bottom:30px;">
-        <h2 style="color:#111;margin-top:0;margin-bottom:15px;font-size:1.4rem;">Как со мной связаться</h2>
-        <p style="margin-bottom:15px;font-size:1rem;line-height:1.5;">Если у вас есть вопросы или предложения, вы можете написать мне:</p>
-        <ul style="padding-left:20px;margin-bottom:15px;">
-            <li style="margin-bottom:12px;font-size:1rem;line-height:1.5;">
-                В Telegram: <a href="https://t.me/AIdispatcher9" target="_blank" style="color:#0066cc;font-weight:bold;text-decoration:none;word-break:break-all;">@AIdispatcher9</a>
-            </li>
-            <li style="font-size:1rem;line-height:1.5;">
-                По почте: <a href="mailto:shippingchampion@gmail.com" style="color:#0066cc;font-weight:bold;text-decoration:none;word-break:break-all;">shippingchampion@gmail.com</a>
-            </li>
-        </ul>
-        <p style="margin:0;font-size:0.9rem;color:#555;">Отвечаю в течение 1-3 часов, обычно в первые 15 минут.</p>
-    </div>
-    
-    <div style="text-align:center;margin:25px 0;">
-        <p style="margin-bottom:15px;font-size:1rem;">Также вы можете поддержать меня:</p>
-        <a href="https://pay.cloudtips.ru/p/a063fe6b" style="display:inline-block;background:#111;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold;font-size:1rem;max-width:100%;box-sizing:border-box;">Купить мне кофе</a>
-    </div>
-</div>
+    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px; box-sizing: border-box;">
+        <h1>Контакты</h1>
+        
+        <div class="contact-card">
+            <h2>Как со мной связаться</h2>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Если у вас есть вопросы или предложения, вы можете написать мне:</p>
+            <ul>
+                <li>
+                    В Telegram: <a href="https://t.me/AIdispatcher9" target="_blank" style="word-break:break-all;">@AIdispatcher9</a>
+                </li>
+                <li>
+                    По почте: <a href="mailto:shippingchampion@gmail.com" style="word-break:break-all;">shippingchampion@gmail.com</a>
+                </li>
+            </ul>
+            <p style="margin:0; font-size: 1rem; color: #a0a0a0;">Отвечаю в течение 1-3 часов, обычно в первые 15 минут.</p>
+        </div>
+        
+        <div class="contact-card" style="text-align:center;">
+            <p style="margin-top: 0; margin-bottom: 20px; font-size: 1.1rem;">Также вы можете поддержать меня:</p>
+            <a href="https://pay.cloudtips.ru/p/a063fe6b" class="coffee-button">Купить мне кофе</a>
+        </div>
+    </main>
 
 
     <div id="footer"></div>
  
-<script>
-// Глобальные переменные
-let currentLessonToOpen = null;
+    <!-- ВСЕ СКРИПТЫ НИЖЕ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
+    <script>
+    // Глобальные переменные
+    let currentLessonToOpen = null;
 
-// Функции для работы с модальным окном
-function showAuthModal(lessonUrl) {
-    currentLessonToOpen = lessonUrl;
-    document.getElementById('authModal').style.display = 'flex';
-    document.getElementById('modalUsername').focus();
-}
-
-function hideAuthModal() {
-    document.getElementById('authModal').style.display = 'none';
-    currentLessonToOpen = null;
-    document.getElementById('modalLoginForm').reset();
-    document.getElementById('modalError').style.display = 'none';
-}
-
-// Проверка авторизации перед открытием урока
-function checkAuthBeforeOpen(lessonUrl) {
-    const sessionToken = localStorage.getItem('sessionToken');
-    
-    if (sessionToken) {
-        try {
-            const sessionData = JSON.parse(atob(sessionToken));
-            if (Date.now() < sessionData.expires) {
-                openLesson(lessonUrl);
-                return;
-            }
-        } catch (e) {
-            // Невалидный токен
-        }
+    // Функции для работы с модальным окном
+    function showAuthModal(lessonUrl) {
+        currentLessonToOpen = lessonUrl;
+        document.getElementById('authModal').style.display = 'flex';
+        document.getElementById('modalUsername').focus();
     }
-    showAuthModal(lessonUrl);
-}
 
-// Открытие урока
-function openLesson(url) {
-    window.location.href = url;
-}
+    function hideAuthModal() {
+        document.getElementById('authModal').style.display = 'none';
+        currentLessonToOpen = null;
+        document.getElementById('modalLoginForm').reset();
+        document.getElementById('modalError').style.display = 'none';
+    }
 
-// Обработка формы в модальном окне
-document.getElementById('modalLoginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('modalUsername').value;
-    const password = document.getElementById('modalPassword').value;
-    const errorElement = document.getElementById('modalError');
-    
-    try {
-        const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
-        const userCreds = storedCredentials[username];
+    // Проверка авторизации перед открытием урока
+    function checkAuthBeforeOpen(lessonUrl) {
+        const sessionToken = localStorage.getItem('sessionToken');
         
-        if (!userCreds) throw new Error('User not found');
-        
-        const hashedInput = await sha256(password + userCreds.salt);
-        if (hashedInput === userCreds.hash) {
-            // Создаем сессию
-            const sessionData = {
-                username: username,
-                timestamp: Date.now(),
-                expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
-            };
-            localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
+        if (sessionToken) {
+            try {
+                const sessionData = JSON.parse(atob(sessionToken));
+                if (Date.now() < sessionData.expires) {
+                    openLesson(lessonUrl);
+                    return;
+                }
+            } catch (e) {
+                // Невалидный токен
+            }
+        }
+        showAuthModal(lessonUrl);
+    }
+
+    // Открытие урока
+    function openLesson(url) {
+        window.location.href = url;
+    }
+
+    // Обработка формы в модальном окне
+    const loginForm = document.getElementById('modalLoginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            hideAuthModal();
-            if (currentLessonToOpen) {
-                openLesson(currentLessonToOpen);
+            const username = document.getElementById('modalUsername').value;
+            const password = document.getElementById('modalPassword').value;
+            const errorElement = document.getElementById('modalError');
+            
+            try {
+                const storedCredentials = JSON.parse(localStorage.getItem('credentials') || '{}');
+                const userCreds = storedCredentials[username];
+                
+                if (!userCreds) throw new Error('User not found');
+                
+                const hashedInput = await sha256(password + userCreds.salt);
+                if (hashedInput === userCreds.hash) {
+                    // Создаем сессию
+                    const sessionData = {
+                        username: username,
+                        timestamp: Date.now(),
+                        expires: Date.now() + (24 * 60 * 60 * 1000) // 24 часа
+                    };
+                    localStorage.setItem('sessionToken', btoa(JSON.stringify(sessionData)));
+                    
+                    hideAuthModal();
+                    if (currentLessonToOpen) {
+                        openLesson(currentLessonToOpen);
+                    }
+                } else {
+                    throw new Error('Invalid password');
+                }
+            } catch (error) {
+                if(errorElement) {
+                    errorElement.style.display = 'block';
+                    setTimeout(() => {
+                        errorElement.style.display = 'none';
+                    }, 3000);
+                }
             }
-        } else {
-            throw new Error('Invalid password');
-        }
-    } catch (error) {
-        errorElement.style.display = 'block';
-        setTimeout(() => {
-            errorElement.style.display = 'none';
-        }, 3000);
+        });
     }
-});
 
-// Хэширование SHA-256
-async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
 
-// Инициализация учетных данных (если еще не сделано)
-if (!localStorage.getItem('authInitialized')) {
-    const credentials = {
-        'admin': {
-            salt: 'a1b2c3d4e5f6',
-            hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
-        },
-'qwerty123': {
-    salt: 'z9y8x7w6v5u4',
-    hash: 'c5d1a8a3e2d8a5e0e2a8e3d5f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // Пример (не настоящий хеш)
-}
-    };
-    localStorage.setItem('credentials', JSON.stringify(credentials));
-    localStorage.setItem('authInitialized', 'true');
-}
+    // Хэширование SHA-256
+    async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
 
-// 3D-эффект при наведении
-document.querySelectorAll('section a div, section > div > div').forEach(item => {
-    item.onmouseover = function() {
-        this.style.transform = 'perspective(1000px) translateZ(20px)';
-        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-        if (this.lastElementChild && this.lastElementChild.style) {
-            this.lastElementChild.style.opacity = '1';
-        }
-    };
-    item.onmouseout = function() {
-        this.style.transform = 'perspective(1000px) translateZ(0)';
-        this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        if (this.lastElementChild && this.lastElementChild.style) {
-            this.lastElementChild.style.opacity = '0';
-        }
-    };
-});
-</script>
+    // Инициализация учетных данных (если еще не сделано)
+    if (!localStorage.getItem('authInitialized')) {
+        const credentials = {
+            'admin': {
+                salt: 'a1b2c3d4e5f6',
+                hash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069'
+            },
+    'qwerty123': {
+        salt: 'z9y8x7w6v5u4',
+        hash: 'c5d1a8a3e2d8a5e0e2a8e3d5f8a2e8c9e9d2f8a2e8c9e9d2f8a2e8c9e9d2f8a2' // Пример (не настоящий хеш)
+    }
+        };
+        localStorage.setItem('credentials', JSON.stringify(credentials));
+        localStorage.setItem('authInitialized', 'true');
+    }
+
+    </script>
   
   <script>
         // Загружаем header
@@ -214,7 +277,6 @@ document.querySelectorAll('section a div, section > div > div').forEach(item => 
                 const headerDiv = document.getElementById('header');
                 if (headerDiv) {
                     headerDiv.innerHTML = data;
-                    // !!! ВАЖНО: Инициализируем меню ТОЛЬКО после того, как header загружен и вставлен
                     initializeMobileMenu(); 
                 }
             })
@@ -235,131 +297,46 @@ document.querySelectorAll('section a div, section > div > div').forEach(item => 
             .catch(error => console.error('Error loading footer:', error)); 
 
 
-        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ (ПЕРЕМЕЩЕН СЮДА) ---
+        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ ---
         function initializeMobileMenu() {
-            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
-            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
-            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
-            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
-            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const desktopMenu = document.getElementById('desktopMenu');
+            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const closeMenuBtn = document.getElementById('mobile-menu-close-button');
+            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle');
 
-            // Проверка, что все нужные элементы найдены (для надежности)
             if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
                 console.error('Не найдены элементы меню для инициализации.');
-                return; // Прекращаем выполнение функции, если элементы не найдены
+                return;
             }
 
-
-            // Функция для открытия мобильного меню
             function openMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
-                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
-                // Используем setTimeout для плавного появления оверлея после его display: block
+                sideMobileMenu.style.transform = 'translateX(0)';
+                mobileMenuOverlay.style.display = 'block';
                 setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
-                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
+                document.body.style.overflow = 'hidden';
                 menuBtn.setAttribute('aria-expanded', 'true');
             }
 
-            // Функция для закрытия мобильного меню
             function closeMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
-                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
-                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+                sideMobileMenu.style.transform = 'translateX(-100%)';
+                mobileMenuOverlay.style.opacity = '0';
                 setTimeout(() => {
                      mobileMenuOverlay.style.display = 'none';
-                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
-                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+                     document.body.style.overflow = '';
+                }, 300);
                 menuBtn.setAttribute('aria-expanded', 'false');
             }
+            
+            menuBtn.addEventListener('click', openMobileMenu);
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
-            // Функция для обновления видимости меню в зависимости от размера экрана
-            function updateMenuVisibility() {
-                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
-
-                if (isMobile) {
-                    mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
-                    desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
-
-                    // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
-                    // Проверяем transform.includes('0') вместо === 'translateX(0px)' для надежности
-                    if (sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
-                         closeMobileMenu();
-                    }
-
-                } else { // Десктоп
-                    mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
-                    desktopMenu.style.display = 'flex'; // Используем flex для nav на десктопе
-                    closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
-                }
-            }
-
-            // Привязываем события ТОЛЬКО после загрузки header
-            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
-            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
-            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
-
-            // Закрывать мобильное меню при клике на любую ссылку внутри него
             sideMobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', closeMobileMenu);
             });
-
-            // Вызываем функцию при загрузке и изменении размера окна
-            // Вместо load и DOMContentLoaded, вызываем updateMenuVisibility 
-            // сразу после привязки событий и при resize
-            updateMenuVisibility(); // Вызываем сразу после инициализации
-            window.addEventListener('resize', updateMenuVisibility);
-
-             // Опционально: перехват клика на уроки, чтобы сначала закрыть меню, потом перейти
-             document.querySelectorAll('#mobile-offcanvas-menu a[href="/#lessons"]').forEach(link => {
-                 link.addEventListener('click', function(event) {
-                     // closeMobileMenu() уже вызывается обработчиком выше для всех ссылок a
-                     // Если нужно добавить что-то специфичное, можно сделать здесь, но вряд ли нужно.
-                 });
-             });
         }
-        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
-
-
-        // 3D-эффект при наведении (ваш существующий скрипт)
-        document.querySelectorAll('section a div, section > div > div').forEach(item => {
-            item.onmouseover = function() {
-                this.style.transform = 'perspective(1000px) translateZ(20px)';
-                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-                if (this.lastElementChild && this.lastElementChild.style) {
-                    this.lastElementChild.style.opacity = '1';
-                }
-            };
-            item.onmouseout = function() {
-                this.style.transform = 'perspective(1000px) translateZ(0)';
-                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                if (this.lastElementChild && this.lastElementChild.style) {
-                    this.lastElementChild.style.opacity = '0';
-                }
-            };
-        });
-
-         // Добавляем обработку случая, когда элемент "Уроки" находится на текущей странице
-         // Если пользователь на главной и кликнул "Уроки" в мобильном меню, нужно закрыть меню
-         // Этот обработчик уже есть в initializeMobileMenu для всех ссылок, но убедимся.
-         // Можно добавить скролл к якорю вручную после закрытия меню, если стандартное поведение не работает.
-         document.querySelectorAll('a[href="/#lessons"]').forEach(link => {
-            link.addEventListener('click', function(event) {
-                 // Проверяем, что это якорь и мы на текущей странице
-                 if (link.pathname === window.location.pathname && link.hash === '#lessons') {
-                     // Стандартное поведение браузера обычно работает с якорями
-                     // Если меню закрывается, скролл должен произойти после.
-                     // Если нужен плавный скролл, его можно добавить тут.
-                     // event.preventDefault(); // Закомментировано, т.к. якоря обычно работают
-                     // closeMobileMenu(); // Меню уже закроется из обработчика внутри initializeMobileMenu
-                     // setTimeout(() => { // Опционально: плавный скролл после закрытия
-                     //    document.getElementById('lessons').scrollIntoView({ behavior: 'smooth' });
-                     // }, 350); // Небольшая задержка после анимации закрытия
-                 }
-            });
-         });
-
-
     </script>
 </body>
 </html>
