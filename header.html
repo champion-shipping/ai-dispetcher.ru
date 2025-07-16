@@ -1,4 +1,4 @@
-<header style="background:#1e1e1e;box-shadow:0 4px 12px rgba(0,0,0,0.3);position:sticky;top:0;left:0;right:0;z-index:1000;padding:15px 0;">
+<header style="background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;left:0;right:0;z-index:1000;padding:15px 0;">
     <!-- CSS для управления видимостью меню на разных разрешениях и стилями элементов -->
     <style>
         /* Стили для основного контейнера шапки */
@@ -46,7 +46,7 @@
         #mobile-menu-button svg {
              width: 28px; /* Размер иконки */
              height: 28px; /* Размер иконки */
-             stroke: #e0e0e0; /* Цвет обводки (светло-серый, хорошо виден на темном фоне) */
+             stroke: #111; /* Цвет обводки (черный, хорошо виден на белом фоне) */
              fill: none; /* Убедимся, что нет заливки, если иконка только из линий */
              display: block; /* Для правильного позиционирования SVG внутри кнопки */
         }
@@ -59,10 +59,10 @@
             width: 250px; /* Ширина панели */
             max-width: 80vw; /* Максимальная ширина (80% от ширины вьюпорта) */
             height: 100%; /* Высота на всю высоту экрана */
-            background: #1e1e1e; /* Темный фон меню */
-            color: #e0e0e0; /* Светлый цвет текста по умолчанию в меню */
+            background: #fff; /* Белый фон меню */
+            color: #111; /* Цвет текста по умолчанию в меню */
             padding: 20px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
             z-index: 1050; /* Поверх оверлея и основного контента */
             overflow-y: auto; /* Позволяет прокручивать, если контент не влезает */
             transform: translateX(-100%); /* Начальное положение - полностью за экраном слева */
@@ -73,7 +73,7 @@
          #mobile-menu-overlay {
             position: fixed;
             inset: 0; /* Растянуть на весь экран */
-            background: rgba(0,0,0,0.7); /* Полупрозрачный черный */
+            background: rgba(0,0,0,0.5); /* Полупрозрачный черный */
             z-index: 1040; /* Ниже выезжающего меню */
             display: none; /* Изначально скрыто */
             opacity: 0; /* Изначально полностью прозрачно */
@@ -92,12 +92,12 @@
              align-items: center;
              margin-bottom: 20px;
              padding-bottom: 15px;
-             border-bottom: 1px solid #333;
+             border-bottom: 1px solid #eee;
          }
           #mobile-offcanvas-menu .mobile-menu-logo a {
                font-weight:700;
                font-size:1.5rem;
-               color:#bb86fc;
+               color:#4f46e5;
                text-decoration:none;
                display: block;
                 border-bottom: none; /* Убрать нижнюю границу у логотипа */
@@ -110,12 +110,8 @@
             border:none;
             cursor:pointer;
             font-size:1.8rem; /* Размер крестика */
-            color: #e0e0e0; /* Цвет крестика */
+            color: #111; /* Цвет крестика */
         }
-         #mobile-menu-close-button svg {
-            stroke: #e0e0e0;
-         }
-
 
          /* Стили для навигации внутри выезжающего меню */
         #mobile-offcanvas-menu nav {
@@ -129,13 +125,13 @@
             display: block;
             padding: 12px 0;
             text-decoration: none;
-            color: #e0e0e0; /* Цвет основных ссылок */
-            border-bottom: 1px solid #333;
+            color: #111; /* Цвет основных ссылок */
+            border-bottom: 1px solid #eee;
             font-weight: 500;
         }
         /* Особый стиль для ссылки "На кофе" */
          #mobile-offcanvas-menu nav a[href="https://pay.cloudtips.ru/p/a063fe6b"] {
-             color: #bb86fc; /* Цвет ссылки "На кофе" */
+             color: #4f46e5; /* Цвет ссылки "На кофе" */
          }
           /* Убираем нижнюю границу у последней ссылки в nav */
           #mobile-offcanvas-menu nav a:last-child {
@@ -147,7 +143,7 @@
         #mobile-offcanvas-menu .social-icons {
              margin-top: 30px;
              padding-top: 20px;
-             border-top: 1px solid #333;
+             border-top: 1px solid #eee;
              display:flex;
              gap:20px;
              justify-content: center;
@@ -164,15 +160,15 @@
 
     <div class="header-container">
         <!-- Логотип всегда слева -->
-        <a href="/" style="font-weight:700;font-size:1.5rem;color:#bb86fc;text-decoration:none; flex-shrink: 0;">AI Dispatcher</a>
+        <a href="/" style="font-weight:700;font-size:1.5rem;color:#4f46e5;text-decoration:none; flex-shrink: 0;">AI Dispatcher</a>
 
         <!-- Десктопное меню (его видимость управляется CSS выше) -->
         <nav id="desktopMenu">
-            <a href="https://pay.cloudtips.ru/p/a063fe6b" style="text-decoration:none;color:#bb86fc;font-weight:500;">На кофе</a>
-            <a href="/#lessons" style="text-decoration:none;color:#e0e0e0;font-weight:500;">Курс</a>
-            <a href="/prompts" style="text-decoration:none;color:#e0e0e0;font-weight:500;">Промты</a>
-            <a href="/course-purchase" style="text-decoration:none;color:#e0e0e0;font-weight:500;">Цены</a>
-            <a href="contact" style="text-decoration:none;color:#e0e0e0;font-weight:500;">Контакты</a>
+            <a href="https://pay.cloudtips.ru/p/a063fe6b" style="text-decoration:none;color:#4f46e5;font-weight:500;">На кофе</a>
+            <a href="/#lessons" style="text-decoration:none;color:#111;font-weight:500;">Курс</a>
+            <a href="/prompts" style="text-decoration:none;color:#111;font-weight:500;">Промты</a>
+            <a href="/course-purchase" style="text-decoration:none;color:#111;font-weight:500;">Цены</a>
+            <a href="contact" style="text-decoration:none;color:#111;font-weight:500;">Контакты</a>
             <div style="display:flex;gap:15px;">
                 <a href="https://t.me/AIdispatcher9" target="_blank" rel="noopener noreferrer">
                     <img src="telegram.png" alt="Telegram" width="24" height="24" style="display: block;">
@@ -184,6 +180,7 @@
         </nav>
 
         <!-- Кнопка мобильного меню (ее видимость управляется CSS выше) -->
+        <!-- !!! ИСПРАВЛЕНО: Теперь это div имеет КЛАСС="mobile-menu-toggle" -->
         <div class="mobile-menu-toggle">
             <button id="mobile-menu-button" aria-label="Открыть меню">
                 <!-- SVG иконка гамбургера. Цвет задан через stroke в CSS -->
