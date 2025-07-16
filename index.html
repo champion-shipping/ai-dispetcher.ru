@@ -100,9 +100,22 @@
     <!-- Основной контент -->
     <main style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
 
-        <!-- ОБНОВЛЕННЫЙ БЛОК: Главный экран -->
+              <!-- ОБНОВЛЕННЫЙ БЛОК: Главный экран -->
         <section class="content-section">
-            <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap-reverse;">
+            <!-- Стили для переключения между десктопной и мобильной версией -->
+            <style>
+                .desktop-hero-layout { display: none; }
+                .mobile-hero-layout { display: block; }
+
+                /* На экранах шире 768px показываем десктопную версию */
+                @media (min-width: 768px) {
+                    .desktop-hero-layout { display: flex; }
+                    .mobile-hero-layout { display: none; }
+                }
+            </style>
+
+            <!-- Десктопная версия (текст слева, картинка справа) -->
+            <div class="desktop-hero-layout" style="align-items: center; gap: 40px;">
                 <!-- Текстовая часть -->
                 <div style="flex: 1; min-width: 300px;">
                     <h1 style="font-size: 2.8rem; font-weight: 700; margin-top: 0; margin-bottom: 20px; line-height: 1.3;">
@@ -113,13 +126,30 @@
                     </p>
                 </div>
                 <!-- Изображение -->
-                <div style="flex: 1; min-width: 300px; max-width: 500px; margin: auto;">
+                <div style="flex: 0 0 40%; max-width: 450px;">
                     <img 
                         src="ai-dispetcher.jpg" 
                         alt="AI Dispatcher" 
                         style="width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.25);"
                     >
                 </div>
+            </div>
+
+            <!-- Мобильная версия (Заголовок -> Картинка -> Текст) -->
+            <div class="mobile-hero-layout">
+                <h1 style="font-size: 2.2rem; font-weight: 700; margin-top: 0; margin-bottom: 25px; line-height: 1.3; text-align: center;">
+                    Курс по ChatGPT, DeepSeek, Gemini и другим LLM.
+                </h1>
+                <div style="margin-bottom: 25px;">
+                     <img 
+                        src="ai-dispetcher.jpg" 
+                        alt="AI Dispatcher" 
+                        style="width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.25);"
+                    >
+                </div>
+                <p style="font-size: 1.1rem; color: #e0e0e0;">
+                    На этой странице вы найдете курс, посвященный практической работе с LLM-моделями: ChatGPT, DeepSeek, Gemini и другие. Мы рассмотрим их особенности, возможные "баги" и предоставим базовые примеры промтов. <a href="https://ai-dispetcher.ru/prompts" target="_blank" style="font-weight: bold;">База промтов</a>, которые я использую в работе, постоянно пополняется. Всегда стараюсь выкладывать что-то новое и полезное, делюсь личными кейсами и инсайтами по работе с LLM в своем <a href="https://t.me/AIdispatcher9" target="_blank" style="font-weight: bold;">Telegram-канале AI Диспетчер</a>.
+                </p>
             </div>
         </section>
 
@@ -139,14 +169,31 @@
             </div>
         </section>
 
-        <!-- ОБНОВЛЕННЫЙ БЛОК: Секция с уроками -->
+        <!-- ОБНОВЛЕННЫЙ БЛОК: Секция с уроками (с 3D эффектом) -->
+        <style>
+            /* Стили для 3D эффекта карточек уроков */
+            .lesson-card {
+                background-color: #252525;
+                padding: 25px;
+                border-radius: 12px;
+                height: 100%;
+                box-sizing: border-box;
+                /* Плавный переход для всех свойств */
+                transition: all 0.3s ease-out;
+            }
+            .lesson-card:hover {
+                /* Приподнимаем карточку и добавляем тень */
+                transform: perspective(800px) translateZ(20px);
+                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            }
+        </style>
         <section class="content-section">
             <h2 id="lessons" style="font-size: 2.2rem; text-align: center; margin-top: 0; margin-bottom: 35px; font-weight: 700;">Доступные уроки</h2>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
                 <!-- Урок 1 (открытый) -->
                 <a href="урок-1" style="text-decoration: none; display: block;">
-                    <div style="background-color: #252525; padding: 25px; border-radius: 12px; transition: all 0.3s ease; border-top: 3px solid #bb86fc; height: 100%; box-sizing: border-box;">
+                    <div class="lesson-card" style="border-top: 3px solid #bb86fc;">
                         <h3 style="color: #bb86fc; font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                             Урок 1
                             <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -162,7 +209,7 @@
                 
                 <!-- Урок 2 (закрытый) -->
                 <a href="урок-2" style="text-decoration: none; display: block;">
-                    <div style="background-color: #252525; padding: 25px; border-radius: 12px; transition: all 0.3s ease; border-top: 3px solid #7952b3; height: 100%; box-sizing: border-box;">
+                    <div class="lesson-card" style="border-top: 3px solid #7952b3;">
                         <h3 style="color: #d0b0ff; font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                             Урок 2
                             <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -178,7 +225,7 @@
                         
                 <!-- Урок 3 (закрытый) -->
                 <a href="урок-3" style="text-decoration: none; display: block;">
-                    <div style="background-color: #252525; padding: 25px; border-radius: 12px; transition: all 0.3s ease; border-top: 3px solid #7952b3; height: 100%; box-sizing: border-box;">
+                    <div class="lesson-card" style="border-top: 3px solid #7952b3;">
                         <h3 style="color: #d0b0ff; font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                             Урок 3
                             <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -193,7 +240,7 @@
                 
                 <!-- Урок 4 (закрытый) -->
                 <a href="урок-4" style="text-decoration: none; display: block;">
-                    <div style="background-color: #252525; padding: 25px; border-radius: 12px; transition: all 0.3s ease; border-top: 3px solid #7952b3; height: 100%; box-sizing: border-box;">
+                    <div class="lesson-card" style="border-top: 3px solid #7952b3;">
                         <h3 style="color: #d0b0ff; font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
                             Урок 4
                             <span style="width: 22px; height: 22px; display: inline-flex;">
@@ -206,7 +253,7 @@
                     </div>
                 </a>
             </div>
-        </section>
+        </section>```
         
     </main>
  
