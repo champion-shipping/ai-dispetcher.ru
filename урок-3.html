@@ -144,15 +144,142 @@
             Вы можете добавлять сюда свои блоки, текст, видео и т.д.
             ============================================================
             -->
-
             <main class="content">
-                <h1 class="title">Урок 3: Практические примеры</h1>
-                <p>Содержимое третьего урока будет здесь...</p>
-                
-                <!-- Добавьте сюда другие секции и элементы -->
 
+
+<!-- НАЧАЛО БЛОКА: ВВЕДЕНИЕ В УРОК 3 -->
+<section class="intro-block-lesson-3" style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px; /* Пространство между основным контентом и боковым меню */
+    padding: 20px;
+">
+
+    <!-- Левая часть: Заголовок и вводный текст -->
+    <div class="intro-content-area-l3" style="
+        flex: 1; /* Занимает все доступное пространство */
+        min-width: 0; /* Для правильного переноса в flex-контейнере */
+    ">
+        <!-- Заголовок урока -->
+        <h1 style="
+            font-size: clamp(28px, 4vw, 38px); /* Адаптивный размер шрифта */
+            color: #2c3e50;
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            line-height: 1.3;
+        ">
+           Урок 3: Вайб-кодинг
+        </h1>
+
+        <!-- Вводный текст -->
+        <div class="intro-text-l3" style="font-size: 17px; line-height: 1.7; color: #34495e;">
+            <p style="margin: 0 0 20px 0;">
+                В прошлой части, в пункте 2.1, я описываю то, как правильно составлять запрос в LLM для получения нужного результата, где мы знакомим модель с тем, что у нас есть, ставим задачу, описываем параметры, даем примеры и т.д. По факту данная структурированность и есть своего рода промт-инжинеринг.
+            </p>
+            <p style="margin: 0 0 20px 0;">
+                В этой части курса, я хочу больше перейти к практике и показать, как это делается на примерах <strong>вайб-кодинга</strong>. Показывать буду на примере своего проекта, который полностью собран с помощью языковых моделей.
+            </p>
+            
+            <!-- Привлекающий внимание блок с предупреждением -->
+            <div class="disclaimer-box-l3" style="
+                background: #fff9e6;
+                border-left: 5px solid #f39c12;
+                padding: 20px;
+                margin: 30px 0;
+                border-radius: 0 8px 8px 0;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            ">
+                <p style="margin: 0; font-size: 16px; color: #5a4d2d; line-height: 1.6;">
+                    <strong>Важный момент:</strong> Сразу хочу сказать, что все продемонстрированные технические действия не всегда гарантируют максимальную безопасность и высокую производительность. Если вы собираете свой большой проект с помощью LLM и не знаете кода, будьте готовы к постоянным трудностям.
+                </p>
+            </div>
+
+            <p style="margin: 0 0 20px 0;">
+                В самом низу данной части я предоставлю рекомендации с дополнительными параметрами, которые стоит добавлять в ваш основной промт при генерации кода.
+            </p>
+        </div>
+    </div>
+
+    <!-- Правая часть: Боковое меню навигации -->
+    <div class="intro-menu-area-l3" style="
+        width: 320px; /* Фиксированная ширина для десктопа */
+        flex-shrink: 0; /* Запрещаем сжиматься */
+    ">
+        <div style="
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            border: 1px solid #e9ecef;
+            position: sticky; /* Меню "прилипает" при скролле */
+            top: 100px; /* Отступ сверху при "прилипании" */
+        ">
+            <h3 style="
+                margin: 0 0 20px 0;
+                color: #3498db;
+                font-size: 20px;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 15px;
+            ">
+                Навигация по уроку
+            </h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 10px;">
+                    <a href="#lesson3-part1" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">1. Верстка - HTML</a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#lesson3-part2" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">2. Создание страницы и вывод данных</a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#lesson3-part3" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">3. Работа с базой данных</a>
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <a href="#lesson3-part4" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">4. Промты для кода</a>
+                </li>
+                <li>
+                    <a href="#lesson3-task" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out; background: #eaf5ff; color: #0056b3;">5. Тестовое задание!</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<style>
+    /* Интерактив: эффект при наведении на пункты меню */
+    .lesson-menu-link-l3:hover {
+        background-color: #f0f8ff;
+        color: #0056b3;
+        transform: translateX(5px); /* Легкий сдвиг вправо */
+        box-shadow: 0 4px 10px rgba(52, 152, 219, 0.1);
+    }
+
+    /* Адаптация под мобильные устройства (экраны шириной до 992px) */
+    @media (max-width: 992px) {
+        .intro-block-lesson-3 {
+            flex-direction: column; /* Ставим блоки друг под другом */
+            gap: 30px;
+        }
+        .intro-menu-area-l3 {
+            width: 100%; /* Меню занимает всю ширину */
+        }
+        .intro-menu-area-l3 > div {
+            position: static; /* Отключаем "прилипание" на мобильных */
+        }
+    }
+</style>
+<!-- КОНЕЦ БЛОКА: ВВЕДЕНИЕ В УРОК 3 -->
+
+
+		    
+
+
+
+           <!-- Добавьте сюда другие секции и элементы -->
+
+		    
             </main>
-
             <!-- 
             ============================================================
             КОНЕЦ ОБЛАСТИ ДЛЯ ВАШЕГО КОНТЕНТА
