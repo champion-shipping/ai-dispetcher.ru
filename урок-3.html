@@ -166,11 +166,10 @@
     <!-- 
         ЛЕВАЯ КОЛОНКА: ЗДЕСЬ БУДЕТ ВЕСЬ КОНТЕНТ УРОКА
     -->
-    <main id="mainLessonContent" style="
-        flex: 1; 
-        min-width: 0; 
-        overflow-x: hidden; /* <-- РЕШЕНИЕ ПРОБЛЕМЫ №1: предотвращает вылезание контента */
-    ">
+<main id="mainLessonContent" style="
+    flex: 1; 
+    min-width: 0; 
+">
         
         <!-- ВВОДНЫЙ БЛОК КУРСА -->
         <section id="lesson-intro">
@@ -1858,6 +1857,21 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     lightboxOverlay.addEventListener('click', closeLightbox);
     lightboxClose.addEventListener('click', closeLightbox);
 
+})();
+</script>
+
+		    <script>
+(function() {
+    // Находим все изображения внутри основного контента урока
+    const imagesToFix = document.querySelectorAll('#mainLessonContent img');
+
+    // Проходим по каждому найденному изображению
+    imagesToFix.forEach(image => {
+        // Применяем "золотой стандарт" стилей для адаптивности
+        image.style.maxWidth = '100%';
+        image.style.height = 'auto';
+        image.style.display = 'block'; // Убирает лишние отступы под картинкой
+    });
 })();
 </script>
         </div>
