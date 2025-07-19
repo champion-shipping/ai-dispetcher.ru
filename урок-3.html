@@ -135,158 +135,1590 @@
     <div id="header"></div>
 
     <div class="container">
-        <!-- Защищенный контент, который появится после входа -->
-        <div id="protectedContent" style="display: none;">
-            
-            <!-- 
-            ============================================================
-            ЗДЕСЬ НАЧНЕТСЯ ОСНОВНОЙ КОНТЕНТ ВАШЕГО ТРЕТЬЕГО УРОКА
-            Вы можете добавлять сюда свои блоки, текст, видео и т.д.
-            ============================================================
-            -->
-            <main class="content">
 
 
-<!-- НАЧАЛО БЛОКА: ВВЕДЕНИЕ В УРОК 3 -->
-<section class="intro-block-lesson-3" style="
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    max-width: 1200px;
-    margin: 40px auto;
-    display: flex;
-    gap: 40px; /* Пространство между основным контентом и боковым меню */
-    padding: 20px;
+<!-- =================================================================== -->
+<!-- НАЧАЛО ГЛАВНОГО КОНТЕЙНЕРА СТРАНИЦЫ (ФИНАЛЬНАЯ ВЕРСИЯ) -->
+<!-- =================================================================== -->
+<div id="lessonPageWrapper" style="
+    max-width: 1200px; 
+    margin: 40px auto; 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 40px; 
+    padding: 0 20px;
 ">
 
-    <!-- Левая часть: Заголовок и вводный текст -->
-    <div class="intro-content-area-l3" style="
-        flex: 1; /* Занимает все доступное пространство */
-        min-width: 0; /* Для правильного переноса в flex-контейнере */
-    ">
-        <!-- Заголовок урока -->
-        <h1 style="
-            font-size: clamp(28px, 4vw, 38px); /* Адаптивный размер шрифта */
-            color: #2c3e50;
-            margin: 0 0 25px 0;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
-            line-height: 1.3;
-        ">
-           Урок 3: Вайб-кодинг
-        </h1>
+    <!-- 
+        ЛЕВАЯ КОЛОНКА: ЗДЕСЬ БУДЕТ ВЕСЬ КОНТЕНТ УРОКА
+    -->
+    <main id="mainLessonContent" style="flex: 1; min-width: 0;">
+        
+        <!-- ВВОДНЫЙ БЛОК КУРСА -->
+        <section id="lesson-intro">
+            <!-- Заголовок урока -->
+            <h1 style="font-size: clamp(28px, 4vw, 38px); color: #2c3e50; margin: 0 0 25px 0; padding-bottom: 15px; border-bottom: 3px solid #3498db; line-height: 1.3;">
+               Урок 3: Вайб-кодинг
+            </h1>
 
-        <!-- Вводный текст -->
-        <div class="intro-text-l3" style="font-size: 17px; line-height: 1.7; color: #34495e;">
-            <p style="margin: 0 0 20px 0;">
-                В прошлой части, в пункте 2.1, я описываю то, как правильно составлять запрос в LLM для получения нужного результата, где мы знакомим модель с тем, что у нас есть, ставим задачу, описываем параметры, даем примеры и т.д. По факту данная структурированность и есть своего рода промт-инжинеринг.
-            </p>
-            <p style="margin: 0 0 20px 0;">
-                В этой части курса, я хочу больше перейти к практике и показать, как это делается на примерах <strong>вайб-кодинга</strong>. Показывать буду на примере своего проекта, который полностью собран с помощью языковых моделей.
-            </p>
-            
-            <!-- Привлекающий внимание блок с предупреждением -->
-            <div class="disclaimer-box-l3" style="
-                background: #fff9e6;
-                border-left: 5px solid #f39c12;
-                padding: 20px;
-                margin: 30px 0;
-                border-radius: 0 8px 8px 0;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            ">
-                <p style="margin: 0; font-size: 16px; color: #5a4d2d; line-height: 1.6;">
-                    <strong>Важный момент:</strong> Сразу хочу сказать, что все продемонстрированные технические действия не всегда гарантируют максимальную безопасность и высокую производительность. Если вы собираете свой большой проект с помощью LLM и не знаете кода, будьте готовы к постоянным трудностям.
+            <!-- Вводный текст -->
+            <div style="font-size: 17px; line-height: 1.7; color: #34495e;">
+                <p style="margin: 0 0 20px 0;">
+                    В прошлой части, в пункте 2.1, я описываю то, как правильно составлять запрос в LLM для получения нужного результата, где мы знакомим модель с тем, что у нас есть, ставим задачу, описываем параметры, даем примеры и т.д. По факту данная структурированность и есть своего рода промт-инжинеринг.
+                </p>
+                <p style="margin: 0 0 20px 0;">
+                    В этой части курса, я хочу больше перейти к практике и показать, как это делается на примерах <strong>вайб-кодинга</strong>. Показывать буду на примере своего проекта, который полностью собран с помощью языковых моделей.
+                </p>
+                
+                <!-- Блок-примечание про текстовую версию -->
+                <div style="margin: 30px 0; padding: 20px; background-color: #f0f9ff; border-left: 5px solid #3498db; border-radius: 8px; display: flex; align-items: flex-start; gap: 15px;">
+                     <div style="flex-shrink: 0; padding-top: 3px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #3498db;"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg></div>
+                     <p style="margin: 0; font-size: 16px; color: #004085; line-height: 1.6;">
+                        <strong>Рекомендую изучать и текстовую версию.</strong> Несмотря на то, что она не отличается от видео, это позволит вам легко копировать готовые промты и важные моменты для своих личных заметок.
+                     </p>
+                </div>
+                
+                <!-- Блок с предупреждением -->
+                <div style="background: #fff9e6; border-left: 5px solid #f39c12; padding: 20px; margin: 30px 0; border-radius: 0 8px 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                    <p style="margin: 0; font-size: 16px; color: #5a4d2d; line-height: 1.6;">
+                        <strong>Важный момент:</strong> Сразу хочу сказать, что все продемонстрированные технические действия не всегда гарантируют максимальную безопасность и высокую производительность. Если вы собираете свой большой проект с помощью LLM и не знаете кода, будьте готовы к постоянным трудностям.
+                    </p>
+                </div>
+                <p style="margin: 0 0 20px 0;">
+                    В самом низу данной части я предоставлю рекомендации с дополнительными параметрами, которые стоит добавлять в ваш основной промт при генерации кода.
                 </p>
             </div>
+        </section>
+        
 
-            <p style="margin: 0 0 20px 0;">
-                В самом низу данной части я предоставлю рекомендации с дополнительными параметрами, которые стоит добавлять в ваш основной промт при генерации кода.
-            </p>
+			
+			<!-- НАЧАЛО БЛОКА: 3.1 ВЕРСТКА - HTML -->
+<section id="lesson3-part1" style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px; /* Оптимальная ширина для текстового контента */
+    margin: 60px auto; /* Увеличенный отступ сверху для разделения блоков */
+    padding: 0 20px;
+">
+    <!-- Заголовок блока, интегрированный в страницу -->
+    <h2 style="
+        font-size: clamp(26px, 3.5vw, 34px);
+        color: #2c3e50;
+        margin: 0 0 20px 0;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #3498db;
+        line-height: 1.3;
+    ">
+       3.1 Верстка - HTML
+    </h2>
+
+ 
+    <!-- НАЧАЛО НОВОГО БЛОКА С YOUTUBE ВИДЕО -->
+    <div style="
+        background-color: #f8f9fa; 
+        border: 1px solid #e9ecef; 
+        border-radius: 12px; 
+        padding: 25px; 
+        margin: 0 0 40px 0;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    ">
+        <!-- Заголовок блока с иконкой YouTube -->
+        <h4 style="font-size: 20px; color: #c4302b; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px; font-weight: 500;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width: 28px; height: auto; fill: currentColor;">
+                <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 42.276 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.322 42.003-24.947 48.284-48.597 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zM232.615 354.468V157.532l159.253 98.468-159.253 98.468z"/>
+            </svg>
+            Видео-версия этого урока:
+        </h4>
+        
+        <!-- Адаптивный контейнер для видео -->
+        <div style="position: relative; padding-bottom: 56.25%; /* Соотношение сторон 16:9 */ height: 0; overflow: hidden; : 100%; background: #000; border-radius: 8px;">
+            <iframe 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                src="https://www.youtube.com/embed/ВАШ_ID_ВИДЕО" 
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
         </div>
+        
+        <!-- Примечание под видео -->
+        <p style="font-size: 15px; color: #7f8c8d; margin: 15px 0 0 0; text-align: center; font-style: italic;">
+            Примечание: видео записывалось в live-режиме.
+        </p>
+    </div>
+    <!-- КОНЕЦ НОВОГО БЛОКА С YOUTUBE ВИДЕО -->
+
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 40px 0;">
+        Начнем мы с создания визуальной части страницы.
+    </p>
+
+    <!-- Внутренние структурированные блоки. Они должны иметь фон, чтобы выделяться. -->
+    <div style="background: #f8f9fa; border-left: 4px solid #3498db; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h4 style="margin: 0 0 15px 0; font-size: 20px; color: #2c3e50;">Основная наша задача будет создать шаблон страницы в HTML, которая будет содержать:</h4>
+        <ol style="margin: 0; padding-left: 20px; font-size: 17px; color: #34495e; line-height: 1.8;">
+            <li style="margin-bottom: 10px;">Шапку с меню, он же Header</li>
+            <li style="margin-bottom: 10px;">Заголовок</li>
+            <li style="margin-bottom: 10px;">Вводный текст</li>
+            <li style="margin-bottom: 10px;">Меню с содержимым страницы с якорными ссылками к нужному блоку</li>
+            <li style="margin-bottom: 10px;">2 блока с видео</li>
+            <li style="margin-bottom: 10px;">Подвал, он же Footer</li>
+            <li>Оптимизирована под мобильные устройства!</li>
+        </ol>
     </div>
 
-    <!-- Правая часть: Боковое меню навигации -->
-    <div class="intro-menu-area-l3" style="
-        width: 320px; /* Фиксированная ширина для десктопа */
-        flex-shrink: 0; /* Запрещаем сжиматься */
-    ">
-        <div style="
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
-            border: 1px solid #e9ecef;
-            position: sticky; /* Меню "прилипает" при скролле */
-            top: 100px; /* Отступ сверху при "прилипании" */
-        ">
-            <h3 style="
-                margin: 0 0 20px 0;
-                color: #3498db;
-                font-size: 20px;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 15px;
-            ">
-                Навигация по уроку
-            </h3>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 10px;">
-                    <a href="#lesson3-part1" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">1. Верстка - HTML</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#lesson3-part2" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">2. Создание страницы и вывод данных</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#lesson3-part3" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">3. Работа с базой данных</a>
-                </li>
-                <li style="margin-bottom: 10px;">
-                    <a href="#lesson3-part4" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out;">4. Промты для кода</a>
-                </li>
-                <li>
-                    <a href="#lesson3-task" class="lesson-menu-link-l3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.25s ease-in-out; background: #eaf5ff; color: #0056b3;">5. Тестовое задание!</a>
-                </li>
-            </ul>
+    <div style="background: #f8f9fa; border-left: 4px solid #2ecc71; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h4 style="margin: 0 0 15px 0; font-size: 20px; color: #2c3e50;">Разворачивать сам шаблон будем локально. Для этого будем использовать:</h4>
+        <ul style="margin: 0; padding-left: 20px; font-size: 17px; color: #34495e; line-height: 1.8; list-style-type: '✓ ';">
+            <li style="margin-bottom: 10px; padding-left: 10px;">Notepad ++</li>
+            <li style="margin-bottom: 10px; padding-left: 10px;">DeepSeek</li>
+            <li style="margin-bottom: 10px; padding-left: 10px;">Google Chrome (можно использовать любой браузер)</li>
+            <li style="padding-left: 10px;">Материал (контент)</li>
+        </ul>
+    </div>
+    
+    <!-- Подраздел с примерами контента (без лишней рамки) -->
+    <div style="margin-top: 50px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+           Для примера возьмем 2 видео и немного вводного текста с последующих пунктов этой части курса.
+        </p>
+
+        <!-- Пример текста -->
+        <div class="subsection-l3-1-integrated" style="margin-bottom: 40px;">
+            <h5 style="font-size: 19px; color: #3498db; margin: 0 0 15px 0; font-weight: 600;">Текст из вводного текста данной части:</h5>
+            <blockquote style="
+                margin: 0;
+                padding: 20px;
+                background: #f1f3f5;
+                border-left: 4px solid #9b59b6;
+                border-radius: 0 8px 8px 0;
+                color: #495057;
+                font-style: italic;
+                line-height: 1.7;
+                white-space: pre-wrap;
+            ">> Урок 3: Вайбкодинг
+	В прошлой части, в пункте 2.1, я описываю то, как правильно составлять запрос в LLM для получения нужного результата, где мы, знакомим модель с тем, что у нас есть, ставим задачу, описываем параметры, даем примеры и тд. По факту данная структурированность и есть своего рода промт-инжинеринг.
+В этой части курса, я хочу больше перейти к практике и показать как это делается на примерах вайбкодинга.
+Показывать буду на примере своего проекта, который полностью собран с помощью языковых моделей.
+Сразу хочу сказать, что все проделанные технические действия не всегда дают максимальную безопасность и высокую производительность. В случае если вы собираете свой большой проект с помощью LLM и не знаете кода, будьте готовы к постоянным трудностям.
+	В самом низу данной части, я предоставлю рекомендации с дополнительными параметрами, которые стоит добавлять в ваш основной промт при генерации кода.
+	1. Создание страницы и вывод данных из БД
+	2. Создание таблицы в базе данных + редактирование существующей страницы</blockquote>
+        </div>
+
+        <!-- Пример списка видео -->
+        <div class="subsection-l3-1-integrated">
+             <h5 style="font-size: 19px; color: #3498db; margin: 0 0 15px 0; font-weight: 600;">2 видео с последующих пунктов этой части курса:</h5>
+              <blockquote style="
+                margin: 0;
+                padding: 20px;
+                background: #f1f3f5;
+                border-left: 4px solid #e67e22;
+                border-radius: 0 8px 8px 0;
+                color: #495057;
+                font-style: italic;
+                line-height: 1.7;
+                white-space: pre-wrap;
+              ">> 
+	1. Видео 1 - Создание страницы и вывод данных из БД (PHP/HTML)
+	2. Видео 2 - Редактирование существующей страницы + Создание таблицы в БД.</blockquote>
         </div>
     </div>
 </section>
-<style>
-    /* Интерактив: эффект при наведении на пункты меню */
-    .lesson-menu-link-l3:hover {
-        background-color: #f0f8ff;
-        color: #0056b3;
-        transform: translateX(5px); /* Легкий сдвиг вправо */
-        box-shadow: 0 4px 10px rgba(52, 152, 219, 0.1);
-    }
 
-    /* Адаптация под мобильные устройства (экраны шириной до 992px) */
-    @media (max-width: 992px) {
-        .intro-block-lesson-3 {
-            flex-direction: column; /* Ставим блоки друг под другом */
-            gap: 30px;
+<!-- Стили для небольшой интерактивности. Классы уникальны, чтобы не было конфликтов. -->
+<style>
+    .subsection-l3-1-integrated {
+        transition: opacity 0.3s ease-in-out;
+    }
+    .subsection-l3-1-integrated:hover {
+        opacity: 0.9;
+    }
+</style>
+<!-- КОНЕЦ БЛОКА: 3.1 ВЕРСТКА - HTML -->
+
+
+
+
+
+<!-- НАЧАЛО БЛОКА: ПРОЦЕСС НАПИСАНИЯ ЗАПРОСА (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Подзаголовок -->
+    <h4 style="
+        font-size: 26px;
+        color: #2c3e50;
+        margin: 0 0 40px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dfe6e9;
+    ">
+        Пишем запрос в DeepSeek:
+    </h4>
+
+    <!-- Контейнер для всех шагов -->
+    <div style="width: 100%;">
+
+        <!-- ШАГ 1 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <!-- Левая часть: Номер и линия -->
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">1</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <!-- Правая часть: Контент -->
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Знакомлю модель с тем, что нам вообще нужно сделать.</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">Мне надо сделать страницу сайта в HTML.</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-1.png" alt="Скриншот шага 1" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 2 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">2</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Описываю о чем вообще будет сама страница.</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">Сама страница сайта будет содержать курс по LLM.</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-2.png" alt="Скриншот шага 2" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+        
+        <!-- ШАГ 3 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">3</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                 <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Даю информацию с содержимым данной страницы.</p>
+                 <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Информация на странице должна быть вот такая:
+	Заголовок - "ЗАГОЛОВОК"
+	Вводный текст - "ВВОДНЫЙ_ТЕКСТ"
+	Пункты меню которые должны быть кликабельные и перематывать при нажатии на пункт с данным видео - "ПУНКТЫ" </blockquote>
+                 <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-3.png" alt="Скриншот шага 3" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 4 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">4</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Указываю пути к видео в нашей папке.</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Так же вот 2 ссылки на видео:
+	"ССЫЛКА_НА_ВИДЕО_1"
+	"ССЫЛКА_НА_ВИДЕО_2"</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-4.png" alt="Скриншот шага 4" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 5 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">5</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                 <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Указываю какие должны быть пункты меню в шапке (header) нашей страницы.</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Шапка меню должна содержать вот такие вот пункты: 
+	На кофе 
+	Курс 
+	Промты 
+	Цены 
+	Контакты</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-5.png" alt="Скриншот шага 5" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 6 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">6</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                 <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Указываю какие должны быть пункты меню в подвале (footer) нашей страницы.</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Подвал нашей страницы должен содержать вот такие вот пункты:
+	На кофе 
+	Контакты</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-6.png" alt="Скриншот шага 6" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 7 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">7</div>
+                <div style="width: 2px; background-color: #e0e0e0; height: 100%; flex-grow: 1;"></div>
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Описываю дизайн страницы. (максимально простыми словами и первое, что приходит в голову.)</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Сделай старницу сайта в темных, мягких тонах, сама страница с блоками должна быть
+интерактивная и увлекательная, чтобы пользователю было приятно на нее смотреть.</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-7.png" alt="Скриншот шага 7" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ШАГ 8 -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0;">8</div>
+                <!-- У последнего элемента нет вертикальной линии вниз -->
+            </div>
+            <div style="flex-grow: 1; padding-bottom: 20px;">
+                <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">Описываю технические моменты с разделением каждого блока в отдельную секцию с прописанными inline стилями. (Я это делаю для быстрого ориентирования в коде и удобства редактирования блоков по отдельности, а так же, чтобы избежать конфликтов в стилях между блоками, при последующих изменениях страницы, таких, как добавление новых блоков, изменения структуры, удаления и прочего. Таким образом создание страницы будет выглядеть как конструктор, где я просто добавляю, меняю местами, редактирую содержимое и тд.)</p>
+                <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Важно! Каждый блок на странице должен быть отдельной  или , а стили к
+каждому блоку должны быть inline внутри этого блока - это нужно для удоства редактирования,
+чтобы не было конфликта в стилях, а так же, чтобы я мог менять их местами.</blockquote>
+                <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-8.png" alt="Скриншот шага 8" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок "Важно!" -->
+    <div style="margin: 40px 0; padding: 25px; background: #fff9e6; border-left: 5px solid #f39c12; border-radius: 0 8px 8px 0;">
+        <h5 style="margin: 0 0 10px 0; font-size: 18px; color: #c27c0e;">Важно!</h5>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #5a4d2d; overflow-wrap: break-word;">
+            Я не указываю в примере, но всегда указывайте: <br>
+            <strong style="font-family: 'Courier New', Courier, monospace;">> Вся страница и все блоки, должны быть оптимизированы под мобильные устройства. Используй Bootstrap или Tailwind CSS.</strong>
+        </p>
+    </div>
+
+    <!-- Блок с полным запросом -->
+    <div>
+        <h4 style="font-size: 26px; color: #2c3e50; margin: 60px 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid #dfe6e9;">Полный запрос:</h4>
+        <blockquote style="margin: 0; padding: 25px; background: #2c3e50; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; color: #ecf0f1; white-space: pre-wrap; font-size: 15px; line-height: 1.8; box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2); overflow-wrap: break-word;">> 
+	Мне надо сделать страницу сайта в HTML.
+
+Сама страница сайта будет содержать курс по LLM.
+
+Информация на странице должна быть вот такая:
+	1. Заголовок - "# Урок 3: Вайбкодинг "
+	2. Вводный текст - "ВВОДНЫЙ_ТЕКСТ"
+	3. Пункты меню которые должны быть кликабельные и перематывать при нажатии на пункт с данным видео - 
+"2. Создание страницы и вывод данных из БД
+3. Создание таблицы в базе данных + редактирование существующей страницы"
+
+
+	Так же вот 2 ссылки на видео:
+"ССЫЛКА_НА_ВИДЕО_1"
+"ССЫЛКА_НА_ВИДЕО_2"
+
+
+	Шапка меню должна содержать вот такие вот пункты:
+	- На кофе
+	- Курс
+	- Промты
+	- Цены
+	- Контакты
+
+
+	Подвал нашей страницы должен содержать вот такие вот пункты:
+	- На кофе
+	- Контакты
+	
+Сделай страницу сайта в темных, мягких тонах, сама страница с блоками должна быть
+интерактивная и увлекательная, чтобы пользователю было приятно на нее смотреть.
+
+Важно! Каждый блок на странице должен быть отдельной <section> или <div>, а стили к каждому блоку должны быть inline внутри этого блока - это нужно для удобства редактирования, чтобы не было конфликта в стилях, а так же, чтобы я мог менять их местами.</blockquote>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+<!-- НАЧАЛО БЛОКА: ОТПРАВКА ЗАПРОСА И РЕЗУЛЬТАТ (СУПЕР-ПРОСТОЙ ВАРИАНТ) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+
+    <!-- Подзаголовок 1 -->
+    <h4 style="font-size: 26px; color: #2c3e50; margin: 0 0 25px 0; padding-bottom: 10px; border-bottom: 1px solid #dfe6e9;">
+        Отправляю запрос, копирую код, сохраняю в наш файл.
+    </h4>
+
+    <!-- Сетка для первых двух изображений (ИСПРАВЛЕННАЯ ВЕРСИЯ) -->
+    <div style="
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 20px; 
+        margin-bottom: 50px;
+    ">
+        <!-- Изображение 1 -->
+        <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-9.png" alt="Копирование кода" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <!-- Изображение 2 -->
+        <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-10.png" alt="Сохранение файла" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+
+    <!-- Подзаголовок 2 -->
+    <h4 style="font-size: 26px; color: #2c3e50; margin: 0 0 25px 0; padding-bottom: 10px; border-bottom: 1px solid #dfe6e9;">
+        Обновляю страницу в браузере и смотрю на результат.
+    </h4>
+
+    <!-- ПРОСТОЙ СПИСОК ИЗОБРАЖЕНИЙ ДРУГ ЗА ДРУГОМ -->
+    <div style="width: 100%;">
+        <!-- Результат 1 -->
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 16px; font-weight: 500; color: #555; margin: 0 0 10px 5px;">Результат 1:</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-11.png" alt="Результат в браузере 1" style=": 100%; display: block; border-radius: 6px;">
+            </div>
+        </div>
+        <!-- Результат 2 -->
+        <div style="margin-bottom: 30px;">
+             <p style="font-size: 16px; font-weight: 500; color: #555; margin: 0 0 10px 5px;">Результат 2:</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-12.png" alt="Результат в браузере 2" style=": 100%; display: block; border-radius: 6px;">
+            </div>
+        </div>
+        <!-- Результат 3 -->
+        <div style="margin-bottom: 30px;">
+             <p style="font-size: 16px; font-weight: 500; color: #555; margin: 0 0 10px 5px;">Результат 3:</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-13.png" alt="Результат в браузере 3" style=": 100%; display: block; border-radius: 6px;">
+            </div>
+        </div>
+        <!-- Результат 4 -->
+        <div style="margin-bottom: 30px;">
+             <p style="font-size: 16px; font-weight: 500; color: #555; margin: 0 0 10px 5px;">Результат 4:</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-14.png" alt="Результат в браузере 4" style=": 100%; display: block; border-radius: 6px;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Блок-инструкция -->
+    <div style="margin: 50px 0; padding: 25px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px;">
+        <p style="margin: 0 0 20px 0; font-size: 16px; color: #555;">(если вдруг вы не знаете как открыть файл в браузере, то вот инструкция для Notepad++)</p>
+        <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+            <div style="width: 30px; height: 30px; background-color: #2ecc71; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; flex-shrink: 0; margin-right: 15px;">1</div>
+            <div style="font-size: 17px; color: #34495e; padding-top: 5px;">Вид</div>
+        </div>
+        <div style="padding-left: 45px; margin-bottom: 25px;">
+            <img src="path/to/your/image-15.png" alt="Меню Вид в Notepad++" style=": 100%; height: auto; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
+        <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+            <div style="width: 30px; height: 30px; background-color: #2ecc71; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; flex-shrink: 0; margin-right: 15px;">2</div>
+            <div style="font-size: 17px; color: #34495e; padding-top: 5px;">Открыть текущий файл и выбираю браузер</div>
+        </div>
+         <div style="padding-left: 45px; margin-bottom: 25px;">
+            <img src="path/to/your/image-16.png" alt="Выбор браузера в Notepad++" style=": 100%; height: auto; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
+        <p style="padding-left: 45px; margin: 0; font-size: 16px; color: #7f8c8d; font-style: italic;">Главное, чтобы файл был сохранен в нужном формате. В данном случае это HTML.</p>
+    </div>
+
+    <!-- Заключительный текст и изображение -->
+    <div style="font-size: 18px; line-height: 1.7; color: #34495e;">
+        <p style="margin: 0 0 20px 0;">
+            Получилось довольно хорошо. Цвета довольно приятные, расположение блоков соответствует нужному порядку. Видео отображаются и воспроизводятся, а пункты в шапке и подвале соответствуют.
+        </p>
+        <p style="margin: 0 0 20px 0;">
+            Единственное, что я хочу сейчас изменить - это расположение вводного текста и блока меню с содержимым страницы.
+        </p>
+		    <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <img src="path/to/your/image-17.png" alt="Проблема с расположением блоков" style=": 100%; height: auto; display: block; border-radius: 8px;">
+    </div>
+        <p style="margin: 0 0 25px 0;">
+            Сейчас это довольно не удобно, а так же при заходе на страницу, меню с содержимым контентом должно бросаться в глаза, чтобы пользователю было просто и быстро с ориентироваться и перейти к нужному блоку. Поэтому вернемся в LLM и отредактируем.
+        </p>
+		        <p style="margin: 0 0 25px 0;">
+Поэтому вернемся в LLM и отредактируем.
+        </p>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+<!-- НАЧАЛО БЛОКА: РЕДАКТИРОВАНИЕ КОДА (100% INLINE, ИСПРАВЛЕННЫЙ) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Шаг 1: Заголовок и вводный текст -->
+    <div>
+        <!-- Имитация нумерованного списка с помощью flexbox -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 25px;">
+            <div style="width: 40px; height: 40px; background-color: #3498db; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">1</div>
+            <h3 style="font-size: 26px; color: #2c3e50; margin: 0; padding-top: 5px; line-height: 1.3;">Открываю код нашего файла</h3>
+        </div>
+        
+        <!-- Контент, выровненный по тексту заголовка -->
+        <div style="padding-left: 60px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+                Так как мы в запросе указали разделение каждого блока на отдельные секции, а стили должны быть inline внутри своего блока, то код будет выглядеть как отдельные кубики. Каждый блок будет начинаться с комментария и &ltsection&gt или &ltdiv&gt с прописанными внутри стилями, которые относятся только к внутреннему блоку.
+            </p>
+            
+            <!-- Изображение 1 -->
+            <div style="margin: 0 0 25px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-18.png" alt="Пример блока кода в файле" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+                Для удобства, если вы не работали с кодом, то рекомендую делать отступы между блоками, чтобы было проще ориентироваться.
+            </p>
+
+            <!-- Изображение 2 -->
+            <div style="margin: 0 0 25px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                 <img src="path/to/your/image-19.png" alt="Код с отступами для ориентации" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0: 20px 0;">
+                Наша задача найти нужные нам блоки, скопировать и отправить в LLM с запросом на редактирование.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Важный информационный блок -->
+    <div style="margin: 40px 0; padding: 25px; background-color: #fef4f4; border-left: 5px solid #e74c3c; border-radius: 8px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.1);">
+        <p style="margin: 0 0 15px 0; font-size: 17px; color: #5c2c2c; line-height: 1.7;">
+            И тут важно редактировать не полную страницу, так как если редактировать сейчас полную страницу, то мы можем столкнуться с проблемой сокращения других частей кода и контента, а если будем указывать модели "ничего не обрезай и не сокращай", то будем тратить много времени, а так же модель может начать вносить изменения в структуру и стили.
+        </p>
+        <p style="margin: 0 0 15px 0; font-size: 17px; color: #5c2c2c; line-height: 1.7; font-weight: 500;">
+            В худшем случае, если объем кода достигнет 500-1000 строк, то DeepSeek попросту может не справляться с такими запросами. Именно поэтому мы изначально разделяли все на блоки.
+        </p>
+        <p style="margin: 0; font-size: 16px; color: #8e4444; line-height: 1.7; font-style: italic;">
+            (Работа с редактированием полного кода будет в следующих разделах с примерами в БД, для этого лучше использовать Gemini)
+        </p>
+    </div>
+
+    <!-- Шаг 2: Поиск блоков -->
+    <div>
+        <h4 style="font-size: 22px; color: #2c3e50; margin: 50px 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid #dfe6e9;">
+            Находим нужные блоки.
+        </h4>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+            (на этом скриншоте я немного отредактировал убрав отступы и переносы строк в стилях, чтобы показать нужные блоки)
+        </p>
+
+        <!-- Изображение 3 -->
+        <div style="margin: 0 0 25px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+             <img src="path/to/your/image-20.png" alt="Поиск нужных блоков в коде" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+            Выделяю и копирую 2 наших блока, которые я хочу отредактировать.
+        </p>
+
+        <!-- Изображение 4 -->
+        <div style="margin: 0 0 25px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+             <img src="path/to/your/image-21.png" alt="Выделение и копирование кода" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+<!-- НАЧАЛО БЛОКА: РЕДАКТИРОВАНИЕ И РЕЗУЛЬТАТ (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Основной заголовок блока -->
+    <p style="
+        font-size: 28px; 
+        color: #2c3e50; 
+        margin: 0 0 40px 0;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #3498db;
+    ">
+        <strong> Возвращаюсь в LLM, пишу запрос
+    </strong></p>
+
+    <!-- Шаг 1: Описание проблемы -->
+    <div style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+            <div style="width: 36px; height: 36px; background-color: #9b59b6; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 15px;">1</div>
+            <h4 style="font-size: 22px; color: #34495e; margin: 0; padding-top: 4px;">Описываю, что сейчас мне не нравится и что нужно сделать.</h4>
+        </div>
+        <div style="padding-left: 51px;">
+            <blockquote style="margin: 0; padding: 20px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Хорошо, единственное, сейчас мне надо сделать так, чтобы вот эти 2 блока с заголовком, вводным текстом и блок с меню, находились на одной горизонтальной линии, чтобы слева был заголовок и вводный текст, а справа меню:
+	"КОД_НАШИХ_БЛОКОВ" </blockquote>
+            <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-22.png" alt="Запрос на изменение расположения блоков" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 2: Уточнение задачи -->
+    <div style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+            <div style="width: 36px; height: 36px; background-color: #9b59b6; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 15px;">2</div>
+            <h4 style="font-size: 22px; color: #34495e; margin: 0; padding-top: 4px;">Указываю модели, что надо получить и отредактировать только 2 этих блока.</h4>
+        </div>
+        <div style="padding-left: 51px;">
+            <p style="margin: 0 0 15px 0; font-size: 16px; font-style: italic; color: #555;">(Чтобы предотвратить получение всего кода, который вероятнее всего будет не полным, а сокращенным в других блоках или контенте.)</p>
+            <blockquote style="margin: 0; padding: 20px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Дай мне код только этих 2 обновленных блоков. Ничего не обрезай и не сокращай.</blockquote>
+            <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-23.png" alt="Уточнение запроса" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок с результатами -->
+    <div style="margin-bottom: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Получаю результат, копирую код и заменяю старые блоки на новые.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-24.png" alt="Полученный код от LLM" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="margin: 0 0 25px 0; font-size: 16px; font-style: italic; color: #555;">(я так же чуть отредактировал отступы, чтобы показать изменения)</p>
+        <p style="margin: 0 0 25px 0; font-size: 18px; line-height: 1.7; color: #34495e;">Сам код мы получили так же двумя блоками, но модель их дополнительно засунула в один блок выделенный в <div>, чтобы сделать горизонтальное положение - это нам не мешает.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-25.png" alt="Анализ полученного кода" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Сохраняю файл, обновляю страницу в браузере и смотрю на результат.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-26.png" alt="Результат на десктопе" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+    
+    <!-- Блок с выводами и осознанием ошибки -->
+    <div style="border-top: 1px solid #dfe6e9; padding-top: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">Выглядит все довольно хорошо, мне нравится. Результат получили соответствующий запросу.</p>
+        
+        <!-- Акцентный блок-предупреждение -->
+        <div style="margin: 30px 0; padding: 25px; background-color: #fff9e6; border-left: 5px solid #f39c12; border-radius: 8px;">
+             <p style="margin: 0; font-size: 17px; color: #5a4d2d; line-height: 1.7;">
+                Но если вы смотрели внимательно, то изначально, мы допустили одну единственную ошибку и при первом запросе не указали 7 пункт "Оптимизировать под мобильные устройства."<br>
+                <em style="color: #8c784a;">(Можете перемотать на самый верх и посмотреть 7 пункт всей наше задачи)</em>
+             </p>
+        </div>
+
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Смортю как сейчас выглядит наша страница на мобильном устройстве.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-27.png" alt="Страница на мобильном устройстве" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+            Что и следовало ожидать… Могу сказать, что например Модель Gemini за частую сама оптимизирует все под мобильные устройства, но все равно, всегда стоит указывать данный пункт.
+        </p>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+            Но пока мы не ушли слишком далеко, а сейчас полный объем нашей страницы со всеми блоками = 373 строчек кода с отступами, что под сильно для DeepSeek.
+        </p>
+        <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+             <img src="path/to/your/image-28.png" alt="Объем кода в 373 строки" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+<!-- НАЧАЛО БЛОКА: ИСПРАВЛЕНИЕ МОБИЛЬНОЙ ВЕРСИИ (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+
+
+    <!-- Описание запроса -->
+    <div style="margin-bottom: 30px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+             Возвращаюсь в DeepSeek и описываю проблема с тем, что нужно сделать.
+        </p>
+        <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px; line-height: 1.8;">> Хорошо, единственное, я забыл тебе вначале указать, что вся страница и все блоки, а так же меню должны быть оптимизированы под мобильные устройства. Дай мне полный код все страницы, сделай все блоки и меню оптимизированными, но главное не меняй стили, цвета, расположения блоков и тд.
+Дай полный код все страницы, ничего не обрезай и не сокращай:
+	
+	"ПОЛНЫЙ_КОД_ВСЕЙ_НАШЕЙ_СТРАНИЦЫ_НА_ДАННЫЙ_МОМЕНТ"</blockquote>
+        <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-29.png" alt="Финальный запрос на мобильную оптимизацию" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+    
+    <!-- Комментарий про запрос -->
+    <div style="margin-bottom: 40px; padding: 15px; background-color: #f0f9ff; border-radius: 8px; border: 1px solid #bde0fe;">
+         <p style="margin: 0; font-size: 16px; color: #0056b3; line-height: 1.6;">
+             В примере я 2 раза пишу "Дай полный код все страницы" - это не обязательно, но можно указывать важные моменты для моделей несколько раз.
+         </p>
+    </div>
+
+    <!-- Результаты -->
+    <div style="margin-bottom: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+            Получаю ответ от модели, так же копирую весь код, заменяю и обновляю страницу в браузере и смотрю на результат.
+        </p>
+        <!-- Адаптивная сетка для двух изображений -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-30.png" alt="Полученный полный код" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-31.png" alt="Обновление страницы в браузере" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Финальный анализ и заключение -->
+    <div style="border-top: 1px solid #dfe6e9; padding-top: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+            Видно, что сейчас страница оптимизирована под мобильные устрйства. Меню в шапке страницы теперь все блоки вмещаются, а вводный текс, блок с меню содержимого страницы идут последовательно друг за другом.
+        </p>
+        <div style="margin-bottom: 40px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+             <img src="path/to/your/image-32.png" alt="Результат на мобильном устройстве" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+
+        <!-- Заключительный блок -->
+        <div style="padding: 25px; background-color: #f1fdf6; border-left: 5px solid #2ecc71; border-radius: 8px;">
+            <p style="margin: 0 0 15px 0; font-size: 18px; color: #1e6e40; line-height: 1.7;">
+                Понравился мне дизайн данной страницы, поэтому основные части сайта с курсом увидите уже в этом темном и мягком стиле.
+            </p>
+
+        </div>
+           <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">
+                Ну и соответственно дальше можно продолжать редактировать внутренние блоки, добавлять, удалять, добиваясь нужного вам результата.
+            </p>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+
+<!-- НАЧАЛО БЛОКА: ДОБАВЛЕНИЕ НОВЫХ ЭЛЕМЕНТОВ (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Заголовок -->
+    <p style="
+        font-size: 28px; 
+        color: #2c3e50; 
+        margin: 0 0 30px 0;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #3498db;
+    ">
+       <strong> И приведу еще пример с добавлением новых блоков</strong>
+    </p>
+
+    <!-- Шаг 1 -->
+    <div style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+            <div style="width: 36px; height: 36px; background-color: #e67e22; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 15px;">1</div>
+            <p style="font-size: 22px; color: #34495e; margin: 0; padding-top: 4px;">Захожу на свой сайт с курсом и делаю скриншот блока.</p>
+        </div>
+        <div style="padding-left: 51px;">
+            <div style="margin-top: 15px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-33.png" alt="Скриншот блока с частями курса" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Шаг 2 -->
+    <div style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+            <div style="width: 36px; height: 36px; background-color: #e67e22; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 15px;">2</div>
+            <p style="font-size: 22px; color: #34495e; margin: 0; padding-top: 4px;">Пишу запрос в DeepSeek и добавляю скриншот.</p>
+        </div>
+        <div style="padding-left: 51px;">
+            <blockquote style="margin: 0; padding: 20px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Хорошо, теперь давай сделаем новый блок для этой страницы на примере вот этого скриншота, сами пункты в этом блоке, должны быть ссылкой на внутреннюю страницу, но сделай в стиле нашего сайта. Дай мне только код этого нового блока</blockquote>
+            <p style="margin: 15px 0 0 0; font-size: 16px; font-style: italic; color: #555;">Главное указать, что сейчас нам надо "Только код этого нового блока", иначе модель начнет исходя из нашего прошлого запроса выдавать всю страницу.</p>
+            <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-34.png" alt="Запрос на создание нового блока по скриншоту" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 3 -->
+    <div style="margin-bottom: 40px;">
+        <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+            <div style="width: 36px; height: 36px; background-color: #e67e22; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 15px;">3</div>
+            <p style="font-size: 22px; color: #34495e; margin: 0; padding-top: 4px;">Получаю результат, копирую код, вставляю и смотрю.</p>
+        </div>
+        <div style="padding-left: 51px;">
+            <p style="margin: 0 0 20px 0; font-size: 18px; color: #34495e; line-height: 1.7;">В целом не плохо, не совсем похоже на скриншот, но с такими же блоками.</p>
+             <div style="margin-top: 15px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-35.png" alt="Результат от LLM - вертикальный список" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Итеративное редактирование -->
+    <div style="margin-bottom: 40px; border-top: 1px solid #dfe6e9; padding-top: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">Ну и приведу последний пример, отредактировав этот блок.</p>
+        <p style="font-size: 22px; color: #34495e; margin: 0 0 15px 0;">Возвращаюсь в LLM и пишу запрос:</p>
+        <blockquote style="margin: 0 0 20px 0; padding: 20px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Хорошо, только давай сделаем так, чтобы пункты в этом блоке были не списком, а в горизонтальные блоки. Дай обновленный код этого блока.</blockquote>
+        <p style="margin: 0 0 20px 0; font-size: 16px; font-style: italic; color: #555;">Не забываем указывать "Дай обновленный код этого блока."</p>
+         <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-36.png" alt="Запрос на изменение на горизонтальные блоки" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">Так же копирую код, обновляю наш новый блок и наблюдаю.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-37.png" alt="Результат с горизонтальными блоками" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">Проверяю как он выглядит на мобильном устройстве.</p>
+        <div style="margin-bottom: 40px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-38.png" alt="Проверка на мобильном устройстве" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0;">Сейчас карточки с уроками в блоки расположены горизонтально, а так же весь блок оптимизирован под мобильные устройства. В целом у нас получилось создать шаблон веб-страницы, которую можно улучшать, изменять, дополнять и развивать под нужные нам цели.</p>
+    </div>
+
+    <!-- Основные выводы -->
+    <div style="background-color: #f0f9ff; border-radius: 12px; padding: 30px; border: 1px solid #bde0fe;">
+        <p style="font-size: 24px; color: #0056b3; margin: 0 0 20px 0;">Основные моменты с этой части верстки:</p>
+        <ol style="margin: 0; padding-left: 25px; font-size: 18px; color: #004085; line-height: 2;">
+            <li style="margin-bottom: 15px;">
+                <strong>Работаем с кодом, как с конструктором.</strong><br>
+                <span style="font-size: 16px; color: #0056b3;">Делить всё на блоки (&ltsection&gt, &ltdiv&gt). Так легче редактировать и менять всё местами при наброске шаблона страницы и неумении работать с кодом.</span>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <strong>Редактируем точечно по блокам,</strong> отправляя только нужный кусок кода с запросом на требуемые изменения.
+            </li>
+			            <li style="margin-bottom: 15px;">
+                <strong>Все стили прописываем inline к каждому блоку.</strong> Если изначально не знаем кода - это упростит нам задачу редактирования и избежания конфликтов между блоками.
+            </li>
+            <li>
+                <strong>Главные команды:</strong><br>
+                <code style="display: block; margin-top: 5px; background: #e2f3ff; color: #003366; padding: 5px 10px; border-radius: 4px;">«Дай код только этого блока»</code>
+                <code style="display: block; margin-top: 5px; background: #e2f3ff; color: #003366; padding: 5px 10px; border-radius: 4px;">«Оптимизируй под мобильные устройства»</code>
+                <code style="display: block; margin-top: 5px; background: #e2f3ff; color: #003366; padding: 5px 10px; border-radius: 4px;">«Ничего не обрезай и не сокращай»</code>
+				<code style="display: block; margin-top: 5px; background: #e2f3ff; color: #003366; padding: 5px 10px; border-radius: 4px;">«Каждый блок на странице должен быть отдельной &ltsection&gt или &ltdiv&gt» </code>
+<code style="display: block; margin-top: 5px; background: #e2f3ff; color: #003366; padding: 5px 10px; border-radius: 4px;">«Все стили должны быть inline внутри своего блока - для удобства редактирования и редоствращения конфликтов в стилях между блоками»</code>
+            </li>
+        </ol>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+
+
+
+<!-- НАЧАЛО БЛОКА: 3.2 PHP И БАЗА ДАННЫХ (ИСПРАВЛЕННЫЙ) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Главный заголовок раздела -->
+    <h2 id="lesson3-part2" style="
+        font-size: clamp(26px, 3.5vw, 34px);
+        color: #2c3e50;
+        margin: 0 0 25px 0;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #3498db;
+        line-height: 1.3;
+    ">
+       3.2 Создание страницы и вывод данных из БД (PHP/HTML)
+    </h2>
+	
+	    <!-- НАЧАЛО НОВОГО БЛОКА С ВИДЕО -->
+    <div style="
+        background-color: #f1fdf6; 
+        border-left: 5px solid #2ecc71; 
+        padding: 25px; 
+        margin: 0 0 40px 0; 
+        border-radius: 8px; 
+        display: flex; 
+        align-items: center; 
+        gap: 20px;
+        box-shadow: 0 5px 20px rgba(46, 204, 113, 0.1);
+    ">
+        <!-- Иконка Play -->
+        <div style="flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 50px; height: 50px; fill: #27ae60;">
+                <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20ZM9.5,8.5l6,3.5-6,3.5Z"/>
+            </svg>
+        </div>
+        <!-- Текстовый контент -->
+        <div style="flex-grow: 1;">
+            <p style="font-size: 18px; line-height: 1.6; color: #1e6e40; margin: 0 0 15px 0; font-weight: 500;">
+                Эту часть курса можно посмотреть в формате видео.
+            </p>
+            <a href="path/to/your/video.mp4" target="_blank" rel="noopener noreferrer" style="
+                display: inline-block; 
+                background-color: #2ecc71; 
+                color: #ffffff; 
+                padding: 12px 25px; 
+                border-radius: 6px; 
+                text-decoration: none; 
+                font-weight: bold; 
+                margin-bottom: 15px;">
+                Смотреть видео
+            </a>
+            <p style="font-size: 15px; color: #2c8a54; margin: 0; font-style: italic;">
+                Примечание: видео записывалось в live-режиме, без пауз и монтажа.
+            </p>
+        </div>
+    </div>
+    <!-- КОНЕЦ НОВОГО БЛОКА С ВИДЕО -->
+	
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 40px 0;">
+        Сейчас на моем проекте есть загрузка аудио файлов зарегистрированными пользователями. И чтобы следить за различной статистикой наблюдая за развитием проекта, я хочу создать страницу, где можно следить за количеством загружаемых аудио, вычислять сколько в среднем загружается в день с момента первой загрузки, общее количество загрузок и тд.
+    </p>
+
+
+
+    <!-- Подзаголовок для шагов -->
+    <h3 style="font-size: 28px; color: #2c3e50; margin: 0 0 40px 0; padding-bottom: 15px; border-bottom: 1px solid #dfe6e9;">
+        Начинаем мы с запроса в LLM
+    </h3>
+
+    <!-- Шаг 1 -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">1</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Всегда для начала нужно ознакомить модель с тем, что у нас имеется.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">У меня есть сайт на php.</blockquote>
+        </div>
+    </div>
+
+    <!-- Шаг 2 -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">2</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Указываем название нужной таблицы в БД.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">Так же есть база данных с таблицей "НАЗВАНИЕ_ТАБЛИЦЫ"</blockquote>
+            <p style="font-size: 16px; font-style: italic; color: #555; margin: 15px 0;">Копирую название таблицы. В моем случае это "beats"</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-39.png" alt="Название таблицы в базе данных" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Шаг 3 (ИСПРАВЛЕННАЯ ВЕРСИЯ) -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">3</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Указываем название всех имеющихся переменных в названии каждого столбца данной таблицы.</p>
+            <!-- ГЛАВНОЕ ИЗМЕНЕНИЕ ЗДЕСЬ -->
+            <blockquote style="
+                margin: 0; 
+                padding: 15px; 
+                background: #f8f9fa; 
+                border-left: 3px solid #6c757d; 
+                border-radius: 6px; 
+                font-family: 'Courier New', Courier, monospace; 
+                color: #333; 
+                overflow-wrap: anywhere; /* Позволяет разрывать длинные строки где угодно */
+                word-break: break-word; /* Дополнительная мера для старых браузеров */
+            ">Таблица содержит вот такие вот столбцы "ВСЕ_НАЗВАНИЯ_СТОЛБЦОВ_В_ДАННОЙ_ТАБЛИЦЕ"</blockquote>
+            <p style="font-size: 16px; font-style: italic; color: #555; margin: 15px 0;">Копируем, все названия столбцов в данной таблице. Можно столбиком, через запятую, в строчку, кому как удобно.</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-40.png" alt="Названия столбцов таблицы" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 4 -->
+     <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">4</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Описываем полностью всю задачу расписывая все до деталей. Тут можно все структурировать разбив на пункты, а можно просто описать все в 1 абзац. Зависит от объема самой задачи, в моем случае пунктов не много, поэтому опишу все в 1 абзац.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Мне надо создать страницу сайта на которой я хочу вывести статистику по общему количеству beat, а так же посчитать среднее количество загружаемых beat в сутки начиная от первой записи. Так же покажи сколько beat максиму загружено было за 1 день. Так же давай сделаем таблицу с 20 записями по последним добавленным beat. Пуска таблица будет внизу иметь кнопку "Показать еще" при нажатии на
+которую мы будет показывать еще 20 записей.</blockquote>
+             <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-41.png" alt="Описание задачи для LLM" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 5 -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">5</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Далее все зависит от требуемых параметров вашей страницы (Подключение файлов, Дизайн, Проверка авторизации и тд.). Тут если у вас есть пример уже существующей страницы, то можно использовать его как шаблон для того, чтобы модель примерно понимала,что нужно.</p>
+             <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0;">В моем случае такая страница есть с требуемыми техническими моментами и примерным дизайном, поэтому предоставляю ее как пример.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Для примера используй вот эту вот страницу моего сайта. Возьми основные моменты с авторизацией пользователя, а так же стили и подключение основных нужных файлов такие как Header, Footer.
+
+Пример страницы - "КОД_СТРАНИЦЫ_ПРИМЕРА"</blockquote>
+            <div style="margin: 20px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-42.png" alt="Предоставление примера страницы" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+            <!-- Информационный блок -->
+            <div style="padding: 25px; background-color: #f0f9ff; border: 1px solid #bde0fe; border-radius: 8px;">
+                <p style="margin: 0 0 15px 0; font-size: 16px; color: #0056b3; line-height: 1.6;">
+                    <strong>В случае если у вас нету примера, нету дизайна, нету технических моментов и тд.</strong>
+                </p>
+                <p style="margin: 0 0 15px 0; font-size: 16px; color: #0056b3; line-height: 1.6;">То вам следует в этом 5 пункте:</p>
+                <ul style="margin: 0 0 15px 0; padding-left: 20px; font-size: 16px; color: #0056b3; line-height: 1.7;">
+                    <li style="margin-bottom: 8px;">описать требуемый дизайн (цвета, блоки, расположение и тд.)</li>
+                    <li style="margin-bottom: 8px;">технические моменты с авторизацией</li>
+                    <li style="margin-bottom: 8px;">то как должна выглядеть шапка и подвал данной страницы</li>
+                    <li>Дополнительные параметры</li>
+                </ul>
+                <p style="margin: 0; font-size: 16px; color: #0056b3; line-height: 1.6;">Если вы не придумали как эта страница должна выглядеть, какие требуются технические моменты и прочее. То рекомендую дать возможность модели для фантазий, а уже потом редактировать на полученном результате. А так же, можно попросить модель продумать важные моменты. (не всегда она делает хорошо)</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Шаг 6 -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">6</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Указываем для модели, что нам надо получить полный код, ничего не обрезать и не сокращать, во избежание получения не полной страницы или обрезанного материала.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">Дай мне полный код. Ничего не обрезай и не сокращай.</blockquote>
+            <p style="font-size: 16px; font-style: italic; color: #555; margin: 15px 0;">Такие дополнения вы можете посмотреть на сайте с курсом в разделе промтов. https://ai-dispetcher.ru/prompts</p>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-43.png" alt="Финальная инструкция для LLM" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 7 -->
+    <div class="step-item-l3-v2" style="display: flex; align-items: flex-start; margin-bottom: 40px;">
+        <div class="step-number-l3-v2" style="width: 36px; height: 36px; background-color: #16a085; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">7</div>
+        <div style="flex-grow: 1; min-width: 0;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Копируем полученный результат, обновляем файл и смотрим на результат.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-44.png" alt="Полученный от LLM код" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+                <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <img src="path/to/your/image-45.png" alt="Результат на странице статистики" style=": 100%; height: auto; display: block; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Заключительный блок с выводами -->
+    <div style="border-top: 1px solid #dfe6e9; padding-top: 40px;">
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+            Все работает, выглядит довольно хорошо для страницы со статистикой, а главное результат получился с 1 запроса.
+        </p>
+         <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0: 20px 0;">
+            Если не устраивает, то мы можем продолжить редактирование данной страницы в этом же чате. Просто описываем модели, что нам надо изменить (цвета, блоки, отображение информации, добавить еще вывод каких-то параметров или подсчетов и тд.). Ограничений в этом плане нету.
+        </p>
+        <!-- Важный совет -->
+        <div style="margin: 30px 0; padding: 25px; background-color: #fef9e7; border-left: 5px solid #f1c40f; border-radius: 8px;">
+            <p style="margin: 0; font-size: 17px; color: #6e5f0d; line-height: 1.7;">
+                Главное понимать, что если вы дальше продолжаете редактировать эту страницу в этом же чате, то не забывайте добавлять в конце запроса: <br>
+                <strong style="font-family: 'Courier New', Courier, monospace; color: #8e761c; overflow-wrap: break-word;">> "Дай мне полный, обновленный код. Ничего не обрезай и не сокращай."</strong>
+            </p>
+             <p style="margin: 15px 0 0 0; font-size: 17px; color: #6e5f0d; line-height: 1.7;">
+                Иначе можете столкнуться с проблемой, где модель будет сокращать моменты, что остаются без изменений. А так же учитывайте, что через несколько запросов, модель может потерять суть задачи или заменить названия переменных. В таких случаях я рекомендую начать промт с самого начала, но тут можно давать написанный код данной страницы, а далее описывать, что хотите изменить. Как это делать, я покажу далее в пункте 3.3.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Стили для мобильной адаптации этого конкретного блока -->
+<style>
+    @media (: 500px) {
+        .step-item-l3-v2 {
+            flex-direction: column; /* Ставим элементы друг под другом */
+            align-items: flex-start; /* Выравниваем по левому краю */
         }
-        .intro-menu-area-l3 {
-            width: 100%; /* Меню занимает всю ширину */
-        }
-        .intro-menu-area-l3 > div {
-            position: static; /* Отключаем "прилипание" на мобильных */
+        .step-number-l3-v2 {
+            margin-right: 0; /* Убираем правый отступ у кружка */
+            margin-bottom: 15px; /* Добавляем нижний отступ */
         }
     }
 </style>
-<!-- КОНЕЦ БЛОКА: ВВЕДЕНИЕ В УРОК 3 -->
+<!-- КОНЕЦ БЛОКА -->
 
 
-		    
 
 
+
+<!-- НАЧАЛО БЛОКА: 3.3 РАБОТА С PHP И MYSQL (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Главный заголовок раздела -->
+    <h2 id="lesson3-part3" style="
+        font-size: clamp(26px, 3.5vw, 34px);
+        color: #2c3e50;
+        margin: 0 0 25px 0;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #3498db;
+        line-height: 1.3;
+    ">
+       3.3 Редактирование существующей страницы + Создание таблицы в БД.
+    </h2>
+	
+	    <!-- НАЧАЛО НОВОГО БЛОКА С ВИДЕО -->
+    <div style="
+        background-color: #f1fdf6; 
+        border-left: 5px solid #2ecc71; 
+        padding: 25px; 
+        margin: 0 0 40px 0; 
+        border-radius: 8px; 
+        display: flex; 
+        align-items: center; 
+        gap: 20px;
+        box-shadow: 0 5px 20px rgba(46, 204, 113, 0.1);
+    ">
+        <!-- Иконка Play -->
+        <div style="flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 50px; height: 50px; fill: #27ae60;">
+                <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20ZM9.5,8.5l6,3.5-6,3.5Z"/>
+            </svg>
+        </div>
+        <!-- Текстовый контент -->
+        <div style="flex-grow: 1;">
+            <p style="font-size: 18px; line-height: 1.6; color: #1e6e40; margin: 0 0 15px 0; font-weight: 500;">
+                Эту часть курса также можно посмотреть в формате видео.
+            </p>
+            <a href="path/to/your/video.mp4" target="_blank" rel="noopener noreferrer" style="
+                display: inline-block; 
+                background-color: #2ecc71; 
+                color: #ffffff; 
+                padding: 12px 25px; 
+                border-radius: 6px; 
+                text-decoration: none; 
+                font-weight: bold; 
+                margin-bottom: 15px;">
+                Смотреть видео
+            </a>
+            <p style="font-size: 15px; color: #2c8a54; margin: 0; font-style: italic;">
+                Примечание: видео записывалось в live-режиме, без пауз и монтажа.
+            </p>
+        </div>
+    </div>
+    <!-- КОНЕЦ НОВОГО БЛОКА С ВИДЕО -->
+	
+	
+	
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+        Для примера приведу то, как я работаю с базой данных MySQL с редактированием и расширением существующей страницы.
+    </p>
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0: 20px 0;">
+        Сейчас у меня есть страница админа, которая позволяет делать рассылку писем зарегистрированным пользователям.
+    </p>
+    <div style="margin: 25px 0 40px 0; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <img src="path/to/your/image-46.png" alt="Страница админки для рассылки писем" style=": 100%; height: auto; display: block; border-radius: 8px;">
+    </div>
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+        На данный момент, на странице доступно несколько возможностей, выбрать пользователя(ей), заполнить Title, сообщение и выбрать количество пользователей, кому отправить письмо.
+    </p>
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">
+        Сейчас мне не хватает функционала, где я смогу сразу же выбирать шаблон письма из БД и делать по нему рассылку. Так же нужно будет добавить форму для создания таких шаблонов с сохранением в БД.
+    </p>
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 40px 0;">
+        Для этого я буду использовать модель Gemini 2.5, код данной страницы и базу данных mySQL. Само выполнения задачи, я хочу осуществить в 1 промт с полным функционалом, и так:
+    </p>
+
+    <!-- Подзаголовок для шагов -->
+    <h3 style="font-size: 28px; color: #2c3e50; margin: 0 0 40px 0; padding-bottom: 15px; border-bottom: 1px solid #dfe6e9;">
+        Пишем запрос в LLM
+    </h3>
+    <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: -20px 0 30px 0;">
+        Сам промт надо разбить на части:
+    </p>
+
+    <!-- Шаги создания промта -->
+    <!-- Шаг 1 -->
+    <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+        <div style="width: 36px; height: 36px; background-color: #2980b9; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">1</div>
+        <div style="flex-grow: 1;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Пояснение, что у нас имеется, какую функцию выполняет.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">У меня есть страница сайта для отправки писем на почту зарегистрированным
+пользователям. Сам файл у меня в PHP.</blockquote>
+        </div>
+    </div>
+    <!-- Шаг 2 -->
+    <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+        <div style="width: 36px; height: 36px; background-color: #2980b9; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">2</div>
+        <div style="flex-grow: 1;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Код нашей страницы.</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; overflow-wrap: break-word;">"КОД_СТРАНИЦЫ"</blockquote>
+        </div>
+    </div>
+    <!-- Шаг 3 -->
+    <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+        <div style="width: 36px; height: 36px; background-color: #2980b9; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; flex-shrink: 0; margin-right: 20px;">3</div>
+        <div style="flex-grow: 1;">
+            <p style="font-size: 17px; color: #34495e; line-height: 1.6; margin: 0 0 15px 0; padding-top: 5px;">Описываем, что нам нужно сделать расписав все до деталей! (Тут можно структурировать на пункты если задача большая. В данном случае я распишу все просто 1 абзацем. А так же мы можем указать модели, чтобы она продумала требуемые столбы в БД самостоятельно)</p>
+            <blockquote style="margin: 0; padding: 15px; background: #f8f9fa; border-left: 3px solid #6c757d; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: #333; white-space: pre-wrap; overflow-wrap: break-word;">Я хочу добавить форму для добавления шаблонов сообщений в базу данных. Сама база данных у меня mySQL. Так же у существующей формы сообщений должна быть возможность выбора шаблона. Дай мне запрос в базу данных mySQL под хранение этих шаблонов. Продумай какие там должны быть столбы в этой таблице для наших шаблонов. Все запросы для добавления в БД и тд. Должны быть в одном файле. Дай мне полный, обновленный код. Ничего не обрезай и не сокращай. Внеси только нужные изменения, остальное оставь без изменений.</blockquote>
+            <div style="margin-top: 20px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-47.png" alt="Запрос на расширение функционала" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Процесс выполнения -->
+    <div style="border-top: 1px solid #dfe6e9; padding-top: 40px; margin-top: 50px;">
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 0 0 20px 0;">Отправляем запрос в LLM</h3>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Получаем ответ от модели. Для начала она нам описывает, что вообще планируется сделать.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-48.png" alt="Описание плана от Gemini" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Так как мы указывали, что нам надо создать таблицу в mySQL и чтобы она самостоятельно продумывала требуемые столбцы, в ее ответе мы получаем первым шагом именно создание этой таблицы в виде запроса mySQL.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-49.png" alt="SQL-запрос от Gemini" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <blockquote style="margin: 0 0 25px 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 14px; line-height: 1.8;">> CREATE TABLE email_templates (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+subject VARCHAR(255) NOT NULL,
+message TEXT NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</blockquote>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Копирую данный запрос и вставляю в БД.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-50.png" alt="Вставка SQL-запроса в phpMyAdmin" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+            <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <img src="path/to/your/image-51.png" alt="Успешное создание таблицы" style=": 100%; height: auto; display: block; border-radius: 8px;">
+            </div>
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">После созданной таблицы возвращаюсь к ответу Gemini и копирую предоставленный код.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-52.png" alt="Копирование PHP-кода от Gemini" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Заменяю старый код на новый, сохраняю и иду проверять нашу страницу.</p>
+         <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-53.png" alt="Сохранение нового кода" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Добавилось новое поле с выбором шаблона. Так же ниже появилась форма для добавления шаблонов с кнопкой "Сохранить Шаблон"</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-54.png" alt="Новый интерфейс страницы" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Пробую добавить шаблон и нажимаю сохранить.</p>
+         <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-55.png" alt="Добавление нового шаблона" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Получаю сообщение с успешным сохранением шаблона.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-56.png" alt="Сообщение об успехе" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">В новом поле с выбором вижу отображение добавленного шаблона.</p>
+        <div style="margin-bottom: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-57.png" alt="Отображение шаблона в списке" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 25px 0;">Пробую добавить еще один шаблон и проверяю таблицу в БД.</p>
+        <div style="margin-bottom: 40px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="path/to/your/image-58.png" alt="Проверка таблицы в базе данных" style=": 100%; height: auto; display: block; border-radius: 8px;">
+        </div>
+    </div>
+    
+    <!-- Финальный блок-заключение -->
+    <div style="padding: 30px; background-color: #f1fdf6; border-left: 5px solid #2ecc71; border-radius: 8px;">
+        <h4 style="font-size: 24px; color: #1e6e40; margin: 0 0 20px 0;">Успех!</h4>
+        <p style="margin: 0 0 15px 0; font-size: 18px; color: #2c8a54; line-height: 1.7;">
+            Все работает, получилось сделать в один запрос как и планировалось. Данный процесс можно подогнать под работу в любой базе данных, с любым кодом и функционалом.
+        </p>
+        <p style="margin: 0; font-size: 18px; color: #2c8a54; line-height: 1.7; font-weight: 500;">
+            Главное правильно расписать промт по выше указанной структуре и нужными параметрами, где мы сначала знакомим модель с тем, что у нас есть, а затем детально расписываем всю задачу. И тут не настолько важно детально указывать какие нам нужны названия столбцов и тд. Достаточно расписанных пунктов, что должно происходить, заполняться, где и как. А модель уже самостоятельно продумает требуемые переменные.
+        </p>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
+
+
+
+
+
+
+<!-- НАЧАЛО БЛОКА: ПРОМТЫ И ТЕСТОВОЕ ЗАДАНИЕ (100% INLINE) -->
+<section style="
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    : 840px;
+    margin: 60px auto;
+    padding: 0 20px;
+">
+    <!-- Заголовок раздела "Промты" -->
+    <h2 id="lesson3-part4" style="
+        font-size: clamp(26px, 3.5vw, 34px);
+        color: #2c3e50;
+        margin: 0 0 30px 0;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #3498db;
+        line-height: 1.3;
+    ">
+       Промты:
+    </h2>
+
+    <!-- Нумерованный список промтов -->
+    <ol style="list-style: none; padding-left: 0;">
+        <!-- Промт 1 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>1. Верстка для разделения внутренних блоков на отдельные секции и написание inline стилей.</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">> Каждый блок на странице должен быть отдельной <section> или <div>, а стили к каждому блоку должны быть inline внутри этого блока - это нужно для удобства редактирования, чтобы не было конфликта в стилях, а так же, чтобы я мог менять их местами.</blockquote>
+        </li>
+        <!-- Промт 2 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>2. Редактируем точечно, а не всё сразу.</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">> Дай мне код только этого обновленного блока.</blockquote>
+        </li>
+        <!-- Промт 3 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>3. Знакомим модель с проектом (для бэкенда и БД).</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">> У меня есть сайт на php. Так же есть база данных с таблицей "НАЗВАНИЕ_ТАБЛИЦЫ". Таблица содержит вот такие вот столбцы: "СПИСОК_СТОЛБЦОВ"</blockquote>
+        </li>
+        <!-- Промт 4 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>4. Используем существующий код как пример.</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">> Для примера используй вот эту вот страницу моего сайта. Возьми основные моменты с…, а так же стили и подключение… :
+	 [ВЕСЬ КОД СТРАНИЦЫ-ПРИМЕРА]</blockquote>
+        </li>
+        <!-- Промт 5 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>5. Просим модель спроектировать решение в БД.</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">> Дай мне запрос в базу данных mySQL под хранение этих данных с новых блоков. Продумай какие там должны быть столбы в этой таблице…</blockquote>
+        </li>
+         <!-- Промт 6 -->
+        <li style="margin-bottom: 40px;">
+            <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 15px 0;"><strong>6. Главные команды-ограничители.</strong></p>
+            <blockquote style="margin: 0; padding: 20px; background: #2c3e50; color: #ecf0f1; border-left: 4px solid #3498db; border-radius: 8px; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; font-size: 15px;">- Дай мне полный, обновленный код.
+- Ничего не обрезай и не сокращай.
+- Внеси только нужные изменения, остальное оставь без изменений.</blockquote>
+        </li>
+    </ol>
+    
+    <!-- Дополнительные параметры -->
+    <div style="margin-top: 50px; border-top: 1px solid #dfe6e9; padding-top: 40px;">
+        <h4 style="font-size: 24px; color: #2c3e50; margin: 0 0 20px 0;">ДОПОЛНИТЕЛЬНО:</h4>
+        <p style="font-size: 18px; line-height: 1.7; color: #34495e; margin: 0 0 20px 0;">Генерация код, который взаимодействует с Базой Данных. (В этой части курса, я не использую данные дополнения и рекомендую использовать исходя из ваших требований.)</p>
+        <!-- Security -->
+        <div style="margin-bottom: 20px; padding: 20px; background-color: #fef4f4; border-left: 5px solid #e74c3c; border-radius: 8px;">
+            <p style="font-weight: bold; font-size: 17px; color: #9c3327; margin: 0 0 10px 0;">[Security]</p>
+            <p style="font-size: 16px; line-height: 1.7; color: #5c2c2c; margin: 0;">Всегда валидируй и очищай (sanitize) пользовательский ввод. Используй безопасные методы взаимодействия с базой данных для предотвращения инъекций. Правильно экранируй весь вывод перед отображением пользователю.</p>
+        </div>
+        <!-- Performance -->
+        <div style="padding: 20px; background-color: #f1fdf6; border-left: 5px solid #2ecc71; border-radius: 8px;">
+            <p style="font-weight: bold; font-size: 17px; color: #1e6e40; margin: 0 0 10px 0;">[Performance]</p>
+            <p style="font-size: 16px; line-height: 1.7; color: #2c8a54; margin: 0;">Оптимизируй взаимодействие с данными для снижения нагрузки. Минимизируй количество запросов к базе данных (используй JOINs вместо N+1). Эффективно обрабатывай данные. Рассмотри кэширование для часто используемых результатов.</p>
+        </div>
+    </div>
+    
+    <!-- Авторский комментарий -->
+    <div style="margin: 50px 0; padding: 25px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+        <p style="font-size: 17px; line-height: 1.7; color: #555; margin: 0 0 15px 0;">
+            Так же хотел упомянуть свои слова из 2 части, что в этой части я разберу еще несколько моментов с LLM, а уже затем перейдем к практике, но из-за постоянных изменений в использовании ИИ, все меняется с такой скоростью, что некоторые моменты становятся не актуальны. Таким образом мной было принято решение, изложить все недочеты и изменения в последующих частях курса.
+        </p>
+        <p style="font-size: 17px; line-height: 1.7; color: #555; margin: 0;">
+            Так же перейдем к дополнительным моментам оптимизации сайта, которые повышают видимость в поисковых системах (SEO).
+        </p>
+    </div>
+
+    <!-- Тестовое задание -->
+    <div id="lesson3-task" style="margin-top: 60px; padding: 30px; border: 2px solid #3498db; border-radius: 12px; background-color: #f0f9ff;">
+        <h2 style="font-size: 32px; color: #0056b3; margin: 0 0 20px 0;">Тестовое задание:</h2>
+        <p style="font-size: 18px; line-height: 1.7; color: #004085; margin: 0 0 20px 0;">
+            Создайте страницу на подобии сервиса <a href="https://taplink.ru/" target="_blank" rel="noopener noreferrer" style="color: #0056b3; font-weight: bold; text-decoration: underline;">Taplink</a>.
+        </p>
+        <p style="font-size: 18px; line-height: 1.7; color: #004085; margin: 0 0 20px 0;">Сделайте:</p>
+        <ol style="margin: 0 0 25px 0; padding-left: 25px; font-size: 18px; color: #004085; line-height: 1.8;">
+            <li style="margin-bottom: 10px;">Меню - (Header)</li>
+            <li style="margin-bottom: 10px;">Форму заявки как в 1 части курса</li>
+            <li style="margin-bottom: 10px;">Ссылки на ваши соц. сети</li>
+            <li style="margin-bottom: 10px;">Блок о себе</li>
+            <li style="margin-bottom: 10px;">По фантазируйте</li>
+            <li>Подвал - (Footer)</li>
+        </ol>
+        <p style="font-size: 18px; line-height: 1.7; color: #004085; margin: 0 0 20px 0;">
+            Сделайте интерактив и передайте свои представления идеальной веб-страницы предоставляющей вас и ваши услуги.
+        </p>
+        <p style="font-size: 18px; line-height: 1.7; color: #004085; margin: 0 0 20px 0;">
+            Для примера можно посмотреть на мою страницу сайта, что я создал на подобии по этой ссылки.
+        </p>
+        <p style="font-size: 18px; line-height: 1.7; color: #004085; margin: 0;">
+            Используйте любые удобные для вас инструменты или инструменты, которые я используя в примерах этого курса.
+        </p>
+    </div>
+</section>
+<!-- КОНЕЦ БЛОКА -->
 
            <!-- Добавьте сюда другие секции и элементы -->
 
-		    
-            </main>
-            <!-- 
-            ============================================================
-            КОНЕЦ ОБЛАСТИ ДЛЯ ВАШЕГО КОНТЕНТА
-            ============================================================
-            -->
-            
+   </main> <!-- Конец левой колонки с контентом -->
+
+    <!-- 
+        ПРАВАЯ КОЛОНКА: ЗДЕСЬ НАХОДИТСЯ ДЕСКТОПНАЯ НАВИГАЦИЯ
+    -->
+    <aside id="desktopNavAside" style="width: 320px; flex-shrink: 0;">
+        <div style="position: sticky; top: 100px;">
+             <div style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07); border: 1px solid #e9ecef;">
+                <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+                    Навигация по уроку
+                </h3>
+                <ul id="lessonNavigationList" style="list-style: none; padding: 0; margin: 0;">
+                     <li style="margin-bottom: 5px;"><a href="#lesson3-part1" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">1. Верстка - HTML</a></li>
+                     <li style="margin-bottom: 5px;"><a href="#lesson3-part2" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">2. Создание страницы и вывод данных</a></li>
+                     <li style="margin-bottom: 5px;"><a href="#lesson3-part3" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">3. Работа с базой данных</a></li>
+                     <li style="margin-bottom: 5px;"><a href="#lesson3-part4" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">4. Промты для кода</a></li>
+                     <li style="margin-bottom: 5px;"><a href="#lesson3-task" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">5. Тестовое задание!</a></li>
+                </ul>
+            </div>
         </div>
+    </aside> <!-- Конец правой колонки с навигацией -->
+
+</div> <!-- Конец главного контейнера страницы -->
+
+<!-- 
+    ===================================================================
+    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (находятся вне основной сетки)
+    ===================================================================
+-->
+<div id="openMenuFab_v4" style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background-color: #3498db; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: white;"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+</div>
+
+<div id="menuOverlay_v4" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease-in-out;"></div>
+
+<div id="mobileNavMenu_v4" style="position: fixed; top: 0; right: 0; width: 300px; max-width: 80%; height: 100%; background-color: #ffffff; box-shadow: -4px 0 15px rgba(0,0,0,0.1); z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 25px;">
+    <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">Навигация</h3>
+    <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
+        <li style="margin-bottom: 10px;"><a href="#lesson3-part1" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">1. Верстка - HTML</a></li>
+        <li style="margin-bottom: 10px;"><a href="#lesson3-part2" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">2. Создание страницы и вывод данных</a></li>
+        <li style="margin-bottom: 10px;"><a href="#lesson3-part3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">3. Работа с базой данных</a></li>
+        <li style="margin-bottom: 10px;"><a href="#lesson3-part4" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">4. Промты для кода</a></li>
+        <li><a href="#lesson3-task" style="display: block; padding: 12px 15px; color: #0056b3; text-decoration: none; border-radius: 8px; font-weight: 500; background: #eaf5ff;">5. Тестовое задание!</a></li>
+    </ul>
+    <a id="scrollToTopBtn_v4" href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 20px; border-top: 1px solid #eee; text-decoration: none; color: #3498db; font-weight: 500;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+        Наверх
+    </a>
+</div>
+
+<!-- 
+    ===================================================================
+    СКРИПТ И СТИЛИ ДЛЯ РАБОТЫ ВСЕЙ ЛОГИКИ
+    ===================================================================
+-->
+<style>
+    /* Стиль для активного пункта меню навигации. Он нужен для подсветки */
+    .lesson-nav-link.active {
+        background-color: #eaf5ff !important;
+        color: #0056b3 !important;
+        transform: translateX(5px);
+    }
+</style>
+
+<script>
+(function() {
+    // Уникальные ID для этого блока
+    const fabId = 'openMenuFab_v4';
+    const overlayId = 'menuOverlay_v4';
+    const mobileMenuId = 'mobileNavMenu_v4';
+    const scrollToTopId = 'scrollToTopBtn_v4';
+    const desktopAsideId = 'desktopNavAside';
+
+    const fab = document.getElementById(fabId);
+    const overlay = document.getElementById(overlayId);
+    const mobileMenu = document.getElementById(mobileMenuId);
+    const scrollToTopButton = document.getElementById(scrollToTopId);
+    const desktopAside = document.getElementById(desktopAsideId);
+    
+    if (!fab || !overlay || !mobileMenu || !scrollToTopButton || !desktopAside) {
+        return;
+    }
+
+    // --- ФУНКЦИЯ ДЛЯ УПРАВЛЕНИЯ ВИДИМОСТЬЮ НАВИГАЦИИ ---
+    function handleNavigationVisibility() {
+        if (window.innerWidth <= 992) {
+            desktopAside.style.display = 'none';
+            fab.style.display = 'flex';
+        } else {
+            desktopAside.style.display = 'block';
+            fab.style.display = 'none';
+            closeMobileMenu(); // Закрываем мобильное меню на широком экране
+        }
+    }
+
+    // --- ЛОГИКА ДЛЯ ПОДСВЕТКИ АКТИВНЫХ ССЫЛОК НА ДЕСКТОПЕ ---
+    const navLinks = desktopAside.querySelectorAll('.lesson-nav-link');
+    const sections = Array.from(navLinks).map(link => {
+        const id = link.getAttribute('href').substring(1);
+        return document.getElementById(id);
+    }).filter(section => section !== null);
+
+    function highlightNavLink() {
+        if (window.innerWidth <= 992) return;
+        let currentSectionId = '';
+        const offset = 150;
+        sections.forEach(section => {
+            if (section.getBoundingClientRect().top < offset) {
+                currentSectionId = section.id;
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${currentSectionId}`);
+        });
+    }
+
+    // --- ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    function openMobileMenu() {
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.style.opacity = '1', 10);
+        mobileMenu.style.transform = 'translateX(0)';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        mobileMenu.style.transform = 'translateX(100%)';
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+        document.body.style.overflow = '';
+    }
+    
+    fab.onclick = openMobileMenu;
+    overlay.onclick = closeMobileMenu;
+
+    scrollToTopButton.onclick = function(event) {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeMobileMenu();
+    };
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        if (link.id !== scrollToTopId) { link.onclick = closeMobileMenu; }
+    });
+
+    // --- ОБЩИЕ ОБРАБОТЧИКИ СОБЫТИЙ ---
+    window.addEventListener('scroll', function() {
+        if (fab.style.display === 'flex') {
+            const isVisible = window.scrollY > 300;
+            fab.style.opacity = isVisible ? '1' : '0';
+            fab.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
+            fab.style.pointerEvents = isVisible ? 'auto' : 'none';
+        }
+        highlightNavLink();
+    });
+    
+    // Вызываем функции при загрузке и изменении размера окна
+    handleNavigationVisibility();
+    highlightNavLink();
+    window.addEventListener('resize', handleNavigationVisibility);
+})();
+</script>
+
+
+	    
     </div>
 
     <!-- Подключение Footer -->
