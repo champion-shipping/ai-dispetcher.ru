@@ -1560,161 +1560,134 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
    </main> <!-- Конец левой колонки с контентом -->
 
- <aside id="lesson-nav-desktop" style="width: 320px; flex-shrink: 0;">
-        <div style="position: sticky; top: 100px;">
-             <div style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07); border: 1px solid #e9ecef;">
-                <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                    Навигация по уроку
-                </h3>
-                <ul id="lesson-nav-list" style="list-style: none; padding: 0; margin: 0;">
-                     <li style="margin-bottom: 5px;"><a href="#lesson3-part1" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">1. Верстка - HTML</a></li>
-                     <li style="margin-bottom: 5px;"><a href="#lesson3-part2" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">2. Создание страницы и вывод данных</a></li>
-                     <li style="margin-bottom: 5px;"><a href="#lesson3-part3" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">3. Работа с базой данных</a></li>
-                     <li style="margin-bottom: 5px;"><a href="#lesson3-part4" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">4. Промты для кода</a></li>
-                     <li style="margin-bottom: 5px;"><a href="#lesson3-task" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;">5. Тестовое задание!</a></li>
-                </ul>
+ <!-- 
+        ПРАВАЯ КОЛОНКА: НАВИГАЦИЯ (ДЕСКТОП И МОБИЛЬНАЯ ВЕРСИЯ В ОДНОМ)
+    -->
+    <aside id="lesson-nav-aside" style="width: 320px; flex-shrink: 0;">
+        <div id="lesson-nav-sticky-wrapper" style="position: sticky; top: 100px;">
+             <div style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07); border: 1px solid #e9ecef; overflow: hidden;">
+                <!-- Заголовок-кнопка для аккордеона -->
+                <div id="lesson-nav-header" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                    <h3 style="margin: 0; color: #3498db; font-size: 20px;">Навигация по уроку</h3>
+                    <!-- Стрелочка, видна только на мобильных -->
+                    <div id="lesson-nav-arrow" style="width: 24px; height: 24px; transition: transform 0.3s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #3498db;"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <!-- Список ссылок, который будет сворачиваться -->
+                <div id="lesson-nav-list-container" style="transition: max-height 0.4s ease-in-out, margin-top 0.4s ease-in-out;">
+                    <ul id="lesson-nav-list" style="list-style: none; padding: 0; margin: 0;">
+                         <li style="margin-bottom: 5px;"><a href="#lesson3-part1" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">1. Верстка - HTML</a></li>
+                         <li style="margin-bottom: 5px;"><a href="#lesson3-part2" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">2. Создание страницы и вывод данных</a></li>
+                         <li style="margin-bottom: 5px;"><a href="#lesson3-part3" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">3. Работа с базой данных</a></li>
+                         <li style="margin-bottom: 5px;"><a href="#lesson3-part4" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">4. Промты для кода</a></li>
+                         <li style="margin-bottom: 5px;"><a href="#lesson3-task" class="lesson-nav-link" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">5. Тестовое задание!</a></li>
+                         <li id="lesson-nav-go-top" style="border-top: 1px solid #eee; margin-top: 15px; padding-top: 10px;"><a href="#" style="display: block; padding: 10px 15px; color: #3498db; text-decoration: none; font-weight: 500;">Наверх</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </aside> <!-- Конец правой колонки с навигацией -->
+    </aside>
 
-</div> <!-- Конец главного контейнера страницы -->
-
-<!-- 
-    ===================================================================
-    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (С УНИКАЛЬНЫМИ ID)
-    ===================================================================
--->
-<div id="lesson-nav-fab" style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background-color: #3498db; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: white;"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
-</div>
-
-<div id="lesson-nav-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease-in-out;"></div>
-
-<div id="lesson-nav-menu" style="position: fixed; top: 0; right: 0; width: 300px; max-width: 80%; height: 100%; background-color: #ffffff; box-shadow: -4px 0 15px rgba(0,0,0,0.1); z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 25px;">
-    <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">Навигация</h3>
-    <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
-        <li style="margin-bottom: 10px;"><a href="#lesson3-part1" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">1. Верстка - HTML</a></li>
-        <li style="margin-bottom: 10px;"><a href="#lesson3-part2" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">2. Создание страницы и вывод данных</a></li>
-        <li style="margin-bottom: 10px;"><a href="#lesson3-part3" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">3. Работа с базой данных</a></li>
-        <li style="margin-bottom: 10px;"><a href="#lesson3-part4" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">4. Промты для кода</a></li>
-        <li><a href="#lesson3-task" style="display: block; padding: 12px 15px; color: #0056b3; text-decoration: none; border-radius: 8px; font-weight: 500; background: #eaf5ff;">5. Тестовое задание!</a></li>
-    </ul>
-    <a id="lesson-nav-scrollTop" href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 20px; border-top: 1px solid #eee; text-decoration: none; color: #3498db; font-weight: 500;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
-        Наверх
-    </a>
 </div>
 
 <!-- 
     ===================================================================
-    СКРИПТ И СТИЛИ ДЛЯ РАБОТЫ ВСЕЙ ЛОГИКИ
+    СКРИПТ И СТИЛИ ДЛЯ РАБОТЫ НАВИГАЦИИ
     ===================================================================
 -->
 <style>
-    /* Стиль для активного пункта меню навигации */
     .lesson-nav-link.active {
         background-color: #eaf5ff !important;
         color: #0056b3 !important;
         transform: translateX(5px);
     }
-    /* Уникальный класс для блокировки скролла, чтобы не конфликтовать */
-    body.lesson-nav-open {
-        overflow: hidden;
+    @media (max-width: 992px) {
+        #lesson-nav-aside {
+            width: 100%;
+            order: -1; /* Ставим меню ПЕРЕД основным контентом на мобильных */
+        }
+        #lesson-nav-sticky-wrapper {
+            position: static !important; /* Отключаем "прилипание" на мобильных */
+        }
     }
 </style>
 
 <script>
-// Оборачиваем весь код в (function() { ... })(); для полной изоляции
 (function() {
-    // Уникальные ID и переменные
-    const fab = document.getElementById('lesson-nav-fab');
-    const overlay = document.getElementById('lesson-nav-overlay');
-    const mobileMenu = document.getElementById('lesson-nav-menu');
-    const scrollTopBtn = document.getElementById('lesson-nav-scrollTop');
-    const desktopNav = document.getElementById('lesson-nav-desktop');
-    
-    if (!fab || !overlay || !mobileMenu || !scrollTopBtn || !desktopNav) {
-        console.error("Не удалось найти все элементы навигации урока.");
-        return;
-    }
+    const navAside = document.getElementById('lesson-nav-aside');
+    if (!navAside) return;
 
-    // --- Управление видимостью навигации (JS вместо CSS) ---
-    function handleNavVisibility() {
+    const navHeader = document.getElementById('lesson-nav-header');
+    const navListContainer = document.getElementById('lesson-nav-list-container');
+    const navArrow = document.getElementById('lesson-nav-arrow');
+    const navGoTop = document.getElementById('lesson-nav-go-top');
+
+    function setupNavMode() {
         if (window.innerWidth <= 992) {
-            desktopNav.style.display = 'none';
-            fab.style.display = 'flex';
+            // МОБИЛЬНЫЙ РЕЖИМ
+            navHeader.style.cursor = 'pointer';
+            navArrow.style.display = 'block';
+            // Сворачиваем меню по умолчанию
+            navListContainer.style.maxHeight = '0';
+            navListContainer.style.marginTop = '0';
         } else {
-            desktopNav.style.display = 'block';
-            fab.style.display = 'none';
-            closeLessonMobileMenu(); // Закрываем на всякий случай
+            // ДЕСКТОПНЫЙ РЕЖИМ
+            navHeader.style.cursor = 'default';
+            navArrow.style.display = 'none';
+            // Разворачиваем меню и делаем видимым
+            navListContainer.style.maxHeight = navListContainer.scrollHeight + 'px';
+            navListContainer.style.marginTop = '20px';
         }
     }
 
-    // --- Логика подсветки для десктопа ---
-    const navLinks = desktopNav.querySelectorAll('.lesson-nav-link');
-    const sections = Array.from(navLinks).map(link => {
-        const id = link.getAttribute('href').substring(1);
-        return document.getElementById(id);
-    }).filter(section => section);
-
-    function highlightNavLink() {
-        if (window.innerWidth <= 992) return;
-        let currentSectionId = '';
-        sections.forEach(section => {
-            if (section.getBoundingClientRect().top < 150) {
-                currentSectionId = section.id;
+    // --- Логика аккордеона ---
+    navHeader.onclick = function() {
+        if (window.innerWidth <= 992) {
+            const isCollapsed = navListContainer.style.maxHeight === '0px';
+            if (isCollapsed) {
+                navListContainer.style.maxHeight = navListContainer.scrollHeight + 'px';
+                navListContainer.style.marginTop = '20px';
+                navArrow.style.transform = 'rotate(180deg)';
+            } else {
+                navListContainer.style.maxHeight = '0';
+                navListContainer.style.marginTop = '0';
+                navArrow.style.transform = 'rotate(0deg)';
             }
-        });
-        navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${currentSectionId}`);
-        });
-    }
-
-    // --- Уникальные функции для мобильного меню ---
-    function openLessonMobileMenu() {
-        overlay.style.display = 'block';
-        setTimeout(() => overlay.style.opacity = '1', 10);
-        mobileMenu.style.transform = 'translateX(0)';
-        document.body.classList.add('lesson-nav-open'); // Используем уникальный класс
-    }
-
-    function closeLessonMobileMenu() {
-        mobileMenu.style.transform = 'translateX(100%)';
-        overlay.style.opacity = '0';
-        setTimeout(() => overlay.style.display = 'none', 300);
-        document.body.classList.remove('lesson-nav-open'); // Убираем уникальный класс
-    }
+        }
+    };
     
-    fab.onclick = openLessonMobileMenu;
-    overlay.onclick = closeLessonMobileMenu;
-
-    scrollTopBtn.onclick = function(e) {
+    // --- Кнопка "Наверх" ---
+    navGoTop.onclick = function(e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        closeLessonMobileMenu();
     };
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        if (link.id !== 'lesson-nav-scrollTop') {
-            link.onclick = closeLessonMobileMenu;
-        }
-    });
+    // --- Логика подсветки ---
+    const navLinks = navAside.querySelectorAll('.lesson-nav-link');
+    const sections = Array.from(navLinks).map(link => document.getElementById(link.getAttribute('href').substring(1))).filter(Boolean);
 
-    // --- Общие обработчики событий ---
-    window.addEventListener('scroll', function() {
-        if (fab.style.display === 'flex') {
-            const isVisible = window.scrollY > 300;
-            fab.style.opacity = isVisible ? '1' : '0';
-            fab.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
-            fab.style.pointerEvents = isVisible ? 'auto' : 'none';
+    function highlightNavLink() {
+        if (window.innerWidth > 992) {
+            let currentId = '';
+            sections.forEach(section => {
+                if (section.getBoundingClientRect().top < 150) {
+                    currentId = section.id;
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+            });
         }
-        highlightNavLink();
-    });
+    }
+
+    // --- Обработчики событий ---
+    window.addEventListener('scroll', highlightNavLink);
+    window.addEventListener('resize', setupNavMode);
     
-    // Вызываем функции при загрузке и изменении размера окна
-    handleNavVisibility();
+    // Первоначальная настройка при загрузке
+    setupNavMode();
     highlightNavLink();
-    window.addEventListener('resize', handleNavVisibility);
 })();
 </script>
             
