@@ -193,7 +193,6 @@
                 </p>
             </div>
         </section>
-        
 
 			
 			<!-- НАЧАЛО БЛОКА: 3.1 ВЕРСТКА - HTML -->
@@ -1562,9 +1561,9 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
    </main> <!-- Конец левой колонки с контентом -->
 
     <!-- 
-        ПРАВАЯ КОЛОНКА: ЗДЕСЬ НАХОДИТСЯ ДЕСКТОПНАЯ НАВИГАЦИЯ
+        ПРАВАЯ КОЛОНКА: ДЕСКТОПНАЯ НАВИГАЦИЯ
     -->
-    <aside id="desktopNavAside" style="width: 320px; flex-shrink: 0;">
+    <aside id="lessonDesktopNav" style="width: 320px; flex-shrink: 0;">
         <div style="position: sticky; top: 100px;">
              <div style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07); border: 1px solid #e9ecef;">
                 <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
@@ -1585,16 +1584,16 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 <!-- 
     ===================================================================
-    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (находятся вне основной сетки)
+    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (С УНИКАЛЬНЫМИ ID)
     ===================================================================
 -->
 <div id="lessonFab" style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background-color: #3498db; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: white;"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
 </div>
 
-<div id="menuOverlay_v4" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease-in-out;"></div>
+<div id="lessonOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease-in-out;"></div>
 
-<div id="mobileNavMenu_v4" style="position: fixed; top: 0; right: 0; width: 300px; max-width: 80%; height: 100%; background-color: #ffffff; box-shadow: -4px 0 15px rgba(0,0,0,0.1); z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 25px;">
+<div id="lessonMobileMenu" style="position: fixed; top: 0; right: 0; width: 300px; max-width: 80%; height: 100%; background-color: #ffffff; box-shadow: -4px 0 15px rgba(0,0,0,0.1); z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 25px;">
     <h3 style="margin: 0 0 20px 0; color: #3498db; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">Навигация</h3>
     <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
         <li style="margin-bottom: 10px;"><a href="#lesson3-part1" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">1. Верстка - HTML</a></li>
@@ -1603,7 +1602,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         <li style="margin-bottom: 10px;"><a href="#lesson3-part4" style="display: block; padding: 12px 15px; color: #2c3e50; text-decoration: none; border-radius: 8px; font-weight: 500;">4. Промты для кода</a></li>
         <li><a href="#lesson3-task" style="display: block; padding: 12px 15px; color: #0056b3; text-decoration: none; border-radius: 8px; font-weight: 500; background: #eaf5ff;">5. Тестовое задание!</a></li>
     </ul>
-    <a id="scrollToTopBtn_v4" href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 20px; border-top: 1px solid #eee; text-decoration: none; color: #3498db; font-weight: 500;">
+    <a id="lessonScrollTop" href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 20px; border-top: 1px solid #eee; text-decoration: none; color: #3498db; font-weight: 500;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
         Наверх
     </a>
@@ -1625,43 +1624,38 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 <script>
 (function() {
-    // Уникальные ID для этого блока
-    const fabId = 'lessonFab';
-    const overlayId = 'menuOverlay_v4';
-    const mobileMenuId = 'mobileNavMenu_v4';
-    const scrollToTopId = 'scrollToTopBtn_v4';
-    const desktopAsideId = 'desktopNavAside';
-
-    const fab = document.getElementById(fabId);
-    const overlay = document.getElementById(overlayId);
-    const mobileMenu = document.getElementById(mobileMenuId);
-    const scrollToTopButton = document.getElementById(scrollToTopId);
-    const desktopAside = document.getElementById(desktopAsideId);
+    // РЕШЕНИЕ ПРОБЛЕМЫ №2: Уникальные имена переменных и функций
+    const lessonFab = document.getElementById('lessonFab');
+    const lessonOverlay = document.getElementById('lessonOverlay');
+    const lessonMobileMenu = document.getElementById('lessonMobileMenu');
+    const lessonScrollTop = document.getElementById('lessonScrollTop');
+    const lessonDesktopNav = document.getElementById('lessonDesktopNav');
     
-    if (!fab || !overlay || !mobileMenu || !scrollToTopButton || !desktopAside) {
+    if (!lessonFab || !lessonOverlay || !lessonMobileMenu || !lessonScrollTop || !lessonDesktopNav) {
+        console.error("Не удалось найти все элементы навигации урока. Скрипт не будет выполнен.");
         return;
     }
 
     // --- ФУНКЦИЯ ДЛЯ УПРАВЛЕНИЯ ВИДИМОСТЬЮ НАВИГАЦИИ ---
-    function handleNavigationVisibility() {
+    function handleLessonNavVisibility() {
         if (window.innerWidth <= 992) {
-            desktopAside.style.display = 'none';
-            fab.style.display = 'flex';
+            lessonDesktopNav.style.display = 'none';
+            lessonFab.style.display = 'flex';
         } else {
-            desktopAside.style.display = 'block';
-            fab.style.display = 'none';
-            closeMobileMenu(); // Закрываем мобильное меню на широком экране
+            lessonDesktopNav.style.display = 'block';
+            lessonFab.style.display = 'none';
+            closeLessonNav(); // Закрываем мобильное меню на широком экране
         }
     }
 
     // --- ЛОГИКА ДЛЯ ПОДСВЕТКИ АКТИВНЫХ ССЫЛОК НА ДЕСКТОПЕ ---
-    const navLinks = desktopAside.querySelectorAll('.lesson-nav-link');
+    const navLinks = lessonDesktopNav.querySelectorAll('.lesson-nav-link');
     const sections = Array.from(navLinks).map(link => {
         const id = link.getAttribute('href').substring(1);
         return document.getElementById(id);
     }).filter(section => section !== null);
 
-    function highlightNavLink() {
+    function highlightLessonNavLink() {
         if (window.innerWidth <= 992) return;
         let currentSectionId = '';
         const offset = 150;
@@ -1675,49 +1669,49 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
     }
 
-    // --- ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+    // --- УНИКАЛЬНЫЕ ФУНКЦИИ ДЛЯ МОБИЛЬНОГО МЕНЮ ---
     function openLessonNav() {
-        overlay.style.display = 'block';
-        setTimeout(() => overlay.style.opacity = '1', 10);
-        mobileMenu.style.transform = 'translateX(0)';
+        lessonOverlay.style.display = 'block';
+        setTimeout(() => lessonOverlay.style.opacity = '1', 10);
+        lessonMobileMenu.style.transform = 'translateX(0)';
         document.body.style.overflow = 'hidden';
     }
 
-    function closeMobileMenu() {
-        mobileMenu.style.transform = 'translateX(100%)';
-        overlay.style.opacity = '0';
-        setTimeout(() => overlay.style.display = 'none', 300);
+    function closeLessonNav() {
+        lessonMobileMenu.style.transform = 'translateX(100%)';
+        lessonOverlay.style.opacity = '0';
+        setTimeout(() => lessonOverlay.style.display = 'none', 300);
         document.body.style.overflow = '';
     }
     
-    fab.onclick = openLessonNav;
-    overlay.onclick = closeMobileMenu;
+    lessonFab.onclick = openLessonNav;
+    lessonOverlay.onclick = closeLessonNav;
 
-    scrollToTopButton.onclick = function(event) {
+    lessonScrollTop.onclick = function(event) {
         event.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        closeMobileMenu();
+        closeLessonNav();
     };
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        if (link.id !== scrollToTopId) { link.onclick = closeMobileMenu; }
+    lessonMobileMenu.querySelectorAll('a').forEach(link => {
+        if (link.id !== 'lessonScrollTop') { link.onclick = closeLessonNav; }
     });
 
     // --- ОБЩИЕ ОБРАБОТЧИКИ СОБЫТИЙ ---
     window.addEventListener('scroll', function() {
-        if (fab.style.display === 'flex') {
+        if (lessonFab.style.display === 'flex') {
             const isVisible = window.scrollY > 300;
-            fab.style.opacity = isVisible ? '1' : '0';
-            fab.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
-            fab.style.pointerEvents = isVisible ? 'auto' : 'none';
+            lessonFab.style.opacity = isVisible ? '1' : '0';
+            lessonFab.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
+            lessonFab.style.pointerEvents = isVisible ? 'auto' : 'none';
         }
-        highlightNavLink();
+        highlightLessonNavLink();
     });
     
     // Вызываем функции при загрузке и изменении размера окна
-    handleNavigationVisibility();
-    highlightNavLink();
-    window.addEventListener('resize', handleNavigationVisibility);
+    handleLessonNavVisibility();
+    highlightLessonNavLink();
+    window.addEventListener('resize', handleLessonNavVisibility);
 })();
 </script>
             
