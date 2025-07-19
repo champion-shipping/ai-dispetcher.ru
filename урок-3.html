@@ -1961,7 +1961,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 ---
         document.addEventListener('DOMContentLoaded', function() {
             // Используем уникальный ключ для 3-го урока
-            const isLoggedIn = localStorage.getItem('isLoggedIn_leasson3');  
+            const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
             if (isLoggedIn === 'true') {
                 document.getElementById('protectedContent').style.display = 'block';
             } else {
@@ -1977,7 +1977,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 const iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 // Важно: указываем новый файл с паролем для 3-го урока
-                iframe.src = 'auth-leasson3.html'; 
+                iframe.src = 'auth-lesson3.html'; 
                 document.body.appendChild(iframe);
                 
                 await new Promise(resolve => iframe.onload = resolve);
@@ -1986,7 +1986,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 
                 if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
                     // Используем уникальный ключ для 3-го урока
-                    localStorage.setItem('isLoggedIn_leasson3', 'true');  
+                    localStorage.setItem('isLoggedIn_lesson3', 'true');  
                     document.getElementById('loginModal').style.display = 'none';
                     document.getElementById('protectedContent').style.display = 'block';
                 } else {
@@ -1998,7 +1998,6 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             }
         }
     </script>
-
 
 </body>
 </html>
