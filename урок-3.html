@@ -1979,11 +1979,10 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
 
     </script>
-    <!-- Скрипты -->
+       <!-- Скрипты -->
     <script>
-        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 ---
+        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
         document.addEventListener('DOMContentLoaded', function() {
-            // Используем уникальный ключ для 3-го урока
             const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
             if (isLoggedIn === 'true') {
                 document.getElementById('protectedContent').style.display = 'block';
@@ -1993,31 +1992,54 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
 
         async function checkLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            // Объявляем iframe здесь, чтобы он был доступен в блоке finally
+            let iframe = null;
 
             try {
-                const iframe = document.createElement('iframe');
+                iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
-                // Важно: указываем новый файл с паролем для 3-го урока
                 iframe.src = 'auth-lesson3.html'; 
                 document.body.appendChild(iframe);
                 
-                await new Promise(resolve => iframe.onload = resolve);
+                // Улучшенное ожидание с обработкой ошибок
+                await new Promise((resolve, reject) => {
+                    iframe.onload = resolve;
+                    // Если файл auth-lesson3.html не найден, это вызовет ошибку
+                    iframe.onerror = () => reject(new Error('Не удалось загрузить файл аутентификации.'));
+                });
+
+                // Явная проверка, что данные существуют, прежде чем их использовать
+                if (!iframe.contentWindow || !iframe.contentWindow.AUTH_DATA) {
+                    throw new Error("Данные аутентификации не найдены в iframe.");
+                }
+                
                 const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
-                document.body.removeChild(iframe);
                 
                 if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-                    // Используем уникальный ключ для 3-го урока
+                    // Успешный вход
                     localStorage.setItem('isLoggedIn_lesson3', 'true');  
                     document.getElementById('loginModal').style.display = 'none';
                     document.getElementById('protectedContent').style.display = 'block';
                 } else {
+                    // Неверные данные
                     alert("Неверный логин или пароль для Урока 3!");
+                    // Очищаем поля для удобства
+                    usernameInput.value = '';
+                    passwordInput.value = '';
                 }
             } catch (error) {
                 console.error("Ошибка при проверке данных:", error);
-                alert("Произошла ошибка при проверке данных. Попробуйте снова.");
+                alert("Произошла критическая ошибка при проверке данных. Пожалуйста, попробуйте снова.");
+            } finally {
+                // Гарантированно удаляем iframe после завершения, даже если была ошибка
+                if (iframe) {
+                    iframe.remove();
+                }
             }
         }
     </script>
