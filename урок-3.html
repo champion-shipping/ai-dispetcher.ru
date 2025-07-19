@@ -1589,7 +1589,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 <!-- 
     ===================================================================
-    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (ОБНОВЛЕННАЯ ВЕРСИЯ)
+    ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (ОБНОВЛЕННАЯ ВЕРСЯ)
     ===================================================================
 -->
 <!-- Кнопка вызова меню -->
@@ -1597,36 +1597,65 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: white;"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
 </div>
 
-<!-- НОВАЯ КНОПКА "НАВЕРХ" -->
-<div id="lesson-nav-scrollTop" style="position: fixed; bottom: 20px; right: 90px; width: 48px; height: 48px; background-color: #2c3e50; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: white;"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
-</div>
-
 <!-- Оверлей -->
 <div id="lesson-nav-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; opacity: 0; transition: opacity 0.3s ease-in-out;"></div>
 
-<!-- Выезжающее меню (с кнопкой закрытия) -->
-<div id="lesson-nav-menu" style="position: fixed; top: 0; right: 0; width: 280px; max-width: 80%; height: 100%; background-color: #ffffff; box-shadow: -4px 0 15px rgba(0,0,0,0.1); z-index: 1001; transform: translateX(100%); transition: transform 0.3s ease-in-out; display: flex; flex-direction: column; padding: 20px;">
+<!-- Выезжающее меню (с кнопкой закрытия и отступом снизу) -->
+<div id="lesson-nav-menu" style="
+    position: fixed; 
+    top: 0; 
+    right: 0; 
+    width: 280px; 
+    max-width: 80%; 
+    height: 100%; 
+    background-color: #ffffff; 
+    box-shadow: -4px 0 15px rgba(0,0,0,0.1); 
+    z-index: 1001; 
+    transform: translateX(100%); 
+    transition: transform 0.3s ease-in-out; 
+    display: flex; 
+    flex-direction: column; 
+    padding: 20px; 
+    padding-bottom: 40px; /* <-- РЕШЕНИЕ ПРОБЛЕМЫ №2: Добавляем отступ снизу */
+    box-sizing: border-box; /* Гарантирует, что padding не увеличит высоту */
+">
     <!-- Заголовок и кнопка закрытия -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px; flex-shrink: 0;">
         <h3 style="margin: 0; color: #3498db; font-size: 18px;">Навигация</h3>
         <div id="lesson-nav-close" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #7f8c8d;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </div>
     </div>
-    <!-- Список ссылок (более компактный) -->
-    <ul style="list-style: none; padding: 0; margin: 0; overflow-y: auto;">
+    <!-- Список ссылок (более компактный, с прокруткой) -->
+    <ul style="list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1;">
         <li style="margin-bottom: 5px;"><a href="#lesson3-part1" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">1. Верстка - HTML</a></li>
         <li style="margin-bottom: 5px;"><a href="#lesson3-part2" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">2. Создание страницы и вывод данных</a></li>
         <li style="margin-bottom: 5px;"><a href="#lesson3-part3" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">3. Работа с базой данных</a></li>
         <li style="margin-bottom: 5px;"><a href="#lesson3-part4" style="display: block; padding: 10px 15px; color: #2c3e50; text-decoration: none; border-radius: 6px; font-weight: 500;">4. Промты для кода</a></li>
         <li><a href="#lesson3-task" style="display: block; padding: 10px 15px; color: #0056b3; text-decoration: none; border-radius: 6px; font-weight: 500; background: #eaf5ff;">5. Тестовое задание!</a></li>
     </ul>
+    <!-- РЕШЕНИЕ ПРОБЛЕМЫ №1: Кнопка "Наверх" вернулась внутрь меню -->
+    <a id="lesson-nav-scrollTop" href="#" style="
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 10px; 
+        padding: 15px 0; 
+        margin-top: 15px; 
+        border-top: 1px solid #eee; 
+        text-decoration: none; 
+        color: #3498db; 
+        font-weight: 500;
+        flex-shrink: 0;
+    ">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+        Наверх
+    </a>
 </div>
 
 <!-- 
     ===================================================================
-    ОБНОВЛЕННЫЙ СКРИПТ И СТИЛИ
+    ОБНОВЛЕННЫЙ СКРИПТ (без логики для отдельной кнопки "Наверх")
     ===================================================================
 -->
 <style>
@@ -1645,14 +1674,15 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     const fab = document.getElementById('lesson-nav-fab');
     const overlay = document.getElementById('lesson-nav-overlay');
     const mobileMenu = document.getElementById('lesson-nav-menu');
-    const scrollTopBtn = document.getElementById('lesson-nav-scrollTop');
-    const closeBtn = document.getElementById('lesson-nav-close'); // Новая кнопка закрытия
+    const scrollTopBtn = document.getElementById('lesson-nav-scrollTop'); // Эта переменная остается
+    const closeBtn = document.getElementById('lesson-nav-close');
     const desktopNav = document.getElementById('lesson-nav-desktop');
     
     if (!fab || !overlay || !mobileMenu || !scrollTopBtn || !closeBtn || !desktopNav) {
         return;
     }
 
+    // ... (функции handleNavVisibility, highlightNavLink, open/closeLessonMobileMenu остаются без изменений) ...
     function handleNavVisibility() {
         if (window.innerWidth <= 992) {
             desktopNav.style.display = 'none';
@@ -1663,76 +1693,62 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             closeLessonMobileMenu();
         }
     }
-
     const navLinks = desktopNav.querySelectorAll('.lesson-nav-link');
     const sections = Array.from(navLinks).map(link => document.getElementById(link.getAttribute('href').substring(1))).filter(Boolean);
-
     function highlightNavLink() {
-        if (window.innerWidth <= 992) return;
-        let currentId = '';
-        sections.forEach(section => {
-            if (section.getBoundingClientRect().top < 150) { currentId = section.id; }
-        });
-        navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
-        });
+        if (window.innerWidth > 992) {
+            let currentId = '';
+            sections.forEach(section => {
+                if (section.getBoundingClientRect().top < 150) { currentId = section.id; }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+            });
+        }
     }
-
     function openLessonMobileMenu() {
         overlay.style.display = 'block';
         setTimeout(() => overlay.style.opacity = '1', 10);
         mobileMenu.style.transform = 'translateX(0)';
         document.body.classList.add('lesson-nav-open');
     }
-
     function closeLessonMobileMenu() {
         mobileMenu.style.transform = 'translateX(100%)';
         overlay.style.opacity = '0';
         setTimeout(() => overlay.style.display = 'none', 300);
         document.body.classList.remove('lesson-nav-open');
     }
-    
+
     fab.onclick = openLessonMobileMenu;
     overlay.onclick = closeLessonMobileMenu;
-    closeBtn.onclick = closeLessonMobileMenu; // Привязываем закрытие к крестику
+    closeBtn.onclick = closeLessonMobileMenu;
 
+    // Привязываем событие к кнопке "Наверх" внутри меню
     scrollTopBtn.onclick = function(e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeLessonMobileMenu(); // Закрываем меню после нажатия
     };
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
+    // Закрываем меню при клике на основные ссылки
+    mobileMenu.querySelectorAll('ul a').forEach(link => {
         link.onclick = closeLessonMobileMenu;
     });
 
-    // --- ЛОГИКА СВАЙПА ДЛЯ ЗАКРЫТИЯ МЕНЮ ---
+    // --- ЛОГИКА СВАЙПА (остается без изменений) ---
     let touchStartX = 0;
-    let touchEndX = 0;
-    mobileMenu.addEventListener('touchstart', function(event) {
-        touchStartX = event.changedTouches[0].screenX;
-    }, false);
-    mobileMenu.addEventListener('touchend', function(event) {
-        touchEndX = event.changedTouches[0].screenX;
-        // Если свайп был вправо (закрытие) и достаточно длинный
-        if (touchEndX > touchStartX + 50) {
-            closeLessonMobileMenu();
-        }
+    mobileMenu.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, false);
+    mobileMenu.addEventListener('touchend', e => {
+        if (e.changedTouches[0].screenX > touchStartX + 50) { closeLessonMobileMenu(); }
     }, false);
 
+    // --- ОБРАБОТЧИК СКРОЛЛА (теперь управляет только одной кнопкой) ---
     window.addEventListener('scroll', function() {
-        const isVisible = window.scrollY > 300;
-        // Управляем видимостью обеих кнопок
         if (fab.style.display === 'flex') {
+            const isVisible = window.scrollY > 300;
             fab.style.opacity = isVisible ? '1' : '0';
             fab.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
             fab.style.pointerEvents = isVisible ? 'auto' : 'none';
-            
-            scrollTopBtn.style.display = 'flex'; // Убедимся, что кнопка видима
-            scrollTopBtn.style.opacity = isVisible ? '1' : '0';
-            scrollTopBtn.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
-            scrollTopBtn.style.pointerEvents = isVisible ? 'auto' : 'none';
-        } else {
-             scrollTopBtn.style.display = 'none'; // Скрываем кнопку на десктопе
         }
         highlightNavLink();
     });
