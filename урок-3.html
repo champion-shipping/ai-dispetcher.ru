@@ -136,7 +136,7 @@
 
     <div class="container">
 
-
+            
 <!-- =================================================================== -->
 <!-- НАЧАЛО ГЛАВНОГО КОНТЕЙНЕРА СТРАНИЦЫ (ФИНАЛЬНАЯ ВЕРСИЯ) -->
 <!-- =================================================================== -->
@@ -152,7 +152,11 @@
     <!-- 
         ЛЕВАЯ КОЛОНКА: ЗДЕСЬ БУДЕТ ВЕСЬ КОНТЕНТ УРОКА
     -->
-    <main id="mainLessonContent" style="flex: 1; min-width: 0;">
+    <main id="mainLessonContent" style="
+        flex: 1; 
+        min-width: 0; 
+        overflow-x: hidden; /* <-- РЕШЕНИЕ ПРОБЛЕМЫ №1: предотвращает вылезание контента */
+    ">
         
         <!-- ВВОДНЫЙ БЛОК КУРСА -->
         <section id="lesson-intro">
@@ -1584,7 +1588,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ЭЛЕМЕНТЫ ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (находятся вне основной сетки)
     ===================================================================
 -->
-<div id="openMenuFab_v4" style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background-color: #3498db; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
+<div id="lessonFab" style="position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; background-color: #3498db; color: white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 999; transition: opacity 0.3s, transform 0.3s; opacity: 0; transform: scale(0.8); pointer-events: none;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: white;"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
 </div>
 
@@ -1622,7 +1626,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 <script>
 (function() {
     // Уникальные ID для этого блока
-    const fabId = 'openMenuFab_v4';
+    const fabId = 'lessonFab';
     const overlayId = 'menuOverlay_v4';
     const mobileMenuId = 'mobileNavMenu_v4';
     const scrollToTopId = 'scrollToTopBtn_v4';
@@ -1672,7 +1676,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     }
 
     // --- ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
-    function openMobileMenu() {
+    function openLessonNav() {
         overlay.style.display = 'block';
         setTimeout(() => overlay.style.opacity = '1', 10);
         mobileMenu.style.transform = 'translateX(0)';
@@ -1686,7 +1690,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         document.body.style.overflow = '';
     }
     
-    fab.onclick = openMobileMenu;
+    fab.onclick = openLessonNav;
     overlay.onclick = closeMobileMenu;
 
     scrollToTopButton.onclick = function(event) {
@@ -1716,10 +1720,8 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     window.addEventListener('resize', handleNavigationVisibility);
 })();
 </script>
-
-
-	    
-    </div>
+            
+        </div>
 
     <!-- Подключение Footer -->
     <div id="footer"></div>
