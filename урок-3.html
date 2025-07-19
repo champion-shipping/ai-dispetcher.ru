@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница 1 | AI Dispatcher</title>
+    <title>Вайб-кодинг - Верстка Урок 3 | AI Dispatcher</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             color: #111;
+            padding-top: 82px; 
         }
         .container {
             max-width: 1200px;
@@ -56,7 +57,7 @@
             text-decoration: underline;
         }
     </style>
-    <script type="text/javascript">
+	<script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -70,12 +71,9 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="AI" />
 <link rel="manifest" href="/site.webmanifest" />
-
-
-    
 </head>
 <body>
-    <!-- Модальное окно (стили inline) -->
+    <!-- Модальное окно входа -->
     <div id="loginModal" style="
         display: none;
         position: fixed;
@@ -97,7 +95,7 @@
             width: 100%;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         ">
-            <h2 style="margin-top: 0; color: #2c3e50;">Вход в систему</h2>
+            <h2 style="margin-top: 0; color: #2c3e50;">Вход для доступа к Уроку 3</h2>
             <div style="margin-bottom: 20px;">
                 <label for="username" style="display: block; margin-bottom: 8px; font-weight: 500;">Логин</label>
                 <input type="text" id="username" placeholder="Введите логин" style="
@@ -130,234 +128,101 @@
             ">
                 Войти
             </button>
-            <a href="/contact" style="
-                display: block;
-                text-align: center;
-                margin-top: 15px;
-                color: #3498db;
-                text-decoration: none;
-            ">
-                Получить доступ
-            </a>
         </div>
     </div>
 
+    <!-- Подключение Header -->
     <div id="header"></div>
-    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+
+    <div class="container">
+        <!-- Защищенный контент, который появится после входа -->
         <div id="protectedContent" style="display: none;">
-            <!-- Контент -->
-
-
-
             
-            <h1>Добро пожаловать!</h1>
-            <p>Это защищённый контент. Вы успешно вошли.</p>
+            <!-- 
+            ============================================================
+            ЗДЕСЬ НАЧНЕТСЯ ОСНОВНОЙ КОНТЕНТ ВАШЕГО ТРЕТЬЕГО УРОКА
+            Вы можете добавлять сюда свои блоки, текст, видео и т.д.
+            ============================================================
+            -->
 
+            <main class="content">
+                <h1 class="title">Урок 3: Практические примеры</h1>
+                <p>Содержимое третьего урока будет здесь...</p>
+                
+                <!-- Добавьте сюда другие секции и элементы -->
 
+            </main>
 
-
-
-
-            <!-- Финиш -->
+            <!-- 
+            ============================================================
+            КОНЕЦ ОБЛАСТИ ДЛЯ ВАШЕГО КОНТЕНТА
+            ============================================================
+            -->
+            
         </div>
     </div>
+
+    <!-- Подключение Footer -->
     <div id="footer"></div>
-  <script>
-        // Загружаем header
+
+    <!-- Скрипты -->
+    <script>
+        // Загрузка header и footer
         fetch('header.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject(`HTTP error! status: ${response.status}`))
             .then(data => {
                 const headerDiv = document.getElementById('header');
-                if (headerDiv) {
-                    headerDiv.innerHTML = data;
-                    // !!! ВАЖНО: Инициализируем меню ТОЛЬКО после того, как header загружен и вставлен
-                    initializeMobileMenu(); 
-                }
+                if (headerDiv) headerDiv.innerHTML = data;
             })
-            .catch(error => console.error('Error loading header:', error)); 
+            .catch(error => console.error('Error loading header:', error));
 
-        // Загружаем footer
         fetch('footer.html')
-            .then(response => {
-                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject(`HTTP error! status: ${response.status}`))
             .then(data => {
                 const footerDiv = document.getElementById('footer');
                 if (footerDiv) footerDiv.innerHTML = data;
             })
-            .catch(error => console.error('Error loading footer:', error)); 
+            .catch(error => console.error('Error loading footer:', error));
 
-
-        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ (ПЕРЕМЕЩЕН СЮДА) ---
-        function initializeMobileMenu() {
-            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
-            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
-            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
-            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
-            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
-
-            // Проверка, что все нужные элементы найдены (для надежности)
-            if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
-                console.error('Не найдены элементы меню для инициализации.');
-                return; // Прекращаем выполнение функции, если элементы не найдены
+        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Используем уникальный ключ для 3-го урока
+            const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
+            if (isLoggedIn === 'true') {
+                document.getElementById('protectedContent').style.display = 'block';
+            } else {
+                document.getElementById('loginModal').style.display = 'flex';
             }
-
-
-            // Функция для открытия мобильного меню
-            function openMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
-                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
-                // Используем setTimeout для плавного появления оверлея после его display: block
-                setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
-                document.body.classList.add('no-scroll'); // Запрещаем скролл основного контента (используя класс)
-                menuBtn.setAttribute('aria-expanded', 'true');
-            }
-
-            // Функция для закрытия мобильного меню
-            function closeMobileMenu() {
-                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
-                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
-                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
-                setTimeout(() => {
-                     mobileMenuOverlay.style.display = 'none';
-                     document.body.classList.remove('no-scroll'); // Разрешаем скролл
-                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
-                menuBtn.setAttribute('aria-expanded', 'false');
-            }
-
-            // Функция для обновления видимости меню в зависимости от размера экрана
-            function updateMenuVisibility() {
-                const isMobile = window.innerWidth <= 768; // Порог для мобильных устройств
-
-                if (isMobile) {
-                    mobileMenuToggleContainer.style.display = 'block'; // Показываем контейнер кнопки открытия меню
-                    desktopMenu.style.display = 'none'; // Скрываем десктопное горизонтальное меню
-
-                    // Если выезжающее меню было открыто при ресайзе на десктоп, закрываем его
-                    // Проверяем transform.includes('0') вместо === 'translateX(0px)' для надежности
-                    if (sideMobileMenu.style.transform && sideMobileMenu.style.transform !== 'translateX(-100%)') {
-                         closeMobileMenu();
-                    }
-
-                } else { // Десктоп
-                    mobileMenuToggleContainer.style.display = 'none'; // Скрываем кнопку открытия меню
-                    desktopMenu.style.display = 'flex'; // Используем flex для nav на десктопе
-                    closeMobileMenu(); // Убеждаемся, что выезжающее меню закрыто на десктопе
-                }
-            }
-
-            // Привязываем события ТОЛЬКО после загрузки header
-            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
-            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
-            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
-
-            // Закрывать мобильное меню при клике на любую ссылку внутри него
-            sideMobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-
-            // Вызываем функцию при загрузке и изменении размера окна
-            // Вместо load и DOMContentLoaded, вызываем updateMenuVisibility 
-            // сразу после привязки событий и при resize
-            updateMenuVisibility(); // Вызываем сразу после инициализации
-            window.addEventListener('resize', updateMenuVisibility);
-
-             // Опционально: перехват клика на уроки, чтобы сначала закрыть меню, потом перейти
-             document.querySelectorAll('#mobile-offcanvas-menu a[href="/#lessons"]').forEach(link => {
-                 link.addEventListener('click', function(event) {
-                     // closeMobileMenu() уже вызывается обработчиком выше для всех ссылок a
-                     // Если нужно добавить что-то специфичное, можно сделать здесь, но вряд ли нужно.
-                 });
-             });
-        }
-        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
-
-
-        // 3D-эффект при наведении (ваш существующий скрипт)
-        document.querySelectorAll('section a div, section > div > div').forEach(item => {
-            item.onmouseover = function() {
-                this.style.transform = 'perspective(1000px) translateZ(20px)';
-                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
-                if (this.lastElementChild && this.lastElementChild.style) {
-                    this.lastElementChild.style.opacity = '1';
-                }
-            };
-            item.onmouseout = function() {
-                this.style.transform = 'perspective(1000px) translateZ(0)';
-                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                if (this.lastElementChild && this.lastElementChild.style) {
-                    this.lastElementChild.style.opacity = '0';
-                }
-            };
         });
 
-         // Добавляем обработку случая, когда элемент "Уроки" находится на текущей странице
-         // Если пользователь на главной и кликнул "Уроки" в мобильном меню, нужно закрыть меню
-         // Этот обработчик уже есть в initializeMobileMenu для всех ссылок, но убедимся.
-         // Можно добавить скролл к якорю вручную после закрытия меню, если стандартное поведение не работает.
-         document.querySelectorAll('a[href="/#lessons"]').forEach(link => {
-            link.addEventListener('click', function(event) {
-                 // Проверяем, что это якорь и мы на текущей странице
-                 if (link.pathname === window.location.pathname && link.hash === '#lessons') {
-                     // Стандартное поведение браузера обычно работает с якорями
-                     // Если меню закрывается, скролл должен произойти после.
-                     // Если нужен плавный скролл, его можно добавить тут.
-                     // event.preventDefault(); // Закомментировано, т.к. якоря обычно работают
-                     // closeMobileMenu(); // Меню уже закроется из обработчика внутри initializeMobileMenu
-                     // setTimeout(() => { // Опционально: плавный скролл после закрытия
-                     //    document.getElementById('lessons').scrollIntoView({ behavior: 'smooth' });
-                     // }, 350); // Небольшая задержка после анимации закрытия
-                 }
-            });
-         });
+        async function checkLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-
-    </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn_lesson2');  
-    if (isLoggedIn === 'true') {
-        document.getElementById('protectedContent').style.display = 'block';
-    } else {
-        document.getElementById('loginModal').style.display = 'flex';
-    }
-});
-
-async function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = 'auth.html'; 
-        document.body.appendChild(iframe);
-        
-        await new Promise(resolve => iframe.onload = resolve);
-        const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
-        document.body.removeChild(iframe);
-        
-        if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-            localStorage.setItem('isLoggedIn_lesson2', 'true');  
-            document.getElementById('loginModal').style.display = 'none';
-            document.getElementById('protectedContent').style.display = 'block';
-        } else {
-            alert("Неверный логин или пароль для Урока 2!");
+            try {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                // Важно: указываем новый файл с паролем для 3-го урока
+                iframe.src = 'auth-lesson3.html'; 
+                document.body.appendChild(iframe);
+                
+                await new Promise(resolve => iframe.onload = resolve);
+                const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+                document.body.removeChild(iframe);
+                
+                if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
+                    // Используем уникальный ключ для 3-го урока
+                    localStorage.setItem('isLoggedIn_lesson3', 'true');  
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('protectedContent').style.display = 'block';
+                } else {
+                    alert("Неверный логин или пароль для Урока 3!");
+                }
+            } catch (error) {
+                console.error("Ошибка при проверке данных:", error);
+                alert("Произошла ошибка при проверке данных. Попробуйте снова.");
+            }
         }
-    } catch (error) {
-        console.error("Ошибка:", error);
-        alert("Ошибка проверки данных");
-    }
-}
-</script>
+    </script>
 </body>
 </html>
