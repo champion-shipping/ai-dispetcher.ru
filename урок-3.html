@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вайб-кодинг - Верстка Урок 3 | AI Dispatcher</title>
     <style>
+	    /* 1. Плавная прокрутка для всей страницы */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Компенсация высоты хедера для ВСЕХ якорных ссылок */
+/* Когда мы переходим к #leasson3-part1, браузер остановится на 100px выше его начала */
+#leasson3-part1, 
+#leasson3-part2, 
+#leasson3-part3, 
+#leasson3-part4, 
+#leasson3-task {
+    scroll-margin-top: 100px; /* Можете подобрать точное значение, 100px обычно хорошо подходит */
+}
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: #f5f7fa;
