@@ -150,7 +150,9 @@
 
     <div class="container">
 
-            
+
+
+	    <template id="lessonTemplate">
 <!-- =================================================================== -->
 <!-- НАЧАЛО ГЛАВНОГО КОНТЕЙНЕРА СТРАНИЦЫ (ФИНАЛЬНАЯ ВЕРСИЯ) -->
 <!-- =================================================================== -->
@@ -1813,6 +1815,9 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 </div>
 <!-- КОНЕЦ БЛОКА LIGHTBOX -->
 
+		        </template>
+
+		    
 		    <script>
 // Оборачиваем в (function() { ... })(); для изоляции
 (function() {
@@ -1979,48 +1984,77 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
 
     </script>
-    <!-- Скрипты -->
-    <script>
-        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 ---
-        document.addEventListener('DOMContentLoaded', function() {
-            // Используем уникальный ключ для 3-го урока
-            const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
-            if (isLoggedIn === 'true') {
-                document.getElementById('protectedContent').style.display = 'block';
+   <!-- Скрипты -->
+<script>
+    // --- СКРИПТ АУТЕНТИФИКАЦИИ С ЗАЩИТОЙ КОНТЕНТА ---
+    
+    // Функция, которая вставляет контент из шаблона на страницу
+    function renderLessonContent() {
+        const protectedContent = document.getElementById('protectedContent');
+        const lessonTemplate = document.getElementById('lessonTemplate');
+        
+        // Проверяем, что контент еще не был вставлен
+        if (lessonTemplate && protectedContent.innerHTML.trim() === '') {
+            const content = lessonTemplate.content.cloneNode(true);
+            protectedContent.appendChild(content);
+        }
+    }
+
+    // Эта часть кода запускается при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
+        const loginModal = document.getElementById('loginModal');
+        const protectedContent = document.getElementById('protectedContent');
+
+        if (isLoggedIn === 'true') {
+            renderLessonContent(); // Вставляем контент
+            protectedContent.style.display = 'block'; // И показываем его
+        } else {
+            loginModal.style.display = 'flex';
+        }
+    });
+
+    // Эта функция вызывается при нажатии на кнопку "Войти"
+    async function checkLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const loginModal = document.getElementById('loginModal');
+        const protectedContent = document.getElementById('protectedContent');
+        let iframe = null;
+
+        try {
+            iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'auth-lesson3.html'; 
+            document.body.appendChild(iframe);
+            
+            await new Promise((resolve, reject) => {
+                iframe.onload = resolve;
+                iframe.onerror = () => reject(new Error('Auth file failed to load'));
+            });
+
+            const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+            
+            if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
+                localStorage.setItem('isLoggedIn_lesson3', 'true');
+                
+                renderLessonContent(); // Сначала вставляем контент
+
+                loginModal.style.display = 'none';
+                protectedContent.style.display = 'block';
             } else {
-                document.getElementById('loginModal').style.display = 'flex';
+                alert("Неверный логин или пароль для Урока 3!");
             }
-        });
-
-        async function checkLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                // Важно: указываем новый файл с паролем для 3-го урока
-                iframe.src = 'auth-lesson3.html'; 
-                document.body.appendChild(iframe);
-                
-                await new Promise(resolve => iframe.onload = resolve);
-                const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
-                document.body.removeChild(iframe);
-                
-                if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-                    // Используем уникальный ключ для 3-го урока
-                    localStorage.setItem('isLoggedIn_lesson3', 'true');  
-                    document.getElementById('loginModal').style.display = 'none';
-                    document.getElementById('protectedContent').style.display = 'block';
-                } else {
-                    alert("Неверный логин или пароль для Урока 3!");
-                }
-            } catch (error) {
-                console.error("Ошибка при проверке данных:", error);
-                alert("Произошла ошибка при проверке данных. Попробуйте снова.");
+        } catch (error) {
+            console.error("Ошибка при проверке данных:", error);
+            alert("Произошла ошибка при проверке данных. Попробуйте снова.");
+        } finally {
+            if (iframe) {
+                iframe.remove();
             }
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
