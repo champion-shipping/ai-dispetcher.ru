@@ -1577,6 +1577,117 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 </section>
 <!-- КОНЕЦ БЛОКА -->
 
+<!-- НАЧАЛО ИЗОЛИРОВАННОГО БЛОКА НАВИГАЦИИ МЕЖДУ УРОКАМИ -->
+<style>
+    /*
+     Используем уникальные имена классов (например, с суффиксом -b4k9s),
+     чтобы избежать конфликтов с другими стилями на вашей странице.
+    */
+    .lesson-nav-container-b4k9s {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 60px 0 40px 0;
+        padding-top: 30px;
+        border-top: 1px solid #e0e6ed;
+    }
+
+    .lesson-nav-btn-b4k9s {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        flex-grow: 1;
+        min-width: 200px;
+    }
+
+    .lesson-nav-btn-b4k9s svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+
+    .btn-prev-b4k9s {
+        background-color: #ffffff;
+        color: #4a5568;
+        border-color: #e2e8f0;
+        justify-content: flex-start;
+    }
+    
+    .btn-prev-b4k9s svg {
+       margin-right: 10px;
+    }
+
+    .btn-next-b4k9s {
+        background-color: #3498db;
+        color: #ffffff;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+    
+    .btn-next-b4k9s svg {
+        margin-left: 10px;
+    }
+
+    /* Эффекты при наведении (которые невозможны в inline-стилях) */
+    .btn-prev-b4k9s:hover {
+        background-color: #f7fafc;
+        border-color: #cbd5e0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-next-b4k9s:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    }
+    
+    /* Мобильная адаптация (невозможна в inline-стилях) */
+    @media (max-width: 520px) {
+        .lesson-nav-container-b4k9s {
+            flex-direction: column;
+        }
+        
+        .lesson-nav-btn-b4k9s {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .btn-next-b4k9s {
+            flex-direction: row;
+        }
+
+        .btn-next-b4k9s svg {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+    }
+</style>
+
+<div class="lesson-nav-container-b4k9s">
+    <!-- Кнопка НАЗАД -->
+    <a href="https://ai-dispetcher.ru/урок-2" class="lesson-nav-btn-b4k9s btn-prev-b4k9s">
+        <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+        <span>Назад: Урок 2</span>
+    </a>
+
+    <!-- Кнопка ВПЕРЕД -->
+    <a href="https://ai-dispetcher.ru/урок-4" class="lesson-nav-btn-b4k9s btn-next-b4k9s">
+        <span>Вперед: Урок 4</span>
+        <svg viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+    </a>
+</div>
+<!-- КОНЕЦ ИЗОЛИРОВАННОГО БЛОКА НАВИГАЦИИ -->
+		    
            <!-- Добавьте сюда другие секции и элементы -->
 
    </main> <!-- Конец левой колонки с контентом -->
