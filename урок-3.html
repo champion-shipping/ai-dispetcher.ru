@@ -1577,7 +1577,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 </section>
 <!-- КОНЕЦ БЛОКА -->
 
-<!-- НАЧАЛО ИЗОЛИРОВАННОГО БЛОКА НАВИГАЦИИ МЕЖДУ УРОКАМИ -->
+<!-- НАЧАЛО ИСПРАВЛЕННОГО ИЗОЛИРОВАННОГО БЛОКА НАВИГАЦИИ -->
 <style>
     /*
      Используем уникальные имена классов (например, с суффиксом -b4k9s),
@@ -1592,6 +1592,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         margin: 60px 0 40px 0;
         padding-top: 30px;
         border-top: 1px solid #e0e6ed;
+        box-sizing: border-box; /* <-- ДОБАВЛЕНО для надежности */
     }
 
     .lesson-nav-btn-b4k9s {
@@ -1607,6 +1608,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         transition: all 0.3s ease;
         flex-grow: 1;
         min-width: 200px;
+        box-sizing: border-box; /* <-- ГЛАВНОЕ ИСПРАВЛЕНИЕ! Предотвращает выход за пределы экрана. */
     }
 
     .lesson-nav-btn-b4k9s svg {
@@ -1637,7 +1639,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         margin-left: 10px;
     }
 
-    /* Эффекты при наведении (которые невозможны в inline-стилях) */
+    /* Эффекты при наведении */
     .btn-prev-b4k9s:hover {
         background-color: #f7fafc;
         border-color: #cbd5e0;
@@ -1651,7 +1653,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
     }
     
-    /* Мобильная адаптация (невозможна в inline-стилях) */
+    /* Мобильная адаптация */
     @media (max-width: 520px) {
         .lesson-nav-container-b4k9s {
             flex-direction: column;
@@ -1663,12 +1665,12 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         }
         
         .btn-next-b4k9s {
-            flex-direction: row;
+            flex-direction: row-reverse; /* Возвращаем иконку направо для единообразия */
         }
 
         .btn-next-b4k9s svg {
-            margin-left: 0;
-            margin-right: 10px;
+            margin-right: 0;
+            margin-left: 10px;
         }
     }
 </style>
