@@ -154,8 +154,6 @@
 <!-- =================================================================== -->
 <!-- НАЧАЛО ГЛАВНОГО КОНТЕЙНЕРА СТРАНИЦЫ (ФИНАЛЬНАЯ ВЕРСИЯ) -->
 <!-- =================================================================== -->
-  <template id="lessonTemplate">
-	    
 <div id="lessonPageWrapper" style="
     max-width: 1200px; 
     margin: 40px auto; 
@@ -202,16 +200,6 @@
                     <p style="margin: 0; font-size: 16px; color: #5a4d2d; line-height: 1.6;">
                         <strong>Важный момент:</strong> Сразу хочу сказать, что все продемонстрированные технические действия не всегда гарантируют максимальную безопасность и высокую производительность. Если вы собираете свой большой проект с помощью LLM и не знаете кода, будьте готовы к постоянным трудностям.
                     </p>
-                </div>
-		                    <div style="margin: 30px 0; padding: 20px; background-color: #f1fdf6; border-left: 5px solid #2ecc71; border-radius: 8px; display: flex; align-items: flex-start; gap: 15px;">
-                     <div style="flex-shrink: 0; padding-top: 3px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #27ae60;">
-                            <path d="M20.71,19.29l-3.4-3.39A7.92,7.92,0,0,0,19,11a8,8,0,1,0-8,8,7.92,7.92,0,0,0,4.9-1.69l3.39,3.4a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42ZM5,11a6,6,0,1,1,6,6,6,6,0,0,1-6-6Zm8,1h-2v2a1,1,0,0,1-2,0v-2H7a1,1,0,0,1,0-2h2V7a1,1,0,0,1,2,0v2h2a1,1,0,0,1,0,2Z"/>
-                        </svg>
-                     </div>
-                     <p style="margin: 0; font-size: 16px; color: #1e6e40; line-height: 1.6;">
-                        <strong>Подсказка:</strong> Все скриншоты на этой странице кликабельны. Если изображение плохо видно, просто нажмите на него, чтобы увеличить.
-                     </p>
                 </div>
                 <p style="margin: 0 0 20px 0;">
                     В самом низу данной части я предоставлю рекомендации с дополнительными параметрами, которые стоит добавлять в ваш основной промт при генерации кода.
@@ -1584,7 +1572,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
            <!-- Добавьте сюда другие секции и элементы -->
 
    </main> <!-- Конец левой колонки с контентом -->
-    </template>
+
      <!-- 
         ПРАВАЯ КОЛОНКА: ДЕСКТОПНАЯ НАВИГАЦИЯ
     -->
@@ -1991,79 +1979,45 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
 
     </script>
-<!-- Скрипты -->
+    <!-- Скрипты -->
     <script>
-        // --- СКРИПТ АУТЕНТИФИКАЦИИ (УЛУЧШЕННАЯ И БЕЗОПАСНАЯ ВЕРСИЯ) ---
-        
-        // Находим ключевые элементы
-        const protectedContent = document.getElementById('protectedContent');
-        const loginModal = document.getElementById('loginModal');
-        const lessonTemplate = document.getElementById('lessonTemplate');
-
-        // Функция, которая "оживляет" контент
-        function showContent() {
-            // Проверяем, есть ли шаблон и пуст ли контейнер
-            if (lessonTemplate && protectedContent.innerHTML === '') {
-                // Клонируем содержимое шаблона
-                const content = lessonTemplate.content.cloneNode(true);
-                // Вставляем его в наш контейнер
-                protectedContent.appendChild(content);
-                // После вставки контента, возможно, потребуется заново запустить скрипты
-                // которые ищут элементы внутри этого контента (например, скрипт навигации)
-                // Это продвинутая тема, но пока основной контент просто появится.
-            }
-            loginModal.style.display = 'none';
-            protectedContent.style.display = 'block';
-        }
-
+        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 ---
         document.addEventListener('DOMContentLoaded', function() {
+            // Используем уникальный ключ для 3-го урока
             const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
             if (isLoggedIn === 'true') {
-                showContent();
+                document.getElementById('protectedContent').style.display = 'block';
             } else {
-                loginModal.style.display = 'flex';
+                document.getElementById('loginModal').style.display = 'flex';
             }
         });
 
         async function checkLogin() {
-            const usernameInput = document.getElementById('username');
-            const passwordInput = document.getElementById('password');
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-            let iframe = null;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
             try {
-                iframe = document.createElement('iframe');
+                const iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
+                // Важно: указываем новый файл с паролем для 3-го урока
                 iframe.src = 'auth-lesson3.html'; 
                 document.body.appendChild(iframe);
                 
-                await new Promise((resolve, reject) => {
-                    iframe.onload = resolve;
-                    iframe.onerror = () => reject(new Error('Не удалось загрузить файл аутентификации.'));
-                });
-
-                if (!iframe.contentWindow || !iframe.contentWindow.AUTH_DATA) {
-                    throw new Error("Данные аутентификации не найдены.");
-                }
-                
+                await new Promise(resolve => iframe.onload = resolve);
                 const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
+                document.body.removeChild(iframe);
                 
                 if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-                    localStorage.setItem('isLoggedIn_lesson3', 'true');
-                    showContent(); // Вызываем нашу новую функцию
+                    // Используем уникальный ключ для 3-го урока
+                    localStorage.setItem('isLoggedIn_lesson3', 'true');  
+                    document.getElementById('loginModal').style.display = 'none';
+                    document.getElementById('protectedContent').style.display = 'block';
                 } else {
                     alert("Неверный логин или пароль для Урока 3!");
-                    usernameInput.value = '';
-                    passwordInput.value = '';
                 }
             } catch (error) {
                 console.error("Ошибка при проверке данных:", error);
-                alert("Произошла критическая ошибка при проверке данных.");
-            } finally {
-                if (iframe) {
-                    iframe.remove();
-                }
+                alert("Произошла ошибка при проверке данных. Попробуйте снова.");
             }
         }
     </script>
