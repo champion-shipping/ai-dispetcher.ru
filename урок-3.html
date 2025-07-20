@@ -154,6 +154,8 @@
 <!-- =================================================================== -->
 <!-- НАЧАЛО ГЛАВНОГО КОНТЕЙНЕРА СТРАНИЦЫ (ФИНАЛЬНАЯ ВЕРСИЯ) -->
 <!-- =================================================================== -->
+  <template id="lessonTemplate">
+	    
 <div id="lessonPageWrapper" style="
     max-width: 1200px; 
     margin: 40px auto; 
@@ -1582,7 +1584,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
            <!-- Добавьте сюда другие секции и элементы -->
 
    </main> <!-- Конец левой колонки с контентом -->
-
+    </template>
      <!-- 
         ПРАВАЯ КОЛОНКА: ДЕСКТОПНАЯ НАВИГАЦИЯ
     -->
@@ -1989,15 +1991,37 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         });
 
     </script>
-       <!-- Скрипты -->
+<!-- Скрипты -->
     <script>
-        // --- СКРИПТ АУТЕНТИФИКАЦИИ ДЛЯ УРОКА 3 (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
+        // --- СКРИПТ АУТЕНТИФИКАЦИИ (УЛУЧШЕННАЯ И БЕЗОПАСНАЯ ВЕРСИЯ) ---
+        
+        // Находим ключевые элементы
+        const protectedContent = document.getElementById('protectedContent');
+        const loginModal = document.getElementById('loginModal');
+        const lessonTemplate = document.getElementById('lessonTemplate');
+
+        // Функция, которая "оживляет" контент
+        function showContent() {
+            // Проверяем, есть ли шаблон и пуст ли контейнер
+            if (lessonTemplate && protectedContent.innerHTML === '') {
+                // Клонируем содержимое шаблона
+                const content = lessonTemplate.content.cloneNode(true);
+                // Вставляем его в наш контейнер
+                protectedContent.appendChild(content);
+                // После вставки контента, возможно, потребуется заново запустить скрипты
+                // которые ищут элементы внутри этого контента (например, скрипт навигации)
+                // Это продвинутая тема, но пока основной контент просто появится.
+            }
+            loginModal.style.display = 'none';
+            protectedContent.style.display = 'block';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const isLoggedIn = localStorage.getItem('isLoggedIn_lesson3');  
             if (isLoggedIn === 'true') {
-                document.getElementById('protectedContent').style.display = 'block';
+                showContent();
             } else {
-                document.getElementById('loginModal').style.display = 'flex';
+                loginModal.style.display = 'flex';
             }
         });
 
@@ -2006,8 +2030,6 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             const passwordInput = document.getElementById('password');
             const username = usernameInput.value;
             const password = passwordInput.value;
-
-            // Объявляем iframe здесь, чтобы он был доступен в блоке finally
             let iframe = null;
 
             try {
@@ -2016,37 +2038,29 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 iframe.src = 'auth-lesson3.html'; 
                 document.body.appendChild(iframe);
                 
-                // Улучшенное ожидание с обработкой ошибок
                 await new Promise((resolve, reject) => {
                     iframe.onload = resolve;
-                    // Если файл auth-lesson3.html не найден, это вызовет ошибку
                     iframe.onerror = () => reject(new Error('Не удалось загрузить файл аутентификации.'));
                 });
 
-                // Явная проверка, что данные существуют, прежде чем их использовать
                 if (!iframe.contentWindow || !iframe.contentWindow.AUTH_DATA) {
-                    throw new Error("Данные аутентификации не найдены в iframe.");
+                    throw new Error("Данные аутентификации не найдены.");
                 }
                 
                 const AUTH_DATA = iframe.contentWindow.AUTH_DATA;
                 
                 if (username === AUTH_DATA.login && password === AUTH_DATA.password) {
-                    // Успешный вход
-                    localStorage.setItem('isLoggedIn_lesson3', 'true');  
-                    document.getElementById('loginModal').style.display = 'none';
-                    document.getElementById('protectedContent').style.display = 'block';
+                    localStorage.setItem('isLoggedIn_lesson3', 'true');
+                    showContent(); // Вызываем нашу новую функцию
                 } else {
-                    // Неверные данные
                     alert("Неверный логин или пароль для Урока 3!");
-                    // Очищаем поля для удобства
                     usernameInput.value = '';
                     passwordInput.value = '';
                 }
             } catch (error) {
                 console.error("Ошибка при проверке данных:", error);
-                alert("Произошла критическая ошибка при проверке данных. Пожалуйста, попробуйте снова.");
+                alert("Произошла критическая ошибка при проверке данных.");
             } finally {
-                // Гарантированно удаляем iframe после завершения, даже если была ошибка
                 if (iframe) {
                     iframe.remove();
                 }
