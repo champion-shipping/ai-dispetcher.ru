@@ -1,0 +1,6 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Disallow:
+
+# Point to the sitemap file
+Sitemap: https://ai-dispetcher.ru/sitemap.xml
