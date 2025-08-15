@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Существующие скрипты и мета-теги остаются без изменений -->
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="pHzw8refkz4vwLOPjgazGg" async></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс и Промты для ChatGPT и DeepSeek | AI Dispatcher</title>
+    <meta name="description" content="Практический курс по работе с ChatGPT и DeepSeek. Учимся эффективно использовать LLM-модели. Цена от 3000 рублей.">
+    <link rel="canonical" href="https://ai-dispetcher.ru/" />
+    
+    <!-- Подключаем шрифты для нового дизайна -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ИЗМЕНЕНИЕ №1: ОБНОВЛЕННЫЙ VIEWPORT -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- ИЗМЕНЕНИЕ №2: ЦВЕТ СИСТЕМНОЙ ПАНЕЛИ -->
+    <meta name="theme-color" content="#1a1a1a">
+
+    
+    <style>
+        /* --- НОВЫЕ ГЛОБАЛЬНЫЕ СТИЛИ --- */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212; /* Темный фон */
+            color: #e0e0e0; /* Светлый текст */
+            line-height: 1.7;
+            /* ВАЖНО: Отступ для фиксированной шапки. Подберите точное значение (в px) под высоту вашей шапки */
+            padding-top: 82px; 
+        }
+
+        /* Общие стили для секций-карточек */
+        .content-section {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Стили для заголовков */
+        h1, h2, h3 {
+            color: #bb86fc; /* Акцентный фиолетовый */
+            font-weight: 600;
+        }
+
+        /* Стили для ссылок */
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: #d0b0ff;
+        }
+    </style>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(101179914, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101179914" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "s702ykdcha");
+    </script>
+    
+    <!-- Favicon-ы остаются без изменений -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AI" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+</head>
+<body>
+
+    <!-- Плейсхолдер для шапки, загружаемой скриптом -->
+    <div id="header"></div>
+
+    <!-- Основной контент -->
+    <main style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+	
+	
+	
+	
+	
+	</main>
+ 
+    <!-- Плейсхолдер для подвала, загружаемого скриптом -->
+    <div id="footer"></div>
+
+    <!-- ВСЕ СКРИПТЫ НИЖЕ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
+    <script>
+        // Загружаем header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const headerDiv = document.getElementById('header');
+                if (headerDiv) {
+                    headerDiv.innerHTML = data;
+                    // !!! ВАЖНО: Инициализируем меню ТОЛЬКО после того, как header загружен и вставлен
+                    initializeMobileMenu(); 
+                }
+            })
+            .catch(error => console.error('Error loading header:', error)); 
+
+        // Загружаем footer
+        fetch('footer.html')
+            .then(response => {
+                 if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const footerDiv = document.getElementById('footer');
+                if (footerDiv) footerDiv.innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error)); 
+
+
+        // --- СКРИПТ УПРАВЛЕНИЯ МОБИЛЬНЫМ МЕНЮ (ПЕРЕМЕЩЕН СЮДА) ---
+        function initializeMobileMenu() {
+            const menuBtn = document.getElementById('mobile-menu-button'); // Кнопка открытия (гамбургер)
+            const desktopMenu = document.getElementById('desktopMenu'); // Десктопное меню
+            const sideMobileMenu = document.getElementById('mobile-offcanvas-menu'); // Выезжающее мобильное меню
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Оверлей для затемнения
+            const closeMenuBtn = document.getElementById('mobile-menu-close-button'); // Кнопка закрытия (крестик)
+            const mobileMenuToggleContainer = document.querySelector('.mobile-menu-toggle'); // Контейнер кнопки гамбургера
+
+            // Проверка, что все нужные элементы найдены (для надежности)
+            if (!menuBtn || !desktopMenu || !sideMobileMenu || !mobileMenuOverlay || !closeMenuBtn || !mobileMenuToggleContainer) {
+                console.error('Не найдены элементы меню для инициализации.');
+                return; // Прекращаем выполнение функции, если элементы не найдены
+            }
+
+
+            // Функция для открытия мобильного меню
+            function openMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(0)'; // Выдвигаем меню сбоку
+                mobileMenuOverlay.style.display = 'block'; // Показываем оверлей (сначала display)
+                // Используем setTimeout для плавного появления оверлея после его display: block
+                setTimeout(() => { mobileMenuOverlay.style.opacity = '1'; }, 10);
+                document.body.style.overflow = 'hidden'; // Запрещаем скролл основного контента
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+
+            // Функция для закрытия мобильного меню
+            function closeMobileMenu() {
+                sideMobileMenu.style.transform = 'translateX(-100%)'; // Сдвигаем меню обратно за экран
+                mobileMenuOverlay.style.opacity = '0'; // Плавно скрываем оверлей
+                 // Ждем завершения анимации opacity, затем скрываем совсем и разрешаем скролл
+                setTimeout(() => {
+                     mobileMenuOverlay.style.display = 'none';
+                     document.body.style.overflow = ''; // Разрешаем скролл
+                }, 300); // Время должно совпадать с transition-duration оверлея и offcanvas меню
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            // Привязываем события ТОЛЬКО после загрузки header
+            menuBtn.addEventListener('click', openMobileMenu); // Клик по гамбургеру открывает меню
+            closeMenuBtn.addEventListener('click', closeMobileMenu); // Клик по крестику закрывает меню
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu); // Клик по оверлею закрывает меню
+
+            // Закрывать мобильное меню при клике на любую ссылку внутри него
+            sideMobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        }
+        // --- КОНЕЦ СКРИПТА УПРАВЛЕНИЯ МЕНЮ ---
+
+
+        // Старый скрипт для 3D-эффекта при наведении, который теперь не нужен, так как эффект сделан через CSS
+        // Но оставляем его, как вы просили, не трогая скрипты.
+        // Для новых .content-section он работать не будет, но и не сломает ничего.
+        document.querySelectorAll('section a div, section > div > div').forEach(item => {
+            item.onmouseover = function() {
+                // Этот код будет применяться к карточкам уроков, если они подходят под селектор
+            };
+            item.onmouseout = function() {
+                //
+            };
+        });
+
+    </script>
+</body>
+</html>
