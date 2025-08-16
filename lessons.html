@@ -139,9 +139,54 @@
         <p style="text-align: center; font-size: 1.2rem; max-width: 850px; margin: 20px auto;">
             Этот курс — концентрат практики. Ниже — список того, что вы сможете создавать своими руками, используя LLM как основного разработчика.
         </p>
+        
+        <!-- НАВИГАЦИОННОЕ МЕНЮ -->
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #333; padding-top: 25px;">
+            <a href="#lessons" class="lesson-link" style="margin: 0 10px;">Смотреть уроки</a>
+            <a href="#details" class="lesson-link" style="background-color: transparent; border: 1px solid #bb86fc; color: #bb86fc !important;">Что я получу?</a>
+            <a href="#pricing" class="lesson-link" style="background-color: transparent; border: 1px solid #bb86fc; color: #bb86fc !important;">Узнать стоимость</a>
+        </div>
     </section>
 
-    <section class="content-section">
+<!-- СЕКЦИЯ С УРОКАМИ (теперь она выше) -->
+<section id="lessons" class="content-section">
+    <h2 style="font-size: 2.2rem;">Доступные уроки</h2>
+    <div class="lessons-grid">
+        <!-- Урок 1 -->
+        <div class="lesson-card">
+            <h3>Урок 1: Основы и ТЗ</h3>
+            <p>Учимся формулировать четкие ТЗ вместо абстрактных запросов, чтобы получать от LLM предсказуемый результат.</p>
+            <span class="lesson-status status-free">В открытом доступе</span><br>
+            <a href="https://ai-dispetcher.ru/урок-1" class="lesson-link">Читать урок</a>
+        </div>
+        <!-- Урок 2 -->
+        <div class="lesson-card">
+            <h3>Урок 2: Создание Telegram-бота и обход AI-детекторов</h3>
+            <p>Создаем Telegram-бота за 5 минут без знаний кода и учимся заставлять LLM писать в вашем уникальном стиле.</p>
+           <span class="lesson-status status-paid">Платный доступ: 3500 ₽ / $35</span><br>
+            <a href="/course-purchase" class="lesson-link">Получить доступ</a>
+        </div>
+        <!-- Урок 3 -->
+        <div class="lesson-card">
+            <h3>Урок 3: Практика (Frontend + Backend)</h3>
+            <p>Создаем и редактируем страницы сайта (HTML/CSS), работаем с базой данных (PHP/MySQL) и разбираем промты для генерации кода.</p>
+           <span class="lesson-status status-paid">Платный доступ: 3500 ₽ / $35</span><br>
+            <a href="/course-purchase" class="lesson-link">Получить доступ</a>
+        </div>
+    </div>
+
+    <!-- НОВЫЙ БЛОК С ПРИЗЫВОМ К ДЕЙСТВИЮ -->
+    <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <h3 style="font-size: 1.8rem; color: #fff; font-weight: 600;">Готовы начать обучение?</h3>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 15px auto 30px; color: #c7c7c7;">
+            Приобретите полный доступ ко всем текущим и будущим урокам по выгодной цене или выберите только те, что нужны вам сейчас.
+        </p>
+        <a href="/course-purchase" class="lesson-link" style="padding: 12px 30px; font-size: 1.1rem; font-weight: 700;">Перейти к покупке</a>
+    </div>
+</section>
+
+    <!-- СЕКЦИЯ С ОПИСАНИЕМ НАВЫКОВ -->
+    <section id="details" class="content-section">
         <h2 style="font-size: 2.2rem; margin-bottom: 30px;">Вы научитесь создавать и управлять:</h2>
         
         <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; margin-bottom: 25px;">
@@ -173,36 +218,8 @@
         </div>
     </section>
 
-    <!-- Секция с уроками (остается без изменений) -->
-    <section class="content-section">
-        <h2 style="font-size: 2.2rem;">Доступные уроки</h2>
-        <div class="lessons-grid">
-            <!-- Урок 1 -->
-            <div class="lesson-card">
-                <h3>Урок 1: Основы и ТЗ</h3>
-                <p>Учимся формулировать четкие ТЗ вместо абстрактных запросов, чтобы получать от LLM предсказуемый результат.</p>
-                <span class="lesson-status status-free">В открытом доступе</span><br>
-                <a href="https://ai-dispetcher.ru/урок-1" class="lesson-link">Читать урок</a>
-            </div>
-            <!-- Урок 2 -->
-            <div class="lesson-card">
-                <h3>Урок 2: Создание Telegram-бота и обход AI-детекторов</h3>
-                <p>Создаем Telegram-бота за 5 минут без знаний кода и учимся заставлять LLM писать в вашем уникальном стиле.</p>
-                <span class="lesson-status status-paid">Платный доступ</span><br>
-                <a href="/course-purchase" class="lesson-link">Узнать стоимость</a>
-            </div>
-            <!-- Урок 3 -->
-            <div class="lesson-card">
-                <h3>Урок 3: Практика (Frontend + Backend)</h3>
-                <p>Создаем и редактируем страницы сайта (HTML/CSS), работаем с базой данных (PHP/MySQL) и разбираем промты для генерации кода.</p>
-                <span class="lesson-status status-paid">Платный доступ</span><br>
-                <a href="/course-purchase" class="lesson-link">Узнать стоимость</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Секция со стоимостью (остается без изменений) -->
-    <section class="content-section">
+    <!-- СЕКЦИЯ СО СТОИМОСТЬЮ -->
+    <section id="pricing" class="content-section">
         <h2>Стоимость и приобретение</h2>
         <p>Вы можете приобрести доступ к каждому платному уроку отдельно или купить полный курс со всеми текущими и будущими уроками по выгодной цене.</p>
         <ul>
