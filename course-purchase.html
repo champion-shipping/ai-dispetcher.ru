@@ -15,62 +15,222 @@
     <!-- ИЗМЕНЕНИЕ №2: ЦВЕТ СИСТЕМНОЙ ПАНЕЛИ -->
     <meta name="theme-color" content="#1a1a1a">
 	
-    <style>
-        /* --- НОВЫЕ ГЛОБАЛЬНЫЕ СТИЛИ --- */
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #121212; /* Темный фон */
-            color: #e0e0e0; /* Светлый текст */
-            line-height: 1.7;
-            /* ВАЖНО: Отступ для фиксированной шапки. */
-            padding-top: 82px; 
-        }
+<style>
+    /* --- CSS-переменные для легкого управления цветами --- */
+    :root {
+        --background-color: #121212;
+        --card-background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+        --text-primary: #e0e0e0;
+        --text-secondary: #c7c7c7;
+        --accent-color: #bb86fc;
+        --accent-hover: #d0b0ff;
+        --cta-background-telegram: linear-gradient(135deg, #6e8efb, #4a6cf7);
+        --cta-background-free: linear-gradient(135deg, #76b852, #8DC26F);
+        --success-color: #76b852;
+    }
 
-        /* Общие стили для информационных карточек */
-        .purchase-card {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    /* --- Глобальные стили --- */
+    body {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-primary);
+        line-height: 1.7;
+        padding-top: 82px; /* Отступ для фиксированной шапки */
+    }
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    a:hover {
+        color: var(--accent-hover);
+    }
+    strong {
+        color: #fff;
+    }
 
-        /* Стили для заголовков внутри карточек */
-        .purchase-card h3 {
-            color: #e0e0e0;
-            font-size: 1.2rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #444; /* Темный разделитель */
-            padding-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        /* Стили для ссылок */
-        a {
-            color: #bb86fc; /* Акцентный фиолетовый */
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            color: #d0b0ff;
-        }
-        
-        /* Стили для списков */
-        ul {
-            padding-left: 25px;
-            margin-top: 0;
-            line-height: 1.8;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        strong {
-             color: #fff; /* Делаем жирный текст ярче */
-        }
-    </style>
+    /* --- Стили для карточек и блоков --- */
+    .content-card {
+        background: var(--card-background);
+        padding: 30px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Стили для заголовков */
+    h1, h2 {
+        color: #ffffff;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 0;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    /* --- Блок с бесплатными материалами --- */
+    .free-content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: flex-start;
+    }
+    .free-block {
+        flex: 1;
+        min-width: 300px;
+    }
+    .free-block h3 {
+        font-size: 1.5rem;
+        color: var(--accent-color);
+        margin-top: 0;
+    }
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #000;
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .cta-button-free {
+        display: inline-block;
+        padding: 14px 28px;
+        background: var(--cta-background-free);
+        color: white !important;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(120, 184, 82, 0.2);
+        margin-top: 15px;
+    }
+    .cta-button-free:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(120, 184, 82, 0.3);
+    }
+
+    /* --- Стили для тарифных планов --- */
+    .pricing-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        align-items: stretch;
+    }
+    .pricing-card {
+        flex: 1;
+        min-width: 300px;
+        max-width: 380px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pricing-card:hover {
+        transform: translateY(-5px);
+    }
+    .pricing-card.recommended {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 25px rgba(187, 134, 252, 0.2);
+    }
+    .card-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-align: left;
+    }
+    .card-price {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    .card-price span {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+    .card-features {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 30px;
+        flex-grow: 1;
+    }
+    .card-features li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .card-features .icon-check {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+        color: var(--success-color);
+    }
+    .card-cta-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px 20px;
+        background: var(--cta-background-telegram);
+        color: white !important;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(74, 108, 247, 0.2);
+    }
+    .card-cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(74, 108, 247, 0.3);
+    }
+    .card-cta-button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* --- Блок "Как купить" --- */
+    .how-to-buy ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .how-to-buy li {
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 15px;
+    }
+    .how-to-buy li::before {
+        content: attr(data-step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        color: #121212;
+        font-weight: 700;
+        text-align: center;
+        line-height: 25px;
+    }
+</style>
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
@@ -108,80 +268,108 @@
 
     <div id="header"></div>
 
-    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
-    
-        <div class="purchase-card">
-            <h1 style="margin-top: 0; color: #bb86fc; font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 20px;">Полный курс по ChatGPT, DeepSeek от AI Диспетчера</h1>
-            <p style="margin-bottom: 15px; text-align: center; font-size: 1.1rem;">ТГ Канал - <a href="https://t.me/AIdispatcher9" style="font-weight: 500;">AI Диспетчер</a></p>
-            
-        </div>
+  <main style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
 
-        <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h1>Полный курс от AI Dispatcher</h1>
+        <p style="font-size: 1.2rem; color: #c7c7c7; max-width: 600px; margin: 0 auto;">
+            Выберите свой формат обучения и начните создавать IT-продукты с помощью нейросетей уже сегодня.
+        </p>
+    </div>
 
-
-            <div class="purchase-card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
-                <h2>Цена полного курса:</h2>
-                <ul>
-                    <li><strong>$100</strong> - (при оплате USDT)</li>
-                    <li><strong>9.000 рублей</strong> - (перевод на банковскую карту)</li>
-                </ul>
-                <p style="margin-bottom: 0; color: #c7c7c7;">Получаете доступ ко всем закрытым урокам на сайте + будут видео материалы с практикой.</p>
+    <!-- БЛОК С БЕСПЛАТНЫМИ МАТЕРИАЛАМИ -->
+    <section class="content-card">
+        <h2>Сначала попробуйте бесплатно</h2>
+        <div class="free-content-wrapper">
+            <!-- Блок с бесплатным уроком -->
+            <div class="free-block">
+                <h3>Посмотрите первый урок</h3>
+                <p>Оцените подачу материала и возможности LLM-моделей в нашем бесплатном вводном уроке. Никаких обязательств!</p>
+                <a href="https://ai-dispetcher.ru/урок-1" class="cta-button-free">Перейти к бесплатному уроку</a>
             </div>
-			
-			            <div class="purchase-card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
-                <p>Поэтапная оплата:</p>
-                <ul>
-                    <li><strong>$35</strong> - (при оплате USDT)</li>
-                    <li><strong>3500 рублей</strong> - (перевод на банковскую карту)</li>
-                </ul>
-                <p style="margin-bottom: 0; color: #c7c7c7;">Получаете доступ на выбранную часть курса.</p>
-            </div>
-        </div>
-
-        <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin-top: 25px;">
-			
-			            <div class="purchase-card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
-                <h3>Приобрести платные уроки можно связавшись со мной:</h3>
-                <ul>
-                    <li><strong>Телеграмм</strong> - <a href="https://t.me/ogg_90">https://t.me/ogg_90</a></li>
-                    <li><strong>Почта</strong> - <a href="mailto:shippingchampion@gmail.com">aidispatcher9@gmail.com</a></li>
-                    <li><strong>Канал в комментариях</strong> - <a href="https://t.me/AIdispatcher9">https://t.me/AIdispatcher9</a></li>
-                </ul>
-                <p style="margin-bottom: 10px; font-style: italic; color: #a0a0a0;">Отвечаю обычно в первые 15-20 минут, могут быть исключения, просто подождите.</p>
-                <p style="margin-bottom: 0; font-style: italic; color: #a0a0a0;">Также я открыт к любым вопросам и предложениям - пишите, постараюсь на них ответить.</p>
-            </div>
-
-            <div class="purchase-card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
-                <h3>Оплату можно осуществить:</h3>
-                <ul>
-                    <li>Перевод на РУ карту Т-Банка</li>
-                    <li>USDT (TRC20)</li>
-                    <li>Другой способ по договоренности</li>
-                </ul>
+            <!-- Блок с видео с YouTube -->
+            <div class="free-block">
+                <h3>Видео с практикой на YouTube</h3>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/q6JJhr224dw?si=gQLPHP2Ke4E8jGxf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="purchase-card" style="margin-top: 25px;">
-            <h3>Для всех кто приобрел любой формат курса:</h3>
-            <ul>
-                <li>Доступ в общий чат, где все смогут обсудить вопросы и пообщаться поделившись своей экспертизой.</li>
-                <li>Проведем созвон/стрим, отвечу на ваши вопросы, возможно сделаем что-то с LLM по вашей просьбе.</li>
-            </ul>
+    <!-- БЛОК С ТАРИФАМИ -->
+    <section>
+        <h2 style="margin-bottom: 40px;">Тарифы</h2>
+        <div class="pricing-container">
+            <!-- Тариф "Полный доступ" (Рекомендованный) -->
+            <div class="content-card pricing-card recommended">
+                <h3 class="card-title">Полный доступ</h3>
+                <div class="card-price">9.000₽ <span>или $100 в USDT</span></div>
+                <ul class="card-features">
+                    <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Доступ ко <strong>всем текущим и будущим</strong> урокам</span>
+                    </li>
+                    <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Доступ в <strong>закрытый чат</strong> с участниками</span>
+                    </li>
+                    <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Участие в общих <strong>созвонах и стримах</strong></span>
+                    </li>
+                     <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Все <strong>дополнительные материалы</strong> и промты</span>
+                    </li>
+                </ul>
+                <a href="https://t.me/ogg_90" target="_blank" class="card-cta-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M22,3.24c-1.28-1.55-3.6-2.2-5.49-1.36L3.2,8.47c-1.89,0.85-2.6,3.2-1.5,4.96c0.85,1.36,2.55,1.96,4.1,1.5l4.89-1.45c0.16-0.05,0.36-0.03,0.49,0.09c0.13,0.12,0.18,0.3,0.13,0.46l-2.06,6.07c-0.45,1.36,0.22,2.83,1.5,3.28c0.3,0.1,0.6,0.1,0.9,0.1c0.95,0,1.82-0.55,2.23-1.45l4.51-9.72C24.08,6.96,23.53,4.68,22,3.24z M10.41,12.38l-4.29,1.28c-0.58,0.17-1.18-0.16-1.35-0.74c-0.17-0.58,0.16-1.18,0.74-1.35l10.29-4.68c0.58-0.26,1.25,0.03,1.5,0.61c0.26,0.58-0.03,1.25-0.61,1.5L10.41,12.38z"></path></svg>
+                    <span>Написать в Telegram</span>
+                </a>
+            </div>
+            <!-- Тариф "Поэтапная оплата" -->
+            <div class="content-card pricing-card">
+                <h3 class="card-title">Поэтапная оплата</h3>
+                <div class="card-price">3.500₽ <span>или $35 в USDT</span></div>
+                <ul class="card-features">
+                    <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Доступ к <strong>выбранной части</strong> курса</span>
+                    </li>
+                    <li>
+                        <svg class="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span>Возможность <strong>позже доплатить</strong> до полного курса</span>
+                    </li>
+                </ul>
+                 <a href="https://t.me/ogg_90" target="_blank" class="card-cta-button">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M22,3.24c-1.28-1.55-3.6-2.2-5.49-1.36L3.2,8.47c-1.89,0.85-2.6,3.2-1.5,4.96c0.85,1.36,2.55,1.96,4.1,1.5l4.89-1.45c0.16-0.05,0.36-0.03,0.49,0.09c0.13,0.12,0.18,0.3,0.13,0.46l-2.06,6.07c-0.45,1.36,0.22,2.83,1.5,3.28c0.3,0.1,0.6,0.1,0.9,0.1c0.95,0,1.82-0.55,2.23-1.45l4.51-9.72C24.08,6.96,23.53,4.68,22,3.24z M10.41,12.38l-4.29,1.28c-0.58,0.17-1.18-0.16-1.35-0.74c-0.17-0.58,0.16-1.18,0.74-1.35l10.29-4.68c0.58-0.26,1.25,0.03,1.5,0.61c0.26,0.58-0.03,1.25-0.61,1.5L10.41,12.38z"></path></svg>
+                    <span>Обсудить детали</span>
+                </a>
+            </div>
         </div>
+    </section>
 
-        <div class="purchase-card" style="margin-top: 0;"> <!-- margin-top: 0, так как у класса уже есть margin-bottom -->
-            <h3>Дополнительная экспертиза:</h3>
-            <ul>
-                <li>Разбор ваших промтов</li>
-                <li>Помощь в создании промта под ваши задачи</li>
-                <li>Индивидуальная экспертиза под ваш кейс</li>
-                <li>Разбор возможных внедрений AI в ваши процессы</li>
-            </ul>
-            <p style="margin-bottom: 0; color: #c7c7c7;"><strong>Цена:</strong> от $50 (зависит от сложности задачи, обсуждается индивидуально)</p>
-        </div>
-    
-    </main>
+    <!-- БЛОК С ИНСТРУКЦИЕЙ ПО ОПЛАТЕ -->
+    <section class="content-card how-to-buy">
+        <h2>Как купить и получить доступ?</h2>
+        <ul>
+            <li data-step="1"><strong>Свяжитесь со мной.</strong> Нажмите на кнопку "Написать в Telegram" или напишите на почту <a href="mailto:aidispatcher9@gmail.com">aidispatcher9@gmail.com</a>.</li>
+            <li data-step="2"><strong>Выберите способ оплаты.</strong> Мы договоримся об удобном варианте (Карта Т-Банка, USDT TRC20 или другой).</li>
+            <li data-step="3"><strong>Получите доступ.</strong> Сразу после оплаты я вышлю вам логин и пароль от сайта и приглашение в закрытый чат участников.</li>
+        </ul>
+        <p style="text-align: center; font-style: italic; color: #a0a0a0; margin-top: 20px; margin-bottom: 0;">Если у вас есть любые вопросы — смело пишите!</p>
+    </section>
 
+    <!-- БЛОК С ДОПОЛНИТЕЛЬНЫМИ УСЛУГАМИ -->
+    <section class="content-card">
+        <h3 style="color: #e0e0e0; font-size: 1.2rem; margin-top: 0;">Дополнительная экспертиза:</h3>
+        <p>Нужна помощь с вашим проектом? Я могу помочь с разбором ваших промтов, созданием промта под ваши задачи или внедрением AI в ваши бизнес-процессы.</p>
+        <p style="color: #c7c7c7;"><strong>Цена:</strong> от $50 (обсуждается индивидуально)</p>
+    </section>
+
+</main>
     <div id="footer"></div>
    
     <!-- ВСЕ СКРИПТЫ НИЖЕ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ -->
