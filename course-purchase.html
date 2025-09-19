@@ -30,6 +30,11 @@
     }
 
     /* --- Глобальные стили --- */
+    /* ИСПРАВЛЕНИЕ: Добавляем box-sizing, чтобы кнопки не вылезали */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         font-family: 'Montserrat', sans-serif;
@@ -50,7 +55,33 @@
         color: #fff;
     }
 
-    /* --- Стили для карточек тарифов --- */
+    /* --- Стили для карточек и блоков --- */
+    .content-card {
+        background: var(--card-background);
+        padding: 30px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Стили для заголовков */
+    h1, h2 {
+        color: #ffffff;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 0;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    /* --- Стили для тарифных планов --- */
     .pricing-container {
         display: flex;
         flex-wrap: wrap; /* Для адаптивности */
@@ -58,15 +89,6 @@
         justify-content: center;
         align-items: stretch; /* Карточки будут одной высоты */
     }
-
-    .content-card {
-        background: var(--card-background);
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
     .pricing-card {
         flex: 1;
         min-width: 300px;
@@ -82,27 +104,26 @@
         border-color: var(--accent-color);
         box-shadow: 0 0 25px rgba(187, 134, 252, 0.2);
     }
-
     .card-title {
         font-size: 1.6rem;
         font-weight: 700;
         color: #fff;
         margin-top: 0;
         margin-bottom: 10px;
+        text-align: left;
     }
-
     .card-price {
         font-size: 2.2rem;
         font-weight: 700;
         color: var(--accent-color);
         margin-bottom: 20px;
+        text-align: left;
     }
     .card-price span {
         font-size: 1rem;
         font-weight: 500;
         color: var(--text-secondary);
     }
-    
     .card-features {
         list-style: none;
         padding-left: 0;
@@ -151,7 +172,6 @@
         background: var(--cta-background-free);
         color: white !important;
         box-shadow: 0 4px 15px rgba(120, 184, 82, 0.2);
-        margin-bottom: 20px; /* Отступ между кнопками в бесплатном блоке */
     }
     .cta-button-free:hover {
         transform: translateY(-3px);
@@ -167,13 +187,15 @@
         overflow: hidden;
         border-radius: 12px;
         background: #000;
+        margin-top: auto; /* Прижимает видео к низу карточки */
+        padding-top: 20px; /* Отступ сверху от текста */
     }
     .video-container iframe {
         position: absolute;
-        top: 0;
+        top: 20px;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: calc(100% - 20px);
     }
 
     /* --- Блок "Как купить" --- */
@@ -238,7 +260,7 @@
 
     <div id="header"></div>
 
-  <main style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+ <main style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
 
     <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
     <div style="text-align: center; margin-bottom: 50px;">
@@ -257,7 +279,7 @@
             <div class="card-price">0₽</div>
             <div class="card-features">
                 <p style="margin-top: 0;">Прежде чем покупать, убедитесь в качестве материала. Этот контент доступен всем абсолютно бесплатно.</p>
-                <a href="https://ai-dispetcher.ru/урок-1" class="cta-button cta-button-free">Смотреть 1-й урок на сайте</a>
+                <a href="https://ai-dispetcher.ru/урок-1" class="cta-button cta-button-free" style="margin-bottom: 20px;">Смотреть 1-й урок на сайте</a>
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/q6JJhr224dw?si=gQLPHP2Ke4E8jGxf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
@@ -296,7 +318,7 @@
     </div>
 
     <!-- БЛОК С ИНСТРУКЦИЕЙ ПО ОПЛАТЕ -->
-    <div class="content-card how-to-buy" style="margin-top: 50px;">
+    <div class="content-card how-to-buy" style="margin-top: 20px;">
         <h2>Как купить и получить доступ?</h2>
         <ul>
             <li data-step="1"><strong>Свяжитесь со мной.</strong> Нажмите на кнопку "Написать в Telegram" или напишите на почту <a href="mailto:aidispatcher9@gmail.com">aidispatcher9@gmail.com</a>.</li>
