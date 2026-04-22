@@ -1237,6 +1237,40 @@ document.getElementById('applicationForm').addEventListener('submit', function(e
         </p>
     </div>
 
+
+<!-- НОВЫЙ РАЗДЕЛ: 1.5 ГАЛЛЮЦИНАЦИИ -->
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h3 id="1.5" style="
+        font-size: 1.4em; 
+        color: #2c3e50; 
+        margin: 40px 0 20px 0; 
+        padding-bottom: 8px; 
+        border-bottom: 2px solid #e74c3c;
+    ">1.5 Галлюцинации</h3>
+
+    <p style="font-size: 1.1em; margin-bottom: 20px;">
+        Есть одна ловушка, на которой сыплются все кто не проверяет данные в ответе. Прикол в том, что нейронка <strong>всегда чувствует себя обязанной выдать ответ</strong>. Она так обучена - быть полезным. 
+    </p>
+
+   <div style="background: #fff8e6; padding: 15px; border-left: 4px solid #ffc107; margin-bottom: 25px; border-radius: 0 5px 5px 0;">
+        <p style="margin: 0; font-weight: bold;">Суть проблемы:</p>
+        <p style="margin: 5px 0 0 0;">
+            Если ты спрашиваешь ИИ о чем-то, чего он не знает (например, свежие новости за вчера или редкий технический баг), он вместо того, чтобы честно сказать «Я не в курсе», начнет <strong>выдумывать данные</strong>, чтобы просто заполнить пустоту в ответе. Это и есть галлюцинация.
+        </p>
+    </div>
+
+    <p style="font-size: 1.1em; margin-bottom: 20px;">
+        Чтобы не тратить время на проверку выдуманных фактов, ты должен прямо в своем ТЗ прописать «защиту от вранья». Нужно разрешить модели ничего не отвечать, если она не имеет данных или ты ей их не передал в запросе.
+    </p>
+
+    <div style="background: #e8f5e9; border: 1px dashed #4caf50; padding: 20px; border-radius: 8px; margin-top: 30px;">
+        <p style="margin: 0; font-size: 1.1em; text-align: center;">
+            <strong>Основное правило:</strong> <br>Всегда добавлять в запросы фразу, а лучше пункт с жестким правилом: <br>
+            <span style="color: #2e7d32; font-family: monospace; background: #fff; padding: 2px 5px; border-radius: 3px;">"Если ты не уверен или у тебя недостаточно данных — ответь 'Нет данных', не пытайся гадать и выдумывать результат, только четкие и имеющиеся данные."</span>
+        </p>
+    </div>
+	
+
     <!-- Завершение урока -->
     <div style="text-align: center; margin: 40px 0; padding: 20px; background-color: #e8f5e9; border-radius: 10px; border: 1px dashed #4caf50;">
         <h3 style="color: #2e7d32; margin-top: 0;">И так, 1 Урок подошел к концу!</h3>
